@@ -7,7 +7,7 @@ void main() => runApp(MaterialApp(
   theme: ThemeData(
     primaryColor: Colors.pink,
   ),
-  initialRoute: '/login',
+  initialRoute: '/register',
   routes: {
     '/home': (context) => HomePage(),
     '/login': (context) => LoginPage(),
