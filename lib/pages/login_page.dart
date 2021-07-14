@@ -44,21 +44,32 @@ class LoginPage extends StatelessWidget {
             height: 50,
             width: 200,
             child: ElevatedButton(
-              onPressed: (){},
-              child: Text('Login'),
+              onPressed: () {},
+              child: Text('Log in'),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent) ,
-                textStyle: MaterialStateProperty.all(TextStyle(fontSize: 25.0,),),
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.deepPurpleAccent),
+                textStyle: MaterialStateProperty.all(
+                  TextStyle(
+                    fontSize: 25.0,
+                  ),
+                ),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 )),
               ),
-              ),
             ),
+          ),
           SizedBox(
             height: 130,
           ),
-          Text('New User? Create Account')
+          TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.only(bottom: 15),
+                textStyle: TextStyle(fontSize: 15),
+              ),
+              onPressed: () {},
+              child: Text('New User? Create Account')),
         ],
       ),
     ));
