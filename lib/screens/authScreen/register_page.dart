@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:shop/provider/auth_provider.dart';
+import 'package:shop/screens/authScreen/login_page.dart';
+import 'package:shop/screens/home_page.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+
+class RegisterPage extends StatefulWidget {
+
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
+  TextEditingController _confirmPassword = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +33,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: TextField(
+                  controller: _email,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -31,6 +45,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
                 child: TextField(
+                  controller: _password,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -43,6 +58,7 @@ class RegisterPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.fromLTRB(30, 0, 30, 15),
                 child: TextField(
+                  controller: _confirmPassword,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -56,7 +72,29 @@ class RegisterPage extends StatelessWidget {
                 height: 50,
                 width: 200,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(_password.text.trim()==_confirmPassword.text.trim()) {
+                      Auth()
+                          .createAccount(
+                          email: _email.text.trim(),
+                          password: _password.text.trim())
+                          .then((message) {
+                        if (message == "Account created") {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                                  (route) => false);
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text(message)));
+                        }
+                      });
+                    }else{
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text('Password mismatch')));
+                    }
+                  },
                   child: Text('Sing up'),
                   style: ButtonStyle(
                     backgroundColor:
@@ -80,8 +118,13 @@ class RegisterPage extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 15),
                     textStyle: TextStyle(fontSize: 15),
                   ),
-                  onPressed: () {},
-                  child: Text('Already have an account? Log in')),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LoginPage()));
+                  },
+                  child: Text('Already have an account? Login')),
             ],
           ),
         ),

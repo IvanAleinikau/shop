@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop/provider/auth_provider.dart';
+import 'package:shop/screens/authScreen/login_page.dart';
 
 class Menu extends StatelessWidget {
-  const Menu({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -27,9 +27,14 @@ class Menu extends StatelessWidget {
           ListTile(
             title: Text('Logout'),
             leading: Icon(Icons.logout),
-            onTap: () {},
+            onTap: () {
+              Auth().signOut();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                      (route) => false);
+            },
           ),
-
         ],
       ),
     );
