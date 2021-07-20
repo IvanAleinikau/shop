@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop/screens/authScreen/login_page.dart';
 import 'package:shop/screens/home_page.dart';
+import 'package:shop/widgets/menu.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 2), () {
+     Future.delayed(const Duration(seconds: 0), () {
       if (auth.currentUser == null) {
         Navigator.pushAndRemoveUntil(
             context,
@@ -27,11 +28,12 @@ class _SplashState extends State<Splash> {
       }
     });
     return Scaffold(
-      body: Center(
-        child: FlutterLogo(
-          size: 80,
-        ),
+      appBar: AppBar(
+        title: Text('Home'),
+        backgroundColor: Colors.deepPurple,
       ),
+      body: Center(),
+      drawer: Menu(),
     );
   }
 }

@@ -1,28 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shop/main.dart';
 import 'package:shop/provider/auth_provider.dart';
 import 'package:shop/screens/authScreen/login_page.dart';
+import 'package:shop/screens/home_page.dart';
+import 'package:shop/screens/settings_page.dart';
+import 'package:shop/screens/shop_page.dart';
 
 class Menu extends StatelessWidget {
+  String? user = FirebaseAuth.instance.currentUser!.email;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Center(
-              child: Text("Menu"),
+            child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
+              accountName: Text('Nothing'),
+              accountEmail: Text('$user'),
+              currentAccountPicture: Icon(Icons.account_circle_sharp,color: Colors.white,size: 60,),
             ),
             decoration: BoxDecoration(color: Colors.deepPurple),
           ),
           ListTile(
+            title: Text('Home'),
+            leading: Icon(Icons.home),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
+            },
+          ),
+          ListTile(
             title: Text('Shop'),
             leading: Icon(Icons.shopping_bag),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ShopPage()),);
+            },
           ),
           ListTile(
             title: Text('Settings'),
             leading: Icon(Icons.settings),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()),);
+            },
           ),
           ListTile(
             title: Text('Logout'),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shop/screens/shop_page.dart';
 import 'package:shop/screens/splash.dart';
+import 'package:shop/screens/settings_page.dart';
+
 
 void main(){
   Firebase.initializeApp();
@@ -18,6 +21,8 @@ class App extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/home': (context) => Home(),
+        '/settings':(context)=> SettingsPage(),
+        '/shop':(context)=> ShopPage(),
       },
     );
   }

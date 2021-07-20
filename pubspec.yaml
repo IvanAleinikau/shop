@@ -32,8 +32,10 @@ dependencies:
   provider: ^5.0.0
   firebase_core: ^1.0.3
   firebase_auth: ^1.0.2
+  cloud_firestore: ^2.4.0
   flutter_signin_button: ^2.0.0
   authentication_provider: ^1.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - asset/image/logo_shop.jpg
+    - asset/image/user.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
