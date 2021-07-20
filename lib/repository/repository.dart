@@ -4,13 +4,19 @@ import 'package:intl/intl.dart';
 abstract class RemDataRep {}
 
 class RemDataRepImpl extends RemDataRep {
-  Future<void> makeNews(
+
+  Future<String> makeNews(
     String title,
     String text,
     String image
   ) async {
-    await FirebaseFirestore.instance
-        .collection("news")
-        .add({'title': title, 'text': text, 'image': image, 'date': new DateFormat.yMMMd().format(new DateTime.now())});
+    if(title.isNotEmpty & text.isNotEmpty){
+      await FirebaseFirestore.instance
+          .collection("news")
+          .add({'title': title, 'text': text, 'image': image, 'date': new DateFormat.yMMMd().format(new DateTime.now())});
+      return "News made";
+    }else {
+      return "Please enter title and text";
+    }
   }
 }

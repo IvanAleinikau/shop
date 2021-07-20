@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
   FirebaseAuth auth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+
 
   Future<String> createAccount({required String email, required String password}) async {
     try {
@@ -33,6 +35,15 @@ class Auth {
       }
     }
     return "Please enter email and password";
+  }
+
+  Future<String> resetPassword(String newPassword) async {
+    try {
+      await user!.updatePassword(newPassword);
+      return "Reset was successful";
+    } catch (e) {
+      return "Error";
+    }
   }
 
   void signOut() {

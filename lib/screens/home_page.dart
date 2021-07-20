@@ -13,7 +13,6 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _title = TextEditingController();
   TextEditingController _text = TextEditingController();
   TextEditingController _image = TextEditingController();
-  TextEditingController _date = TextEditingController();
 
   void initFirebase() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -64,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                           controller: _image,
                           decoration: InputDecoration(
                             labelText: 'Image',
-                            hintText: 'Enter URL',
+                            hintText: 'Enter image URL',
                           ),
                         ),
                       ],
@@ -73,14 +72,30 @@ class _HomePageState extends State<HomePage> {
                   actions: [
                     ElevatedButton(
                       onPressed: () {
-                        RemDataRepImpl().makeNews(_title.text.trim(), _text.text.trim(), _image.text.trim());
-
                         Navigator.of(context).pop();
+                      },
+                      child: Text('Cancel'),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.red),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        RemDataRepImpl().makeNews(_title.text.trim(), _text.text.trim(), _image.text.trim()).then((value) {
+                          if(value=="News made"){
+                            Navigator.of(context).pop();
+                          }else{
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text(value)));
+                          }
+                        });
+
                       },
                       child: Text('Add'),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
-                      ),)
+                      ),
+                    ),
                   ],
                 );
               });

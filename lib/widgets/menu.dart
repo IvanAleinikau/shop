@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shop/main.dart';
 import 'package:shop/provider/auth_provider.dart';
 import 'package:shop/screens/authScreen/login_page.dart';
 import 'package:shop/screens/home_page.dart';
@@ -46,6 +45,10 @@ class Menu extends StatelessWidget {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()),);
             },
+          ),
+          Divider(
+            height: 10.0,
+            color: Colors.black12,
           ),
           ListTile(
             title: Text('Logout'),
