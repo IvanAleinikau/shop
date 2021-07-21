@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/repository/repository.dart';
+import 'package:shop/repository/news_repository.dart';
 
 class MakeNewsForm extends StatelessWidget {
   TextEditingController _title = TextEditingController();
@@ -42,7 +42,7 @@ class MakeNewsForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            RemDataRepImpl().makeNews(_title.text.trim(), _text.text.trim()).then((value) {
+            NewsRepository().makeNews(_title.text.trim(), _text.text.trim()).then((value) {
               if(value=="News made"){
                 Navigator.of(context).pop();
               }else{
