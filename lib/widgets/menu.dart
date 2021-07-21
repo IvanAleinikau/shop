@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop/provider/auth_provider.dart';
+import 'package:shop/widgets/list_news.dart';
 import 'package:shop/screens/authScreen/login_page.dart';
 import 'package:shop/screens/home_page.dart';
 import 'package:shop/screens/settings_page.dart';
@@ -40,6 +41,13 @@ class Menu extends StatelessWidget {
             },
           ),
           ListTile(
+            title: Text('Saved news'),
+            leading: Icon(Icons.announcement_sharp),
+            onTap: () {
+
+            },
+          ),
+          ListTile(
             title: Text('Settings'),
             leading: Icon(Icons.settings),
             onTap: () {
@@ -49,6 +57,13 @@ class Menu extends StatelessWidget {
           Divider(
             height: 10.0,
             color: Colors.black12,
+          ),
+          ListTile(
+            title: Text('Shop FAQ'),
+            leading: Icon(Icons.question_answer),
+            onTap: () {
+
+            },
           ),
           ListTile(
             title: Text('Logout'),

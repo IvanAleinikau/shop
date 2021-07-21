@@ -27,6 +27,6 @@ class _SplashState extends State<Splash> {
                 (route) => false);
       }
     });
-    return HomePage();
+    return Scaffold();
   }
 }
