@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/widgets/list_news.dart';
-import 'package:shop/widgets/make_news.dart';
+import 'package:shop/widgets/news/list_news.dart';
+import 'package:shop/widgets/news/make_news.dart';
 import 'package:shop/widgets/menu.dart';
 import 'package:firebase_core/firebase_core.dart';
 

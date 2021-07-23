@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shop/widgets/news_menu.dart';
+import 'package:shop/widgets/news/news_menu.dart';
 
 class ListNews extends StatelessWidget {
   @override

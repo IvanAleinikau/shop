@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shop/widgets/list_news.dart';
+import 'package:shop/widgets/news/list_news.dart';
 import 'package:shop/screens/shop_page.dart';
 import 'package:shop/screens/splash.dart';
 import 'package:shop/screens/settings_page.dart';

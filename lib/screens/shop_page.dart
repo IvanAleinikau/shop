@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/widgets/vinyl_record/vinyl_record_page.dart';
 import 'package:shop/widgets/menu.dart';
 
 class ShopPage extends StatefulWidget {
@@ -32,7 +33,7 @@ class _ShopPageState extends State<ShopPage>{
         body: TabBarView(
           children: [
             Center(
-              child: Text("It's cloudy here"),
+              child: VinylRecordPage(),
             ),
             Center(
               child: Text("It's cloudy here"),
