@@ -4,7 +4,7 @@ import 'package:shop/model/element_news.dart';
 
 class NewsRepository  {
 
-  Future<String> makeNews(ElementNews news) async {
+  Future<String> makeNews(News news) async {
     if(news.title.isNotEmpty & news.text.isNotEmpty){
       await FirebaseFirestore.instance
           .collection("news")

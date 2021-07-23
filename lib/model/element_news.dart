@@ -1,9 +1,9 @@
-class ElementNews {
+class News {
   String title;
   String text;
   DateTime date;
 
-  ElementNews(
+  News(
       this.title, this.text, this.date
       );
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shop/model/element_news.dart';
-import 'package:intl/intl.dart';
 import 'package:shop/repository/news_repository.dart';
 
 class MakeNewsForm extends StatelessWidget {
@@ -44,7 +43,7 @@ class MakeNewsForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            ElementNews news = ElementNews(_title.text.trim(), _text.text.trim(), new DateTime.now());
+            News news = News(_title.text.trim(), _text.text.trim(), new DateTime.now());
             NewsRepository().makeNews(news).then((value) {
               if(value=="News made"){
                 Navigator.of(context).pop();
@@ -53,7 +52,6 @@ class MakeNewsForm extends StatelessWidget {
                     .showSnackBar(SnackBar(content: Text(value)));
               }
             });
-
           },
           child: Text('Add'),
           style: ButtonStyle(

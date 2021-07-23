@@ -57,6 +57,7 @@ flutter:
     - asset/image/logo_shop.jpg
     - asset/image/news.jpg
     - asset/image/user.png
+    - asset/vinyl_record/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

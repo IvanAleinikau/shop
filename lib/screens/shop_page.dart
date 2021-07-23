@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/widgets/shop_elements/make_shop_element.dart';
 import 'package:shop/widgets/vinyl_record/vinyl_record_page.dart';
 import 'package:shop/widgets/menu.dart';
 
@@ -16,6 +17,20 @@ class _ShopPageState extends State<ShopPage>{
       child: Scaffold(
         appBar: AppBar(
           title: Text('Shop'),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.shopping_cart_outlined),
+              onPressed: () {
+
+              },
+            ),
+          ],
           bottom: TabBar(
             tabs: [
               Tab(
@@ -32,11 +47,11 @@ class _ShopPageState extends State<ShopPage>{
         ),
         body: TabBarView(
           children: [
-            Center(
+            Container(
               child: VinylRecordPage(),
             ),
-            Center(
-              child: Text("It's cloudy here"),
+            Container(
+              child: VinylRecordPage(),
             ),
             Center(
               child: Text("It's cloudy here"),
@@ -44,6 +59,17 @@ class _ShopPageState extends State<ShopPage>{
           ],
         ),
         drawer: Menu(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return MakeShopElement();
+                });
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.deepPurple,
+        ),
       ),
     );
   }

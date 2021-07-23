@@ -13,21 +13,27 @@ class _VinylRecordPageState extends State<VinylRecordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('news').snapshots(),
+      stream: FirebaseFirestore.instance.collection('vinyl_record').snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
         return GridView.count(
           crossAxisCount: 2,
           children: List.generate(streamSnapshot.data!.docs.length, (index) {
             return GestureDetector(
               onTap: (){
-                print('ff');
+
               },
               child: Card(
                 child: Column(
                   children: [
-                    Image.asset('asset/image/news.jpg'),
+                    Flexible(
+                      child:Image(
+                        image: AssetImage("asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+                      ),
+                    ),
                     ListTile(
-                      title: Text('Title'),
+                      title: Text(streamSnapshot.data!.docs[index]['name']),
+                      subtitle: Text(streamSnapshot.data!.docs[index]['author']),
+                      trailing: Text(streamSnapshot.data!.docs[index]['cost']+'\$') ,
                     ),
                   ],
                 ),
