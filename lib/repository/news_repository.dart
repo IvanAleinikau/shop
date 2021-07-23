@@ -1,16 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:shop/model/element_news.dart';
 
 class NewsRepository  {
 
-  Future<String> makeNews(
-    String title,
-    String text,
-  ) async {
-    if(title.isNotEmpty & text.isNotEmpty){
+  Future<String> makeNews(ElementNews news) async {
+    if(news.title.isNotEmpty & news.text.isNotEmpty){
       await FirebaseFirestore.instance
           .collection("news")
-          .add({'title': title, 'text': text, 'date': new DateFormat.yMMMd().format(new DateTime.now())});
+          .add({'title': news.title, 'text': news.text, 'date': new DateFormat.yMMMd().format(news.date)});
       return "News made";
     }else {
       return "Please enter title and text";
