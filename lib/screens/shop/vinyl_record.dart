@@ -1,58 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shop/model/element_vinyl_record.dart';
 
-class VinylRecord extends StatefulWidget {
-  final String name;
+class ObjVinylRecord extends StatefulWidget {
+  final VinylRecord vinylRecord;
   final int index;
 
-  VinylRecord(this.name, this.index);
+  ObjVinylRecord(this.vinylRecord, this.index);
 
   @override
-  _VinylRecordState createState() => _VinylRecordState();
+  _ObjVinylRecordState createState() => _ObjVinylRecordState();
 }
 
-class _VinylRecordState extends State<VinylRecord> {
+class _ObjVinylRecordState extends State<ObjVinylRecord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.name}'),
+        title: Text('${widget.vinylRecord.name}'),
       ),
-      body: StreamBuilder(
-        stream:
-            FirebaseFirestore.instance.collection('vinyl_record').snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          return Column(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
-                child: Image(
-                  image: AssetImage(
-                      'asset/vinyl_record/${streamSnapshot.data!.docs[widget.index]['image']}.png'),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  streamSnapshot.data!.docs[widget.index]['name'] +' - '+ streamSnapshot.data!.docs[widget.index]['year'],
-                  style: TextStyle(fontSize: 25),
-                ),
-                subtitle:
-                    Text(streamSnapshot.data!.docs[widget.index]['author']),
-              ),
-             ListTile(
-               title: Text('Description',
-                 style: TextStyle(fontSize: 20),
-               ),
-               subtitle: Text(streamSnapshot.data!.docs[widget.index]['description']),
-               trailing: Text(streamSnapshot.data!.docs[widget.index]['cost']+'\$',
-               style: TextStyle(fontSize: 20),),
-             )
-            ],
-          );
-        },
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
+            child: Image(
+              image: AssetImage(
+                  'asset/vinyl_record/${widget.vinylRecord.image}.png'),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              widget.vinylRecord.name +' - '+ widget.vinylRecord.year,
+              style: TextStyle(fontSize: 25),
+            ),
+            subtitle:
+            Text(widget.vinylRecord.author),
+          ),
+          ListTile(
+            title: Text('Description',
+              style: TextStyle(fontSize: 20),
+            ),
+            subtitle: Text(widget.vinylRecord.description),
+            trailing: Text(widget.vinylRecord.cost+'\$',
+              style: TextStyle(fontSize: 20),),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+
+        },
         child: const Icon(Icons.shopping_cart),
         backgroundColor: Colors.deepPurple,
       ),
