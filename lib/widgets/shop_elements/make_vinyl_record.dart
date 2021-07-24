@@ -62,8 +62,8 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
             TextField(
               controller: _image,
               decoration: InputDecoration(
-                labelText: 'Image',
-                hintText: 'Enter image',
+                labelText: 'Image number',
+                hintText: 'Enter 1-9 number',
               ),
             ),
           ],

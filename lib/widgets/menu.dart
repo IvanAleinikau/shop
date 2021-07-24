@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop/provider/auth_provider.dart';
-import 'package:shop/widgets/news/list_news.dart';
+import 'package:shop/screens/news/news_page.dart';
 import 'package:shop/screens/authScreen/login_page.dart';
 import 'package:shop/screens/home_page.dart';
 import 'package:shop/screens/settings_page.dart';
-import 'package:shop/screens/shop_page.dart';
+import 'package:shop/screens/shop/shop_page.dart';
 
 class Menu extends StatelessWidget {
   String? user = FirebaseAuth.instance.currentUser!.email;

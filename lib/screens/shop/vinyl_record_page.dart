@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shop/screens/shop/vinyl_record.dart';
+import 'package:shop/widgets/shop_elements/make_vinyl_record.dart';
 
 class VinylRecordPage extends StatefulWidget {
-  const VinylRecordPage({Key? key}) : super(key: key);
 
   @override
   _VinylRecordPageState createState() => _VinylRecordPageState();
@@ -20,7 +21,7 @@ class _VinylRecordPageState extends State<VinylRecordPage> {
           children: List.generate(streamSnapshot.data!.docs.length, (index) {
             return GestureDetector(
               onTap: (){
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => VinylRecord(streamSnapshot.data!.docs[index]['name'],index)),);
               },
               child: Card(
                 child: Column(
@@ -42,6 +43,19 @@ class _VinylRecordPageState extends State<VinylRecordPage> {
           }),
         );
       },
-    ));
+    ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return MakeVinylRecord();
+              });
+        },
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.deepPurple,
+      ),
+    );
+
   }
 }

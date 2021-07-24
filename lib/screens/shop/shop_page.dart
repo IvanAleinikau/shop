@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/widgets/shop_elements/make_shop_element.dart';
-import 'package:shop/widgets/vinyl_record/vinyl_record_page.dart';
+import 'package:shop/screens/shop/vinyl_record_page.dart';
 import 'package:shop/widgets/menu.dart';
 
 class ShopPage extends StatefulWidget {
@@ -51,7 +50,7 @@ class _ShopPageState extends State<ShopPage>{
               child: VinylRecordPage(),
             ),
             Container(
-              child: VinylRecordPage(),
+              child: Text(""),
             ),
             Center(
               child: Text("It's cloudy here"),
@@ -59,17 +58,6 @@ class _ShopPageState extends State<ShopPage>{
           ],
         ),
         drawer: Menu(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return MakeShopElement();
-                });
-          },
-          child: const Icon(Icons.add),
-          backgroundColor: Colors.deepPurple,
-        ),
       ),
     );
   }
