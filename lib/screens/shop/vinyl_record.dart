@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop/model/element_purchase.dart';
 import 'package:shop/model/element_vinyl_record.dart';
+import 'package:shop/repository/purchase_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ObjVinylRecord extends StatefulWidget {
   final VinylRecord vinylRecord;
@@ -12,6 +15,8 @@ class ObjVinylRecord extends StatefulWidget {
 }
 
 class _ObjVinylRecordState extends State<ObjVinylRecord> {
+  String? user = FirebaseAuth.instance.currentUser!.email;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +52,14 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          PurchaseRepository().makePurchase(new Purchase( user!,true,widget.vinylRecord)).then((value) {
+            if(value=="Purchase made"){
+              Navigator.of(context).pop();
+            }else{
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(value)));
+            }
+          });
         },
         child: const Icon(Icons.shopping_cart),
         backgroundColor: Colors.deepPurple,

@@ -1,3 +1,5 @@
+
+
 class VinylRecord {
   String name;
   String author;
@@ -6,12 +8,5 @@ class VinylRecord {
   String cost;
   String image;
 
-  VinylRecord(
-    this.name,
-    this.author,
-    this.year,
-    this.description,
-    this.cost,
-    this.image,
-  );
+  VinylRecord(this.name, this.author, this.year, this.description, this.cost, this.image);
 }

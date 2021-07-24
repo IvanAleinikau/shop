@@ -1,6 +1,9 @@
+import 'package:shop/model/element_vinyl_record.dart';
+
 class Purchase {
   String user;
-  Object shopElement;
+  bool isActive;
+  VinylRecord vinylRecord;
 
-  Purchase(this.user, this.shopElement);
+  Purchase(this.user , this.isActive,this.vinylRecord );
 }

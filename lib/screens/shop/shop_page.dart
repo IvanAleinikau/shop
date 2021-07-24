@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/screens/shop/shopping_cart_page.dart';
 import 'package:shop/screens/shop/vinyl_record_page.dart';
 import 'package:shop/widgets/menu.dart';
 
@@ -26,7 +27,7 @@ class _ShopPageState extends State<ShopPage>{
             IconButton(
               icon: Icon(Icons.shopping_cart_outlined),
               onPressed: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingCartPage()),);
               },
             ),
           ],
