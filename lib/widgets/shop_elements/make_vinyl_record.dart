@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_vinyl_record.dart';
 import 'package:shop/repository/vinyl_record_repository.dart';
 
@@ -19,7 +20,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add vinyl record'),
+      title: Text(AppLocalization.of(context)!.addVinylRecord),
       content: SingleChildScrollView(
         child:Column(
           mainAxisSize: MainAxisSize.min,
@@ -27,43 +28,43 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
             TextField(
               controller: _name,
               decoration: InputDecoration(
-                labelText: 'Name',
-                hintText: 'Enter name',
+                labelText: AppLocalization.of(context)!.name,
+                hintText: AppLocalization.of(context)!.enterName,
               ),
             ),
             TextField(
               controller: _author,
               decoration: InputDecoration(
-                labelText: 'Author',
-                hintText: 'Enter author',
+                labelText: AppLocalization.of(context)!.author,
+                hintText: AppLocalization.of(context)!.enterAuthor,
               ),
             ),
             TextField(
               controller: _year,
               decoration: InputDecoration(
-                labelText: 'Year',
-                hintText: 'Enter Year',
+                labelText: AppLocalization.of(context)!.year,
+                hintText: AppLocalization.of(context)!.enterYear,
               ),
             ),
             TextField(
               controller: _description,
               decoration: InputDecoration(
-                labelText: 'Description',
-                hintText: 'Enter description',
+                labelText: AppLocalization.of(context)!.description,
+                hintText: AppLocalization.of(context)!.enterDescription,
               ),
             ),
             TextField(
               controller: _cost,
               decoration: InputDecoration(
-                labelText: 'Cost',
-                hintText: 'Enter cost',
+                labelText: AppLocalization.of(context)!.cost,
+                hintText: AppLocalization.of(context)!.enterCost,
               ),
             ),
             TextField(
               controller: _image,
               decoration: InputDecoration(
-                labelText: 'Image number',
-                hintText: 'Enter 1-9 number',
+                labelText: AppLocalization.of(context)!.imageNumber,
+                hintText: AppLocalization.of(context)!.enterImage,
               ),
             ),
           ],
@@ -74,7 +75,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: Text(AppLocalization.of(context)!.cancel),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.red),
           ),
@@ -91,7 +92,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
               }
             });
           },
-          child: Text('Add'),
+          child: Text(AppLocalization.of(context)!.add),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
           ),

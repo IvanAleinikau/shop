@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_news.dart';
 import 'package:shop/repository/news_repository.dart';
 
@@ -9,7 +10,7 @@ class MakeNewsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add news'),
+      title: Text(AppLocalization.of(context)!.addNews),
       content: SingleChildScrollView(
         child:Column(
           mainAxisSize: MainAxisSize.min,
@@ -17,15 +18,15 @@ class MakeNewsForm extends StatelessWidget {
             TextField(
               controller: _title,
               decoration: InputDecoration(
-                labelText: 'Title',
-                hintText: 'Enter title',
+                labelText: AppLocalization.of(context)!.title,
+                hintText: AppLocalization.of(context)!.enterTitle,
               ),
             ),
             TextField(
               controller: _text,
               decoration: InputDecoration(
-                labelText: 'Text',
-                hintText: 'Enter text',
+                labelText: AppLocalization.of(context)!.text,
+                hintText: AppLocalization.of(context)!.enterText,
               ),
             ),
           ],
@@ -36,7 +37,7 @@ class MakeNewsForm extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: Text(AppLocalization.of(context)!.cancel),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.red),
           ),
@@ -53,7 +54,7 @@ class MakeNewsForm extends StatelessWidget {
               }
             });
           },
-          child: Text('Add'),
+          child: Text(AppLocalization.of(context)!.add),
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
           ),

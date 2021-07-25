@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_purchase.dart';
 import 'package:shop/model/element_vinyl_record.dart';
 import 'package:shop/repository/purchase_repository.dart';
@@ -41,7 +42,7 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
             Text(widget.vinylRecord.author),
           ),
           ListTile(
-            title: Text('Description',
+            title: Text(AppLocalization.of(context)!.description,
               style: TextStyle(fontSize: 20),
             ),
             subtitle: Text(widget.vinylRecord.description),

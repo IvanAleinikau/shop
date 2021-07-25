@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 
 class NewsMenu extends StatelessWidget {
 
@@ -10,7 +11,7 @@ class NewsMenu extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              title: Text('Save'),
+              title: Text(AppLocalization.of(context)!.save),
               leading: Icon(Icons.save),
               onTap: () {
 
@@ -20,7 +21,7 @@ class NewsMenu extends StatelessWidget {
               color: Colors.black12,
             ),
             ListTile(
-              title: Text('Remove'),
+              title: Text(AppLocalization.of(context)!.remove),
               leading: Icon(Icons.highlight_remove),
               onTap: () {
 

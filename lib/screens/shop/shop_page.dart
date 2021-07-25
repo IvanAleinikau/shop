@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/screens/shop/shopping_cart_page.dart';
 import 'package:shop/screens/shop/vinyl_record_page.dart';
 import 'package:shop/widgets/menu.dart';
@@ -16,7 +17,7 @@ class _ShopPageState extends State<ShopPage>{
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Shop'),
+          title: Text(AppLocalization.of(context)!.shop),
           actions: [
             IconButton(
               icon: Icon(Icons.search),

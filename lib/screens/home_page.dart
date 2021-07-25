@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/screens/news/news_page.dart';
 import 'package:shop/widgets/news/make_news.dart';
 import 'package:shop/widgets/menu.dart';
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News'),
+        title: Text(AppLocalization.of(context)!.news),
         backgroundColor: Colors.deepPurple,
       ),
       body: ListNews(),

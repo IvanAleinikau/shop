@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shop/screens/news/news_page.dart';
 import 'package:shop/screens/shop/shop_page.dart';
 import 'package:shop/screens/splash.dart';
 import 'package:shop/screens/settings_page.dart';
-import 'package:shop/widgets/shop_elements/make_vinyl_record.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/intl.dart';
+
+import 'locale/app_localization.dart';
 
 void main(){
   Firebase.initializeApp();
@@ -13,10 +15,21 @@ void main(){
 } 
 
 class App extends StatelessWidget {
+  AppLocalizationDelegate _localeOverrideDelegate =
+  AppLocalizationDelegate(Locale('en', 'US'));
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        _localeOverrideDelegate
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('ru', 'RUS')
+      ],
       theme: ThemeData(
         primaryColor: Colors.deepPurple,
       ),

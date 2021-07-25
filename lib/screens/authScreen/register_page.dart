@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/provider/auth_provider.dart';
 import 'package:shop/screens/authScreen/login_page.dart';
 import 'package:shop/screens/home_page.dart';
@@ -38,8 +39,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      labelText: 'Email',
-                      hintText: 'Enter email'),
+                      labelText: AppLocalization.of(context)!.email,
+                      hintText: AppLocalization.of(context)!.enterEmail),
                 ),
               ),
               Padding(
@@ -50,8 +51,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    labelText: 'Password',
-                    hintText: 'Enter password',
+                    labelText: AppLocalization.of(context)!.password,
+                    hintText: AppLocalization.of(context)!.enterPassword,
                   ),
                 ),
               ),
@@ -63,8 +64,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    labelText: 'Confirm password',
-                    hintText: 'Confirm password',
+                    labelText: AppLocalization.of(context)!.confirmPassword,
+                    hintText: AppLocalization.of(context)!.confirmPassword,
                   ),
                 ),
               ),
@@ -95,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           .showSnackBar(SnackBar(content: Text('Password mismatch')));
                     }
                   },
-                  child: Text('Sing up'),
+                  child: Text(AppLocalization.of(context)!.singUp),
                   style: ButtonStyle(
                     backgroundColor:
                     MaterialStateProperty.all(Colors.deepPurpleAccent),
@@ -124,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         MaterialPageRoute(
                             builder: (context) => LoginPage()));
                   },
-                  child: Text('Already have an account? Login')),
+                  child: Text(AppLocalization.of(context)!.alreadyHave)),
             ],
           ),
         ),

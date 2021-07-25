@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/widgets/menu.dart';
 import 'package:shop/provider/auth_provider.dart';
+import 'package:flutter/cupertino.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -13,51 +14,64 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   TextEditingController _password = TextEditingController();
   TextEditingController _confirm = TextEditingController();
+  bool isEng = true;
+  bool isRus = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: Text(AppLocalization.of(context)!.settings),
         backgroundColor: Colors.deepPurple,
       ),
       body: ListView(
         padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
         children: [
           SizedBox(
-            child: Text('Account',style: TextStyle(
-              fontSize: 20.0,color:Colors.deepPurple,
-            ),),
+            child: Text(
+              AppLocalization.of(context)!.account,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.deepPurple,
+              ),
+            ),
           ),
           Divider(
             height: 10.0,
             color: Colors.black12,
           ),
           ListTile(
-            title: Text('Change password'),
-            leading: Icon(Icons.account_tree_sharp , color: Colors.deepPurple,),
-            onTap: (){
+            title: Text(AppLocalization.of(context)!.changePassword),
+            leading: Icon(
+              Icons.account_tree_sharp,
+              color: Colors.deepPurple,
+            ),
+            onTap: () {
               showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Change password'),
+                      title: Text(AppLocalization.of(context)!.changePassword),
                       content: SingleChildScrollView(
-                        child:Column(
+                        child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             TextField(
                               controller: _password,
                               decoration: InputDecoration(
-                                labelText: 'New password',
-                                hintText: 'Enter new password',
+                                labelText:
+                                    AppLocalization.of(context)!.newPassword,
+                                hintText: AppLocalization.of(context)!
+                                    .enterNewPassword,
                               ),
                             ),
                             TextField(
                               controller: _confirm,
                               decoration: InputDecoration(
-                                labelText: 'Confirm new password',
-                                hintText: 'Enter new password',
+                                labelText: AppLocalization.of(context)!
+                                    .confirmNewPassword,
+                                hintText: AppLocalization.of(context)!
+                                    .enterNewPassword,
                               ),
                             ),
                           ],
@@ -68,27 +82,31 @@ class _SettingsPageState extends State<SettingsPage> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel'),
+                          child: Text(AppLocalization.of(context)!.cancel),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.red),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.red),
                           ),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            if(_password.text.trim()==_confirm.text.trim()){
-                              Auth().resetPassword(_password.text.trim()).then((value) {
-                                if(value=="Reset was successful"){
+                            if (_password.text.trim() == _confirm.text.trim()) {
+                              Auth()
+                                  .resetPassword(_password.text.trim())
+                                  .then((value) {
+                                if (value == "Reset was successful") {
                                   Navigator.of(context).pop();
-                                }else{
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(content: Text(value)));
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(value)));
                                 }
                               });
                             }
                           },
-                          child: Text('Change'),
+                          child: Text(AppLocalization.of(context)!.change),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.deepPurpleAccent),
                           ),
                         ),
                       ],
@@ -97,19 +115,66 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           ),
           SizedBox(
-            child: Text('Settings',style: TextStyle(
-              fontSize: 20.0,color:Colors.deepPurple,
-            ),),
+            child: Text(
+              AppLocalization.of(context)!.settings,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.deepPurple,
+              ),
+            ),
           ),
           Divider(
             height: 10.0,
             color: Colors.black12,
           ),
           ListTile(
-            title: Text('Change a language'),
-            leading: Icon(Icons.language , color: Colors.deepPurple,),
-            onTap: (){
-
+            title: Text(AppLocalization.of(context)!.changeLanguage),
+            leading: Icon(
+              Icons.language,
+              color: Colors.deepPurple,
+            ),
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                        title:
+                            Text(AppLocalization.of(context)!.chooseLanguage),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Text('English'),
+                                trailing: isEng == true
+                                    ? Icon(Icons.check)
+                                    : null,
+                                onTap: () {
+                                  setState(() {
+                                    isRus = false;
+                                    isEng = true;
+                                    AppLocalization.load(Locale('en', 'US'));
+                                    Navigator.of(context).pop();
+                                  });
+                                },
+                              ),
+                              ListTile(
+                                title: Text('Русский'),
+                                trailing: isRus == true
+                                    ? Icon(Icons.check)
+                                    : null,
+                                onTap: () {
+                                  setState(() {
+                                    isRus = true;
+                                    isEng = false;
+                                    AppLocalization.load(Locale('ru', 'RUS'));
+                                    Navigator.of(context).pop();
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ));
+                  });
             },
           ),
         ],

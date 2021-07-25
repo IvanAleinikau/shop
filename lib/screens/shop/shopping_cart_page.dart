@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shop/locale/app_localization.dart';
 
 class ShoppingCartPage extends StatefulWidget {
   const ShoppingCartPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shopping cart'),
+        title: Text(AppLocalization.of(context)!.cart),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('purchase').snapshots(),

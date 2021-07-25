@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/locale/app_localization.dart';
 import 'package:shop/provider/auth_provider.dart';
 import 'package:shop/screens/authScreen/register_page.dart';
 import 'package:shop/screens/home_page.dart';
@@ -34,8 +35,8 @@ class _LoginPageState extends State<LoginPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  labelText: 'Email',
-                  hintText: 'Enter email'),
+                  labelText: AppLocalization.of(context)!.email,
+                  hintText: AppLocalization.of(context)!.enterEmail),
             ),
           ),
           Padding(
@@ -46,8 +47,8 @@ class _LoginPageState extends State<LoginPage> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                labelText: 'Password',
-                hintText: 'Enter password',
+                labelText: AppLocalization.of(context)!.password,
+                hintText: AppLocalization.of(context)!.enterPassword,
               ),
             ),
           ),
@@ -72,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 });
               },
-              child: Text('Login'),
+              child: Text(AppLocalization.of(context)!.logIn),
               style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all(Colors.deepPurpleAccent),
@@ -99,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => RegisterPage()));
               },
-              child: Text('New User? Create Account')),
+              child: Text(AppLocalization.of(context)!.haveAcc)),
         ],
       ),
     ));
