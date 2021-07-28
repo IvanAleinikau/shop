@@ -1,15 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
+import 'package:shop/model/element_vinyl_record.dart';
 import 'package:shop/screens/shop/shopping_cart_page.dart';
+import 'package:shop/screens/shop/vinyl_record.dart';
 import 'package:shop/screens/shop/vinyl_record_page.dart';
+import 'package:shop/search/search.dart';
 import 'package:shop/widgets/menu.dart';
+import 'package:shop/widgets/shop_elements/make_vinyl_record.dart';
 
 class ShopPage extends StatefulWidget {
   @override
   _ShopPageState createState() => _ShopPageState();
 }
 
-class _ShopPageState extends State<ShopPage>{
+class _ShopPageState extends State<ShopPage> {
+  final List<String> names = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,42 +29,77 @@ class _ShopPageState extends State<ShopPage>{
             IconButton(
               icon: Icon(Icons.search),
               onPressed: () {
-
+                showSearch(context: context, delegate: Search(names));
               },
             ),
             IconButton(
               icon: Icon(Icons.shopping_cart_outlined),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingCartPage()),);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShoppingCartPage()),
+                );
               },
             ),
           ],
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                icon: Icon(Icons.album),
-              ),
-              Tab(
-                icon: Icon(Icons.watch),
-              ),
-              Tab(
-                icon: Icon(Icons.account_balance_wallet_sharp),
-              ),
-            ],
-          ),
         ),
-        body: TabBarView(
-          children: [
-            Container(
-              child: VinylRecordPage(),
-            ),
-            Container(
-              child: Text(""),
-            ),
-            Center(
-              child: Text("It's cloudy here"),
-            ),
-          ],
+        body: Scaffold(
+          body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('vinyl_record')
+                .snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              return GridView.count(
+                crossAxisCount: 2,
+                children:
+                    List.generate(streamSnapshot.data!.docs.length, (index) {
+                  if (streamSnapshot.data!.docs.length > names.length)
+                    names.add(streamSnapshot.data!.docs[index]['name']);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ObjVinylRecord(streamSnapshot.data!.docs[index]['name'])),
+                      );
+                    },
+                    child: Card(
+                      child: Column(
+                        children: [
+                          Flexible(
+                            child: Image(
+                              image: AssetImage(
+                                  "asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+                            ),
+                          ),
+                          ListTile(
+                            title:
+                                Text(streamSnapshot.data!.docs[index]['name']),
+                            subtitle: Text(
+                                streamSnapshot.data!.docs[index]['author']),
+                            trailing: Text(streamSnapshot.data!.docs[index]
+                                    ['cost'] +
+                                '\$'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              );
+            },
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return MakeVinylRecord();
+                  });
+            },
+            child: const Icon(Icons.add),
+            backgroundColor: Colors.deepPurple,
+          ),
         ),
         drawer: Menu(),
       ),

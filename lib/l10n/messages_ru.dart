@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "already_have" : MessageLookupByLibrary.simpleMessage("Уже есть аккаунт? Авторизоваться"),
     "log_in" : MessageLookupByLibrary.simpleMessage("Войти"),
     "have_acc" : MessageLookupByLibrary.simpleMessage("Новый пользователь? Создать учетную запись"),
-    "" : MessageLookupByLibrary.simpleMessage(""),
+    "buy" : MessageLookupByLibrary.simpleMessage("Купить"),
     "" : MessageLookupByLibrary.simpleMessage(""),
     "" : MessageLookupByLibrary.simpleMessage(""),
     "" : MessageLookupByLibrary.simpleMessage(""),

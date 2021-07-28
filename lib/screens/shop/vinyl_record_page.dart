@@ -10,6 +10,8 @@ class VinylRecordPage extends StatefulWidget {
 }
 
 class _VinylRecordPageState extends State<VinylRecordPage> {
+  TextEditingController editingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,18 +24,11 @@ class _VinylRecordPageState extends State<VinylRecordPage> {
             children: List.generate(streamSnapshot.data!.docs.length, (index) {
               return GestureDetector(
                 onTap: () {
-                  VinylRecord vinylRecord = VinylRecord(
-                      streamSnapshot.data!.docs[index]['name'],
-                      streamSnapshot.data!.docs[index]['author'],
-                      streamSnapshot.data!.docs[index]['year'],
-                      streamSnapshot.data!.docs[index]['description'],
-                      streamSnapshot.data!.docs[index]['cost'],
-                      streamSnapshot.data!.docs[index]['image']);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ObjVinylRecord(
-                            vinylRecord, index)),
+                        builder: (context) =>
+                            ObjVinylRecord(streamSnapshot.data!.docs[index]['name'])),
                   );
                 },
                 child: Card(

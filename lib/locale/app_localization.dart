@@ -315,6 +315,12 @@ class AppLocalization {
       name: 'have_acc',
     );
   }
+  String get  buy{
+    return Intl.message(
+      '',
+      name: 'buy',
+    );
+  }
 
 }
 

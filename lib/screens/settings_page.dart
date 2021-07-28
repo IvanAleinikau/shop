@@ -14,8 +14,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   TextEditingController _password = TextEditingController();
   TextEditingController _confirm = TextEditingController();
-  bool isEng = true;
-  bool isRus = false;
 
   @override
   Widget build(BuildContext context) {
@@ -145,13 +143,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             children: [
                               ListTile(
                                 title: Text('English'),
-                                trailing: isEng == true
-                                    ? Icon(Icons.check)
-                                    : null,
                                 onTap: () {
                                   setState(() {
-                                    isRus = false;
-                                    isEng = true;
                                     AppLocalization.load(Locale('en', 'US'));
                                     Navigator.of(context).pop();
                                   });
@@ -159,13 +152,8 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               ListTile(
                                 title: Text('Русский'),
-                                trailing: isRus == true
-                                    ? Icon(Icons.check)
-                                    : null,
                                 onTap: () {
                                   setState(() {
-                                    isRus = true;
-                                    isEng = false;
                                     AppLocalization.load(Locale('ru', 'RUS'));
                                     Navigator.of(context).pop();
                                   });

@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VinylRecord {
   String name;
@@ -9,4 +9,6 @@ class VinylRecord {
   String image;
 
   VinylRecord(this.name, this.author, this.year, this.description, this.cost, this.image);
+
+
 }
