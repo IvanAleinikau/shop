@@ -22,34 +22,39 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('purchase').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          return GridView.count(
-            crossAxisCount: 2,
-            children: List.generate(streamSnapshot.data!.docs.length, (index) {
-              return streamSnapshot.data!.docs[index]['user'] == user
-                  ? Card(
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: Image(
-                              image: AssetImage(
-                                  "asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+          if (streamSnapshot.hasData) {
+            return GridView.count(
+              crossAxisCount: 2,
+              children:
+                  List.generate(streamSnapshot.data!.docs.length, (index) {
+                return streamSnapshot.data!.docs[index]['user'] == user
+                    ? Card(
+                        child: Column(
+                          children: [
+                            Flexible(
+                              child: Image(
+                                image: AssetImage(
+                                    "asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+                              ),
                             ),
-                          ),
-                          ListTile(
-                            title:
-                                Text(streamSnapshot.data!.docs[index]['name']),
-                            subtitle: Text(
-                                streamSnapshot.data!.docs[index]['author']),
-                            trailing: Text(streamSnapshot.data!.docs[index]
-                                    ['cost'] +
-                                '\$'),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container();
-            }),
-          );
+                            ListTile(
+                              title: Text(
+                                  streamSnapshot.data!.docs[index]['name']),
+                              subtitle: Text(
+                                  streamSnapshot.data!.docs[index]['author']),
+                              trailing: Text(streamSnapshot.data!.docs[index]
+                                      ['cost'] +
+                                  '\$'),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container();
+              }),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
         },
       ),
     );

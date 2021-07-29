@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/provider/auth_provider.dart';
-import 'package:shop/screens/authScreen/register_page.dart';
-import 'package:shop/screens/home_page.dart';
+import 'package:shop/screens/auth/register_page.dart';
+import 'package:shop/screens/news/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override

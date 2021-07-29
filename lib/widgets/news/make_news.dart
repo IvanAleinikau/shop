@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_news.dart';
-import 'package:shop/repository/news_repository.dart';
+import 'package:shop/provider/news_provider.dart';
 
 class MakeNewsForm extends StatelessWidget {
-  TextEditingController _title = TextEditingController();
-  TextEditingController _text = TextEditingController();
+  final TextEditingController _title = TextEditingController();
+  final TextEditingController _text = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

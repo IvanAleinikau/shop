@@ -322,6 +322,33 @@ class AppLocalization {
     );
   }
 
+  String get  question{
+    return Intl.message(
+      '',
+      name: 'question',
+    );
+  }
+
+  String get  enterQuestion{
+    return Intl.message(
+      '',
+      name: 'enter_question',
+    );
+  }
+
+  String get answer {
+    return Intl.message(
+      '',
+      name: 'answer',
+    );
+  }
+
+  String get  enterAnswer{
+    return Intl.message(
+      '',
+      name: 'enter_answer',
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization>{

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
-import 'package:shop/widgets/menu.dart';
+import 'package:shop/widgets/app_menu.dart';
 import 'package:shop/provider/auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 

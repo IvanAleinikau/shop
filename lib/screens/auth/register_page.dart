@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/provider/auth_provider.dart';
-import 'package:shop/screens/authScreen/login_page.dart';
-import 'package:shop/screens/home_page.dart';
+import 'package:shop/screens/auth/login_page.dart';
+import 'package:shop/screens/news/home_page.dart';
 
 
 class RegisterPage extends StatefulWidget {

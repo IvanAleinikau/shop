@@ -1,6 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shop/screens/shop/vinyl_record.dart';
+import 'package:shop/widgets/shop/vinyl_record.dart';
 
 class Search extends SearchDelegate {
   List<String> names = [];

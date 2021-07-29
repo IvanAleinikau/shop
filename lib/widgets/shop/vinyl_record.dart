@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_purchase.dart';
 import 'package:shop/model/element_vinyl_record.dart';
-import 'package:shop/repository/purchase_repository.dart';
+import 'package:shop/provider/purchase_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ObjVinylRecord extends StatefulWidget {

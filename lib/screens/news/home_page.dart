@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/screens/news/news_page.dart';
 import 'package:shop/widgets/news/make_news.dart';
-import 'package:shop/widgets/menu.dart';
+import 'package:shop/widgets/app_menu.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class HomePage extends StatefulWidget {

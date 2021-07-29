@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_vinyl_record.dart';
-import 'package:shop/repository/vinyl_record_repository.dart';
+import 'package:shop/provider/vinyl_record_provider.dart';
 
 class MakeVinylRecord extends StatefulWidget {
 

@@ -70,11 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "log_in" : MessageLookupByLibrary.simpleMessage("Войти"),
     "have_acc" : MessageLookupByLibrary.simpleMessage("Новый пользователь? Создать учетную запись"),
     "buy" : MessageLookupByLibrary.simpleMessage("Купить"),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
+    "question" : MessageLookupByLibrary.simpleMessage("Вопрос"),
+    "enter_question" : MessageLookupByLibrary.simpleMessage("Введите вопрос"),
+    "answer" : MessageLookupByLibrary.simpleMessage("Ответ"),
+    "enter_answer" : MessageLookupByLibrary.simpleMessage("Введите ответ"),
   };
 }

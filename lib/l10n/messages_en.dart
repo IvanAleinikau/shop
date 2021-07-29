@@ -70,12 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "log_in" : MessageLookupByLibrary.simpleMessage("Log in"),
     "have_acc" : MessageLookupByLibrary.simpleMessage("New User? Create Account"),
     "buy" : MessageLookupByLibrary.simpleMessage("Buy"),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-
+    "question" : MessageLookupByLibrary.simpleMessage("Question"),
+    "enter_question" : MessageLookupByLibrary.simpleMessage("Enter question"),
+    "answer" : MessageLookupByLibrary.simpleMessage("Answer"),
+    "enter_answer" : MessageLookupByLibrary.simpleMessage("Enter answer"),
   };
 }

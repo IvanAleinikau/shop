@@ -5,7 +5,6 @@ import 'package:shop/screens/splash.dart';
 import 'package:shop/screens/settings_page.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 
 import 'locale/app_localization.dart';
 
@@ -15,7 +14,7 @@ void main(){
 } 
 
 class App extends StatelessWidget {
-  AppLocalizationDelegate _localeOverrideDelegate =
+  final AppLocalizationDelegate _localeOverrideDelegate =
   AppLocalizationDelegate(Locale('en', 'US'));
 
   @override

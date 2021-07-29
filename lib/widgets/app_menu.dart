@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/provider/auth_provider.dart';
-import 'package:shop/screens/authScreen/login_page.dart';
-import 'package:shop/screens/home_page.dart';
+import 'package:shop/screens/auth/login_page.dart';
+import 'package:shop/screens/fqa_page.dart';
+import 'package:shop/screens/news/home_page.dart';
 import 'package:shop/screens/settings_page.dart';
 import 'package:shop/screens/shop/shop_page.dart';
 
@@ -69,7 +70,7 @@ class _MenuState extends State<Menu> {
             title: Text(AppLocalization.of(context)!.faq),
             leading: Icon(Icons.question_answer),
             onTap: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => FQAPage()),);
             },
           ),
           ListTile(

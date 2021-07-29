@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
-import 'package:shop/model/element_vinyl_record.dart';
 import 'package:shop/screens/shop/shopping_cart_page.dart';
-import 'package:shop/screens/shop/vinyl_record.dart';
-import 'package:shop/screens/shop/vinyl_record_page.dart';
+import 'package:shop/widgets/shop/vinyl_record.dart';
 import 'package:shop/search/search.dart';
-import 'package:shop/widgets/menu.dart';
-import 'package:shop/widgets/shop_elements/make_vinyl_record.dart';
+import 'package:shop/widgets/app_menu.dart';
+import 'package:shop/widgets/shop/make_vinyl_record.dart';
 
 class ShopPage extends StatefulWidget {
   @override
@@ -49,44 +46,49 @@ class _ShopPageState extends State<ShopPage> {
                 .collection('vinyl_record')
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-              return GridView.count(
-                crossAxisCount: 2,
-                children:
-                    List.generate(streamSnapshot.data!.docs.length, (index) {
-                  if (streamSnapshot.data!.docs.length > names.length)
-                    names.add(streamSnapshot.data!.docs[index]['name']);
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ObjVinylRecord(streamSnapshot.data!.docs[index]['name'])),
-                      );
-                    },
-                    child: Card(
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: Image(
-                              image: AssetImage(
-                                  "asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+              if (streamSnapshot.hasData) {
+                return GridView.count(
+                  crossAxisCount: 2,
+                  children:
+                      List.generate(streamSnapshot.data!.docs.length, (index) {
+                    if (streamSnapshot.data!.docs.length > names.length)
+                      names.add(streamSnapshot.data!.docs[index]['name']);
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ObjVinylRecord(
+                                  streamSnapshot.data!.docs[index]['name'])),
+                        );
+                      },
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Flexible(
+                              child: Image(
+                                image: AssetImage(
+                                    "asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+                              ),
                             ),
-                          ),
-                          ListTile(
-                            title:
-                                Text(streamSnapshot.data!.docs[index]['name']),
-                            subtitle: Text(
-                                streamSnapshot.data!.docs[index]['author']),
-                            trailing: Text(streamSnapshot.data!.docs[index]
-                                    ['cost'] +
-                                '\$'),
-                          ),
-                        ],
+                            ListTile(
+                              title: Text(
+                                  streamSnapshot.data!.docs[index]['name']),
+                              subtitle: Text(
+                                  streamSnapshot.data!.docs[index]['author']),
+                              trailing: Text(streamSnapshot.data!.docs[index]
+                                      ['cost'] +
+                                  '\$'),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }),
-              );
+                    );
+                  }),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             },
           ),
           floatingActionButton: FloatingActionButton(
