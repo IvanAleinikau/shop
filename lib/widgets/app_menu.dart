@@ -5,6 +5,7 @@ import 'package:shop/provider/auth_provider.dart';
 import 'package:shop/screens/auth/login_page.dart';
 import 'package:shop/screens/fqa_page.dart';
 import 'package:shop/screens/news/home_page.dart';
+import 'package:shop/screens/saved_news_page.dart';
 import 'package:shop/screens/settings_page.dart';
 import 'package:shop/screens/shop/shop_page.dart';
 
@@ -52,7 +53,7 @@ class _MenuState extends State<Menu> {
             title: Text(AppLocalization.of(context)!.savedNews),
             leading: Icon(Icons.announcement_sharp),
             onTap: () {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SavedNewsPage()),);
             },
           ),
           ListTile(

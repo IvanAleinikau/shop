@@ -25,6 +25,11 @@ class _FQAPageState extends State<FQAPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => FQAPage()),);
+          }, icon: Icon(Icons.replay_sharp),)
+        ],
         title: Text(AppLocalization.of(context)!.faq),
         backgroundColor: Colors.deepPurple,
       ),
@@ -112,8 +117,7 @@ class _FQAPageState extends State<FQAPage> {
                           QuestionAnswer qa = QuestionAnswer(
                               question: _question.text.trim(),
                               answer: _answer.text.trim());
-                          List<QuestionAnswer> list = [qa];
-                          database.insertQuestionAnswer(list);
+                          database.insertQuestionAnswer(qa);
                           Navigator.of(context).pop();
                         },
                         child: Text(AppLocalization.of(context)!.add),
