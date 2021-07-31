@@ -117,8 +117,13 @@ class _FQAPageState extends State<FQAPage> {
                           QuestionAnswer qa = QuestionAnswer(
                               question: _question.text.trim(),
                               answer: _answer.text.trim());
-                          database.insertQuestionAnswer(qa);
-                          Navigator.of(context).pop();
+                          if(qa.question.length>5 && qa.answer.length>5){
+                            database.insertQuestionAnswer(qa);
+                            Navigator.of(context).pop();
+                          }else{
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text(AppLocalization.of(context)!.field)));
+                          }
                         },
                         child: Text(AppLocalization.of(context)!.add),
                         style: ButtonStyle(

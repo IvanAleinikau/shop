@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_vinyl_record.dart';
 import 'package:shop/provider/vinyl_record_provider.dart';
+import 'package:shop/screens/shop/shop_page.dart';
 
 class MakeVinylRecord extends StatefulWidget {
 
@@ -85,7 +86,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
             VinylRecord vinylRecord = VinylRecord(_name.text.trim(), _author.text.trim(),_year.text.trim(),_description.text.trim(),_cost.text.trim(),_image.text.trim() );
             VinylRecordRepository().makeVinylRecord(vinylRecord).then((value) {
               if(value=="Vinyl record made"){
-                Navigator.of(context).pop();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ShopPage()),);
               }else{
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(value)));

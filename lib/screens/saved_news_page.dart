@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:shop/locale/app_localization.dart';
 import 'package:shop/model/element_saved_news.dart';
 import 'package:shop/provider/db_provider.dart';
+import 'package:shop/widgets/app_menu.dart';
 
 class SavedNewsPage extends StatefulWidget {
   @override
@@ -73,6 +73,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
           }
         },
       ),
+      drawer: Menu(),
     );
   }
 }

@@ -32,91 +32,103 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
             return ListView.builder(
                 itemCount: streamSnapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  return widget.name == streamSnapshot.data!.docs[index]['name']
-                      ? Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
-                              child: Image(
-                                image: AssetImage(
-                                    'asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png'),
+                  if (streamSnapshot.hasData) {
+                    return widget.name ==
+                            streamSnapshot.data!.docs[index]['name']
+                        ? Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.fromLTRB(30, 30, 0, 0),
+                                child: Image(
+                                  image: AssetImage(
+                                      'asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png'),
+                                ),
                               ),
-                            ),
-                            ListTile(
-                              title: Text(
-                                streamSnapshot.data!.docs[index]['name'] +
-                                    ' - ' +
-                                    streamSnapshot.data!.docs[index]['year'],
-                                style: TextStyle(fontSize: 25),
+                              ListTile(
+                                title: Text(
+                                  streamSnapshot.data!.docs[index]['name'] +
+                                      ' - ' +
+                                      streamSnapshot.data!.docs[index]['year'],
+                                  style: TextStyle(fontSize: 25),
+                                ),
+                                subtitle: Text(
+                                    streamSnapshot.data!.docs[index]['author']),
                               ),
-                              subtitle: Text(
-                                  streamSnapshot.data!.docs[index]['author']),
-                            ),
-                            ListTile(
-                              title: Text(
-                                AppLocalization.of(context)!.description,
-                                style: TextStyle(fontSize: 20),
+                              ListTile(
+                                title: Text(
+                                  AppLocalization.of(context)!.description,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                subtitle: Text(streamSnapshot.data!.docs[index]
+                                    ['description']),
+                                trailing: Text(
+                                  streamSnapshot.data!.docs[index]['cost'] +
+                                      '\$',
+                                  style: TextStyle(fontSize: 20),
+                                ),
                               ),
-                              subtitle: Text(streamSnapshot.data!.docs[index]
-                                  ['description']),
-                              trailing: Text(
-                                streamSnapshot.data!.docs[index]['cost'] + '\$',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Container(
+                              SizedBox(
                                 height: 50,
-                                width: 150,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    VinylRecord vinylRecord = VinylRecord(
-                                        streamSnapshot.data!.docs[index]['name'],
-                                        streamSnapshot.data!.docs[index]
-                                        ['author'],
-                                        streamSnapshot.data!.docs[index]['year'],
-                                        streamSnapshot.data!.docs[index]
-                                        ['description'],
-                                        streamSnapshot.data!.docs[index]['cost'],
-                                        streamSnapshot.data!.docs[index]
-                                        ['image']);
-                                    PurchaseRepository()
-                                        .makePurchase(new Purchase(
-                                        user!, true, vinylRecord))
-                                        .then((value) {
-                                      if (value == "Purchase made") {
-                                        Navigator.of(context).pop();
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                            SnackBar(content: Text(value)));
-                                      }
-                                    });
-                                  },
-                                  child: Text(AppLocalization.of(context)!.buy),
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.deepPurpleAccent),
-                                    textStyle: MaterialStateProperty.all(
-                                      TextStyle(
-                                        fontSize: 25.0,
+                              ),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      VinylRecord vinylRecord = VinylRecord(
+                                          streamSnapshot.data!.docs[index]
+                                              ['name'],
+                                          streamSnapshot.data!.docs[index]
+                                              ['author'],
+                                          streamSnapshot.data!.docs[index]
+                                              ['year'],
+                                          streamSnapshot.data!.docs[index]
+                                              ['description'],
+                                          streamSnapshot.data!.docs[index]
+                                              ['cost'],
+                                          streamSnapshot.data!.docs[index]
+                                              ['image']);
+                                      PurchaseRepository()
+                                          .makePurchase(new Purchase(
+                                              user!, true, vinylRecord))
+                                          .then((value) {
+                                        if (value == "Purchase made") {
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                                  content: Text(value)));
+                                        }
+                                      });
+                                    },
+                                    child:
+                                        Text(AppLocalization.of(context)!.buy),
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.deepPurpleAccent),
+                                      textStyle: MaterialStateProperty.all(
+                                        TextStyle(
+                                          fontSize: 25.0,
+                                        ),
                                       ),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      )),
                                     ),
-                                    shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10.0),
-                                        )),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )
-                      : Column();
+                            ],
+                          )
+                        : Column();
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
                 });
           }),
     );

@@ -349,6 +349,13 @@ class AppLocalization {
       name: 'enter_answer',
     );
   }
+
+  String get  field{
+    return Intl.message(
+      '',
+      name: 'field',
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization>{
