@@ -1,5 +1,5 @@
 # Vinyl record store
-# Demo: https://disk.yandex.ru/i/psTv8NBtKH2gMA
+# Demo: https://drive.google.com/file/d/1Lx9tpSYSn3xQvd6AOr2zC3iWfHkKIXS_/view?usp=sharing
 # App have a 9 screens
 1. Login (user can log in),
 2. Register (user can register),
