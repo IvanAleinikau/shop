@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(AppLocalization.of(context)!.logIn),
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all(Colors.blue),
+                    MaterialStateProperty.all(Colors.black54),
                     textStyle: MaterialStateProperty.all(
                       TextStyle(
                         fontSize: 25.0,
