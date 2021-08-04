@@ -17,58 +17,85 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalization.of(context)!.cart),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add_shopping_cart),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Maps()),
-              );
-            },
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.black54,
+          title: Text(
+            AppLocalization.of(context)!.cart,
+            style: TextStyle(fontFamily: 'Oxygen'),
           ),
-        ],
-      ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('purchase').snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData) {
-            return GridView.count(
-              crossAxisCount: 2,
-              children:
-                  List.generate(streamSnapshot.data!.docs.length, (index) {
-                return streamSnapshot.data!.docs[index]['user'] == user
-                    ? Card(
-                        child: Column(
-                          children: [
-                            Flexible(
-                              child: Image(
-                                image: AssetImage(
-                                    "asset/vinyl_record/${streamSnapshot.data!.docs[index]['image']}.png"),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add_shopping_cart),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Maps()),
+                );
+              },
+            ),
+          ],
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+          ),
+          child: StreamBuilder(
+            stream:
+                FirebaseFirestore.instance.collection('purchase').snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if (streamSnapshot.hasData) {
+                return GridView.count(
+                  childAspectRatio: 0.7,
+                  crossAxisCount: 2,
+                  children:
+                      List.generate(streamSnapshot.data!.docs.length, (index) {
+                    return streamSnapshot.data!.docs[index]['user'] == user
+                        ? Container(
+                            padding: EdgeInsets.all(3),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(17),
+                              child: Card(
+                                color: Colors.transparent,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      child: Image.network(streamSnapshot
+                                          .data!.docs[index]['image']),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        streamSnapshot.data!.docs[index]
+                                            ['name'],
+                                        style: TextStyle(
+                                            fontSize: 17, color: Colors.white),
+                                      ),
+                                      subtitle: Text(
+                                        streamSnapshot.data!.docs[index]
+                                            ['author'],
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      trailing: Text(
+                                        streamSnapshot.data!.docs[index]
+                                                ['cost'] +
+                                            '\$',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            ListTile(
-                              title: Text(
-                                  streamSnapshot.data!.docs[index]['name']),
-                              subtitle: Text(
-                                  streamSnapshot.data!.docs[index]['author']),
-                              trailing: Text(streamSnapshot.data!.docs[index]
-                                      ['cost'] +
-                                  '\$'),
-                            ),
-                          ],
-                        ),
-                      )
-                    : Container();
-              }),
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-    );
+                          )
+                        : Container();
+                  }),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ));
   }
 }

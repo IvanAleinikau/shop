@@ -8,7 +8,7 @@ class NewsRepository  {
     if(news.title.isNotEmpty & news.text.isNotEmpty){
       await FirebaseFirestore.instance
           .collection("news")
-          .add({'title': news.title, 'text': news.text, 'date': new DateFormat.yMMMd().format(news.date)});
+          .add({'title': news.title, 'text': news.text,'url': news.url, 'date': new DateFormat.yMMMd().format(news.date)});
       return "News made";
     }else {
       return "Please enter title and text";

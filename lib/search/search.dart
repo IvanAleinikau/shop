@@ -3,7 +3,7 @@ import 'package:shop/widgets/shop/vinyl_record.dart';
 
 class Search extends SearchDelegate {
   List<String> names = [];
-  String selectedResult='';
+  String selectedResult = '';
 
   Search(this.names);
 
@@ -39,31 +39,38 @@ class Search extends SearchDelegate {
     final suggestionList = query.isEmpty
         ? names
         : names.where((element) => element.contains(query)).toList();
-    return ListView.builder(
-        itemCount: suggestionList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Icon(Icons.album),
-            title: RichText(
-              text: TextSpan(
-                  text: suggestionList[index].substring(0, query.length),
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold,fontSize: 20),
-                  children: [
-                    TextSpan(
-                        text: suggestionList[index].substring(query.length),
-                        style: TextStyle(color: Colors.black54,fontSize: 20))
-                  ]),
-            ),
-            onTap: (){
-              selectedResult = suggestionList[index];
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ObjVinylRecord(selectedResult)),
-              );
-            },
-          );
-        });
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade400
+      ),
+      child: ListView.builder(
+          itemCount: suggestionList.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: Icon(Icons.album),
+              title: RichText(
+                text: TextSpan(
+                    text: suggestionList[index].substring(0, query.length),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                    children: [
+                      TextSpan(
+                          text: suggestionList[index].substring(query.length),
+                          style: TextStyle(color: Colors.black54, fontSize: 20))
+                    ]),
+              ),
+              onTap: () {
+                selectedResult = suggestionList[index];
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ObjVinylRecord(selectedResult)),
+                );
+              },
+            );
+          }),
+    );
   }
 }

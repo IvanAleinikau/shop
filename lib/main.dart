@@ -30,9 +30,10 @@ class App extends StatelessWidget {
         const Locale('ru', 'RUS')
       ],
       theme: ThemeData(
-        primaryColor: Colors.deepPurple,
+        primaryColor: Colors.indigo.shade400,
       ),
       initialRoute: '/home',
+      debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => Home(),
         '/settings':(context)=> SettingsPage(),

@@ -11,16 +11,13 @@ class Maps extends StatefulWidget {
   @override
   _MapsState createState() => _MapsState();
 }
-const LatLng SOURCE_LOCATION = LatLng(42.7477863, -71.1699932);
-const LatLng DEST_LOCATION = LatLng(42.6871386, -71.2143403);
+
 class _MapsState extends State<Maps> {
   LatLng endLoc = LatLng(52.08823582961075, 23.68843269527837);
 
   static const endLatitude = 52.08823582961075;
   static const endLongitude = 23.68843269527837;
 
-  double startLatitude = 52;
-  double startLongitude = 23;
 
   static const _initialCameraPosition = CameraPosition(
       target: LatLng(endLatitude, endLongitude), zoom: 15);
@@ -37,7 +34,6 @@ class _MapsState extends State<Maps> {
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
     setMarkers();
-    _createPolylines(startLatitude, startLongitude, endLatitude, endLongitude);
   }
 
   Future<void> moveCamera() async {
@@ -80,7 +76,7 @@ class _MapsState extends State<Maps> {
           icon:
           BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
         ));
-        _createPolylines(start.position.latitude, start.position.longitude, end.position.latitude, end.position.longitude);
+      //  _createPolylines(start.position.latitude, start.position.longitude, end.position.latitude, end.position.longitude);
        LatLng startLoc = LatLng(start.position.latitude, start.position.longitude);
         List<LatLng> latlng = [endLoc,startLoc];
         _polyline.add(Polyline(
@@ -170,7 +166,7 @@ class _MapsState extends State<Maps> {
     return Scaffold(
       appBar: AppBar(
         title: Text(''),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.black54,
       ),
       body: Stack(
         children: [
@@ -182,7 +178,7 @@ class _MapsState extends State<Maps> {
             onMapCreated: _onMapCreated,
             markers: _markers,
             polylines: _polyline,
-           // Set<Polyline>.of(polylines.values),
+           //Set<Polyline>.of(polylines.values),
             onTap: _handleTap,
           ),
           SafeArea(
@@ -193,9 +189,9 @@ class _MapsState extends State<Maps> {
                 children: <Widget>[
                   ClipOval(
                     child: Material(
-                      color: Colors.deepPurple, // button color
+                      color: Colors.transparent, // button color
                       child: InkWell(
-                        splashColor: Colors.purple, // inkwell color
+                        splashColor: Colors.blueGrey, // inkwell color
                         child: SizedBox(
                           width: 50,
                           height: 50,
@@ -210,9 +206,9 @@ class _MapsState extends State<Maps> {
                   SizedBox(height: 20),
                   ClipOval(
                     child: Material(
-                      color: Colors.deepPurple, // button color
+                      color: Colors.transparent, // button color
                       child: InkWell(
-                        splashColor: Colors.purple, // inkwell color
+                        splashColor: Colors.blueGrey, // inkwell color
                         child: SizedBox(
                           width: 50,
                           height: 50,
@@ -231,7 +227,7 @@ class _MapsState extends State<Maps> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.black54,
         foregroundColor: Colors.black,
         onPressed: () {
           moveCamera();

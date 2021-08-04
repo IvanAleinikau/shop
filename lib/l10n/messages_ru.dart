@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "email" : MessageLookupByLibrary.simpleMessage("Почта"),
-    "shop" : MessageLookupByLibrary.simpleMessage("Магазин"),
+    "shop" : MessageLookupByLibrary.simpleMessage("Каталог"),
     "home" : MessageLookupByLibrary.simpleMessage("Домашняя страница"),
     "saved_news" : MessageLookupByLibrary.simpleMessage("Сохранённые новости"),
     "settings" : MessageLookupByLibrary.simpleMessage("Настройки"),
@@ -58,8 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_year" : MessageLookupByLibrary.simpleMessage("Введите год"),
     "cost" : MessageLookupByLibrary.simpleMessage("Стоимость"),
     "enter_cost" : MessageLookupByLibrary.simpleMessage("Введите стоимость"),
-    "image_number" : MessageLookupByLibrary.simpleMessage("Номер изображения"),
-    "enter_image" : MessageLookupByLibrary.simpleMessage("Выберете 1-9 изображение"),
+    "image_number" : MessageLookupByLibrary.simpleMessage("Ссылка"),
+    "enter_image" : MessageLookupByLibrary.simpleMessage("Введите ссылку"),
     "cart" : MessageLookupByLibrary.simpleMessage("Корзина"),
     "enter_email" : MessageLookupByLibrary.simpleMessage("Введите почту"),
     "password" : MessageLookupByLibrary.simpleMessage("Пароль"),

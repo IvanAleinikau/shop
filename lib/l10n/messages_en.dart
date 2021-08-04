@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "email" : MessageLookupByLibrary.simpleMessage("Email"),
-    "shop" : MessageLookupByLibrary.simpleMessage("Shop"),
+    "shop" : MessageLookupByLibrary.simpleMessage("Catalog"),
     "home" : MessageLookupByLibrary.simpleMessage("Home"),
     "saved_news" : MessageLookupByLibrary.simpleMessage("Saved news"),
     "settings" : MessageLookupByLibrary.simpleMessage("Settings"),
@@ -58,8 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_year" : MessageLookupByLibrary.simpleMessage("Enter year"),
     "cost" : MessageLookupByLibrary.simpleMessage("Cost"),
     "enter_cost" : MessageLookupByLibrary.simpleMessage("Enter cost"),
-    "image_number" : MessageLookupByLibrary.simpleMessage("Image number"),
-    "enter_image" : MessageLookupByLibrary.simpleMessage("Enter 1-9 image"),
+    "image_number" : MessageLookupByLibrary.simpleMessage("URL"),
+    "enter_image" : MessageLookupByLibrary.simpleMessage("Enter URL"),
     "cart" : MessageLookupByLibrary.simpleMessage("Shopping cart"),
     "enter_email" : MessageLookupByLibrary.simpleMessage("Enter email"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),

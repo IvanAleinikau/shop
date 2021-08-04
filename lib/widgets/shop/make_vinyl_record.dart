@@ -21,6 +21,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.grey.shade200,
       title: Text(AppLocalization.of(context)!.addVinylRecord),
       content: SingleChildScrollView(
         child:Column(
@@ -95,7 +96,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
           },
           child: Text(AppLocalization.of(context)!.add),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
           ),
         ),
       ],

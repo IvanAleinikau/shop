@@ -6,6 +6,7 @@ import 'package:shop/provider/news_provider.dart';
 class MakeNewsForm extends StatelessWidget {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _text = TextEditingController();
+  final TextEditingController _url = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,13 @@ class MakeNewsForm extends StatelessWidget {
                 hintText: AppLocalization.of(context)!.enterText,
               ),
             ),
+            TextField(
+              controller: _url,
+              decoration: InputDecoration(
+                labelText: AppLocalization.of(context)!.imageNumber,
+                hintText: AppLocalization.of(context)!.enterImage,
+              ),
+            ),
           ],
         ),
       ),
@@ -44,7 +52,7 @@ class MakeNewsForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            News news = News(_title.text.trim(), _text.text.trim(), new DateTime.now());
+            News news = News(_title.text.trim(), _text.text.trim(), _url.text.trim(), new DateTime.now());
             NewsRepository().makeNews(news).then((value) {
               if(value=="News made"){
                 Navigator.of(context).pop();
@@ -56,7 +64,7 @@ class MakeNewsForm extends StatelessWidget {
           },
           child: Text(AppLocalization.of(context)!.add),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
           ),
         ),
       ],

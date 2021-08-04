@@ -22,72 +22,142 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-            child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("asset/image/image2.jpg"), fit: BoxFit.cover),
+        ),
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                accountName: Text(AppLocalization.of(context)!.email),
+                accountEmail: Text('$user'),
+                currentAccountPicture: Icon(
+                  Icons.account_circle_sharp,
+                  color: Colors.white,
+                  size: 70,
+                ),
               ),
-              accountName: Text(AppLocalization.of(context)!.email),
-              accountEmail: Text('$user'),
-              currentAccountPicture: Icon(Icons.account_circle_sharp,color: Colors.white,size: 60,),
+              decoration: BoxDecoration(color: Colors.transparent),
             ),
-            decoration: BoxDecoration(color: Colors.deepPurple),
-          ),
-          ListTile(
-            title: Text(AppLocalization.of(context)!.home),
-            leading: Icon(Icons.home),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
-            },
-          ),
-          ListTile(
-            title: Text(AppLocalization.of(context)!.shop),
-            leading: Icon(Icons.shopping_bag),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ShopPage()),);
-            },
-          ),
-          ListTile(
-            title: Text(AppLocalization.of(context)!.savedNews),
-            leading: Icon(Icons.announcement_sharp),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SavedNewsPage()),);
-            },
-          ),
-          ListTile(
-            title: Text(AppLocalization.of(context)!.settings),
-            leading: Icon(Icons.settings),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()),);
-            },
-          ),
-          Divider(
-            height: 10.0,
-            color: Colors.black12,
-          ),
-          ListTile(
-            title: Text(AppLocalization.of(context)!.faq),
-            leading: Icon(Icons.question_answer),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FQAPage()),);
-            },
-          ),
-          ListTile(
-            title: Text(AppLocalization.of(context)!.logout),
-            leading: Icon(Icons.logout),
-            onTap: () {
-              Auth().signOut();
-              Navigator.pushAndRemoveUntil(
+            Divider(
+              height: 10.0,
+              color: Colors.white,
+            ),
+            ListTile(
+              title: Text(
+                AppLocalization.of(context)!.home,
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+              ),
+              leading: Icon(
+                Icons.home,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                      (route) => false);
-            },
-          ),
-        ],
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                AppLocalization.of(context)!.shop,
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+              ),
+              leading: Icon(
+                Icons.shopping_bag,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShopPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                AppLocalization.of(context)!.savedNews,
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+              ),
+              leading: Icon(
+                Icons.announcement_sharp,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SavedNewsPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                AppLocalization.of(context)!.settings,
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+              ),
+              leading: Icon(
+                Icons.settings,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                );
+              },
+            ),
+            Divider(
+              height: 10.0,
+              color: Colors.white,
+            ),
+            ListTile(
+              title: Text(
+                AppLocalization.of(context)!.faq,
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+              ),
+              leading: Icon(
+                Icons.question_answer,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FQAPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text(
+                AppLocalization.of(context)!.logout,
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+              ),
+              leading: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onTap: () {
+                Auth().signOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
-

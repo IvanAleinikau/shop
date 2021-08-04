@@ -4,7 +4,7 @@ import 'package:shop/model/element_vinyl_record.dart';
 class VinylRecordRepository{
 
   Future<String> makeVinylRecord(VinylRecord vinylRecord) async {
-    if(vinylRecord.name.isNotEmpty && int.parse(vinylRecord.cost)>0 && int.parse(vinylRecord.image)>0 && int.parse(vinylRecord.image)<=9  ){
+    if(vinylRecord.name.isNotEmpty && int.parse(vinylRecord.cost)>0 ){
           await FirebaseFirestore.instance
               .collection("vinyl_record")
               .add({

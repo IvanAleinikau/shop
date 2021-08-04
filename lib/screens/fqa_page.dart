@@ -26,53 +26,72 @@ class _FQAPageState extends State<FQAPage> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => FQAPage()),);
-          }, icon: Icon(Icons.replay_sharp),)
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FQAPage()),
+              );
+            },
+            icon: Icon(Icons.replay_sharp),
+          )
         ],
-        title: Text(AppLocalization.of(context)!.faq),
-        backgroundColor: Colors.deepPurple,
+        centerTitle: true,
+        title: Text(
+          AppLocalization.of(context)!.faq,
+          style: TextStyle(fontFamily: 'Oxygen'),
+        ),
+        backgroundColor: Colors.black45,
       ),
-      body: FutureBuilder<List<QuestionAnswer>>(
-        future: this.database.retrieveQuestionAnswer(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<QuestionAnswer>> snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Dismissible(
-                    direction: DismissDirection.endToStart,
-                      background: Container(
-                        color: Colors.red,
-                        alignment: Alignment.centerRight,
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Icon(Icons.delete_forever),
-                      ),
-                      key: ValueKey<int>(snapshot.data![index].id!),
-                      onDismissed: (DismissDirection direction) async {
-                        await this.database.deleteQuestionAnswer(snapshot.data![index].id!);
-                        setState(() {
-                          snapshot.data!.remove(snapshot.data![index]);
-                        });
-                      },
-                      child: Card(
-                        child: ListTile(
-                          contentPadding: EdgeInsets.all(8.0),
-                          title: Text(snapshot.data![index].question),
-                          subtitle: Text(snapshot.data![index].answer),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+        ),
+        child: FutureBuilder<List<QuestionAnswer>>(
+          future: this.database.retrieveQuestionAnswer(),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<QuestionAnswer>> snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Dismissible(
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: Colors.red,
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Icon(Icons.delete_forever),
                         ),
-                      ));
-                });
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+                        key: ValueKey<int>(snapshot.data![index].id!),
+                        onDismissed: (DismissDirection direction) async {
+                          await this
+                              .database
+                              .deleteQuestionAnswer(snapshot.data![index].id!);
+                          setState(() {
+                            snapshot.data!.remove(snapshot.data![index]);
+                          });
+                        },
+                        child: Card(
+                          color: Colors.transparent,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.all(8.0),
+                            title: Text('${index+1}. '+ snapshot.data![index].question,style: TextStyle(color: Colors.white),),
+                            subtitle: Text(snapshot.data![index].answer,style: TextStyle(color: Colors.white),),
+                          ),
+                        ));
+                  });
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
       drawer: Menu(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.black45,
         onPressed: () {
           showDialog(
               context: context,
@@ -117,18 +136,19 @@ class _FQAPageState extends State<FQAPage> {
                           QuestionAnswer qa = QuestionAnswer(
                               question: _question.text.trim(),
                               answer: _answer.text.trim());
-                          if(qa.question.length>5 && qa.answer.length>5){
+                          if (qa.question.length > 5 && qa.answer.length > 5) {
                             database.insertQuestionAnswer(qa);
                             Navigator.of(context).pop();
-                          }else{
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(SnackBar(content: Text(AppLocalization.of(context)!.field)));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content:
+                                    Text(AppLocalization.of(context)!.field)));
                           }
                         },
                         child: Text(AppLocalization.of(context)!.add),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Colors.deepPurpleAccent),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
                         ),
                       ),
                     ],
