@@ -77,7 +77,7 @@ class _ShopPageState extends State<ShopPage> {
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
               if (streamSnapshot.hasData) {
                 return GridView.count(
-                  childAspectRatio: 0.68,
+                  childAspectRatio: 0.66,
                   crossAxisCount: 2,
                   children: List.generate(streamSnapshot.data!.size, (index) {
                     if (streamSnapshot.data!.docs.length > names.length)
@@ -113,68 +113,94 @@ class _ShopPageState extends State<ShopPage> {
                                     streamSnapshot.data!.docs[index]['author'],
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  trailing: Text(
-                                    streamSnapshot.data!.docs[index]['cost'] +
-                                        '\$',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
                                 ),
-                                Container(
-                                  height: 20,
-                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          count++;
-                                        });
-                                        VinylRecord vinylRecord = VinylRecord(
+                                Padding(
+                                  padding: EdgeInsets.zero,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                                          child: Text(
                                             streamSnapshot.data!.docs[index]
-                                                ['name'],
-                                            streamSnapshot.data!.docs[index]
-                                                ['author'],
-                                            streamSnapshot.data!.docs[index]
-                                                ['year'],
-                                            streamSnapshot.data!.docs[index]
-                                                ['description'],
-                                            streamSnapshot.data!.docs[index]
-                                                ['cost'],
-                                            streamSnapshot.data!.docs[index]
-                                                ['image']);
-                                        PurchaseRepository()
-                                            .makePurchase(new Purchase(
-                                                user!, true, vinylRecord))
-                                            .then((value) {
-                                          if (value == "Purchase made") {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    content: Text(value)));
-                                          } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    content: Text(value)));
-                                          }
-                                        });
-                                      },
-                                      child: Text(
-                                          AppLocalization.of(context)!.buy,
-                                          style:
-                                              TextStyle(fontFamily: 'Oxygen')),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.black54),
-                                        textStyle: MaterialStateProperty.all(
-                                          TextStyle(),
-                                        ),
-                                        shape: MaterialStateProperty.all(
-                                            RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
+                                            ['cost'] +
+                                                '\$',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
                                         )),
-                                      ),
-                                    ),
+                                      Container(
+                                        height: 20,
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 0, 2, 2),
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                count++;
+                                              });
+                                              VinylRecord vinylRecord =
+                                                  VinylRecord(
+                                                      streamSnapshot
+                                                              .data!.docs[index][
+                                                          'name'],
+                                                      streamSnapshot
+                                                              .data!.docs[index]
+                                                          ['author'],
+                                                      streamSnapshot
+                                                              .data!.docs[index]
+                                                          ['year'],
+                                                      streamSnapshot
+                                                              .data!.docs[index]
+                                                          ['description'],
+                                                      streamSnapshot.data!
+                                                          .docs[index]['cost'],
+                                                      streamSnapshot
+                                                              .data!.docs[index]
+                                                          ['image']);
+                                              PurchaseRepository()
+                                                  .makePurchase(new Purchase(
+                                                      user!, true, vinylRecord))
+                                                  .then((value) {
+                                                if (value == "Purchase made") {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content:
+                                                              Text(value)));
+                                                } else {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(SnackBar(
+                                                          content:
+                                                              Text(value)));
+                                                }
+                                              });
+                                            },
+                                            child: Text(
+                                                AppLocalization.of(context)!
+                                                    .buy,
+                                                style: TextStyle(
+                                                    fontFamily: 'Oxygen')),
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Colors.black54),
+                                              textStyle:
+                                                  MaterialStateProperty.all(
+                                                TextStyle(),
+                                              ),
+                                              shape: MaterialStateProperty.all(
+                                                  RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              )),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 )
                               ],

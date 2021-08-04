@@ -36,10 +36,10 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                   .collection('vinyl_record')
                   .snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                return ListView.builder(
-                    itemCount: streamSnapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      if (streamSnapshot.hasData) {
+                if (streamSnapshot.hasData) {
+                  return ListView.builder(
+                      itemCount: streamSnapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
                         return widget.name ==
                                 streamSnapshot.data!.docs[index]['name']
                             ? Column(
@@ -62,7 +62,8 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                                         streamSnapshot.data!.docs[index]
                                             ['author'],
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(color: Colors.white,fontSize: 15)),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 15)),
                                   ),
                                   ListTile(
                                     title: Text(
@@ -84,10 +85,10 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                                 ],
                               )
                             : Column();
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    });
+                      });
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
               }),
         ));
   }
