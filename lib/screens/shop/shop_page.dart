@@ -82,77 +82,81 @@ class _ShopPageState extends State<ShopPage> {
                   children: List.generate(streamSnapshot.data!.size, (index) {
                     if (streamSnapshot.data!.docs.length > names.length)
                       names.add(streamSnapshot.data!.docs[index]['name']);
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ObjVinylRecord(
-                                  streamSnapshot.data!.docs[index]['name'])),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(3),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(17),
-                          child: Card(
-                            color: Colors.transparent,
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  child: Image.network(streamSnapshot
-                                      .data!.docs[index]['image']),
-                                ),
-                                ListTile(
-                                  title: Text(
-                                    streamSnapshot.data!.docs[index]['name'],
-                                    style: TextStyle(
-                                        fontSize: 17, color: Colors.white),
-                                  ),
-                                  subtitle: Text(
-                                    streamSnapshot.data!.docs[index]['author'],
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.zero,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                                          child: Text(
-                                            streamSnapshot.data!.docs[index]
-                                            ['cost'] +
-                                                '\$',
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                        )),
-                                      Container(
-                                        height: 20,
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 0, 2, 2),
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                count++;
-                                              });
-                                              VinylRecord vinylRecord =
-                                                  VinylRecord(
-                                                      streamSnapshot
-                                                              .data!.docs[index][
-                                                          'name'],
+                    return Hero(
+                        tag: 'vinyl${index.toString()}',
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ObjVinylRecord(
+                                      streamSnapshot.data!.docs[index]['name'],
+                                      index)),
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(3),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(17),
+                              child: Card(
+                                color: Colors.transparent,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      child: Image.network(streamSnapshot
+                                          .data!.docs[index]['image']),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        streamSnapshot.data!.docs[index]
+                                            ['name'],
+                                        style: TextStyle(
+                                            fontSize: 17, color: Colors.white),
+                                      ),
+                                      subtitle: Text(
+                                        streamSnapshot.data!.docs[index]
+                                            ['author'],
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    16, 0, 0, 0),
+                                                child: Text(
+                                                  streamSnapshot.data!
+                                                          .docs[index]['cost'] +
+                                                      '\$',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              )),
+                                          Container(
+                                            height: 20,
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 0, 2, 2),
+                                            child: Align(
+                                              alignment: Alignment.topRight,
+                                              child: ElevatedButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    count++;
+                                                  });
+                                                  VinylRecord vinylRecord = VinylRecord(
+                                                      streamSnapshot.data!
+                                                          .docs[index]['name'],
                                                       streamSnapshot
                                                               .data!.docs[index]
                                                           ['author'],
-                                                      streamSnapshot
-                                                              .data!.docs[index]
-                                                          ['year'],
+                                                      streamSnapshot.data!
+                                                          .docs[index]['year'],
                                                       streamSnapshot
                                                               .data!.docs[index]
                                                           ['description'],
@@ -161,54 +165,64 @@ class _ShopPageState extends State<ShopPage> {
                                                       streamSnapshot
                                                               .data!.docs[index]
                                                           ['image']);
-                                              PurchaseRepository()
-                                                  .makePurchase(new Purchase(
-                                                      user!, true, vinylRecord))
-                                                  .then((value) {
-                                                if (value == "Purchase made") {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
-                                                          content:
-                                                              Text(value)));
-                                                } else {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(SnackBar(
-                                                          content:
-                                                              Text(value)));
-                                                }
-                                              });
-                                            },
-                                            child: Text(
-                                                AppLocalization.of(context)!
-                                                    .buy,
-                                                style: TextStyle(
-                                                    fontFamily: 'Oxygen')),
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all(
-                                                      Colors.black54),
-                                              textStyle:
-                                                  MaterialStateProperty.all(
-                                                TextStyle(),
+                                                  PurchaseRepository()
+                                                      .makePurchase(
+                                                          new Purchase(
+                                                              user!,
+                                                              true,
+                                                              vinylRecord))
+                                                      .then((value) {
+                                                    if (value ==
+                                                        "Purchase made") {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                                  content: Text(
+                                                                      value)));
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                                  content: Text(
+                                                                      value)));
+                                                    }
+                                                  });
+                                                },
+                                                child: Text(
+                                                    AppLocalization.of(context)!
+                                                        .buy,
+                                                    style: TextStyle(
+                                                        fontFamily: 'Oxygen')),
+                                                style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStateProperty.all(
+                                                          Colors.black54),
+                                                  textStyle:
+                                                      MaterialStateProperty.all(
+                                                    TextStyle(),
+                                                  ),
+                                                  shape:
+                                                      MaterialStateProperty.all(
+                                                          RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                  )),
+                                                ),
                                               ),
-                                              shape: MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                              )),
                                             ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
+                        ));
                   }),
                 );
               } else {

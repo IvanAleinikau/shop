@@ -66,7 +66,7 @@ class Search extends SearchDelegate {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ObjVinylRecord(selectedResult)),
+                      builder: (context) => ObjVinylRecord(selectedResult,index)),
                 );
               },
             );

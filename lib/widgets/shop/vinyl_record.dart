@@ -2,15 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/locale/app_localization.dart';
-import 'package:shop/model/element_purchase.dart';
-import 'package:shop/model/element_vinyl_record.dart';
-import 'package:shop/provider/purchase_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ObjVinylRecord extends StatefulWidget {
   final String name;
+  final int count;
 
-  ObjVinylRecord(this.name);
+  ObjVinylRecord(this.name, this.count);
 
   @override
   _ObjVinylRecordState createState() => _ObjVinylRecordState();
@@ -42,47 +40,55 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                       itemBuilder: (context, index) {
                         return widget.name ==
                                 streamSnapshot.data!.docs[index]['name']
-                            ? Column(
-                                children: [
-                                  Container(
-                                    child: Image.network(streamSnapshot
-                                        .data!.docs[index]['image']),
-                                  ),
-                                  ListTile(
-                                    title: Text(
-                                      streamSnapshot.data!.docs[index]['name'] +
-                                          ' - ' +
-                                          streamSnapshot.data!.docs[index]
-                                              ['year'],
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 25, color: Colors.white),
+                            ? Hero(
+                                tag: 'vinyl${widget.count.toString()}',
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      child: Image.network(streamSnapshot
+                                          .data!.docs[index]['image']),
                                     ),
-                                    subtitle: Text(
+                                    ListTile(
+                                      title: Text(
                                         streamSnapshot.data!.docs[index]
-                                            ['author'],
+                                                ['name'] +
+                                            ' - ' +
+                                            streamSnapshot.data!.docs[index]
+                                                ['year'],
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            color: Colors.white, fontSize: 15)),
-                                  ),
-                                  ListTile(
-                                    title: Text(
-                                      AppLocalization.of(context)!.description,
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white),
+                                            fontSize: 25, color: Colors.white),
+                                      ),
+                                      subtitle: Text(
+                                          streamSnapshot.data!.docs[index]
+                                              ['author'],
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15)),
                                     ),
-                                    subtitle: Text(
+                                    ListTile(
+                                      title: Text(
+                                        AppLocalization.of(context)!
+                                            .description,
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
+                                      subtitle: Text(
+                                          streamSnapshot.data!.docs[index]
+                                              ['description'],
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                      trailing: Text(
                                         streamSnapshot.data!.docs[index]
-                                            ['description'],
-                                        style: TextStyle(color: Colors.white)),
-                                    trailing: Text(
-                                      streamSnapshot.data!.docs[index]['cost'] +
-                                          '\$',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white),
+                                                ['cost'] +
+                                            '\$',
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.white),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               )
                             : Column();
                       });
