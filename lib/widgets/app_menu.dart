@@ -8,6 +8,7 @@ import 'package:shop/screens/news/home_page.dart';
 import 'package:shop/screens/saved_news_page.dart';
 import 'package:shop/screens/settings_page.dart';
 import 'package:shop/screens/shop/shop_page.dart';
+import 'package:shop/screens/video.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);

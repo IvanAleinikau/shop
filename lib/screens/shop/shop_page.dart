@@ -13,6 +13,8 @@ import 'package:shop/search/search.dart';
 import 'package:shop/widgets/app_menu.dart';
 import 'package:shop/widgets/shop/make_vinyl_record.dart';
 
+import '../video.dart';
+
 class ShopPage extends StatefulWidget {
   @override
   _ShopPageState createState() => _ShopPageState();
@@ -85,6 +87,12 @@ class _ShopPageState extends State<ShopPage> {
                     return Hero(
                         tag: 'vinyl${index.toString()}',
                         child: GestureDetector(
+                          onLongPress: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => VideoPlayerScreen()),
+                            );
+                          },
                           onTap: () {
                             Navigator.push(
                               context,
