@@ -1,5 +1,9 @@
 # Vinyl record store
-# Demo: https://drive.google.com/file/d/1Lx9tpSYSn3xQvd6AOr2zC3iWfHkKIXS_/view?usp=sharing
+# New demo: https://drive.google.com/file/d/1Ysa3PkTKg4Bz4wSLeonyjplx9EnEZeNz/view?usp=sharing
+# Changes
+1. New design
+2. Hero animation in catalog
+3. Video player
 # App have a 9 screens
 1. Login (user can log in),
 2. Register (user can register),
