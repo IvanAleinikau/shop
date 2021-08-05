@@ -39,25 +39,35 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.black45,
           image: DecorationImage(
               image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
         ),
-        child: FutureBuilder(
-          future: _initializeVideoPlayerFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: VideoPlayer(_controller),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
+        child: Column(
+          children: [
+            FutureBuilder(
+              future: _initializeVideoPlayerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+          ListTile(
+            title: Text('My Way - Calvin Harris',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 25, color: Colors.white),
+            ),
+          ),
+          ],
+        )
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
