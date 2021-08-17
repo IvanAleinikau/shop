@@ -6,11 +6,13 @@ analyzer:
     - lib/l10n/messages_ru.dart
     - lib/l10n/messages_messages.dart
     - lib/l10n/messages_all.dart
-  errors:
-    todo: warning
 
 linter:
   rules:
+    sized_box_for_whitespace: false
+    use_key_in_widget_constructors: false
+    avoid_function_literals_in_foreach_calls: false
+    avoid_unnecessary_containers: false
     avoid_print: true
     prefer_single_quotes: true
     close_sinks: true

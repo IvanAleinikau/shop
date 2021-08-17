@@ -40,11 +40,11 @@ class _ShopPageState extends State<ShopPage> {
         backgroundColor: Colors.black54,
         title: Text(
           AppLocalization.of(context)!.shop,
-          style: TextStyle(fontFamily: 'Oxygen'),
+          style: const TextStyle(fontFamily: 'Oxygen'),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               showSearch(context: context, delegate: Search(names));
             },
@@ -54,11 +54,11 @@ class _ShopPageState extends State<ShopPage> {
             position: BadgePosition.topEnd(top: 3, end: 22),
             badgeContent: Text(count.toString()),
             child: IconButton(
-              icon: Icon(Icons.shopping_cart_outlined),
+              icon: const Icon(Icons.shopping_cart_outlined),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShoppingCartPage()),
+                  MaterialPageRoute(builder: (context) => const ShoppingCartPage()),
                 );
               },
             ),
@@ -66,9 +66,9 @@ class _ShopPageState extends State<ShopPage> {
         ],
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
         ),
         child: Scrollbar(
           controller: _scrollController,
@@ -82,15 +82,16 @@ class _ShopPageState extends State<ShopPage> {
                   childAspectRatio: 0.66,
                   crossAxisCount: 2,
                   children: List.generate(streamSnapshot.data!.size, (index) {
-                    if (streamSnapshot.data!.docs.length > names.length)
+                    if (streamSnapshot.data!.docs.length > names.length) {
                       names.add(streamSnapshot.data!.docs[index]['name']);
+                    }
                     return Hero(
                         tag: 'vinyl${index.toString()}',
                         child: GestureDetector(
                           onLongPress: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => VideoPlayerScreen()),
+                              MaterialPageRoute(builder: (context) => const VideoPlayerScreen()),
                             );
                           },
                           onTap: () {
@@ -103,7 +104,7 @@ class _ShopPageState extends State<ShopPage> {
                             );
                           },
                           child: Container(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(17),
                               child: Card(
@@ -118,13 +119,13 @@ class _ShopPageState extends State<ShopPage> {
                                       title: Text(
                                         streamSnapshot.data!.docs[index]
                                             ['name'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 17, color: Colors.white),
                                       ),
                                       subtitle: Text(
                                         streamSnapshot.data!.docs[index]
                                             ['author'],
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     ),
                                     Padding(
@@ -136,20 +137,20 @@ class _ShopPageState extends State<ShopPage> {
                                           Expanded(
                                               flex: 1,
                                               child: Container(
-                                                padding: EdgeInsets.fromLTRB(
+                                                padding: const EdgeInsets.fromLTRB(
                                                     16, 0, 0, 0),
                                                 child: Text(
                                                   streamSnapshot.data!
                                                           .docs[index]['cost'] +
                                                       '\$',
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: Colors.white),
                                                 ),
                                               )),
                                           Container(
                                             height: 20,
                                             padding:
-                                                EdgeInsets.fromLTRB(0, 0, 2, 2),
+                                                const EdgeInsets.fromLTRB(0, 0, 2, 2),
                                             child: Align(
                                               alignment: Alignment.topRight,
                                               child: ElevatedButton(
@@ -175,13 +176,13 @@ class _ShopPageState extends State<ShopPage> {
                                                           ['image']);
                                                   PurchaseRepository()
                                                       .makePurchase(
-                                                          new Purchase(
+                                                          Purchase(
                                                               user!,
                                                               true,
                                                               vinylRecord))
                                                       .then((value) {
                                                     if (value ==
-                                                        "Purchase made") {
+                                                        'Purchase made') {
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
@@ -201,7 +202,7 @@ class _ShopPageState extends State<ShopPage> {
                                                 child: Text(
                                                     AppLocalization.of(context)!
                                                         .buy,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontFamily: 'Oxygen')),
                                                 style: ButtonStyle(
                                                   backgroundColor:
@@ -209,7 +210,7 @@ class _ShopPageState extends State<ShopPage> {
                                                           Colors.black54),
                                                   textStyle:
                                                       MaterialStateProperty.all(
-                                                    TextStyle(),
+                                                    const TextStyle(),
                                                   ),
                                                   shape:
                                                       MaterialStateProperty.all(
@@ -234,13 +235,13 @@ class _ShopPageState extends State<ShopPage> {
                   }),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           ),
         ),
       ),
-      drawer: Menu(),
+      drawer: const Menu(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(

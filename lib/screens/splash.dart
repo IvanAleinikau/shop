@@ -27,6 +27,6 @@ class _SplashState extends State<Splash> {
                 (route) => false);
       }
     });
-    return Center(child: CircularProgressIndicator());
+    return const Center(child: CircularProgressIndicator());
   }
 }

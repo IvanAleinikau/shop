@@ -8,7 +8,6 @@ import 'package:shop/screens/news/home_page.dart';
 import 'package:shop/screens/saved_news_page.dart';
 import 'package:shop/screens/settings_page.dart';
 import 'package:shop/screens/shop/shop_page.dart';
-import 'package:shop/screens/video.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -24,38 +23,38 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("asset/image/image2.jpg"), fit: BoxFit.cover),
+              image: AssetImage('asset/image/image2.jpg'), fit: BoxFit.cover),
         ),
         child: ListView(
           children: <Widget>[
             DrawerHeader(
               child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.transparent,
                 ),
                 accountName: Text(AppLocalization.of(context)!.email),
-                accountEmail: Text('$user'),
-                currentAccountPicture: Icon(
+                accountEmail: Text(user!),
+                currentAccountPicture: const Icon(
                   Icons.account_circle_sharp,
                   color: Colors.white,
                   size: 70,
                 ),
               ),
-              decoration: BoxDecoration(color: Colors.transparent),
+              decoration: const BoxDecoration(color: Colors.transparent),
             ),
-            Divider(
+            const Divider(
               height: 10.0,
               color: Colors.white,
             ),
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.home,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.home,
                 color: Colors.white,
               ),
@@ -69,10 +68,10 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.shop,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.shopping_bag,
                 color: Colors.white,
               ),
@@ -86,10 +85,10 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.savedNews,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.announcement_sharp,
                 color: Colors.white,
               ),
@@ -103,31 +102,31 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.settings,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.settings,
                 color: Colors.white,
               ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SettingsPage()),
+                  MaterialPageRoute(builder: (context) => const SettingsPage()),
                 );
               },
             ),
-            Divider(
+            const Divider(
               height: 10.0,
               color: Colors.white,
             ),
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.faq,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.question_answer,
                 color: Colors.white,
               ),
@@ -141,10 +140,10 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.logout,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.logout,
                 color: Colors.white,
               ),

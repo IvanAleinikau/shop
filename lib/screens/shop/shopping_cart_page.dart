@@ -22,24 +22,24 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
           backgroundColor: Colors.black54,
           title: Text(
             AppLocalization.of(context)!.cart,
-            style: TextStyle(fontFamily: 'Oxygen'),
+            style: const TextStyle(fontFamily: 'Oxygen'),
           ),
           actions: [
             IconButton(
-              icon: Icon(Icons.add_shopping_cart),
+              icon: const Icon(Icons.add_shopping_cart),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Maps()),
+                  MaterialPageRoute(builder: (context) => const Maps()),
                 );
               },
             ),
           ],
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+                image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
           ),
           child: StreamBuilder(
             stream:
@@ -53,7 +53,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                       List.generate(streamSnapshot.data!.docs.length, (index) {
                     return streamSnapshot.data!.docs[index]['user'] == user
                         ? Container(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(17),
                               child: Card(
@@ -68,19 +68,19 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                                       title: Text(
                                         streamSnapshot.data!.docs[index]
                                             ['name'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 17, color: Colors.white),
                                       ),
                                       subtitle: Text(
                                         streamSnapshot.data!.docs[index]
                                             ['author'],
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                       trailing: Text(
                                         streamSnapshot.data!.docs[index]
                                                 ['cost'] +
                                             '\$',
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -92,7 +92,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   }),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           ),

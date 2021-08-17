@@ -10,14 +10,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white70,
         ),
         child: SingleChildScrollView(
@@ -25,14 +25,14 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Container(
                 height: 320,
-                child: Center(
+                child: const Center(
                   child: Image(
                     image: AssetImage('asset/image/logo_shop.jpg'),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: TextField(
                   controller: _email,
                   decoration: InputDecoration(
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
                 child: TextField(
                   controller: _password,
                   decoration: InputDecoration(
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                         email: _email.text.trim(),
                         password: _password.text.trim())
                         .then((value) {
-                      if (value == "Welcome") {
+                      if (value == 'Welcome') {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(builder: (context) => HomePage()),
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor:
                     MaterialStateProperty.all(Colors.black54),
                     textStyle: MaterialStateProperty.all(
-                      TextStyle(
+                      const TextStyle(
                         fontSize: 25.0,
                       ),
                     ),
@@ -92,13 +92,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 130,
               ),
               TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.only(bottom: 15),
-                    textStyle: TextStyle(fontSize: 15),
+                    padding: const EdgeInsets.only(bottom: 15),
+                    textStyle: const TextStyle(fontSize: 15),
                   ),
                   onPressed: () {
                     Navigator.push(context,

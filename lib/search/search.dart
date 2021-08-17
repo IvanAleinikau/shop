@@ -12,9 +12,9 @@ class Search extends SearchDelegate {
     return <Widget>[
       IconButton(
           onPressed: () {
-            query = "";
+            query = '';
           },
-          icon: Icon(Icons.close))
+          icon: const Icon(Icons.close))
     ];
   }
 
@@ -24,13 +24,13 @@ class Search extends SearchDelegate {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        icon: Icon(Icons.arrow_back));
+        icon: const Icon(Icons.arrow_back));
   }
 
   @override
   Widget buildResults(BuildContext context) {
     return Container(
-      child: Text(''),
+      child: const Text(''),
     );
   }
 
@@ -47,18 +47,18 @@ class Search extends SearchDelegate {
           itemCount: suggestionList.length,
           itemBuilder: (context, index) {
             return ListTile(
-              leading: Icon(Icons.album),
+              leading: const Icon(Icons.album),
               title: RichText(
                 text: TextSpan(
                     text: suggestionList[index].substring(0, query.length),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                     children: [
                       TextSpan(
                           text: suggestionList[index].substring(query.length),
-                          style: TextStyle(color: Colors.black54, fontSize: 20))
+                          style: const TextStyle(color: Colors.black54, fontSize: 20))
                     ]),
               ),
               onTap: () {

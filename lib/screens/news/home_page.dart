@@ -28,8 +28,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     initFirebase();
-    this.database = DbProvider();
-    this.database.initializeDB();
+    database = DbProvider();
+    database.initializeDB();
   }
 
   @override
@@ -39,16 +39,16 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: Text(
           AppLocalization.of(context)!.news,
-          style: TextStyle(fontFamily: 'Oxygen'),
+          style: const TextStyle(fontFamily: 'Oxygen'),
         ),
         backgroundColor: Colors.black54,
       ),
       body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+                image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
           ),
-          padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+          padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
           child: StreamBuilder(
             stream: FirebaseFirestore.instance.collection('news').snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                           return Card(
                             color: Colors.transparent,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.0),
+                              padding: const EdgeInsets.symmetric(vertical: 5.0),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                                   Expanded(
                                       flex: 3,
                                       child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
+                                        padding: const EdgeInsets.fromLTRB(
                                             5.0, 0.0, 0.0, 0.0),
                                         child: Column(
                                           crossAxisAlignment:
@@ -84,31 +84,31 @@ class _HomePageState extends State<HomePage> {
                                             Text(
                                               streamSnapshot.data!.docs[index]
                                                   ['title'],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 25.0,
                                               ),
                                             ),
-                                            Padding(
+                                            const Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 2.0)),
                                             Text(
                                               streamSnapshot.data!.docs[index]
                                                   ['date'],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 17.0,
                                               ),
                                             ),
-                                            Padding(
+                                            const Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 2.0)),
                                             Text(
                                               streamSnapshot.data!.docs[index]
                                                   ['text'],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: 17.0,
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                                                 .data!.docs[index]['date']);
                                         database.insertSavedNews(savedNews);
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.save,
                                         color: Colors.grey,
                                       )),
@@ -139,11 +139,11 @@ class _HomePageState extends State<HomePage> {
                           );
                         }));
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           )),
-      drawer: Menu(),
+      drawer: const Menu(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(

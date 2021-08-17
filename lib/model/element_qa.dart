@@ -3,19 +3,21 @@ class QuestionAnswer {
   final String question;
   final String answer;
 
-  QuestionAnswer({this.id, required this.question, required this.answer});
+  QuestionAnswer({
+    this.id,
+    required this.question,
+    required this.answer,
+  });
 
-  factory QuestionAnswer.fromMap(Map<String, dynamic> json) =>
-      new QuestionAnswer(
-        id: json["id"],
-        question: json["question"],
-        answer : json["answer"],
+  factory QuestionAnswer.fromMap(Map<String, dynamic> json) => QuestionAnswer(
+        id: json['id'],
+        question: json['question'],
+        answer: json['answer'],
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "question": question,
-        "answer": answer,
+        'id': id,
+        'question': question,
+        'answer': answer,
       };
 }
-

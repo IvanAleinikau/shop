@@ -35,12 +35,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black45,
-        title: Text('Demo video'),
+        title: const Text('Demo video'),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -59,7 +59,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 }
               },
             ),
-          ListTile(
+          const ListTile(
             title: Text('My Way - Calvin Harris',
               textAlign: TextAlign.center,
               style: TextStyle(

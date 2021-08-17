@@ -52,9 +52,9 @@ class MakeNewsForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            News news = News(_title.text.trim(), _text.text.trim(), _url.text.trim(), new DateTime.now());
+            News news = News(_title.text.trim(), _text.text.trim(), _url.text.trim(), DateTime.now());
             NewsRepository().makeNews(news).then((value) {
-              if(value=="News made"){
+              if(value=='News made'){
                 Navigator.of(context).pop();
               }else{
                 ScaffoldMessenger.of(context)

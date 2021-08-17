@@ -15,7 +15,7 @@ void main(){
 
 class App extends StatelessWidget {
   final AppLocalizationDelegate _localeOverrideDelegate =
-  AppLocalizationDelegate(Locale('en', 'US'));
+  const AppLocalizationDelegate(Locale('en', 'US'));
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class App extends StatelessWidget {
       ],
       supportedLocales: [
         const Locale('en', 'US'),
-        const Locale('ru', 'RUS')
+        const Locale('ru', 'RUS'),
       ],
       theme: ThemeData(
         primaryColor: Colors.indigo.shade400,
@@ -36,7 +36,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => Home(),
-        '/settings':(context)=> SettingsPage(),
+        '/settings':(context)=> const SettingsPage(),
         '/shop':(context)=> ShopPage(),
       },
     );
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
         if (snapshot.connectionState == ConnectionState.done) {
           return Splash();
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

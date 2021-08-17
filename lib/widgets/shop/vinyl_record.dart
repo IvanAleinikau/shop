@@ -8,7 +8,7 @@ class ObjVinylRecord extends StatefulWidget {
   final String name;
   final int count;
 
-  ObjVinylRecord(this.name, this.count);
+  const ObjVinylRecord(this.name, this.count);
 
   @override
   _ObjVinylRecordState createState() => _ObjVinylRecordState();
@@ -23,12 +23,12 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black54,
-          title: Text('${widget.name}'),
+          title: Text(widget.name),
         ),
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+                image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
           ),
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
@@ -57,14 +57,14 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                                             streamSnapshot.data!.docs[index]
                                                 ['year'],
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 25, color: Colors.white),
                                       ),
                                       subtitle: Text(
                                           streamSnapshot.data!.docs[index]
                                               ['author'],
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 15)),
                                     ),
@@ -72,19 +72,19 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                                       title: Text(
                                         AppLocalization.of(context)!
                                             .description,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 20, color: Colors.white),
                                       ),
                                       subtitle: Text(
                                           streamSnapshot.data!.docs[index]
                                               ['description'],
                                           style:
-                                              TextStyle(color: Colors.white)),
+                                              const TextStyle(color: Colors.white)),
                                       trailing: Text(
                                         streamSnapshot.data!.docs[index]
                                                 ['cost'] +
                                             '\$',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 20, color: Colors.white),
                                       ),
                                     ),
@@ -94,7 +94,7 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                             : Column();
                       });
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child:  CircularProgressIndicator());
                 }
               }),
         ));

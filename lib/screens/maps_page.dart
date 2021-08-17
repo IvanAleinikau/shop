@@ -13,7 +13,7 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
-  LatLng endLoc = LatLng(52.08823582961075, 23.68843269527837);
+  LatLng endLoc = const LatLng(52.08823582961075, 23.68843269527837);
 
   static const endLatitude = 52.08823582961075;
   static const endLongitude = 23.68843269527837;
@@ -22,14 +22,14 @@ class _MapsState extends State<Maps> {
   static const _initialCameraPosition = CameraPosition(
       target: LatLng(endLatitude, endLongitude), zoom: 15);
 
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 
-  Set<Polyline>_polyline={};
+  final Set<Polyline>_polyline={};
 
   late Marker start;
   late Marker end;
 
-  Set<Marker> _markers ={ };
+  final Set<Marker> _markers ={ };
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
@@ -38,7 +38,7 @@ class _MapsState extends State<Maps> {
 
   Future<void> moveCamera() async {
     final GoogleMapController controller = await _controller.future;
-    controller.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+    controller.moveCamera(CameraUpdate.newCameraPosition(const CameraPosition(
       target: LatLng(endLatitude, endLongitude),
       zoom: 15,
     )));
@@ -55,12 +55,12 @@ class _MapsState extends State<Maps> {
   }
 
   setMarkers() {
-    _markers.add(end = Marker(
-      markerId: MarkerId("Destination"),
+    _markers.add(end = const Marker(
+      markerId: MarkerId('Destination'),
       position: LatLng(endLatitude, endLongitude),
       infoWindow: InfoWindow(
-        title: "Vinyl record shop",
-        snippet: "5 star ratted place",
+        title: 'Vinyl record shop',
+        snippet: '5 star ratted place',
       ),
     ));
     setState(() {});
@@ -80,7 +80,7 @@ class _MapsState extends State<Maps> {
        LatLng startLoc = LatLng(start.position.latitude, start.position.longitude);
         List<LatLng> latlng = [endLoc,startLoc];
         _polyline.add(Polyline(
-            polylineId: PolylineId(''),
+            polylineId: const PolylineId(''),
           visible: true,
           points: latlng,
           color: Colors.blue
@@ -95,7 +95,7 @@ class _MapsState extends State<Maps> {
         LatLng startLoc = LatLng(start.position.latitude, start.position.longitude);
         List<LatLng> latlng = [endLoc,startLoc];
         _polyline.add(Polyline(
-            polylineId: PolylineId(''),
+            polylineId: const PolylineId(''),
             visible: true,
             points: latlng,
             color: Colors.blue
@@ -122,7 +122,6 @@ class _MapsState extends State<Maps> {
     setState(() {
       _center = LatLng(currentLocation.latitude, currentLocation.longitude);
     });
-    print('center $_center');
   }
 
   late PolylinePoints polylinePoints;
@@ -139,7 +138,7 @@ class _MapsState extends State<Maps> {
     polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyAVsenPAwkbXo44wluSIRpRT-_WnSRuKzk", // Google Maps API Key
+      'AIzaSyAVsenPAwkbXo44wluSIRpRT-_WnSRuKzk', // Google Maps API Key
       PointLatLng(startLatitude, startLongitude),
       PointLatLng(destinationLatitude, destinationLongitude),
       travelMode: TravelMode.transit,
@@ -149,7 +148,7 @@ class _MapsState extends State<Maps> {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     }
-    PolylineId id = PolylineId('poly');
+    PolylineId id = const PolylineId('poly');
 
     Polyline polyline = Polyline(
       polylineId: id,
@@ -165,7 +164,6 @@ class _MapsState extends State<Maps> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(''),
         backgroundColor: Colors.black54,
       ),
       body: Stack(
@@ -192,7 +190,7 @@ class _MapsState extends State<Maps> {
                       color: Colors.transparent, // button color
                       child: InkWell(
                         splashColor: Colors.blueGrey, // inkwell color
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 50,
                           height: 50,
                           child: Icon(Icons.add),
@@ -203,13 +201,13 @@ class _MapsState extends State<Maps> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ClipOval(
                     child: Material(
                       color: Colors.transparent, // button color
                       child: InkWell(
                         splashColor: Colors.blueGrey, // inkwell color
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 50,
                           height: 50,
                           child: Icon(Icons.remove),
@@ -232,7 +230,7 @@ class _MapsState extends State<Maps> {
         onPressed: () {
           moveCamera();
         },
-        child: Icon(Icons.center_focus_strong),
+        child: const Icon(Icons.center_focus_strong),
       ),
     );
   }

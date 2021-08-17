@@ -17,8 +17,8 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
   @override
   void initState() {
     super.initState();
-    this.database = DbProvider();
-    this.database.initializeDB();
+    database = DbProvider();
+    database.initializeDB();
   }
 
   @override
@@ -28,17 +28,17 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
         centerTitle: true,
         title: Text(
           AppLocalization.of(context)!.savedNews,
-          style: TextStyle(fontFamily: 'Oxygen'),
+          style: const TextStyle(fontFamily: 'Oxygen'),
         ),
         backgroundColor: Colors.black54,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
         ),
         child: FutureBuilder<List<SavedNews>>(
-          future: this.database.retrieveSavedNews(),
+          future: database.retrieveSavedNews(),
           builder:
               (BuildContext context, AsyncSnapshot<List<SavedNews>> snapshot) {
             if (snapshot.hasData) {
@@ -51,13 +51,12 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
                             background: Container(
                               color: Colors.red,
                               alignment: Alignment.centerRight,
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Icon(Icons.delete_forever),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: const Icon(Icons.delete_forever),
                             ),
                             key: ValueKey<int>(snapshot.data![index].id!),
                             onDismissed: (DismissDirection direction) async {
-                              await this
-                                  .database
+                              await database
                                   .deleteSavedNews(snapshot.data![index].id!);
                               setState(() {
                                 snapshot.data!.remove(snapshot.data![index]);
@@ -68,16 +67,16 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
                                 Card(
                                   color: Colors.transparent,
                                   child: ListTile(
-                                    contentPadding: EdgeInsets.all(8.0),
+                                    contentPadding: const EdgeInsets.all(8.0),
                                     title: Text(
                                       snapshot.data![index].title +
                                           ' - ' +
                                           snapshot.data![index].date,
-                                      style: TextStyle(color: Colors.white),
+                                      style: const TextStyle(color: Colors.white),
                                     ),
                                     subtitle: Text(
                                       snapshot.data![index].text,
-                                      style: TextStyle(color: Colors.white),
+                                      style: const TextStyle(color: Colors.white),
                                     ),
                                   ),
                                 ),
@@ -87,12 +86,12 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
                         : Container();
                   });
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
       ),
-      drawer: Menu(),
+      drawer: const Menu(),
     );
   }
 }

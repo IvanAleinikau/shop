@@ -12,8 +12,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  TextEditingController _password = TextEditingController();
-  TextEditingController _confirm = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirm = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,37 +22,37 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: true,
         title: Text(
           AppLocalization.of(context)!.settings,
-          style: TextStyle(fontFamily: 'Oxygen'),
+          style: const TextStyle(fontFamily: 'Oxygen'),
         ),
         backgroundColor: Colors.black54,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
         ),
         child: ListView(
-          padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
           children: [
             SizedBox(
               child: Text(
                 AppLocalization.of(context)!.account,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               height: 10.0,
               color: Colors.white,
             ),
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.changePassword,
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.account_tree_sharp,
                 color: Colors.white,
                 size: 30,
@@ -107,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Auth()
                                     .resetPassword(_password.text.trim())
                                     .then((value) {
-                                  if (value == "Reset was successful") {
+                                  if (value == 'Reset was successful') {
                                     Navigator.of(context).pop();
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -130,22 +130,22 @@ class _SettingsPageState extends State<SettingsPage> {
             SizedBox(
               child: Text(
                 AppLocalization.of(context)!.settings,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
               ),
             ),
-            Divider(
+            const Divider(
               height: 12.0,
               color: Colors.white,
             ),
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.changeLanguage,
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.language,
                 color: Colors.white,
                 size: 30,
@@ -161,19 +161,19 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Column(
                               children: [
                                 ListTile(
-                                  title: Text('English'),
+                                  title: const Text('English'),
                                   onTap: () {
                                     setState(() {
-                                      AppLocalization.load(Locale('en', 'US'));
+                                      AppLocalization.load(const Locale('en', 'US'));
                                       Navigator.of(context).pop();
                                     });
                                   },
                                 ),
                                 ListTile(
-                                  title: Text('Русский'),
+                                  title: const Text('Русский'),
                                   onTap: () {
                                     setState(() {
-                                      AppLocalization.load(Locale('ru', 'RUS'));
+                                      AppLocalization.load(const Locale('ru', 'RUS'));
                                       Navigator.of(context).pop();
                                     });
                                   },
@@ -187,7 +187,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         ),
       ),
-      drawer: Menu(),
+      drawer: const Menu(),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:shop/model/element_purchase.dart';
 
 class PurchaseRepository {
   Future<String> makePurchase(Purchase purchase) async {
-    await FirebaseFirestore.instance.collection("purchase").add({
+    await FirebaseFirestore.instance.collection('purchase').add({
       'user': purchase.user,
       'is_active':purchase.isActive,
       'name': purchase.vinylRecord.name,
@@ -13,6 +13,6 @@ class PurchaseRepository {
       'cost':purchase.vinylRecord.cost,
       'image':purchase.vinylRecord.image
     });
-    return "Purchase made";
+    return 'Purchase made';
   }
 }

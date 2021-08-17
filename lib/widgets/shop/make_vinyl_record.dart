@@ -11,12 +11,12 @@ class MakeVinylRecord extends StatefulWidget {
 }
 
 class _MakeVinylRecordState extends State<MakeVinylRecord> {
-  TextEditingController _name = TextEditingController();
-  TextEditingController _author = TextEditingController();
-  TextEditingController _year = TextEditingController();
-  TextEditingController _description = TextEditingController();
-  TextEditingController _cost = TextEditingController();
-  TextEditingController _image = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _author = TextEditingController();
+  final TextEditingController _year = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+  final TextEditingController _cost = TextEditingController();
+  final TextEditingController _image = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
           onPressed: () {
             VinylRecord vinylRecord = VinylRecord(_name.text.trim(), _author.text.trim(),_year.text.trim(),_description.text.trim(),_cost.text.trim(),_image.text.trim() );
             VinylRecordRepository().makeVinylRecord(vinylRecord).then((value) {
-              if(value=="Vinyl record made"){
+              if(value=='Vinyl record made'){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ShopPage()),);
               }else{
                 ScaffoldMessenger.of(context)

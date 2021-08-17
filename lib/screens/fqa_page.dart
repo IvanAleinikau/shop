@@ -10,15 +10,15 @@ class FQAPage extends StatefulWidget {
 }
 
 class _FQAPageState extends State<FQAPage> {
-  TextEditingController _question = TextEditingController();
-  TextEditingController _answer = TextEditingController();
+  final TextEditingController _question = TextEditingController();
+  final TextEditingController _answer = TextEditingController();
   late DbProvider database;
 
   @override
   void initState() {
     super.initState();
-    this.database = DbProvider();
-    this.database.initializeDB();
+    database = DbProvider();
+    database.initializeDB();
   }
 
   @override
@@ -33,23 +33,23 @@ class _FQAPageState extends State<FQAPage> {
                 MaterialPageRoute(builder: (context) => FQAPage()),
               );
             },
-            icon: Icon(Icons.replay_sharp),
+            icon: const Icon(Icons.replay_sharp),
           )
         ],
         centerTitle: true,
         title: Text(
           AppLocalization.of(context)!.faq,
-          style: TextStyle(fontFamily: 'Oxygen'),
+          style: const TextStyle(fontFamily: 'Oxygen'),
         ),
         backgroundColor: Colors.black45,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("asset/image/image.jpg"), fit: BoxFit.cover),
+              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
         ),
         child: FutureBuilder<List<QuestionAnswer>>(
-          future: this.database.retrieveQuestionAnswer(),
+          future: database.retrieveQuestionAnswer(),
           builder: (BuildContext context,
               AsyncSnapshot<List<QuestionAnswer>> snapshot) {
             if (snapshot.hasData) {
@@ -61,13 +61,12 @@ class _FQAPageState extends State<FQAPage> {
                         background: Container(
                           color: Colors.red,
                           alignment: Alignment.centerRight,
-                          padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Icon(Icons.delete_forever),
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: const Icon(Icons.delete_forever),
                         ),
                         key: ValueKey<int>(snapshot.data![index].id!),
                         onDismissed: (DismissDirection direction) async {
-                          await this
-                              .database
+                          await database
                               .deleteQuestionAnswer(snapshot.data![index].id!);
                           setState(() {
                             snapshot.data!.remove(snapshot.data![index]);
@@ -76,21 +75,21 @@ class _FQAPageState extends State<FQAPage> {
                         child: Card(
                           color: Colors.transparent,
                           child: ListTile(
-                            contentPadding: EdgeInsets.all(8.0),
-                            title: Text('${index+1}. '+ snapshot.data![index].question,style: TextStyle(color: Colors.white),),
-                            subtitle: Text(snapshot.data![index].answer,style: TextStyle(color: Colors.white),),
+                            contentPadding: const EdgeInsets.all(8.0),
+                            title: Text('${index+1}. '+ snapshot.data![index].question,style: const TextStyle(color: Colors.white),),
+                            subtitle: Text(snapshot.data![index].answer,style: const TextStyle(color: Colors.white),),
                           ),
                         ));
                   });
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
       ),
-      drawer: Menu(),
+      drawer: const Menu(),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.black45,
         onPressed: () {
           showDialog(

@@ -12,9 +12,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  TextEditingController _confirmPassword = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
 
 
   @override
@@ -25,14 +25,14 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               Container(
                 height: 320,
-                child: Center(
+                child: const Center(
                   child: Image(
                     image: AssetImage('asset/image/logo_shop.jpg'),
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: TextField(
                   controller: _email,
                   decoration: InputDecoration(
@@ -44,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
                 child: TextField(
                   controller: _password,
                   decoration: InputDecoration(
@@ -57,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 0, 30, 15),
+                padding: const EdgeInsets.fromLTRB(30, 0, 30, 15),
                 child: TextField(
                   controller: _confirmPassword,
                   decoration: InputDecoration(
@@ -80,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           email: _email.text.trim(),
                           password: _password.text.trim())
                           .then((message) {
-                        if (message == "Account created") {
+                        if (message == 'Account created') {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -93,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       });
                     }else{
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text('Password mismatch')));
+                          .showSnackBar(const SnackBar(content: Text('Password mismatch')));
                     }
                   },
                   child: Text(AppLocalization.of(context)!.singUp),
@@ -101,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor:
                     MaterialStateProperty.all(Colors.black),
                     textStyle: MaterialStateProperty.all(
-                      TextStyle(
+                      const TextStyle(
                         fontSize: 25.0,
                       ),
                     ),
@@ -111,13 +111,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.only(bottom: 15),
-                    textStyle: TextStyle(fontSize: 15),
+                    padding: const EdgeInsets.only(bottom: 15),
+                    textStyle: const TextStyle(fontSize: 15),
                   ),
                   onPressed: () {
                     Navigator.push(

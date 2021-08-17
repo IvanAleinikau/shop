@@ -12,10 +12,10 @@ class DbProvider {
       join(path, 'newDatabase.db'),
       onCreate: (database, version) async {
         await database.execute(
-          "CREATE TABLE question_answer(id INTEGER PRIMARY KEY AUTOINCREMENT, question TEXT ,answer TEXT)",
+          'CREATE TABLE question_answer(id INTEGER PRIMARY KEY AUTOINCREMENT, question TEXT ,answer TEXT)',
         );
         await database.execute(
-          "CREATE TABLE news(id INTEGER PRIMARY KEY AUTOINCREMENT,user TEXT,title TEXT,text TEXT,date TEXT)",
+          'CREATE TABLE news(id INTEGER PRIMARY KEY AUTOINCREMENT,user TEXT,title TEXT,text TEXT,date TEXT)',
         );
       },
       version: 1,
@@ -41,7 +41,7 @@ class DbProvider {
     final db = await initializeDB();
     await db.delete(
       'question_answer',
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
@@ -65,7 +65,7 @@ class DbProvider {
     final db = await initializeDB();
     await db.delete(
       'news',
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
