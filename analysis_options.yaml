@@ -1,0 +1,16 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lib/l10n/messages_en.dart
+    - lib/l10n/messages_ru.dart
+    - lib/l10n/messages_messages.dart
+    - lib/l10n/messages_all.dart
+  errors:
+    todo: warning
+
+linter:
+  rules:
+    avoid_print: true
+    prefer_single_quotes: true
+    close_sinks: true
