@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shop/locale/app_localization.dart';
-import 'package:shop/provider/auth_provider.dart';
-import 'package:shop/screens/auth/login_page.dart';
-import 'package:shop/screens/fqa_page.dart';
-import 'package:shop/screens/news/home_page.dart';
-import 'package:shop/screens/saved_news_page.dart';
-import 'package:shop/screens/settings_page.dart';
-import 'package:shop/screens/shop/shop_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
+import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
+import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
+import 'package:shop/core/bloc/bloc_news/news_event.dart';
+import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
+import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
+import 'package:shop/core/localization/app_localization.dart';
+import 'package:shop/pages/fqa_page.dart';
+import 'package:shop/pages/news_page.dart';
+import 'package:shop/pages/saved_news_page.dart';
+import 'package:shop/pages/settings_page.dart';
+import 'package:shop/pages/shop_page.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -59,9 +64,10 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
               ),
               onTap: () {
+                BlocProvider.of<NewsBloc>(context).add(LoadNews());
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => NewsPage()),
                 );
               },
             ),
@@ -76,6 +82,7 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
               ),
               onTap: () {
+                BlocProvider.of<VinylRecordBloc>(context).add(LoadVinylRecord());
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ShopPage()),
@@ -148,11 +155,7 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
               ),
               onTap: () {
-                Auth().signOut();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
+                BlocProvider.of<AuthBloc>(context).add(UnloadUser());
               },
             ),
           ],

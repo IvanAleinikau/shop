@@ -75,5 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "answer" : MessageLookupByLibrary.simpleMessage("Ответ"),
     "enter_answer" : MessageLookupByLibrary.simpleMessage("Введите ответ"),
     "field" : MessageLookupByLibrary.simpleMessage("Заполните поля"),
+    "notNews" : MessageLookupByLibrary.simpleMessage("Нет новостей"),
+    "notFqa" : MessageLookupByLibrary.simpleMessage("Нет вопросов/ответов"),
   };
 }

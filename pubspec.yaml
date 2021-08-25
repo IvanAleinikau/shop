@@ -51,7 +51,7 @@ dependencies:
   authentication_provider: ^1.0.1
   badges: ^2.0.1
   video_player: ^2.1.12
-
+  flutter_bloc: ^7.1.0
 
 
 
