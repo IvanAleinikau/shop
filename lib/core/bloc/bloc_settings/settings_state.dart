@@ -1,9 +1,13 @@
-abstract class SettingState{}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class SettingStateInit extends SettingState{}
+part 'settings_state.freezed.dart';
 
-class RusState extends SettingState{}
+@freezed
+abstract class SettingState with _$SettingState{
 
-class EngState extends SettingState{}
+  factory SettingState.initState() = _InitState;
 
-class ResetPage extends SettingState{}
+  factory SettingState.loading() = _Loading;
+
+}
+

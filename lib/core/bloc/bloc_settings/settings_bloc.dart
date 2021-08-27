@@ -7,17 +7,20 @@ import 'package:shop/core/bloc/bloc_settings/settings_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
-  SettingBloc() : super(SettingStateInit());
+  SettingBloc() : super(SettingState.initState());
 
   @override
   Stream<SettingState> mapEventToState(SettingEvent event) async* {
     if (event is LoadEng) {
       AppLocalization.load(const Locale('en', 'US'));
-      yield ResetPage();
+      yield SettingState.loading();
     }
     if (event is LoadRus) {
       AppLocalization.load(const Locale('ru', 'RUS'));
-      yield ResetPage();
+      yield SettingState.loading();
+    }
+    if(event is ResetPage){
+      yield SettingState.initState();
     }
   }
 }

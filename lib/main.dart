@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
-import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
 import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
 import 'package:shop/core/bloc/bloc_register/register_bloc.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_bloc.dart';
@@ -13,7 +12,6 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
 import 'package:shop/core/splash.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:shop/pages/fqa_page.dart';
 
 import 'core/localization/app_localization.dart';
 
