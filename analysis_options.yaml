@@ -6,6 +6,8 @@ analyzer:
     - lib/l10n/messages_ru.dart
     - lib/l10n/messages_messages.dart
     - lib/l10n/messages_all.dart
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
 
 linter:
   rules:

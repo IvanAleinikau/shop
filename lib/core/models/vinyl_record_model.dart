@@ -1,17 +1,15 @@
-class VinylRecord {
-  final String name;
-  final String author;
-  final String year;
-  final String description;
-  final String cost;
-  final String image;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  VinylRecord(
-    this.name,
-    this.author,
-    this.year,
-    this.description,
-    this.cost,
-    this.image,
-  );
+part 'vinyl_record_model.freezed.dart';
+
+@freezed
+class VinylRecord with _$VinylRecord {
+  factory VinylRecord({
+    required String name,
+    required String author,
+    required String year,
+    required String description,
+    required String cost,
+    required String image,
+  }) = _VinylRecord;
 }

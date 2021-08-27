@@ -1,14 +1,14 @@
-class News {
-  final String title;
-  final String text;
-  final String url;
-  final DateTime date;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  News({
-    required this.title,
-    required this.text,
-    required this.url,
-    required this.date,
-  });
+part 'news_model.freezed.dart';
+
+@freezed
+class News with _$News{
+  factory News({
+    required String title,
+    required String text,
+    required String url,
+    required DateTime date,
+  }) = _News;
 
 }

@@ -1,31 +1,19 @@
-class SavedNews {
-  final int? id;
-  final String user;
-  final String title;
-  final String text;
-  final String date;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  SavedNews({
-    this.id,
-    required this.user,
-    required this.title,
-    required this.text,
-    required this.date,
-  });
+part 'saved_news_model.freezed.dart';
+part 'saved_news_model.g.dart';
 
-  factory SavedNews.fromMap(Map<String, dynamic> json) => SavedNews(
-        id: json['id'],
-        user: json['user'],
-        title: json['title'],
-        text: json['text'],
-        date: json['date'],
-      );
+@freezed
+class SavedNews with _$SavedNews{
 
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'user': user,
-        'title': title,
-        'text': text,
-        'date': date,
-      };
+  factory SavedNews({
+    int? id,
+    required String user,
+    required String title,
+    required String text,
+    required String date,
+  }) = _SavedNews;
+
+  factory SavedNews.fromJson(Map<String, dynamic> json) => _$SavedNewsFromJson(json);
+
 }

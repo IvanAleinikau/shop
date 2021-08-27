@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
-import 'package:shop/core/models/qa_model.dart';
+import 'package:shop/core/models/question_answer_model.dart';
 import 'package:shop/data/repositories/local_database_repository.dart';
 
 class FqaBloc extends Bloc<FqaEvent, FqaState> {
