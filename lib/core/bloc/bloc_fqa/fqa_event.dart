@@ -1,23 +1,13 @@
-abstract class FqaEvent {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoadFqa extends FqaEvent {}
+part 'fqa_event.freezed.dart';
 
-class CircleEvent extends FqaEvent {}
+@freezed
+abstract class FqaEvent with _$FqaEvent{
+  factory FqaEvent.fetchQuestionAnswer() = FqaQuestionAnswerEvent;
 
-class CreateFqa extends FqaEvent {
-  final String question;
-  final String answer;
+  factory FqaEvent.createQuestionAnswer(String question, String answer) = CreateQuestionAnswerEvent;
 
-  CreateFqa({
-    required this.question,
-    required this.answer,
-  });
+  factory FqaEvent.deleteQuestionAnswer(int index) = DeleteQuestionAnswerEvent;
 }
 
-class DeleteFqa extends FqaEvent {
-  final int? index;
-
-  DeleteFqa({
-    this.index,
-  });
-}

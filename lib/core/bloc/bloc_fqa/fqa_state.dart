@@ -1,12 +1,19 @@
-abstract class FqaState{}
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shop/core/models/question_answer_model.dart';
 
-class FqaInitState extends FqaState{}
+part 'fqa_state.freezed.dart';
 
-class FqaLoaded extends FqaState{}
+@freezed
+abstract class FqaState with _$FqaState {
 
-class EmptyFqa extends FqaState{}
+  factory FqaState.initState() = _InitState;
 
-class CircleState extends FqaState{}
+  factory FqaState.loading() = _FqaLoading;
 
-class FqaCreated extends FqaState{}
+  factory FqaState.content(List<QuestionAnswer> questionsAndAnswers) = _FqaContent;
 
+  factory FqaState.contentEmpty() = _FqaContentEmpty;
+
+  factory FqaState.error() = _FqaError;
+
+}

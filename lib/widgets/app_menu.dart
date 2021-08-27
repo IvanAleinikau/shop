@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
+import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
+import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
 import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
 import 'package:shop/core/bloc/bloc_news/news_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
