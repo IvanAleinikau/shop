@@ -10,30 +10,40 @@ import 'package:shop/data/repositories/local_database_repository.dart';
 class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
   LocalDatabaseRepository database = LocalDatabaseRepository();
-  late List<SavedNews> allSavedNews;
-  final List<SavedNews> currentUserSavedNews = [];
+  late  List<SavedNews> allSavedNews ;
+  late List<SavedNews> currentUserSavedNews ;
 
-  SavedNewsBloc() : super(SavedNewsInitState());
+  SavedNewsBloc() : super(SavedNewsState.initState());
 
   @override
   Stream<SavedNewsState> mapEventToState(SavedNewsEvent event) async* {
-    if (event is LoadSavedNews) {
-      allSavedNews = await database.retrieveSavedNews();
-      if (allSavedNews.isNotEmpty) {
-        yield SavedNewsLoaded();
-      } else {
-        yield EmptySavedNews();
+    if(event is FetchSavedNewsEvent){
+      yield SavedNewsState.loading();
+      try{
+        allSavedNews = [];
+        currentUserSavedNews = [];
+        allSavedNews = await database.retrieveSavedNews();
+        if(allSavedNews.isNotEmpty){
+          for(int i = 0 ; i < allSavedNews.length;i++){
+            if(allSavedNews[i].user == user.toString()){
+              currentUserSavedNews.add(allSavedNews[i]);
+            }
+          }
+          yield SavedNewsState.content(currentUserSavedNews);
+        }else{
+          yield SavedNewsState.contentEmpty();
+        }
+      }catch(_){
+        yield SavedNewsState.error();
       }
-    } else if (event is CircleEvent) {
-      yield CircleState();
-    } else if (event is DeleteSavedNews) {
-      await database.deleteSavedNews(event.index!.toInt());
-      allSavedNews = [];
-      allSavedNews = await database.retrieveSavedNews();
-      yield SavedNewsLoaded();
-    } else if(event is CreateSavedNews){
-      database.insertSavedNews(SavedNews(user: user.toString(), title: event.title, text: event.text, date: event.date));
-      yield SavedNewsLoaded();
+    }
+    if(event is CreateSavedNewsEvent){
+      await database.insertSavedNews(SavedNews(user: user.toString(), title: event.title, text: event.text, date: event.date));
+      yield SavedNewsState.loading();
+    }
+    if(event is DeleteSavedNewsEvent){
+      await database.deleteSavedNews(event.index);
+      yield SavedNewsState.loading();
     }
   }
 }

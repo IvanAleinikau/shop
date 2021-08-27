@@ -131,14 +131,15 @@ class _NewsPageState extends State<NewsPage> {
                                                   BlocProvider.of<
                                                               SavedNewsBloc>(
                                                           context)
-                                                      .add(CreateSavedNews(
-                                                    title: streamSnapshot.data!
+                                                      .add(CreateSavedNewsEvent(
+                                                    streamSnapshot.data!
                                                         .docs[index]['title'],
-                                                    text: streamSnapshot.data!
+                                                    streamSnapshot.data!
                                                         .docs[index]['text'],
-                                                    date: streamSnapshot.data!
+                                                    streamSnapshot.data!
                                                         .docs[index]['date'],
                                                   ));
+                                                  BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
                                                 },
                                                 icon: const Icon(
                                                   Icons.save,
