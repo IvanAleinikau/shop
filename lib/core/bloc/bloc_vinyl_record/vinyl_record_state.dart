@@ -1,15 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class VinylRecordState{}
+part 'vinyl_record_state.freezed.dart';
 
-class VinylRecordInitState extends VinylRecordState{}
+@freezed
+abstract class VinylRecordState with _$VinylRecordState{
+  factory VinylRecordState.initState() = _InitState;
 
-class VinylRecordLoaded extends VinylRecordState{
-  final vinylRecordRef = FirebaseFirestore.instance.collection('vinyl_record').snapshots();
+  factory VinylRecordState.loading() = _VinylRecordLoading;
+
+  factory VinylRecordState.content(Stream<QuerySnapshot<Map<String, dynamic>>> name) = _VinylRecordContent;
+
+  factory VinylRecordState.contentEmpty() = _VinylRecordContentEmpty;
+
+  factory VinylRecordState.error() = _VinylRecordError;
 }
 
-class LoadListName extends VinylRecordState{
-  final List<String> names;
-
-  LoadListName(this.names);
-}

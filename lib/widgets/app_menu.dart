@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
-import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
-import 'package:shop/core/bloc/bloc_news/news_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
@@ -81,7 +79,6 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
               ),
               onTap: () {
-                BlocProvider.of<VinylRecordBloc>(context).add(LoadVinylRecord());
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ShopPage()),

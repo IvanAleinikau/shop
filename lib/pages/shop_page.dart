@@ -29,6 +29,7 @@ class _ShopPageState extends State<ShopPage> {
     return BlocBuilder<VinylRecordBloc, VinylRecordState>(
       builder: (context, state) {
         final VinylRecordBloc _bloc = BlocProvider.of<VinylRecordBloc>(context);
+        BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -62,197 +63,205 @@ class _ShopPageState extends State<ShopPage> {
                   image: AssetImage('asset/image/image.jpg'),
                   fit: BoxFit.cover),
             ),
-            child: Scrollbar(
-              controller: _scrollController,
-              child: state is VinylRecordLoaded
-                  ? StreamBuilder(
-                      stream: state.vinylRecordRef,
-                      builder: (context,
-                          AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                        if (streamSnapshot.hasData) {
-                          return GridView.count(
-                            childAspectRatio: 0.66,
-                            crossAxisCount: 2,
-                            children: List.generate(streamSnapshot.data!.size,
-                                (index) {
-                              if (streamSnapshot.data!.docs.length >
-                                  _bloc.names.length) {
-                                _bloc.add(AddName(
-                                    streamSnapshot.data!.docs[index]['name']));
-                              }
-                              return Hero(
-                                  tag: 'vinyl${index.toString()}',
-                                  child: GestureDetector(
-                                    onLongPress: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const VideoPlayerScreen()),
-                                      );
-                                    },
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ObjVinylRecord(
-                                                    streamSnapshot.data!
-                                                        .docs[index]['name'],
-                                                    index)),
-                                      );
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.all(3),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(17),
-                                        child: Card(
-                                          color: Colors.transparent,
-                                          child: Column(
-                                            children: <Widget>[
-                                              Container(
-                                                child: Image.network(
-                                                    streamSnapshot.data!
-                                                        .docs[index]['image']),
-                                              ),
-                                              ListTile(
-                                                title: Text(
+            child: state.when(initState: () {
+              BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
+            }, loading: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }, content: (name) {
+              return Scrollbar(
+                  controller: _scrollController,
+                  child: StreamBuilder(
+                    stream: name,
+                    builder:
+                        (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                      if (streamSnapshot.hasData) {
+                        if(streamSnapshot.data!.docs.isEmpty){
+                          BlocProvider.of<VinylRecordBloc>(context).add(VinylRecordEmpty());
+                        }
+                        return GridView.count(
+                          childAspectRatio: 0.66,
+                          crossAxisCount: 2,
+                          children:
+                              List.generate(streamSnapshot.data!.size, (index) {
+                            if (streamSnapshot.data!.docs.length >
+                                _bloc.names.length) {
+                              BlocProvider.of<VinylRecordBloc>(context).add(NameToList(streamSnapshot.data!.docs[index]['name']));
+                            }
+                            return Hero(
+                                tag: 'vinyl${index.toString()}',
+                                child: GestureDetector(
+                                  onLongPress: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const VideoPlayerScreen()),
+                                    );
+                                  },
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ObjVinylRecord(
+                                              streamSnapshot.data!.docs[index]
+                                                  ['name'],
+                                              index)),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(3),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(17),
+                                      child: Card(
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          children: <Widget>[
+                                            Container(
+                                              child: Image.network(
                                                   streamSnapshot.data!
-                                                      .docs[index]['name'],
-                                                  style: const TextStyle(
-                                                      fontSize: 17,
-                                                      color: Colors.white),
-                                                ),
-                                                subtitle: Text(
-                                                  streamSnapshot.data!
-                                                      .docs[index]['author'],
-                                                  style: const TextStyle(
-                                                      color: Colors.white),
-                                                ),
+                                                      .docs[index]['image']),
+                                            ),
+                                            ListTile(
+                                              title: Text(
+                                                streamSnapshot.data!.docs[index]
+                                                    ['name'],
+                                                style: const TextStyle(
+                                                    fontSize: 17,
+                                                    color: Colors.white),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsets.zero,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Expanded(
-                                                        flex: 1,
-                                                        child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .fromLTRB(
-                                                                  16, 0, 0, 0),
-                                                          child: Text(
-                                                            streamSnapshot.data!
-                                                                            .docs[
-                                                                        index]
-                                                                    ['cost'] +
-                                                                '\$',
-                                                            style:
-                                                                const TextStyle(
-                                                                    color: Colors
-                                                                        .white),
+                                              subtitle: Text(
+                                                streamSnapshot.data!.docs[index]
+                                                    ['author'],
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.zero,
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                      flex: 1,
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .fromLTRB(
+                                                                16, 0, 0, 0),
+                                                        child: Text(
+                                                          streamSnapshot.data!
+                                                                          .docs[
+                                                                      index]
+                                                                  ['cost'] +
+                                                              '\$',
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                        ),
+                                                      )),
+                                                  Container(
+                                                    height: 20,
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(0, 0, 2, 2),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: ElevatedButton(
+                                                        onPressed: () {
+                                                          BlocProvider.of<
+                                                                      ShoppingCartBloc>(
+                                                                  context)
+                                                              .add(
+                                                                  CreatePurchase(
+                                                            name: streamSnapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['name'],
+                                                            author: streamSnapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['author'],
+                                                            year: streamSnapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['year'],
+                                                            description: streamSnapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['description'],
+                                                            cost: streamSnapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['cost'],
+                                                            image: streamSnapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['image'],
+                                                          ));
+                                                        },
+                                                        child: Text(
+                                                            AppLocalization.of(
+                                                                    context)!
+                                                                .buy,
+                                                            style: const TextStyle(
+                                                                fontFamily:
+                                                                    'Oxygen')),
+                                                        style: ButtonStyle(
+                                                          backgroundColor:
+                                                              MaterialStateProperty
+                                                                  .all(Colors
+                                                                      .black54),
+                                                          textStyle:
+                                                              MaterialStateProperty
+                                                                  .all(
+                                                            const TextStyle(),
                                                           ),
-                                                        )),
-                                                    Container(
-                                                      height: 20,
-                                                      padding: const EdgeInsets
-                                                          .fromLTRB(0, 0, 2, 2),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            BlocProvider.of<
-                                                                        ShoppingCartBloc>(
-                                                                    context)
-                                                                .add(
-                                                                    CreatePurchase(
-                                                              name: streamSnapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                      index]
-                                                                  ['name'],
-                                                              author: streamSnapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                      index]
-                                                                  ['author'],
-                                                              year: streamSnapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                      index]
-                                                                  ['year'],
-                                                              description:
-                                                                  streamSnapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                      index]['description'],
-                                                              cost: streamSnapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                      index][
-                                                                  'cost'],
-                                                              image: streamSnapshot
-                                                                          .data!
-                                                                          .docs[
-                                                                      index]
-                                                                  ['image'],
-                                                            ));
-                                                          },
-                                                          child: Text(
-                                                              AppLocalization.of(
-                                                                      context)!
-                                                                  .buy,
-                                                              style: const TextStyle(
-                                                                  fontFamily:
-                                                                      'Oxygen')),
-                                                          style: ButtonStyle(
-                                                            backgroundColor:
-                                                                MaterialStateProperty
-                                                                    .all(Colors
-                                                                        .black54),
-                                                            textStyle:
-                                                                MaterialStateProperty
-                                                                    .all(
-                                                              const TextStyle(),
-                                                            ),
-                                                            shape: MaterialStateProperty
-                                                                .all(
-                                                                    RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15.0),
-                                                            )),
-                                                          ),
+                                                          shape: MaterialStateProperty
+                                                              .all(
+                                                                  RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        15.0),
+                                                          )),
                                                         ),
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
                                     ),
-                                  ));
-                            }),
-                          );
-                        } else {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                      },
-                    )
-                  : Container(
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-            ),
+                                  ),
+                                ));
+                          }),
+                        );
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ));
+            }, contentEmpty: () {
+              return const Center(
+                child: Text(
+                  '',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            }, error: () {
+              return const Center(
+                  child: Text(
+                'Something wrong',
+                style: TextStyle(color: Colors.white),
+              ));
+            }),
           ),
           drawer: const Menu(),
           floatingActionButton: FloatingActionButton(
