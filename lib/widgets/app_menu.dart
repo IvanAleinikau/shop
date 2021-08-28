@@ -64,7 +64,6 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
               ),
               onTap: () {
-                BlocProvider.of<NewsBloc>(context).add(LoadNews());
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => NewsPage()),
