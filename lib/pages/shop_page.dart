@@ -176,28 +176,28 @@ class _ShopPageState extends State<ShopPage> {
                                                                       ShoppingCartBloc>(
                                                                   context)
                                                               .add(
-                                                                  CreatePurchase(
-                                                            name: streamSnapshot
+                                                              CreateShoppingCart(
+                                                            streamSnapshot
                                                                     .data!
                                                                     .docs[index]
                                                                 ['name'],
-                                                            author: streamSnapshot
+                                                             streamSnapshot
                                                                     .data!
                                                                     .docs[index]
                                                                 ['author'],
-                                                            year: streamSnapshot
+                                                            streamSnapshot
                                                                     .data!
                                                                     .docs[index]
                                                                 ['year'],
-                                                            description: streamSnapshot
+                                                            streamSnapshot
                                                                     .data!
                                                                     .docs[index]
                                                                 ['description'],
-                                                            cost: streamSnapshot
+                                                             streamSnapshot
                                                                     .data!
                                                                     .docs[index]
                                                                 ['cost'],
-                                                            image: streamSnapshot
+                                                             streamSnapshot
                                                                     .data!
                                                                     .docs[index]
                                                                 ['image'],
@@ -252,7 +252,7 @@ class _ShopPageState extends State<ShopPage> {
               return const Center(
                 child: Text(
                   '',
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
               );
             }, error: () {

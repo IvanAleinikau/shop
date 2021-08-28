@@ -1,21 +1,14 @@
-abstract class ShoppingCarEvent {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class CreatePurchase extends ShoppingCarEvent {
-  final String name;
-  final String author;
-  final String year;
-  final String description;
-  final String cost;
-  final String image;
+part 'shopping_cart_event.freezed.dart';
 
-  CreatePurchase({
-    required this.name,
-    required this.author,
-    required this.year,
-    required this.description,
-    required this.cost,
-    required this.image,
-  });
+@freezed
+abstract class ShoppingCartEvent with _$ShoppingCartEvent {
+
+  factory ShoppingCartEvent.fetchShoppingCart() = FetchShoppingCartEvent;
+
+  factory ShoppingCartEvent.empty() = ShoppingCartEmpty;
+
+  factory ShoppingCartEvent.createShoppingCart(String name, String author,String year, String description, String cost, String image) = CreateShoppingCart;
 }
 
-class LoadPurchase extends ShoppingCarEvent {}

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
@@ -8,19 +9,21 @@ import 'package:shop/core/models/purchase_model.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:shop/data/repositories/purchase_repository.dart';
 
-class ShoppingCartBloc extends Bloc<ShoppingCarEvent, ShoppingCarState> {
+class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
+  PurchaseRepository repository = PurchaseRepository();
 
-  ShoppingCartBloc() : super(ShoppingCartInitState());
+  ShoppingCartBloc() : super(ShoppingCartState.initState());
 
   @override
-  Stream<ShoppingCarState> mapEventToState(ShoppingCarEvent event) async* {
-    if (event is LoadPurchase) {
-      yield ShoppingCartLoaded();
-    } else if (event is CreatePurchase) {
+  Stream<ShoppingCartState> mapEventToState(ShoppingCartEvent event) async* {
+    if (event is FetchShoppingCartEvent) {
+      yield ShoppingCartState.content(FirebaseFirestore.instance.collection('purchase').snapshots(),user);
+    }
+    if (event is CreateShoppingCart) {
       PurchaseRepository().makePurchase(Purchase(
-          user : user.toString(),
-          isActive : true,
+          user: user.toString(),
+          isActive: true,
           vinylRecord: VinylRecord(
             name: event.name,
             author: event.author,
@@ -29,7 +32,9 @@ class ShoppingCartBloc extends Bloc<ShoppingCarEvent, ShoppingCarState> {
             cost: event.cost,
             image: event.image,
           )));
-      yield ShoppingCartLoaded();
+    }
+    if(event is ShoppingCartEmpty){
+      yield ShoppingCartState.contentEmpty();
     }
   }
 }
