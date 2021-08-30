@@ -1,7 +1,10 @@
-abstract class AuthState{}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class AuthInitState extends AuthState{}
+part 'auth_state.freezed.dart';
 
-class LogIn extends AuthState{}
+@freezed
+abstract class AuthState with _$AuthState{
 
-class LogOut extends AuthState{}
+  factory AuthState.initAuthState() = _InitAuthState;
+
+}

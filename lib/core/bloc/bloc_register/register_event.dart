@@ -1,13 +1,10 @@
-abstract class RegisterEvent{}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class RegisterUser extends RegisterEvent {
-  final String email;
-  final String password;
-  final String confirmPassword;
+part 'register_event.freezed.dart';
 
-  RegisterUser({
-    required this.email,
-    required this.password,
-    required this.confirmPassword,
-  });
+@freezed
+abstract class RegisterEvent with _$RegisterEvent{
+
+  factory RegisterEvent.registerEvent(String email, String password, String confirmPassword ) = RegisterUserEvent;
+
 }

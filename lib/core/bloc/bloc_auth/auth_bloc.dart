@@ -1,39 +1,34 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_state.dart';
+import 'package:shop/core/bloc/bloc_splash/splash_bloc.dart';
+import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
 import 'package:shop/data/repositories/auth_repository.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  FirebaseAuth auth = FirebaseAuth.instance;
+class AuthBloc extends Bloc<AuthEvent, AuthState>{
+  AuthRepository repository = AuthRepository();
 
-  AuthBloc() : super(AuthInitState());
+  final SplashBloc splashBloc;
+
+  AuthBloc(this.splashBloc) : super(AuthState.initAuthState());
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
-    if (event is CheckCurrentUser) {
-      if (auth.currentUser != null) {
-        yield LogIn();
-      } else {
-        yield LogOut();
-      }
-    } else if (event is LoadUser) {
-      AuthRepository()
-          .signIN(email: event.email, password: event.password)
-          .then((value) async* {
-        if (value == 'Welcome') {
-          yield LogIn();
-        } else {
-          yield LogOut();
+    if(event is LogInEvent){
+     repository.signIN(email: event.email, password: event.password).then((value) => {
+        if(value=='Welcome'){
+          splashBloc.add(CheckCurrentUser())
         }
       });
-    } else if (event is UnloadUser) {
-      AuthRepository().signOut();
-      yield LogOut();
-    } else {
-      yield AuthInitState();
+    }
+    if(event is LogOutEvent){
+      repository.signOut().then((value) => {
+        if(value == 'singOut'){
+          splashBloc.add(CheckCurrentUser())
+        }
+      });
     }
   }
 }

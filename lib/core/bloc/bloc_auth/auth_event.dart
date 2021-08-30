@@ -1,17 +1,14 @@
-abstract class AuthEvent {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class CheckCurrentUser extends AuthEvent {}
+part 'auth_event.freezed.dart';
 
-class LoadUser extends AuthEvent {
-  final String email;
-  final String password;
+@freezed
+abstract class AuthEvent with _$AuthEvent {
 
-  LoadUser({
-    required this.email,
-    required this.password,
-  });
+  factory AuthEvent.logIn(String email, String password) = LogInEvent;
+
+  factory AuthEvent.logOut() = LogOutEvent;
+
 }
-
-class UnloadUser extends AuthEvent {}
 
 

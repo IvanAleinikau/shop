@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
-import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
-import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/pages/fqa_page.dart';
 import 'package:shop/pages/news_page.dart';
@@ -151,7 +149,7 @@ class _MenuState extends State<Menu> {
                 color: Colors.white,
               ),
               onTap: () {
-                BlocProvider.of<AuthBloc>(context).add(UnloadUser());
+                BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
               },
             ),
           ],

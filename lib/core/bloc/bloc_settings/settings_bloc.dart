@@ -7,6 +7,7 @@ import 'package:shop/core/bloc/bloc_settings/settings_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
+
   SettingBloc() : super(SettingState.initState());
 
   @override

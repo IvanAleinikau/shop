@@ -46,7 +46,8 @@ class AuthRepository  {
     }
   }
 
-  void signOut() {
-    auth.signOut();
+  Future<String> signOut() async {
+    await auth.signOut();
+    return 'singOut';
   }
 }
