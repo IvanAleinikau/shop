@@ -9,34 +9,46 @@ import 'package:shop/data/repositories/vinyl_record_repository.dart';
 
 class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
   VinylRecordRepository repository = VinylRecordRepository();
+  late List<VinylRecord> allVinylRecord;
   List<String> names = [];
 
   VinylRecordBloc() : super(VinylRecordState.initState());
 
   @override
   Stream<VinylRecordState> mapEventToState(VinylRecordEvent event) async* {
-    if (event is FetchVinylRecord) {
-      try {
-        yield VinylRecordState.content(FirebaseFirestore.instance.collection('vinyl_record').snapshots());
-      } catch (_) {
-        yield VinylRecordState.error();
-      }
+    yield* event.map(
+      fetchNews: _fetchNews,
+      empty: _empty,
+      createVinylRecord: _createVinylRecord,
+      nameToList: _nameToList,
+    );
+  }
+
+  Stream<VinylRecordState> _fetchNews(FetchVinylRecord event) async* {
+    try {
+      allVinylRecord = await repository.fetchVinylRecord();
+      yield VinylRecordState.content(allVinylRecord);
+    } catch (_) {
+      yield VinylRecordState.error();
     }
-    if (event is CreateVinylRecord) {
-      repository.makeVinylRecord(VinylRecord(
-        name: event.name,
-        author: event.author,
-        year: event.year,
-        description: event.description,
-        cost: event.cost,
-        image: event.image,
-      ));
-    }
-    if(event is VinylRecordEmpty){
-      yield VinylRecordState.contentEmpty();
-    }
-    if (event is NameToList) {
-      names.add(event.name);
-    }
+  }
+
+  Stream<VinylRecordState> _createVinylRecord(CreateVinylRecord event) async* {
+    repository.makeVinylRecord(VinylRecord(
+      name: event.name,
+      author: event.author,
+      year: event.year,
+      description: event.description,
+      cost: event.cost,
+      image: event.image,
+    ));
+  }
+
+  Stream<VinylRecordState> _empty(VinylRecordEmpty event) async* {
+    yield VinylRecordState.contentEmpty();
+  }
+
+  Stream<VinylRecordState> _nameToList(NameToList event) async* {
+    names.add(event.name);
   }
 }

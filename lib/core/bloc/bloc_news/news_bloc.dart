@@ -5,26 +5,40 @@ import 'package:shop/core/bloc/bloc_news/news_event.dart';
 import 'package:shop/core/bloc/bloc_news/news_state.dart';
 import 'package:shop/core/models/news_model.dart';
 import 'package:shop/data/repositories/news_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsRepository repository = NewsRepository();
+  late List<News> list;
+
   NewsBloc() : super(NewsState.initState());
 
   @override
   Stream<NewsState> mapEventToState(NewsEvent event) async* {
-    if(event is FetchNewsEvent){
-      try{
-        yield NewsState.content(FirebaseFirestore.instance.collection('news').snapshots());
-      }catch(_){
-        yield NewsState.error();
-      }
+    yield* event.map(
+      fetchNews: _fetchNews,
+      empty: _empty,
+      createNews: _createNews,
+    );
+  }
+
+  Stream<NewsState> _fetchNews(FetchNewsEvent event) async* {
+    try {
+      list = await repository.fetchNews();
+      yield NewsState.content(list);
+    } catch (_) {
+      yield NewsState.error();
     }
-    if(event is CreateNewsEvent){
-      repository.makeNews(News(title: event.title, text: event.title, url: event.url, date: DateTime.now()));
-    }
-    if(event is NewsEmpty){
-      yield NewsState.contentEmpty();
-    }
+  }
+
+  Stream<NewsState> _empty(NewsEmpty event) async* {
+    yield NewsState.contentEmpty();
+  }
+
+  Stream<NewsState> _createNews(CreateNewsEvent event) async* {
+    repository.makeNews(News(
+        title: event.title,
+        text: event.title,
+        url: event.url,
+        date: DateTime.now()));
   }
 }

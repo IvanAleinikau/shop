@@ -12,6 +12,10 @@ class SplashBloc extends Bloc<SplashEvent,SplashState> {
 
   @override
   Stream<SplashState> mapEventToState(SplashEvent event) async* {
+    yield* event.map(checkCurrentUser: _checkCurrentUser);
+  }
+
+  Stream<SplashState> _checkCurrentUser(CheckCurrentUser event) async* {
     if(event is CheckCurrentUser){
       if(auth.currentUser!=null){
         yield SplashState.userLogIn();

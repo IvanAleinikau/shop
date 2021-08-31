@@ -24,10 +24,9 @@ class _$VinylRecordStateTearOff {
     return _VinylRecordLoading();
   }
 
-  _VinylRecordContent content(
-      Stream<QuerySnapshot<Map<String, dynamic>>> name) {
+  _VinylRecordContent content(List<VinylRecord> list) {
     return _VinylRecordContent(
-      name,
+      list,
     );
   }
 
@@ -49,8 +48,7 @@ mixin _$VinylRecordState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<VinylRecord> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) =>
@@ -59,7 +57,7 @@ mixin _$VinylRecordState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<VinylRecord> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -144,8 +142,7 @@ class _$_InitState implements _InitState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<VinylRecord> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -157,7 +154,7 @@ class _$_InitState implements _InitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<VinylRecord> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -243,8 +240,7 @@ class _$_VinylRecordLoading implements _VinylRecordLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<VinylRecord> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -256,7 +252,7 @@ class _$_VinylRecordLoading implements _VinylRecordLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<VinylRecord> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -305,7 +301,7 @@ abstract class _$VinylRecordContentCopyWith<$Res> {
   factory _$VinylRecordContentCopyWith(
           _VinylRecordContent value, $Res Function(_VinylRecordContent) then) =
       __$VinylRecordContentCopyWithImpl<$Res>;
-  $Res call({Stream<QuerySnapshot<Map<String, dynamic>>> name});
+  $Res call({List<VinylRecord> list});
 }
 
 /// @nodoc
@@ -321,13 +317,13 @@ class __$VinylRecordContentCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? list = freezed,
   }) {
     return _then(_VinylRecordContent(
-      name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Stream<QuerySnapshot<Map<String, dynamic>>>,
+      list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<VinylRecord>,
     ));
   }
 }
@@ -335,27 +331,27 @@ class __$VinylRecordContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_VinylRecordContent implements _VinylRecordContent {
-  _$_VinylRecordContent(this.name);
+  _$_VinylRecordContent(this.list);
 
   @override
-  final Stream<QuerySnapshot<Map<String, dynamic>>> name;
+  final List<VinylRecord> list;
 
   @override
   String toString() {
-    return 'VinylRecordState.content(name: $name)';
+    return 'VinylRecordState.content(list: $list)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _VinylRecordContent &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+            (identical(other.list, list) ||
+                const DeepCollectionEquality().equals(other.list, list)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(list);
 
   @JsonKey(ignore: true)
   @override
@@ -367,12 +363,11 @@ class _$_VinylRecordContent implements _VinylRecordContent {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<VinylRecord> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
-    return content(name);
+    return content(list);
   }
 
   @override
@@ -380,13 +375,13 @@ class _$_VinylRecordContent implements _VinylRecordContent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<VinylRecord> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (content != null) {
-      return content(name);
+      return content(list);
     }
     return orElse();
   }
@@ -421,11 +416,9 @@ class _$_VinylRecordContent implements _VinylRecordContent {
 }
 
 abstract class _VinylRecordContent implements VinylRecordState {
-  factory _VinylRecordContent(
-      Stream<QuerySnapshot<Map<String, dynamic>>> name) = _$_VinylRecordContent;
+  factory _VinylRecordContent(List<VinylRecord> list) = _$_VinylRecordContent;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> get name =>
-      throw _privateConstructorUsedError;
+  List<VinylRecord> get list => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$VinylRecordContentCopyWith<_VinylRecordContent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -474,8 +467,7 @@ class _$_VinylRecordContentEmpty implements _VinylRecordContentEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<VinylRecord> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -487,7 +479,7 @@ class _$_VinylRecordContentEmpty implements _VinylRecordContentEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<VinylRecord> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -573,8 +565,7 @@ class _$_VinylRecordError implements _VinylRecordError {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<VinylRecord> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -586,7 +577,7 @@ class _$_VinylRecordError implements _VinylRecordError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<VinylRecord> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),

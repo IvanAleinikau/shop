@@ -17,11 +17,13 @@ class _$RegisterEventTearOff {
   const _$RegisterEventTearOff();
 
   RegisterUserEvent registerEvent(
-      String email, String password, String confirmPassword) {
+      {required String email,
+      required String password,
+      required String confirmPassword}) {
     return RegisterUserEvent(
-      email,
-      password,
-      confirmPassword,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
     );
   }
 }
@@ -134,15 +136,15 @@ class _$RegisterUserEventCopyWithImpl<$Res>
     Object? confirmPassword = freezed,
   }) {
     return _then(RegisterUserEvent(
-      email == freezed
+      email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password == freezed
+      password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      confirmPassword == freezed
+      confirmPassword: confirmPassword == freezed
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
               as String,
@@ -153,7 +155,10 @@ class _$RegisterUserEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RegisterUserEvent implements RegisterUserEvent {
-  _$RegisterUserEvent(this.email, this.password, this.confirmPassword);
+  _$RegisterUserEvent(
+      {required this.email,
+      required this.password,
+      required this.confirmPassword});
 
   @override
   final String email;
@@ -239,8 +244,9 @@ class _$RegisterUserEvent implements RegisterUserEvent {
 
 abstract class RegisterUserEvent implements RegisterEvent {
   factory RegisterUserEvent(
-          String email, String password, String confirmPassword) =
-      _$RegisterUserEvent;
+      {required String email,
+      required String password,
+      required String confirmPassword}) = _$RegisterUserEvent;
 
   @override
   String get email => throw _privateConstructorUsedError;

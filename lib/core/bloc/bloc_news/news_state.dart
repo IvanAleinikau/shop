@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shop/core/models/news_model.dart';
 
 part 'news_state.freezed.dart';
 
@@ -10,7 +10,7 @@ abstract class NewsState with _$NewsState{
 
   factory NewsState.loading() = _NewsLoading;
 
-  factory NewsState.content(Stream<QuerySnapshot<Map<String, dynamic>>> name) = _NewsContent;
+  factory NewsState.content(List<News> list) = _NewsContent;
 
   factory NewsState.contentEmpty() = _NewsContentEmpty;
 

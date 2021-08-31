@@ -85,12 +85,12 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
         ElevatedButton(
           onPressed: () {
             BlocProvider.of<VinylRecordBloc>(context).add(CreateVinylRecord(
-              _name.text.trim(),
-              _author.text.trim(),
-              _year.text.trim(),
-              _description.text.trim(),
-              _cost.text.trim(),
-              _image.text.trim(),));
+              name: _name.text.trim(),
+              author: _author.text.trim(),
+              year: _year.text.trim(),
+              description: _description.text.trim(),
+              cost: _cost.text.trim(),
+              image: _image.text.trim(),));
             _name.text = '';
             _author.text = '';
             _year.text = '';

@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shop/core/models/vinyl_record_model.dart';
 
 part 'vinyl_record_state.freezed.dart';
 
@@ -9,7 +9,7 @@ abstract class VinylRecordState with _$VinylRecordState{
 
   factory VinylRecordState.loading() = _VinylRecordLoading;
 
-  factory VinylRecordState.content(Stream<QuerySnapshot<Map<String, dynamic>>> name) = _VinylRecordContent;
+  factory VinylRecordState.content(List<VinylRecord> list) = _VinylRecordContent;
 
   factory VinylRecordState.contentEmpty() = _VinylRecordContentEmpty;
 

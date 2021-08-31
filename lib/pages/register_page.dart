@@ -80,9 +80,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () {
                         BlocProvider.of<RegisterBloc>(context)
                             .add(RegisterUserEvent(
-                          _email.text.trim(),
-                          _password.text.trim(),
-                          _confirmPassword.text.trim(),
+                          email : _email.text.trim(),
+                          password : _password.text.trim(),
+                          confirmPassword: _confirmPassword.text.trim(),
                         ));
                       },
                       child: Text(AppLocalization.of(context)!.singUp),

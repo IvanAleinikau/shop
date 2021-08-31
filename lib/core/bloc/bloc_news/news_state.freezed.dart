@@ -24,9 +24,9 @@ class _$NewsStateTearOff {
     return _NewsLoading();
   }
 
-  _NewsContent content(Stream<QuerySnapshot<Map<String, dynamic>>> name) {
+  _NewsContent content(List<News> list) {
     return _NewsContent(
-      name,
+      list,
     );
   }
 
@@ -48,8 +48,7 @@ mixin _$NewsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<News> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) =>
@@ -58,7 +57,7 @@ mixin _$NewsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<News> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -140,8 +139,7 @@ class _$_InitState implements _InitState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<News> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -153,7 +151,7 @@ class _$_InitState implements _InitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<News> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -238,8 +236,7 @@ class _$_NewsLoading implements _NewsLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<News> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -251,7 +248,7 @@ class _$_NewsLoading implements _NewsLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<News> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -300,7 +297,7 @@ abstract class _$NewsContentCopyWith<$Res> {
   factory _$NewsContentCopyWith(
           _NewsContent value, $Res Function(_NewsContent) then) =
       __$NewsContentCopyWithImpl<$Res>;
-  $Res call({Stream<QuerySnapshot<Map<String, dynamic>>> name});
+  $Res call({List<News> list});
 }
 
 /// @nodoc
@@ -315,13 +312,13 @@ class __$NewsContentCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
+    Object? list = freezed,
   }) {
     return _then(_NewsContent(
-      name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Stream<QuerySnapshot<Map<String, dynamic>>>,
+      list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<News>,
     ));
   }
 }
@@ -329,27 +326,27 @@ class __$NewsContentCopyWithImpl<$Res> extends _$NewsStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NewsContent implements _NewsContent {
-  _$_NewsContent(this.name);
+  _$_NewsContent(this.list);
 
   @override
-  final Stream<QuerySnapshot<Map<String, dynamic>>> name;
+  final List<News> list;
 
   @override
   String toString() {
-    return 'NewsState.content(name: $name)';
+    return 'NewsState.content(list: $list)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _NewsContent &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+            (identical(other.list, list) ||
+                const DeepCollectionEquality().equals(other.list, list)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(list);
 
   @JsonKey(ignore: true)
   @override
@@ -361,12 +358,11 @@ class _$_NewsContent implements _NewsContent {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<News> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
-    return content(name);
+    return content(list);
   }
 
   @override
@@ -374,13 +370,13 @@ class _$_NewsContent implements _NewsContent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<News> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (content != null) {
-      return content(name);
+      return content(list);
     }
     return orElse();
   }
@@ -415,11 +411,9 @@ class _$_NewsContent implements _NewsContent {
 }
 
 abstract class _NewsContent implements NewsState {
-  factory _NewsContent(Stream<QuerySnapshot<Map<String, dynamic>>> name) =
-      _$_NewsContent;
+  factory _NewsContent(List<News> list) = _$_NewsContent;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> get name =>
-      throw _privateConstructorUsedError;
+  List<News> get list => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$NewsContentCopyWith<_NewsContent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -467,8 +461,7 @@ class _$_NewsContentEmpty implements _NewsContentEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<News> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -480,7 +473,7 @@ class _$_NewsContentEmpty implements _NewsContentEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<News> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -564,8 +557,7 @@ class _$_NewsError implements _NewsError {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)
-        content,
+    required TResult Function(List<News> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -577,7 +569,7 @@ class _$_NewsError implements _NewsError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(Stream<QuerySnapshot<Map<String, dynamic>>> name)? content,
+    TResult Function(List<News> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),

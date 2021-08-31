@@ -24,11 +24,12 @@ class _$NewsEventTearOff {
     return NewsEmpty();
   }
 
-  CreateNewsEvent createNews(String title, String text, String url) {
+  CreateNewsEvent createNews(
+      {required String title, required String text, required String url}) {
     return CreateNewsEvent(
-      title,
-      text,
-      url,
+      title: title,
+      text: text,
+      url: url,
     );
   }
 }
@@ -286,15 +287,15 @@ class _$CreateNewsEventCopyWithImpl<$Res> extends _$NewsEventCopyWithImpl<$Res>
     Object? url = freezed,
   }) {
     return _then(CreateNewsEvent(
-      title == freezed
+      title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      text == freezed
+      text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
-      url == freezed
+      url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
@@ -305,7 +306,8 @@ class _$CreateNewsEventCopyWithImpl<$Res> extends _$NewsEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateNewsEvent implements CreateNewsEvent {
-  _$CreateNewsEvent(this.title, this.text, this.url);
+  _$CreateNewsEvent(
+      {required this.title, required this.text, required this.url});
 
   @override
   final String title;
@@ -393,8 +395,10 @@ class _$CreateNewsEvent implements CreateNewsEvent {
 }
 
 abstract class CreateNewsEvent implements NewsEvent {
-  factory CreateNewsEvent(String title, String text, String url) =
-      _$CreateNewsEvent;
+  factory CreateNewsEvent(
+      {required String title,
+      required String text,
+      required String url}) = _$CreateNewsEvent;
 
   String get title => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;

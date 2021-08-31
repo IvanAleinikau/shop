@@ -9,5 +9,5 @@ abstract class NewsEvent with _$NewsEvent{
 
   factory NewsEvent.empty() = NewsEmpty;
 
-  factory NewsEvent.createNews(String title, String text,String url) = CreateNewsEvent;
+  factory NewsEvent.createNews({required String title,required String text, required String url}) = CreateNewsEvent;
 }

@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
 import 'package:shop/core/bloc/bloc_news/news_event.dart';
 import 'package:shop/core/bloc/bloc_news/news_state.dart';
@@ -23,7 +23,6 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewsBloc, NewsState>(
       builder: (context, state) {
-        BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -49,124 +48,103 @@ class _NewsPageState extends State<NewsPage> {
                       child: CircularProgressIndicator(),
                   );
                 },
-                content: (name) {
-                  return StreamBuilder(
-                    stream: name,
-                    builder: (context,
-                        AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                      if (streamSnapshot.hasData) {
-                        return Scrollbar(
-                            controller: _scrollController,
-                            child: ListView.builder(
-                                itemCount: streamSnapshot.data!.docs.length,
-                                itemBuilder: (ctx, index) {
-                                  if(streamSnapshot.data!.docs.isEmpty){
-                                    BlocProvider.of<NewsBloc>(context).add(NewsEmpty());
-                                  }
-                                  return Card(
-                                    color: Colors.transparent,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5.0),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Expanded(
-                                              flex: 2,
-                                              child: Container(
-                                                height: 100,
-                                                child: Image.network(
-                                                    streamSnapshot.data!
-                                                        .docs[index]['url']),
-                                              )),
-                                          Expanded(
-                                              flex: 3,
-                                              child: Padding(
-                                                padding:
-                                                const EdgeInsets.fromLTRB(
-                                                    5.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  children: [
-                                                    Text(
-                                                      streamSnapshot.data!
-                                                          .docs[index]
-                                                      ['title'],
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                        FontWeight.w500,
-                                                        fontSize: 25.0,
-                                                      ),
-                                                    ),
-                                                    const Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                            vertical:
-                                                            2.0)),
-                                                    Text(
-                                                      streamSnapshot.data!
-                                                          .docs[index]
-                                                      ['date'],
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                        FontWeight.w300,
-                                                        fontSize: 17.0,
-                                                      ),
-                                                    ),
-                                                    const Padding(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                            vertical:
-                                                            2.0)),
-                                                    Text(
-                                                      streamSnapshot.data!
-                                                          .docs[index]
-                                                      ['text'],
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                        FontWeight.w300,
-                                                        fontSize: 17.0,
-                                                      ),
-                                                    ),
-                                                  ],
+                content: (list) {
+                  return Scrollbar(
+                      controller: _scrollController,
+                      child: ListView.builder(
+                          itemCount: list.length,
+                          itemBuilder: (ctx, index) {
+                            if(list.isEmpty){
+                              BlocProvider.of<NewsBloc>(context).add(NewsEmpty());
+                            }
+                            return Card(
+                              color: Colors.transparent,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 5.0),
+                                child: Row(
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          height: 100,
+                                          child: Image.network(
+                                              list[index].url),
+                                        )),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.fromLTRB(
+                                              5.0, 0.0, 0.0, 0.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment
+                                                .start,
+                                            children: [
+                                              Text(
+                                                list[index].title,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  fontSize: 25.0,
                                                 ),
-                                              )),
-                                          IconButton(
-                                              onPressed: () {
-                                                BlocProvider.of<
-                                                    SavedNewsBloc>(
-                                                    context)
-                                                    .add(CreateSavedNewsEvent(
-                                                  streamSnapshot.data!
-                                                      .docs[index]['title'],
-                                                  streamSnapshot.data!
-                                                      .docs[index]['text'],
-                                                  streamSnapshot.data!
-                                                      .docs[index]['date'],
-                                                ));
-                                                BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
-                                              },
-                                              icon: const Icon(
-                                                Icons.save,
-                                                color: Colors.grey,
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }));
-                      } else {
-                        return const Center(
-                            child: CircularProgressIndicator());
-                      }
-                    },
-                  );
+                                              ),
+                                              const Padding(
+                                                  padding: EdgeInsets
+                                                      .symmetric(
+                                                      vertical:
+                                                      2.0)),
+                                              Text(
+                                                DateFormat.yMMMd().format(list[index].date),
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                  FontWeight.w300,
+                                                  fontSize: 17.0,
+                                                ),
+                                              ),
+                                              const Padding(
+                                                  padding: EdgeInsets
+                                                      .symmetric(
+                                                      vertical:
+                                                      2.0)),
+                                              Text(
+                                                list[index].text,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                  FontWeight.w300,
+                                                  fontSize: 17.0,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                    IconButton(
+                                        onPressed: () {
+                                          BlocProvider.of<
+                                              SavedNewsBloc>(
+                                              context)
+                                              .add(CreateSavedNewsEvent(
+                                            list[index].title,
+                                            list[index].text,
+                                              DateFormat.yMMMd().format(list[index].date,)
+                                          ));
+                                          BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+                                        },
+                                        icon: const Icon(
+                                          Icons.save,
+                                          color: Colors.grey,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }));
                 },
                 contentEmpty: () {
                   return Center(

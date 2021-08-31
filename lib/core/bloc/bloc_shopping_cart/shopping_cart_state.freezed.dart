@@ -24,11 +24,9 @@ class _$ShoppingCartStateTearOff {
     return _ShoppingCartLoading();
   }
 
-  _ShoppingCartContent content(
-      Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user) {
+  _ShoppingCartContent content(List<Purchase> list) {
     return _ShoppingCartContent(
-      name,
-      user,
+      list,
     );
   }
 
@@ -50,9 +48,7 @@ mixin _$ShoppingCartState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)
-        content,
+    required TResult Function(List<Purchase> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) =>
@@ -61,9 +57,7 @@ mixin _$ShoppingCartState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)?
-        content,
+    TResult Function(List<Purchase> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -148,9 +142,7 @@ class _$_InitState implements _InitState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)
-        content,
+    required TResult Function(List<Purchase> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -162,9 +154,7 @@ class _$_InitState implements _InitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)?
-        content,
+    TResult Function(List<Purchase> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -250,9 +240,7 @@ class _$_ShoppingCartLoading implements _ShoppingCartLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)
-        content,
+    required TResult Function(List<Purchase> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -264,9 +252,7 @@ class _$_ShoppingCartLoading implements _ShoppingCartLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)?
-        content,
+    TResult Function(List<Purchase> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -315,7 +301,7 @@ abstract class _$ShoppingCartContentCopyWith<$Res> {
   factory _$ShoppingCartContentCopyWith(_ShoppingCartContent value,
           $Res Function(_ShoppingCartContent) then) =
       __$ShoppingCartContentCopyWithImpl<$Res>;
-  $Res call({Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user});
+  $Res call({List<Purchase> list});
 }
 
 /// @nodoc
@@ -331,15 +317,13 @@ class __$ShoppingCartContentCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? name = freezed,
-    Object? user = freezed,
+    Object? list = freezed,
   }) {
     return _then(_ShoppingCartContent(
-      name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as Stream<QuerySnapshot<Map<String, dynamic>>>,
-      user == freezed ? _value.user : user,
+      list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as List<Purchase>,
     ));
   }
 }
@@ -347,33 +331,27 @@ class __$ShoppingCartContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ShoppingCartContent implements _ShoppingCartContent {
-  _$_ShoppingCartContent(this.name, this.user);
+  _$_ShoppingCartContent(this.list);
 
   @override
-  final Stream<QuerySnapshot<Map<String, dynamic>>> name;
-  @override
-  final dynamic user;
+  final List<Purchase> list;
 
   @override
   String toString() {
-    return 'ShoppingCartState.content(name: $name, user: $user)';
+    return 'ShoppingCartState.content(list: $list)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ShoppingCartContent &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.user, user) ||
-                const DeepCollectionEquality().equals(other.user, user)));
+            (identical(other.list, list) ||
+                const DeepCollectionEquality().equals(other.list, list)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(user);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(list);
 
   @JsonKey(ignore: true)
   @override
@@ -386,13 +364,11 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)
-        content,
+    required TResult Function(List<Purchase> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
-    return content(name, user);
+    return content(list);
   }
 
   @override
@@ -400,15 +376,13 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)?
-        content,
+    TResult Function(List<Purchase> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (content != null) {
-      return content(name, user);
+      return content(list);
     }
     return orElse();
   }
@@ -443,13 +417,9 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
 }
 
 abstract class _ShoppingCartContent implements ShoppingCartState {
-  factory _ShoppingCartContent(
-          Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user) =
-      _$_ShoppingCartContent;
+  factory _ShoppingCartContent(List<Purchase> list) = _$_ShoppingCartContent;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> get name =>
-      throw _privateConstructorUsedError;
-  dynamic get user => throw _privateConstructorUsedError;
+  List<Purchase> get list => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ShoppingCartContentCopyWith<_ShoppingCartContent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -497,9 +467,7 @@ class _$_ShoppingCartEmpty implements _ShoppingCartEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)
-        content,
+    required TResult Function(List<Purchase> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -511,9 +479,7 @@ class _$_ShoppingCartEmpty implements _ShoppingCartEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)?
-        content,
+    TResult Function(List<Purchase> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -599,9 +565,7 @@ class _$_ShoppingCartError implements _ShoppingCartError {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)
-        content,
+    required TResult Function(List<Purchase> list) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -613,9 +577,7 @@ class _$_ShoppingCartError implements _ShoppingCartError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(
-            Stream<QuerySnapshot<Map<String, dynamic>>> name, dynamic user)?
-        content,
+    TResult Function(List<Purchase> list)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),

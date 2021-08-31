@@ -54,9 +54,9 @@ class MakeNewsForm extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             BlocProvider.of<NewsBloc>(context).add(CreateNewsEvent(
-               _title.text.trim(),
-               _text.text.trim(),
-               _url.text.trim(),
+               title: _title.text.trim(),
+               text: _text.text.trim(),
+               url: _url.text.trim(),
             ));
             _title.text = '';
             _text.text = '';

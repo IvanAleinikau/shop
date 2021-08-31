@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shop/core/models/purchase_model.dart';
 
 part 'shopping_cart_state.freezed.dart';
 
@@ -10,7 +10,7 @@ abstract class ShoppingCartState with _$ShoppingCartState{
 
   factory ShoppingCartState.loading() = _ShoppingCartLoading;
 
-  factory ShoppingCartState.content(Stream<QuerySnapshot<Map<String, dynamic>>> name , user) = _ShoppingCartContent;
+  factory ShoppingCartState.content(List<Purchase> list) = _ShoppingCartContent;
 
   factory ShoppingCartState.contentEmpty() = _ShoppingCartEmpty;
 

@@ -12,5 +12,4 @@ class QuestionAnswer with _$QuestionAnswer {
   }) = _QuestionAnswer;
 
   factory QuestionAnswer.fromJson(Map<String, dynamic> json) => _$QuestionAnswerFromJson(json);
-
 }

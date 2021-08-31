@@ -10,17 +10,23 @@ import 'package:shop/data/repositories/auth_repository.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   AuthRepository repository = AuthRepository();
   final SplashBloc splashBloc;
-  
+
   RegisterBloc(this.splashBloc) : super(RegisterState.initRegisterState());
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
-    if(event is RegisterUserEvent){
-      repository.createAccount(email: event.email, password: event.password).then((value) => {
-        if(value=='Account created'){
-          splashBloc.add(CheckCurrentUser())
-        }
-      });
-    }
+    yield* event.map(
+      registerEvent: _registerEvent,
+    );
+  }
+
+  Stream<RegisterState> _registerEvent(RegisterUserEvent event) async* {
+    await repository
+        .createAccount(email: event.email, password: event.password)
+        .then(
+          (value) => {
+            if (value == 'Account created') {splashBloc.add(CheckCurrentUser())}
+          },
+        );
   }
 }

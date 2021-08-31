@@ -23,7 +23,7 @@ class AuthRepository  {
   }
 
 
-  Future<String> signIN({required String email, required String password}) async {
+  Future<String> signIn({required String email, required String password}) async {
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
       return 'Welcome';

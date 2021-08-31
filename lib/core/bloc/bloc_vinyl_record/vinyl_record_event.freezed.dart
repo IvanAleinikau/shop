@@ -24,15 +24,20 @@ class _$VinylRecordEventTearOff {
     return VinylRecordEmpty();
   }
 
-  CreateVinylRecord createVinylRecord(String name, String author, String year,
-      String description, String cost, String image) {
+  CreateVinylRecord createVinylRecord(
+      {required String name,
+      required String author,
+      required String year,
+      required String description,
+      required String cost,
+      required String image}) {
     return CreateVinylRecord(
-      name,
-      author,
-      year,
-      description,
-      cost,
-      image,
+      name: name,
+      author: author,
+      year: year,
+      description: description,
+      cost: cost,
+      image: image,
     );
   }
 
@@ -336,27 +341,27 @@ class _$CreateVinylRecordCopyWithImpl<$Res>
     Object? image = freezed,
   }) {
     return _then(CreateVinylRecord(
-      name == freezed
+      name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      author == freezed
+      author: author == freezed
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String,
-      year == freezed
+      year: year == freezed
           ? _value.year
           : year // ignore: cast_nullable_to_non_nullable
               as String,
-      description == freezed
+      description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      cost == freezed
+      cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
               as String,
-      image == freezed
+      image: image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
@@ -367,8 +372,13 @@ class _$CreateVinylRecordCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateVinylRecord implements CreateVinylRecord {
-  _$CreateVinylRecord(this.name, this.author, this.year, this.description,
-      this.cost, this.image);
+  _$CreateVinylRecord(
+      {required this.name,
+      required this.author,
+      required this.year,
+      required this.description,
+      required this.cost,
+      required this.image});
 
   @override
   final String name;
@@ -480,8 +490,13 @@ class _$CreateVinylRecord implements CreateVinylRecord {
 }
 
 abstract class CreateVinylRecord implements VinylRecordEvent {
-  factory CreateVinylRecord(String name, String author, String year,
-      String description, String cost, String image) = _$CreateVinylRecord;
+  factory CreateVinylRecord(
+      {required String name,
+      required String author,
+      required String year,
+      required String description,
+      required String cost,
+      required String image}) = _$CreateVinylRecord;
 
   String get name => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
