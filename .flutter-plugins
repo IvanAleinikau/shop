@@ -1,20 +1,20 @@
 # This is a generated file; do not edit or check into version control.
-cloud_firestore=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-2.5.0/
-cloud_firestore_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-2.4.0/
+cloud_firestore=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-2.5.1/
+cloud_firestore_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-2.4.1/
 firebase_auth=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-1.4.1/
 firebase_auth_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-1.3.1/
-firebase_core=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.5.0/
+firebase_core=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.6.0/
 firebase_core_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.1.0/
 flutter_plugin_android_lifecycle=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.2/
-geolocator=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-7.4.0/
+geolocator=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator-7.6.0/
 geolocator_android=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-1.0.0/
-geolocator_apple=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.0.0/
+geolocator_apple=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_apple-1.2.0/
 geolocator_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_web-2.0.6/
 google_maps_flutter=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.0.6/
 path_provider=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.2/
 path_provider_linux=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.0.2/
 path_provider_macos=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2/
 path_provider_windows=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.3/
-sqflite=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3/
+sqflite=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+4/
 video_player=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/video_player-2.1.14/
-video_player_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/video_player_web-2.0.2/
+video_player_web=/home/aleinikau/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/video_player_web-2.0.3/

@@ -11,29 +11,54 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
   LocalDatabaseRepository database = LocalDatabaseRepository();
   late List<SavedNews> allSavedNews;
-  final List<SavedNews> currentUserSavedNews = [];
+  late List<SavedNews> currentUserSavedNews;
 
-  SavedNewsBloc() : super(SavedNewsInitState());
+  SavedNewsBloc() : super(SavedNewsState.initState());
 
   @override
   Stream<SavedNewsState> mapEventToState(SavedNewsEvent event) async* {
-    if (event is LoadSavedNews) {
+    yield* event.map(
+      fetchSavedNews: _fetchSavedNews,
+      createSavedNews: _createSavedNews,
+      deleteSavedNews: _deleteSavedNews,
+    );
+  }
+
+  Stream<SavedNewsState> _fetchSavedNews(FetchSavedNewsEvent event) async* {
+    yield SavedNewsState.loading();
+    try {
+      allSavedNews = [];
+      currentUserSavedNews = [];
       allSavedNews = await database.retrieveSavedNews();
       if (allSavedNews.isNotEmpty) {
-        yield SavedNewsLoaded();
+        for (int i = 0; i < allSavedNews.length; i++) {
+          if (allSavedNews[i].user == user.toString()) {
+            currentUserSavedNews.add(allSavedNews[i]);
+          }
+        }
+        yield SavedNewsState.content(currentUserSavedNews);
       } else {
-        yield EmptySavedNews();
+        yield SavedNewsState.contentEmpty();
       }
-    } else if (event is CircleEvent) {
-      yield CircleState();
-    } else if (event is DeleteSavedNews) {
-      await database.deleteSavedNews(event.index!.toInt());
-      allSavedNews = [];
-      allSavedNews = await database.retrieveSavedNews();
-      yield SavedNewsLoaded();
-    } else if(event is CreateSavedNews){
-      database.insertSavedNews(SavedNews(user: user.toString(), title: event.title, text: event.text, date: event.date));
-      yield SavedNewsLoaded();
+    } catch (_) {
+      yield SavedNewsState.error();
     }
+  }
+
+  Stream<SavedNewsState> _createSavedNews(CreateSavedNewsEvent event) async* {
+    await database.insertSavedNews(
+      SavedNews(
+        user: user.toString(),
+        title: event.title,
+        text: event.text,
+        date: event.date,
+      ),
+    );
+    yield SavedNewsState.loading();
+  }
+
+  Stream<SavedNewsState> _deleteSavedNews(DeleteSavedNewsEvent event) async* {
+    await database.deleteSavedNews(event.index);
+    yield SavedNewsState.loading();
   }
 }

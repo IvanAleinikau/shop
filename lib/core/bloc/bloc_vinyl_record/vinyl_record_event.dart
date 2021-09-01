@@ -1,27 +1,21 @@
-abstract class VinylRecordEvent {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoadVinylRecord extends VinylRecordEvent {}
+part 'vinyl_record_event.freezed.dart';
 
-class CreateVinylRecord extends VinylRecordEvent {
-  final String name;
-  final String author;
-  final String year;
-  final String description;
-  final String cost;
-  final String image;
+@freezed
+abstract class VinylRecordEvent with _$VinylRecordEvent {
+  factory VinylRecordEvent.fetchNews() = FetchVinylRecord;
 
-  CreateVinylRecord({
-    required this.name,
-    required this.author,
-    required this.year,
-    required this.description,
-    required this.cost,
-    required this.image,
-  });
-}
+  factory VinylRecordEvent.empty() = VinylRecordEmpty;
 
-class AddName extends VinylRecordEvent{
-  final String name;
+  factory VinylRecordEvent.createVinylRecord({
+    required String name,
+    required String author,
+    required String year,
+    required String description,
+    required String cost,
+    required String image,
+  }) = CreateVinylRecord;
 
-  AddName(this.name);
+  factory VinylRecordEvent.nameToList(String name) = NameToList;
 }

@@ -1,11 +1,16 @@
-abstract class NewsEvent{}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoadNews extends NewsEvent{}
+part 'news_event.freezed.dart';
 
-class CreateNews extends NewsEvent{
-  final String title;
-  final String text;
-  final String url;
+@freezed
+abstract class NewsEvent with _$NewsEvent {
+  factory NewsEvent.fetchNews() = FetchNewsEvent;
 
-  CreateNews({required this.title,required this.text,required this.url});
+  factory NewsEvent.empty() = NewsEmpty;
+
+  factory NewsEvent.createNews({
+    required String title,
+    required String text,
+    required String url,
+  }) = CreateNewsEvent;
 }

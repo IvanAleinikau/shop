@@ -1,21 +1,16 @@
-abstract class SavedNewsEvent {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoadSavedNews extends SavedNewsEvent {}
+part 'saved_news_event.freezed.dart';
 
-class DeleteSavedNews extends SavedNewsEvent {
-  final int? index;
+@freezed
+abstract class SavedNewsEvent with _$SavedNewsEvent {
+  factory SavedNewsEvent.fetchSavedNews() = FetchSavedNewsEvent;
 
-  DeleteSavedNews({
-    required this.index,
-  });
-}
+  factory SavedNewsEvent.createSavedNews(
+    String title,
+    String text,
+    String date,
+  ) = CreateSavedNewsEvent;
 
-class CircleEvent extends SavedNewsEvent {}
-
-class CreateSavedNews extends SavedNewsEvent{
-  final String title;
-  final String text;
-  final String date;
-
-  CreateSavedNews({required this.title,required this.text,required this.date});
+  factory SavedNewsEvent.deleteSavedNews(int index) = DeleteSavedNewsEvent;
 }

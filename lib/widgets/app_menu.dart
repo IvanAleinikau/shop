@@ -3,10 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
-import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
-import 'package:shop/core/bloc/bloc_news/news_event.dart';
-import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
-import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/pages/fqa_page.dart';
 import 'package:shop/pages/news_page.dart';
@@ -30,7 +26,9 @@ class _MenuState extends State<Menu> {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('asset/image/image2.jpg'), fit: BoxFit.cover),
+            image: AssetImage('asset/image/image2.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
         child: ListView(
           children: <Widget>[
@@ -39,7 +37,9 @@ class _MenuState extends State<Menu> {
                 decoration: const BoxDecoration(
                   color: Colors.transparent,
                 ),
-                accountName: Text(AppLocalization.of(context)!.email),
+                accountName: Text(
+                  AppLocalization.of(context)!.email,
+                ),
                 accountEmail: Text(user!),
                 currentAccountPicture: const Icon(
                   Icons.account_circle_sharp,
@@ -47,7 +47,9 @@ class _MenuState extends State<Menu> {
                   size: 70,
                 ),
               ),
-              decoration: const BoxDecoration(color: Colors.transparent),
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
             ),
             const Divider(
               height: 10.0,
@@ -57,17 +59,21 @@ class _MenuState extends State<Menu> {
               title: Text(
                 AppLocalization.of(context)!.home,
                 style: const TextStyle(
-                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+                  color: Colors.white,
+                  fontFamily: 'Oxygen',
+                  fontSize: 17,
+                ),
               ),
               leading: const Icon(
                 Icons.home,
                 color: Colors.white,
               ),
               onTap: () {
-                BlocProvider.of<NewsBloc>(context).add(LoadNews());
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NewsPage()),
+                  MaterialPageRoute(
+                    builder: (context) => NewsPage(),
+                  ),
                 );
               },
             ),
@@ -75,17 +81,21 @@ class _MenuState extends State<Menu> {
               title: Text(
                 AppLocalization.of(context)!.shop,
                 style: const TextStyle(
-                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+                  color: Colors.white,
+                  fontFamily: 'Oxygen',
+                  fontSize: 17,
+                ),
               ),
               leading: const Icon(
                 Icons.shopping_bag,
                 color: Colors.white,
               ),
               onTap: () {
-                BlocProvider.of<VinylRecordBloc>(context).add(LoadVinylRecord());
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShopPage()),
+                  MaterialPageRoute(
+                    builder: (context) => ShopPage(),
+                  ),
                 );
               },
             ),
@@ -93,7 +103,10 @@ class _MenuState extends State<Menu> {
               title: Text(
                 AppLocalization.of(context)!.savedNews,
                 style: const TextStyle(
-                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+                  color: Colors.white,
+                  fontFamily: 'Oxygen',
+                  fontSize: 17,
+                ),
               ),
               leading: const Icon(
                 Icons.announcement_sharp,
@@ -102,7 +115,9 @@ class _MenuState extends State<Menu> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SavedNewsPage()),
+                  MaterialPageRoute(
+                    builder: (context) => SavedNewsPage(),
+                  ),
                 );
               },
             ),
@@ -110,7 +125,10 @@ class _MenuState extends State<Menu> {
               title: Text(
                 AppLocalization.of(context)!.settings,
                 style: const TextStyle(
-                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+                  color: Colors.white,
+                  fontFamily: 'Oxygen',
+                  fontSize: 17,
+                ),
               ),
               leading: const Icon(
                 Icons.settings,
@@ -119,7 +137,9 @@ class _MenuState extends State<Menu> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
                 );
               },
             ),
@@ -131,7 +151,10 @@ class _MenuState extends State<Menu> {
               title: Text(
                 AppLocalization.of(context)!.faq,
                 style: const TextStyle(
-                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+                  color: Colors.white,
+                  fontFamily: 'Oxygen',
+                  fontSize: 17,
+                ),
               ),
               leading: const Icon(
                 Icons.question_answer,
@@ -140,7 +163,9 @@ class _MenuState extends State<Menu> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FQAPage()),
+                  MaterialPageRoute(
+                    builder: (context) => FQAPage(),
+                  ),
                 );
               },
             ),
@@ -148,14 +173,17 @@ class _MenuState extends State<Menu> {
               title: Text(
                 AppLocalization.of(context)!.logout,
                 style: const TextStyle(
-                    color: Colors.white, fontFamily: 'Oxygen', fontSize: 17),
+                  color: Colors.white,
+                  fontFamily: 'Oxygen',
+                  fontSize: 17,
+                ),
               ),
               leading: const Icon(
                 Icons.logout,
                 color: Colors.white,
               ),
               onTap: () {
-                BlocProvider.of<AuthBloc>(context).add(UnloadUser());
+                BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
               },
             ),
           ],

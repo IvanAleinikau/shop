@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:shop/core/models/qa_model.dart';
+import 'package:shop/core/models/question_answer_model.dart';
 import 'package:shop/core/models/saved_news_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -26,15 +26,14 @@ class LocalDatabaseRepository {
   Future<int> insertQuestionAnswer(QuestionAnswer qa) async {
     int result = 0;
     final Database db = await initializeDB();
-    result = await db.insert('question_answer', qa.toMap());
+    result = await db.insert('question_answer', qa.toJson());
     return result;
   }
 
   Future<List<QuestionAnswer>> retrieveQuestionAnswer() async {
     final Database db = await initializeDB();
-    final List<Map<String, Object?>> queryResult =
-        await db.query('question_answer');
-    return queryResult.map((e) => QuestionAnswer.fromMap(e)).toList();
+    final List<Map<String, Object?>> queryResult = await db.query('question_answer');
+    return queryResult.map((e) => QuestionAnswer.fromJson(e)).toList();
   }
 
   Future<void> deleteQuestionAnswer(int id) async {
@@ -50,15 +49,14 @@ class LocalDatabaseRepository {
   Future<int> insertSavedNews(SavedNews savedNews) async {
     int result = 0;
     final Database db = await initializeDB();
-    result = await db.insert('news', savedNews.toMap());
+    result = await db.insert('news', savedNews.toJson());
     return result;
   }
 
-  Future <List<SavedNews>> retrieveSavedNews() async {
+  Future<List<SavedNews>> retrieveSavedNews() async {
     final Database db = await initializeDB();
-    final List<Map<String, Object?>> queryResult =
-    await db.query('news');
-    return queryResult.map((e) => SavedNews.fromMap(e)).toList();
+    final List<Map<String, Object?>> queryResult = await db.query('news');
+    return queryResult.map((e) => SavedNews.fromJson(e)).toList();
   }
 
   Future<void> deleteSavedNews(int id) async {

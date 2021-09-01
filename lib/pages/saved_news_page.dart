@@ -14,84 +14,112 @@ class SavedNewsPage extends StatefulWidget {
 class _SavedNewsPageState extends State<SavedNewsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          AppLocalization.of(context)!.savedNews,
-          style: const TextStyle(fontFamily: 'Oxygen'),
-        ),
-        backgroundColor: Colors.black54,
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
-        ),
-        child: BlocBuilder<SavedNewsBloc, SavedNewsState>(
-          builder: (context, state) {
-            final SavedNewsBloc _bloc = BlocProvider.of<SavedNewsBloc>(context);
-            _bloc.add(LoadSavedNews());
-            if (state is SavedNewsLoaded) {
-              return ListView.builder(
-                itemCount: _bloc.allSavedNews.length,
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    direction: DismissDirection.endToStart,
-                    background: Container(
-                      color: Colors.red,
-                      alignment: Alignment.centerRight,
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: const Icon(Icons.delete_forever),
-                    ),
-                    key: ValueKey<int>(_bloc.allSavedNews[index].id!.toInt()),
-                    onDismissed: (direction) {
-                      _bloc.add(CircleEvent());
-                      _bloc.add(
-                          DeleteSavedNews(index: _bloc.allSavedNews[index].id));
-                    },
-                    child: Column(
-                      children: [
-                        Card(
-                          color: Colors.transparent,
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.all(8.0),
-                            title: Text(
-                              _bloc.allSavedNews[index].title +
-                                  ' - ' +
-                                  _bloc.allSavedNews[index].date,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            subtitle: Text(
-                              _bloc.allSavedNews[index].text,
-                              style: const TextStyle(color: Colors.white),
-                            ),
+    return BlocBuilder<SavedNewsBloc, SavedNewsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              AppLocalization.of(context)!.savedNews,
+              style: const TextStyle(
+                fontFamily: 'Oxygen',
+              ),
+            ),
+            backgroundColor: Colors.black54,
+          ),
+          body: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('asset/image/image.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: state.when(
+              initState: () {
+                BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+              },
+              loading: () {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+              content: (list) {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+                  },
+                  child: ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: Colors.red,
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                          ),
+                          child: const Icon(
+                            Icons.delete_forever,
                           ),
                         ),
-                      ],
+                        key: ValueKey<int>(list[index].id!.toInt()),
+                        onDismissed: (direction) {
+                          BlocProvider.of<SavedNewsBloc>(context).add(DeleteSavedNewsEvent(list[index].id!.toInt()));
+                          BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+                        },
+                        child: Column(
+                          children: [
+                            Card(
+                              color: Colors.transparent,
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.all(8.0),
+                                title: Text(
+                                  list[index].title + ' - ' + list[index].date,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  list[index].text,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+              contentEmpty: () {
+                return Center(
+                  child: Text(
+                    AppLocalization.of(context)!.notNews,
+                    style: const TextStyle(
+                      color: Colors.white,
                     ),
-                  );
-                },
-              );
-            } else if (state is EmptySavedNews) {
-              return Center(
-                child: Text(
-                  AppLocalization.of(context)!.notNews,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              );
-            }else if(state is CircleState){
-              return const Center(
-                child: CircularProgressIndicator(value: 200,),
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
-      ),
-      drawer: const Menu(),
+                  ),
+                );
+              },
+              error: () {
+                return const Center(
+                  child: Text(
+                    'Something wrong',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          drawer: const Menu(),
+        );
+      },
     );
   }
 }

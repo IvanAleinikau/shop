@@ -3,24 +3,27 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_register/register_event.dart';
 import 'package:shop/core/bloc/bloc_register/register_state.dart';
+import 'package:shop/core/bloc/bloc_splash/splash_bloc.dart';
+import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
 import 'package:shop/data/repositories/auth_repository.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RegisterBloc() : super(RegisterInitState());
+  AuthRepository repository = AuthRepository();
+  final SplashBloc splashBloc;
+
+  RegisterBloc(this.splashBloc) : super(RegisterState.initRegisterState());
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
-    if (event is RegisterUser) {
-      if (event.email.isNotEmpty &
-          (event.password.isNotEmpty == event.confirmPassword.isNotEmpty)) {
-        AuthRepository()
-            .createAccount(email: event.email, password: event.password);
-        yield UserCreated();
-      } else {
-        yield EmptyState();
-      }
-    } else {
-      yield EmptyState();
+    yield* event.map(
+      registerEvent: _registerEvent,
+    );
+  }
+
+  Stream<RegisterState> _registerEvent(RegisterUserEvent event) async* {
+    final account = await repository.createAccount(email: event.email, password: event.password);
+    if (account == 'Account created') {
+      splashBloc.add(CheckCurrentUser());
     }
   }
 }

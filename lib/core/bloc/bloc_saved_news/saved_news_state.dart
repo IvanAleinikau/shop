@@ -1,9 +1,17 @@
-abstract class SavedNewsState{}
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shop/core/models/saved_news_model.dart';
 
-class SavedNewsInitState extends SavedNewsState{}
+part 'saved_news_state.freezed.dart';
 
-class EmptySavedNews extends SavedNewsState{}
+@freezed
+abstract class SavedNewsState with _$SavedNewsState {
+  factory SavedNewsState.initState() = _InitSavedNewsState;
 
-class SavedNewsLoaded extends SavedNewsState{}
+  factory SavedNewsState.loading() = _SavedNewsLoading;
 
-class CircleState extends SavedNewsState{}
+  factory SavedNewsState.content(List<SavedNews> savedNews) = _SavedNewsContent;
+
+  factory SavedNewsState.contentEmpty() = _SavedNewsContentEmpty;
+
+  factory SavedNewsState.error() = _SavedNewsError;
+}

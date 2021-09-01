@@ -1,13 +1,13 @@
 import 'package:shop/core/models/vinyl_record_model.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Purchase {
-  final String user;
-  final bool isActive;
-  final VinylRecord vinylRecord;
+part 'purchase_model.freezed.dart';
 
-  Purchase(
-    this.user,
-    this.isActive,
-    this.vinylRecord,
-  );
+@freezed
+class Purchase with _$Purchase {
+  factory Purchase({
+    required String user,
+    required bool isActive,
+    required VinylRecord vinylRecord,}
+  ) = _Purchase;
 }

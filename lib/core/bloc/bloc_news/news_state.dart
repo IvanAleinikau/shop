@@ -1,11 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shop/core/models/news_model.dart';
 
-abstract class NewsState{}
+part 'news_state.freezed.dart';
 
-class NewsInitState extends NewsState{}
+@freezed
+abstract class NewsState with _$NewsState {
+  factory NewsState.initState() = _InitState;
 
-class NewsLoaded extends NewsState{
-  final newsRef = FirebaseFirestore.instance.collection('news').snapshots();
+  factory NewsState.loading() = _NewsLoading;
+
+  factory NewsState.content(List<News> list) = _NewsContent;
+
+  factory NewsState.contentEmpty() = _NewsContentEmpty;
+
+  factory NewsState.error() = _NewsError;
 }
-
-class EmptyNews extends NewsState{}

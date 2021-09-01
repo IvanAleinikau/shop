@@ -1,5 +1,12 @@
-abstract class SettingEvent{}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class LoadEng extends SettingEvent{}
+part 'settings_event.freezed.dart';
 
-class LoadRus extends SettingEvent{}
+@freezed
+abstract class SettingEvent with _$SettingEvent {
+  factory SettingEvent.resetPage() = ResetPage;
+
+  factory SettingEvent.loadEng() = LoadEng;
+
+  factory SettingEvent.loadRus() = LoadRus;
+}

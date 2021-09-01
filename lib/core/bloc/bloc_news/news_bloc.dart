@@ -8,17 +8,33 @@ import 'package:shop/data/repositories/news_repository.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   NewsRepository repository = NewsRepository();
-  NewsBloc() : super(NewsInitState());
+  late List<News> list;
+
+  NewsBloc() : super(NewsState.initState());
 
   @override
   Stream<NewsState> mapEventToState(NewsEvent event) async* {
-    if (event is LoadNews) {
-      yield NewsLoaded();
-    } else if (event is CreateNews) {
-      repository.makeNews(News(title: event.title, text: event.text, url: event.url, date: DateTime.now()));
-      yield NewsLoaded();
-    } else {
-      yield EmptyNews();
+    yield* event.map(
+      fetchNews: _fetchNews,
+      empty: _empty,
+      createNews: _createNews,
+    );
+  }
+
+  Stream<NewsState> _fetchNews(FetchNewsEvent event) async* {
+    try {
+      list = await repository.fetchNews();
+      yield NewsState.content(list);
+    } catch (_) {
+      yield NewsState.error();
     }
+  }
+
+  Stream<NewsState> _empty(NewsEmpty event) async* {
+    yield NewsState.contentEmpty();
+  }
+
+  Stream<NewsState> _createNews(CreateNewsEvent event) async* {
+    repository.makeNews(News(title: event.title, text: event.title, url: event.url, date: DateTime.now()));
   }
 }

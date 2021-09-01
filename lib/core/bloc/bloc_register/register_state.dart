@@ -1,7 +1,8 @@
-abstract class RegisterState{}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class RegisterInitState extends RegisterState{}
+part 'register_state.freezed.dart';
 
-class UserCreated extends RegisterState{}
-
-class EmptyState extends RegisterState{}
+@freezed
+abstract class RegisterState with _$RegisterState {
+  factory RegisterState.initRegisterState() = _InitRegisterState;
+}

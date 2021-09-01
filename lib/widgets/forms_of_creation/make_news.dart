@@ -48,21 +48,30 @@ class MakeNewsForm extends StatelessWidget {
           },
           child: Text(AppLocalization.of(context)!.cancel),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red),
+            backgroundColor: MaterialStateProperty.all(
+              Colors.red,
+            ),
           ),
         ),
         ElevatedButton(
           onPressed: () {
-            BlocProvider.of<NewsBloc>(context).add(CreateNews(
-              title: _title.text.trim(),
-              text: _text.text.trim(),
-              url: _url.text.trim(),
-            ));
+            BlocProvider.of<NewsBloc>(context).add(
+              CreateNewsEvent(
+                title: _title.text.trim(),
+                text: _text.text.trim(),
+                url: _url.text.trim(),
+              ),
+            );
+            _title.text = '';
+            _text.text = '';
+            _url.text = '';
             Navigator.of(context).pop();
           },
           child: Text(AppLocalization.of(context)!.add),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            backgroundColor: MaterialStateProperty.all(
+              Colors.blue,
+            ),
           ),
         ),
       ],
