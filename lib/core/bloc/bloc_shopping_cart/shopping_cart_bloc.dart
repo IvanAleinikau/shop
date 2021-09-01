@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
@@ -28,8 +27,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     );
   }
 
-  Stream<ShoppingCartState> _fetchShoppingCart(
-      FetchShoppingCartEvent event) async* {
+  Stream<ShoppingCartState> _fetchShoppingCart(FetchShoppingCartEvent event) async* {
     allPurchase = [];
     currentUserPurchase = [];
     allPurchase = await repository.fetchPurchase();
@@ -49,8 +47,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     yield ShoppingCartState.contentEmpty();
   }
 
-  Stream<ShoppingCartState> _createShoppingCart(
-      CreateShoppingCart event) async* {
+  Stream<ShoppingCartState> _createShoppingCart(CreateShoppingCart event) async* {
     vinylRecord = VinylRecord(
       name: event.name,
       author: event.author,
@@ -64,6 +61,6 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
       isActive: true,
       vinylRecord: vinylRecord,
     );
-    PurchaseRepository().makePurchase(purchase);
+    repository.makePurchase(purchase);
   }
 }

@@ -32,8 +32,7 @@ class LocalDatabaseRepository {
 
   Future<List<QuestionAnswer>> retrieveQuestionAnswer() async {
     final Database db = await initializeDB();
-    final List<Map<String, Object?>> queryResult =
-        await db.query('question_answer');
+    final List<Map<String, Object?>> queryResult = await db.query('question_answer');
     return queryResult.map((e) => QuestionAnswer.fromJson(e)).toList();
   }
 
@@ -54,10 +53,9 @@ class LocalDatabaseRepository {
     return result;
   }
 
-  Future <List<SavedNews>> retrieveSavedNews() async {
+  Future<List<SavedNews>> retrieveSavedNews() async {
     final Database db = await initializeDB();
-    final List<Map<String, Object?>> queryResult =
-    await db.query('news');
+    final List<Map<String, Object?>> queryResult = await db.query('news');
     return queryResult.map((e) => SavedNews.fromJson(e)).toList();
   }
 

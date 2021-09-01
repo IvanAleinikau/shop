@@ -7,12 +7,14 @@ class NewsRepository {
 
   Future<String> makeNews(News news) async {
     if (news.title.isNotEmpty & news.text.isNotEmpty) {
-      await FirebaseFirestore.instance.collection('news').add({
-        'title': news.title,
-        'text': news.text,
-        'url': news.url,
-        'date': DateFormat.yMMMd().format(news.date),
-      });
+      await FirebaseFirestore.instance.collection('news').add(
+        {
+          'title': news.title,
+          'text': news.text,
+          'url': news.url,
+          'date': DateFormat.yMMMd().format(news.date),
+        },
+      );
       return 'News made';
     } else {
       return 'Please enter title and text';
@@ -20,20 +22,21 @@ class NewsRepository {
   }
 
   Future<List<News>> fetchNews() async {
-    await FirebaseFirestore.instance
-        .collection('news')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        News news = News(
-          title: doc['title'],
-          text: doc['text'],
-          url: doc['url'],
-          date: DateFormat.yMMMd().parse(doc['date']),
+    await FirebaseFirestore.instance.collection('news').get().then(
+      (QuerySnapshot querySnapshot) {
+        querySnapshot.docs.forEach(
+          (doc) {
+            News news = News(
+              title: doc['title'],
+              text: doc['text'],
+              url: doc['url'],
+              date: DateFormat.yMMMd().parse(doc['date']),
+            );
+            list.add(news);
+          },
         );
-        list.add(news);
-      });
-    });
+      },
+    );
     return list;
   }
 }

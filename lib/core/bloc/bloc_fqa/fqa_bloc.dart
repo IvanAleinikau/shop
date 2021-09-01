@@ -35,15 +35,12 @@ class FqaBloc extends Bloc<FqaEvent, FqaState> {
     }
   }
 
-  Stream<FqaState> _createQuestionAnswer(
-      CreateQuestionAnswerEvent event) async* {
-    await database.insertQuestionAnswer(
-        QuestionAnswer(question: event.question, answer: event.answer));
+  Stream<FqaState> _createQuestionAnswer(CreateQuestionAnswerEvent event) async* {
+    await database.insertQuestionAnswer(QuestionAnswer(question: event.question, answer: event.answer));
     yield FqaState.loading();
   }
 
-  Stream<FqaState> _deleteQuestionAnswer(
-      DeleteQuestionAnswerEvent event) async* {
+  Stream<FqaState> _deleteQuestionAnswer(DeleteQuestionAnswerEvent event) async* {
     await database.deleteQuestionAnswer(event.index);
     yield FqaState.loading();
   }

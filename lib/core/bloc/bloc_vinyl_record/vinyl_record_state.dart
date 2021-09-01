@@ -4,7 +4,7 @@ import 'package:shop/core/models/vinyl_record_model.dart';
 part 'vinyl_record_state.freezed.dart';
 
 @freezed
-abstract class VinylRecordState with _$VinylRecordState{
+abstract class VinylRecordState with _$VinylRecordState {
   factory VinylRecordState.initState() = _InitState;
 
   factory VinylRecordState.loading() = _VinylRecordLoading;
@@ -15,4 +15,3 @@ abstract class VinylRecordState with _$VinylRecordState{
 
   factory VinylRecordState.error() = _VinylRecordError;
 }
-

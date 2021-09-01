@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';

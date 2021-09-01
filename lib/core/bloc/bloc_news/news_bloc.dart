@@ -35,10 +35,6 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   }
 
   Stream<NewsState> _createNews(CreateNewsEvent event) async* {
-    repository.makeNews(News(
-        title: event.title,
-        text: event.title,
-        url: event.url,
-        date: DateTime.now()));
+    repository.makeNews(News(title: event.title, text: event.title, url: event.url, date: DateTime.now()));
   }
 }

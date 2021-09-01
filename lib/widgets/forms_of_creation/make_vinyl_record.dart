@@ -5,7 +5,6 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class MakeVinylRecord extends StatefulWidget {
-
   @override
   _MakeVinylRecordState createState() => _MakeVinylRecordState();
 }
@@ -79,18 +78,23 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
           },
           child: Text(AppLocalization.of(context)!.cancel),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red),
+            backgroundColor: MaterialStateProperty.all(
+              Colors.red,
+            ),
           ),
         ),
         ElevatedButton(
           onPressed: () {
-            BlocProvider.of<VinylRecordBloc>(context).add(CreateVinylRecord(
-              name: _name.text.trim(),
-              author: _author.text.trim(),
-              year: _year.text.trim(),
-              description: _description.text.trim(),
-              cost: _cost.text.trim(),
-              image: _image.text.trim(),));
+            BlocProvider.of<VinylRecordBloc>(context).add(
+              CreateVinylRecord(
+                name: _name.text.trim(),
+                author: _author.text.trim(),
+                year: _year.text.trim(),
+                description: _description.text.trim(),
+                cost: _cost.text.trim(),
+                image: _image.text.trim(),
+              ),
+            );
             _name.text = '';
             _author.text = '';
             _year.text = '';
@@ -101,7 +105,9 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
           },
           child: Text(AppLocalization.of(context)!.add),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.blue),
+            backgroundColor: MaterialStateProperty.all(
+              Colors.blue,
+            ),
           ),
         ),
       ],

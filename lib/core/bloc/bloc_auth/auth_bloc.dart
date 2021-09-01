@@ -23,19 +23,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Stream<AuthState> _logInEvent(LogInEvent event) async* {
-    await repository
-        .signIn(email: event.email, password: event.password)
-        .then((value) => {
-              if (value == 'Welcome') {splashBloc.add(CheckCurrentUser())}
-            });
+    final user = await repository.signIn(email: event.email, password: event.password);
+    if (user == 'Welcome') {
+      splashBloc.add(CheckCurrentUser());
+    }
   }
 
   Stream<AuthState> _logOutEvent(LogOutEvent event) async* {
-    await repository.signOut().then((value) => {
-          if (value == 'singOut') {splashBloc.add(CheckCurrentUser())}
-        });
+    final user = await repository.signOut();
+    if (user == 'singOut') {
+      splashBloc.add(CheckCurrentUser());
+    }
   }
-}
-Stream<AuthState> _logInEvent(LogInEvent event) async* {
-
 }

@@ -5,7 +5,6 @@ part 'fqa_state.freezed.dart';
 
 @freezed
 abstract class FqaState with _$FqaState {
-
   factory FqaState.initState() = _InitState;
 
   factory FqaState.loading() = _FqaLoading;
@@ -15,5 +14,4 @@ abstract class FqaState with _$FqaState {
   factory FqaState.contentEmpty() = _FqaContentEmpty;
 
   factory FqaState.error() = _FqaError;
-
 }

@@ -19,25 +19,32 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<SettingBloc, SettingState>(
       builder: (context, state) {
-        state.when(initState: (){
-        }, loading: () {
-          BlocProvider.of<SettingBloc>(context).add(ResetPage());
-          return const Center(child: CircularProgressIndicator(),);
-        });
+        state.when(
+          initState: () {},
+          loading: () {
+            BlocProvider.of<SettingBloc>(context).add(ResetPage());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        );
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
             title: Text(
               AppLocalization.of(context)!.settings,
-              style: const TextStyle(fontFamily: 'Oxygen'),
+              style: const TextStyle(
+                fontFamily: 'Oxygen',
+              ),
             ),
             backgroundColor: Colors.black54,
           ),
           body: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('asset/image/image.jpg'),
-                  fit: BoxFit.cover),
+                image: AssetImage('asset/image/image.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
             child: ListView(
               padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
@@ -58,7 +65,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 ListTile(
                   title: Text(
                     AppLocalization.of(context)!.changeLanguage,
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                   leading: const Icon(
                     Icons.language,
@@ -67,32 +77,33 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   onTap: () {
                     showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                              title: Text(
-                                  AppLocalization.of(context)!.chooseLanguage),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      title: const Text('English'),
-                                      onTap: () {
-                                        BlocProvider.of<SettingBloc>(context).add(LoadEng());
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                    ListTile(
-                                      title: const Text('Русский'),
-                                      onTap: () {
-                                        BlocProvider.of<SettingBloc>(context).add(LoadRus());
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(AppLocalization.of(context)!.chooseLanguage),
+                          content: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: const Text('English'),
+                                  onTap: () {
+                                    BlocProvider.of<SettingBloc>(context).add(LoadEng());
+                                    Navigator.of(context).pop();
+                                  },
                                 ),
-                              ));
-                        });
+                                ListTile(
+                                  title: const Text('Русский'),
+                                  onTap: () {
+                                    BlocProvider.of<SettingBloc>(context).add(LoadRus());
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
               ],

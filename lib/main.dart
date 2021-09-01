@@ -17,23 +17,23 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/localization/app_localization.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(App());
 }
+
 class App extends StatefulWidget {
   @override
   _AppState createState() => _AppState();
 }
 
 class _AppState extends State<App> {
-  final AppLocalizationDelegate _localeOverrideDelegate =
-  const AppLocalizationDelegate(Locale('en', 'US'));
+  final AppLocalizationDelegate _localeOverrideDelegate = const AppLocalizationDelegate(Locale('en', 'US'));
   late SplashBloc splashBloc;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     splashBloc = SplashBloc();
   }
@@ -71,11 +71,7 @@ class _AppState extends State<App> {
           ),
         ],
         child: MaterialApp(
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            _localeOverrideDelegate
-          ],
+          localizationsDelegates: [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, _localeOverrideDelegate],
           supportedLocales: [
             const Locale('en', 'US'),
             const Locale('ru', 'RUS'),
@@ -88,4 +84,3 @@ class _AppState extends State<App> {
         ));
   }
 }
-

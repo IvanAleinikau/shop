@@ -38,37 +38,35 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         title: const Text('Demo video'),
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
-        ),
-        child: Column(
-          children: [
-            FutureBuilder(
-              future: _initializeVideoPlayerFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          const ListTile(
-            title: Text('My Way - Calvin Harris',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 25, color: Colors.white),
-            ),
+          decoration: const BoxDecoration(
+            image: DecorationImage(image: AssetImage('asset/image/image.jpg'), fit: BoxFit.cover),
           ),
-          ],
-        )
-      ),
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: _initializeVideoPlayerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+              const ListTile(
+                title: Text(
+                  'My Way - Calvin Harris',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 25, color: Colors.white),
+                ),
+              ),
+            ],
+          )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {

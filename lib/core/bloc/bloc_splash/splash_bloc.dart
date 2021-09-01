@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_state.dart';
 
-class SplashBloc extends Bloc<SplashEvent,SplashState> {
+class SplashBloc extends Bloc<SplashEvent, SplashState> {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   SplashBloc() : super(SplashState.initState());
@@ -16,10 +16,10 @@ class SplashBloc extends Bloc<SplashEvent,SplashState> {
   }
 
   Stream<SplashState> _checkCurrentUser(CheckCurrentUser event) async* {
-    if(event is CheckCurrentUser){
-      if(auth.currentUser!=null){
+    if (event is CheckCurrentUser) {
+      if (auth.currentUser != null) {
         yield SplashState.userLogIn();
-      }else{
+      } else {
         yield SplashState.userLogOut();
       }
     }

@@ -4,8 +4,7 @@ import 'package:shop/core/models/saved_news_model.dart';
 part 'saved_news_state.freezed.dart';
 
 @freezed
-abstract class SavedNewsState with _$SavedNewsState{
-
+abstract class SavedNewsState with _$SavedNewsState {
   factory SavedNewsState.initState() = _InitSavedNewsState;
 
   factory SavedNewsState.loading() = _SavedNewsLoading;
@@ -16,12 +15,3 @@ abstract class SavedNewsState with _$SavedNewsState{
 
   factory SavedNewsState.error() = _SavedNewsError;
 }
-
-/*
-class SavedNewsInitState extends SavedNewsState{}
-
-class EmptySavedNews extends SavedNewsState{}
-
-class SavedNewsLoaded extends SavedNewsState{}
-
-class CircleState extends SavedNewsState{}*/

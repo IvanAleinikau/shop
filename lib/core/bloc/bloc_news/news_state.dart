@@ -4,8 +4,7 @@ import 'package:shop/core/models/news_model.dart';
 part 'news_state.freezed.dart';
 
 @freezed
-abstract class NewsState with _$NewsState{
-
+abstract class NewsState with _$NewsState {
   factory NewsState.initState() = _InitState;
 
   factory NewsState.loading() = _NewsLoading;
