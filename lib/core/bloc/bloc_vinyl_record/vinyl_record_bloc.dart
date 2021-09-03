@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:shop/data/repositories/vinyl_record_repository.dart';
 
 class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
-  VinylRecordRepository repository = VinylRecordRepository();
+  var repository = GetIt.instance<VinylRecordRepository>();
   late List<VinylRecord> allVinylRecord;
   final List<String> names = [];
 

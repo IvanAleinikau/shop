@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_state.dart';
 import 'package:shop/core/models/purchase_model.dart';
@@ -10,7 +11,7 @@ import 'package:shop/data/repositories/purchase_repository.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
-  PurchaseRepository repository = PurchaseRepository();
+  var repository = GetIt.instance<PurchaseRepository>();
   late Purchase purchase;
   late VinylRecord vinylRecord;
   late List<Purchase> allPurchase;

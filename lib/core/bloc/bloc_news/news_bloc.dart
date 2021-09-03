@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_news/news_event.dart';
 import 'package:shop/core/bloc/bloc_news/news_state.dart';
 import 'package:shop/core/models/news_model.dart';
 import 'package:shop/data/repositories/news_repository.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
-  NewsRepository repository = NewsRepository();
+  var repository = GetIt.instance<NewsRepository>();
   late List<News> list;
 
   NewsBloc() : super(NewsState.initState());
