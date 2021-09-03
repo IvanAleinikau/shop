@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop/widgets/vinyl_record.dart';
+import 'package:shop/app/widgets/vinyl_record.dart';
 
 class Search extends SearchDelegate {
   List<String> names = [];

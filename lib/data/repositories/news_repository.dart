@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:shop/core/models/news_model.dart';
 
 class NewsRepository {
-  late List<News> list = [];
+  late List<News> list;
 
   Future<String> makeNews(News news) async {
     if (news.title.isNotEmpty & news.text.isNotEmpty) {
@@ -22,21 +22,19 @@ class NewsRepository {
   }
 
   Future<List<News>> fetchNews() async {
-    await FirebaseFirestore.instance.collection('news').get().then(
-      (QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach(
-          (doc) {
-            News news = News(
-              title: doc['title'],
-              text: doc['text'],
-              url: doc['url'],
-              date: DateFormat.yMMMd().parse(doc['date']),
-            );
-            list.add(news);
-          },
-        );
-      },
-    );
+    list = [];
+    final collection = await FirebaseFirestore.instance.collection('news').get();
+    collection.docs.forEach((doc) {
+      News news = News(
+        title: doc['title'],
+        text: doc['text'],
+        url: doc['url'],
+        date: DateFormat.yMMMd().parse(
+          doc['date'],
+        ),
+      );
+      list.add(news);
+    });
     return list;
   }
 }

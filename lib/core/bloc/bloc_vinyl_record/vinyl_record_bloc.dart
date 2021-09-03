@@ -9,7 +9,7 @@ import 'package:shop/data/repositories/vinyl_record_repository.dart';
 class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
   VinylRecordRepository repository = VinylRecordRepository();
   late List<VinylRecord> allVinylRecord;
-  List<String> names = [];
+  final List<String> names = [];
 
   VinylRecordBloc() : super(VinylRecordState.initState());
 
@@ -25,6 +25,7 @@ class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
 
   Stream<VinylRecordState> _fetchNews(FetchVinylRecord event) async* {
     try {
+      allVinylRecord=[];
       allVinylRecord = await repository.fetchVinylRecord();
       yield VinylRecordState.content(allVinylRecord);
     } catch (_) {

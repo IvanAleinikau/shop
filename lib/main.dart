@@ -71,14 +71,15 @@ class _AppState extends State<App> {
           ),
         ],
         child: MaterialApp(
-          localizationsDelegates: [GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, _localeOverrideDelegate],
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            _localeOverrideDelegate,
+          ],
           supportedLocales: [
             const Locale('en', 'US'),
             const Locale('ru', 'RUS'),
           ],
-          theme: ThemeData(
-            primaryColor: Colors.indigo.shade400,
-          ),
           home: Splash(),
           debugShowCheckedModeBanner: false,
         ));

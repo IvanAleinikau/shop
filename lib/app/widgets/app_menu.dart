@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/app/pages/fqa_page.dart';
+import 'package:shop/app/pages/news_page.dart';
+import 'package:shop/app/pages/saved_news_page.dart';
+import 'package:shop/app/pages/settings_page.dart';
+import 'package:shop/app/pages/shop_page.dart';
+import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/theme/theme_provider.dart';
+import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
-import 'package:shop/pages/fqa_page.dart';
-import 'package:shop/pages/news_page.dart';
-import 'package:shop/pages/saved_news_page.dart';
-import 'package:shop/pages/settings_page.dart';
-import 'package:shop/pages/shop_page.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -43,7 +46,7 @@ class _MenuState extends State<Menu> {
                 accountEmail: Text(user!),
                 currentAccountPicture: const Icon(
                   Icons.account_circle_sharp,
-                  color: Colors.white,
+                  color: ColorPalette.textColor,
                   size: 70,
                 ),
               ),
@@ -51,22 +54,15 @@ class _MenuState extends State<Menu> {
                 color: Colors.transparent,
               ),
             ),
-            const Divider(
-              height: 10.0,
-              color: Colors.white,
-            ),
+            const CustomDivider(),
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.home,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Oxygen',
-                  fontSize: 17,
-                ),
+                style: ThemeProvider.getTheme().textTheme.headline1,
               ),
               leading: const Icon(
                 Icons.home,
-                color: Colors.white,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -80,15 +76,11 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.shop,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Oxygen',
-                  fontSize: 17,
-                ),
+                style: ThemeProvider.getTheme().textTheme.headline1,
               ),
               leading: const Icon(
                 Icons.shopping_bag,
-                color: Colors.white,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -102,15 +94,11 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.savedNews,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Oxygen',
-                  fontSize: 17,
-                ),
+                style: ThemeProvider.getTheme().textTheme.headline1,
               ),
               leading: const Icon(
                 Icons.announcement_sharp,
-                color: Colors.white,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -124,15 +112,11 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.settings,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Oxygen',
-                  fontSize: 17,
-                ),
+                style: ThemeProvider.getTheme().textTheme.headline1,
               ),
               leading: const Icon(
                 Icons.settings,
-                color: Colors.white,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -143,22 +127,15 @@ class _MenuState extends State<Menu> {
                 );
               },
             ),
-            const Divider(
-              height: 10.0,
-              color: Colors.white,
-            ),
+            const CustomDivider(),
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.faq,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Oxygen',
-                  fontSize: 17,
-                ),
+                style: ThemeProvider.getTheme().textTheme.headline1,
               ),
               leading: const Icon(
                 Icons.question_answer,
-                color: Colors.white,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -172,15 +149,11 @@ class _MenuState extends State<Menu> {
             ListTile(
               title: Text(
                 AppLocalization.of(context)!.logout,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Oxygen',
-                  fontSize: 17,
-                ),
+                style: ThemeProvider.getTheme().textTheme.headline1,
               ),
               leading: const Icon(
                 Icons.logout,
-                color: Colors.white,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 BlocProvider.of<AuthBloc>(context).add(LogOutEvent());

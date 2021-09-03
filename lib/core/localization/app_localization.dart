@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shop/l10n/messages_all.dart';
+import 'package:shop/core/l10n/messages_all.dart';
 
 class AppLocalization {
 
@@ -23,6 +23,20 @@ class AppLocalization {
     return Intl.message(
       '',
       name: 'email',
+    );
+  }
+
+  String get wrong {
+    return Intl.message(
+      '',
+      name: 'wrong',
+    );
+  }
+
+  String get notVinyl {
+    return Intl.message(
+      '',
+      name: 'not_vinyl',
     );
   }
 

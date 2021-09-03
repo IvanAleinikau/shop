@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/widgets/app_logo.dart';
 import 'package:shop/core/bloc/bloc_register/register_bloc.dart';
 import 'package:shop/core/bloc/bloc_register/register_event.dart';
 import 'package:shop/core/bloc/bloc_register/register_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
-import 'package:shop/pages/login_page.dart';
+
+
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -28,11 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     Container(
                       height: 320,
-                      child: const Center(
-                        child: Image(
-                          image: AssetImage('asset/image/logo_shop.jpg'),
-                        ),
-                      ),
+                      child: AppLogo(),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -89,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         child: Text(AppLocalization.of(context)!.singUp),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.black),
+                          backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
                           textStyle: MaterialStateProperty.all(
                             const TextStyle(
                               fontSize: 25.0,

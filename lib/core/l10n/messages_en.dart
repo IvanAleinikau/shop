@@ -77,5 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "field" : MessageLookupByLibrary.simpleMessage("Fill in the fields"),
     "notNews" : MessageLookupByLibrary.simpleMessage("Not news"),
     "notFqa" : MessageLookupByLibrary.simpleMessage("Not question/answer"),
+    "wrong" : MessageLookupByLibrary.simpleMessage("Something wrong"),
+    "not_vinyl" : MessageLookupByLibrary.simpleMessage("Not vinyl records"),
   };
 }

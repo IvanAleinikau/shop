@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/app/pages/register_page.dart';
+import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/widgets/app_logo.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
-import 'package:shop/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,18 +27,14 @@ class _LoginPageState extends State<LoginPage> {
             initAuthState: () {
               return Container(
                 decoration: const BoxDecoration(
-                  color: Colors.white70,
+                  color: ColorPalette.authBackColor,
                 ),
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Container(
                         height: 320,
-                        child: const Center(
-                          child: Image(
-                            image: AssetImage('asset/image/logo_shop.jpg'),
-                          ),
-                        ),
+                        child: AppLogo(),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
@@ -73,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Text(AppLocalization.of(context)!.logIn),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.black54),
+                            backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
                             textStyle: MaterialStateProperty.all(
                               const TextStyle(
                                 fontSize: 25.0,
