@@ -87,7 +87,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
     );
   }
 
-  _scrollView(context, list) {
+  Widget _scrollView(context, list) {
     return GridView.count(
       childAspectRatio: 0.7,
       crossAxisCount: 2,

@@ -93,7 +93,7 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
   
-  _scrollView(context,list){
+  Widget _scrollView(context,list){
     return Scrollbar(
       controller: _scrollController,
       child: ListView.builder(
@@ -102,86 +102,90 @@ class _NewsPageState extends State<NewsPage> {
           if (list.isEmpty) {
             BlocProvider.of<NewsBloc>(context).add(NewsEmpty());
           }
-          return Card(
-            color: Colors.transparent,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: 100,
-                      child: Image.network(
-                        list[index].url,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            list[index].title,
-                            style: const TextStyle(
-                              color: ColorPalette.whiteColor,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 25.0,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.0,),
-                          ),
-                          Text(
-                            DateFormat.yMMMd().format(list[index].date),
-                            style: const TextStyle(
-                              color: ColorPalette.whiteColor,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 17.0,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.0,),
-                          ),
-                          Text(
-                            list[index].text,
-                            style: const TextStyle(
-                              color: ColorPalette.whiteColor,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 17.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      BlocProvider.of<SavedNewsBloc>(context).add(
-                        CreateSavedNewsEvent(
-                          list[index].title,
-                          list[index].text,
-                          DateFormat.yMMMd().format(
-                            list[index].date,
-                          ),
-                        ),
-                      );
-                      BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
-                    },
-                    icon: const Icon(
-                      Icons.save,
-                      color: ColorPalette.greyColor,
-                    ),
-                  ),
-                ],
+          return _newsCard(context, list, index);
+        },
+      ),
+    );
+  }
+
+  Widget _newsCard(context,list,index){
+    return Card(
+      color: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: 100,
+                child: Image.network(
+                  list[index].url,
+                ),
               ),
             ),
-          );
-        },
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      list[index].title,
+                      style: const TextStyle(
+                        color: ColorPalette.textColor,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 25.0,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2.0,),
+                    ),
+                    Text(
+                      DateFormat.yMMMd().format(list[index].date),
+                      style: const TextStyle(
+                        color: ColorPalette.textColor,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 17.0,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2.0,),
+                    ),
+                    Text(
+                      list[index].text,
+                      style: const TextStyle(
+                        color: ColorPalette.textColor,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 17.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                BlocProvider.of<SavedNewsBloc>(context).add(
+                  CreateSavedNewsEvent(
+                    list[index].title,
+                    list[index].text,
+                    DateFormat.yMMMd().format(
+                      list[index].date,
+                    ),
+                  ),
+                );
+                BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+              },
+              icon: const Icon(
+                Icons.save,
+                color: ColorPalette.iconColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -46,7 +46,7 @@ class _MenuState extends State<Menu> {
                 accountEmail: Text(user!),
                 currentAccountPicture: const Icon(
                   Icons.account_circle_sharp,
-                  color: ColorPalette.whiteColor,
+                  color: ColorPalette.textColor,
                   size: 70,
                 ),
               ),
@@ -62,7 +62,7 @@ class _MenuState extends State<Menu> {
               ),
               leading: const Icon(
                 Icons.home,
-                color: ColorPalette.whiteColor,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -80,7 +80,7 @@ class _MenuState extends State<Menu> {
               ),
               leading: const Icon(
                 Icons.shopping_bag,
-                color: ColorPalette.whiteColor,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -98,7 +98,7 @@ class _MenuState extends State<Menu> {
               ),
               leading: const Icon(
                 Icons.announcement_sharp,
-                color: ColorPalette.whiteColor,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -116,7 +116,7 @@ class _MenuState extends State<Menu> {
               ),
               leading: const Icon(
                 Icons.settings,
-                color: ColorPalette.whiteColor,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -135,7 +135,7 @@ class _MenuState extends State<Menu> {
               ),
               leading: const Icon(
                 Icons.question_answer,
-                color: ColorPalette.whiteColor,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 Navigator.push(
@@ -153,7 +153,7 @@ class _MenuState extends State<Menu> {
               ),
               leading: const Icon(
                 Icons.logout,
-                color: ColorPalette.whiteColor,
+                color: ColorPalette.textColor,
               ),
               onTap: () {
                 BlocProvider.of<AuthBloc>(context).add(LogOutEvent());

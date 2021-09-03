@@ -71,7 +71,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
     );
   }
 
-  _scrollView(context, list) {
+  Widget _scrollView(context, list) {
     return RefreshIndicator(
       onRefresh: () async {
         BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
@@ -82,7 +82,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
           return Dismissible(
             direction: DismissDirection.endToStart,
             background: Container(
-              color: ColorPalette.redColor,
+              color: ColorPalette.dismissibleColor,
               alignment: Alignment.centerRight,
               padding: const EdgeInsets.symmetric(
                 horizontal: 10.0,
