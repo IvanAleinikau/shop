@@ -22,27 +22,22 @@ class PurchaseRepository {
   }
 
   Future<List<Purchase>> fetchPurchase() async {
-    await FirebaseFirestore.instance.collection('purchase').get().then(
-      (QuerySnapshot querySnapshot) {
-        querySnapshot.docs.forEach(
-          (doc) {
-            Purchase purchase = Purchase(
-              user: doc['user'],
-              isActive: doc['is_active'],
-              vinylRecord: VinylRecord(
-                name: doc['name'],
-                author: doc['author'],
-                year: doc['year'],
-                description: doc['description'],
-                cost: doc['cost'],
-                image: doc['image'],
-              ),
-            );
-            list.add(purchase);
-          },
-        );
-      },
-    );
+    final collection = await FirebaseFirestore.instance.collection('purchase').get();
+    collection.docs.forEach((doc) {
+      Purchase purchase = Purchase(
+        user: doc['user'],
+        isActive: doc['is_active'],
+        vinylRecord: VinylRecord(
+          name: doc['name'],
+          author: doc['author'],
+          year: doc['year'],
+          description: doc['description'],
+          cost: doc['cost'],
+          image: doc['image'],
+        ),
+      );
+      list.add(purchase);
+    });
     return list;
   }
 }

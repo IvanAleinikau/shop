@@ -77,5 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "field" : MessageLookupByLibrary.simpleMessage("Заполните поля"),
     "notNews" : MessageLookupByLibrary.simpleMessage("Нет новостей"),
     "notFqa" : MessageLookupByLibrary.simpleMessage("Нет вопросов/ответов"),
+    "wrong" : MessageLookupByLibrary.simpleMessage("Что-то случилось"),
+    "not_vinyl" : MessageLookupByLibrary.simpleMessage("Нет виниловых пластинок"),
   };
 }

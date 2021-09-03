@@ -23,6 +23,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
   Stream<NewsState> _fetchNews(FetchNewsEvent event) async* {
     try {
+      list=[];
       list = await repository.fetchNews();
       yield NewsState.content(list);
     } catch (_) {
