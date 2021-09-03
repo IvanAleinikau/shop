@@ -67,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _switchLanguage(context){
+  Widget _switchLanguage(context){
     return ListTile(
       title: Text(
         AppLocalization.of(context)!.changeLanguage,
@@ -75,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       leading: const Icon(
         Icons.language,
-        color: ColorPalette.whiteColor,
+        color: ColorPalette.textColor,
         size: 30,
       ),
       onTap: () {

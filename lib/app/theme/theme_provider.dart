@@ -19,27 +19,27 @@ class ThemeProvider{
 
 class _TextStyle{
   static const headline1 = TextStyle(
-    color: ColorPalette.whiteColor,
+    color: ColorPalette.textColor,
     fontFamily: 'Oxygen' ,
     fontSize: 17,
   );
 
   static const headline2 = TextStyle(
-    color: ColorPalette.whiteColor,
+    color: ColorPalette.textColor,
     fontFamily: 'Oxygen',
   );
 
   static const headline3 = TextStyle(
-    color: ColorPalette.whiteColor,
+    color: ColorPalette.textColor,
   );
 
   static const headline4 = TextStyle(
-    color: ColorPalette.whiteColor,
+    color: ColorPalette.textColor,
     fontSize: 25,
   );
 
   static const headline5 = TextStyle(
-    color: ColorPalette.whiteColor,
+    color: ColorPalette.textColor,
     fontSize: 20,
   );
 

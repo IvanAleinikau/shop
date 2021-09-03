@@ -80,7 +80,7 @@ class _FQAPageState extends State<FQAPage> {
     );
   }
 
-  _scrollView(context, list) {
+  Widget _scrollView(context, list) {
     return RefreshIndicator(
       onRefresh: () async {
         BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());

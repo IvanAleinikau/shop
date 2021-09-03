@@ -117,7 +117,7 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 
-  _scrollView(context, list, _bloc) {
+  Widget _scrollView(context, list, _bloc) {
     return Scrollbar(
       controller: _scrollController,
       child: GridView.count(
@@ -148,88 +148,92 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                   );
                 },
-                child: Container(
-                  padding: const EdgeInsets.all(3),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(17),
-                    child: Card(
-                      color: Colors.transparent,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            child: Image.network(list[index].image),
-                          ),
-                          ListTile(
-                            title: Text(
-                              list[index].name,
-                              style: ThemeProvider.getTheme().textTheme.headline1,
-                            ),
-                            subtitle: Text(
-                              list[index].author,
-                              style: ThemeProvider.getTheme().textTheme.headline2,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.zero,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                                      child: Text(
-                                        list[index].cost + '\$',
-                                        style: ThemeProvider.getTheme().textTheme.headline3,
-                                      ),
-                                    )),
-                                Container(
-                                  height: 20,
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 2, 2),
-                                  child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        BlocProvider.of<ShoppingCartBloc>(context).add(
-                                          CreateShoppingCart(
-                                            list[index].name,
-                                            list[index].author,
-                                            list[index].year,
-                                            list[index].description,
-                                            list[index].cost,
-                                            list[index].image,
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
-                                        AppLocalization.of(context)!.buy,
-                                        style: ThemeProvider.getTheme().textTheme.headline2,
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
-                                        textStyle: MaterialStateProperty.all(
-                                          const TextStyle(),
-                                        ),
-                                        shape: MaterialStateProperty.all(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(15.0),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                child: _vinylCard(context, list, index),
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+  
+  Widget _vinylCard(context,list,index){
+    return Container(
+      padding: const EdgeInsets.all(3),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(17),
+        child: Card(
+          color: Colors.transparent,
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Image.network(list[index].image),
+              ),
+              ListTile(
+                title: Text(
+                  list[index].name,
+                  style: ThemeProvider.getTheme().textTheme.headline1,
+                ),
+                subtitle: Text(
+                  list[index].author,
+                  style: ThemeProvider.getTheme().textTheme.headline2,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.zero,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                          child: Text(
+                            list[index].cost + '\$',
+                            style: ThemeProvider.getTheme().textTheme.headline3,
+                          ),
+                        )),
+                    Container(
+                      height: 20,
+                      padding: const EdgeInsets.fromLTRB(0, 0, 2, 2),
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            BlocProvider.of<ShoppingCartBloc>(context).add(
+                              CreateShoppingCart(
+                                list[index].name,
+                                list[index].author,
+                                list[index].year,
+                                list[index].description,
+                                list[index].cost,
+                                list[index].image,
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalization.of(context)!.buy,
+                            style: ThemeProvider.getTheme().textTheme.headline2,
+                          ),
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
+                            textStyle: MaterialStateProperty.all(
+                              const TextStyle(),
+                            ),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
