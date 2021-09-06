@@ -13,7 +13,6 @@ import 'package:shop/core/bloc/bloc_saved_news/saved_news_bloc.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
-
 class NewsPage extends StatefulWidget {
   @override
   _NewsPageState createState() => _NewsPageState();
@@ -24,76 +23,79 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsBloc, NewsState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              AppLocalization.of(context)!.news,
-              style: ThemeProvider.getTheme().textTheme.headline2
-            ),
-            backgroundColor: ColorPalette.primaryColor,
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('asset/image/image.jpg'),
-                fit: BoxFit.cover,
+    return BlocProvider<NewsBloc>(
+      create: (context) => NewsBloc(),
+      child: BlocProvider<SavedNewsBloc>(
+        create: (context) => SavedNewsBloc(),
+        child: BlocBuilder<NewsBloc, NewsState>(
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(AppLocalization.of(context)!.news, style: ThemeProvider.getTheme().textTheme.headline2),
+                backgroundColor: ColorPalette.primaryColor,
               ),
-            ),
-            padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-            child: state.when(
-              initState: () {
-                BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
-              },
-              loading: () {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              content: (list) {
-                return _scrollView(context, list);
-              },
-              contentEmpty: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.notNews,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('asset/image/image.jpg'),
+                    fit: BoxFit.cover,
                   ),
-                );
-              },
-              error: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.wrong,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
-                  ),
-                );
-              },
-            ),
-          ),
-          drawer: const Menu(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return MakeNewsForm();
+                ),
+                padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                child: state.when(
+                  initState: () {
+                    BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
+                  },
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  content: (list) {
+                    return _scrollView(context, list);
+                  },
+                  contentEmpty: () {
+                    return Center(
+                      child: Text(
+                        AppLocalization.of(context)!.notNews,
+                        style: ThemeProvider.getTheme().textTheme.headline2,
+                      ),
+                    );
+                  },
+                  error: () {
+                    return Center(
+                      child: Text(
+                        AppLocalization.of(context)!.wrong,
+                        style: ThemeProvider.getTheme().textTheme.headline2,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              drawer: const Menu(),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return MakeNewsForm(context);
+                    },
+                  );
                 },
-              );
-            },
-            child: const Icon(
-              Icons.add,
-            ),
-            backgroundColor: ColorPalette.primaryColor,
-          ),
-        );
-      },
+                child: const Icon(
+                  Icons.add,
+                ),
+                backgroundColor: ColorPalette.primaryColor,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
-  
-  Widget _scrollView(context,list){
+
+  Widget _scrollView(context, list) {
     return Scrollbar(
       controller: _scrollController,
       child: ListView.builder(
@@ -108,7 +110,7 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  Widget _newsCard(context,list,index){
+  Widget _newsCard(context, list, index) {
     return Card(
       color: Colors.transparent,
       child: Padding(
@@ -141,7 +143,9 @@ class _NewsPageState extends State<NewsPage> {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2.0,),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 2.0,
+                      ),
                     ),
                     Text(
                       DateFormat.yMMMd().format(list[index].date),
@@ -152,7 +156,9 @@ class _NewsPageState extends State<NewsPage> {
                       ),
                     ),
                     const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2.0,),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 2.0,
+                      ),
                     ),
                     Text(
                       list[index].text,

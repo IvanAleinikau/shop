@@ -8,7 +8,6 @@ import 'package:shop/core/bloc/bloc_saved_news/saved_news_event.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
-
 class SavedNewsPage extends StatefulWidget {
   @override
   _SavedNewsPageState createState() => _SavedNewsPageState();
@@ -17,64 +16,67 @@ class SavedNewsPage extends StatefulWidget {
 class _SavedNewsPageState extends State<SavedNewsPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SavedNewsBloc, SavedNewsState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              AppLocalization.of(context)!.savedNews,
-              style: ThemeProvider.getTheme().textTheme.headline2,
+    return BlocProvider<SavedNewsBloc>(
+      create: (context) => SavedNewsBloc(),
+      child: BlocBuilder<SavedNewsBloc, SavedNewsState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                AppLocalization.of(context)!.savedNews,
+                style: ThemeProvider.getTheme().textTheme.headline2,
+              ),
+              backgroundColor: ColorPalette.primaryColor,
             ),
-            backgroundColor: ColorPalette.primaryColor,
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('asset/image/image.jpg'),
-                fit: BoxFit.cover,
+            body: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('asset/image/image.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: state.when(
+                initState: () {
+                  BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                content: (list) {
+                  return _scrollView(context, list, context);
+                },
+                contentEmpty: () {
+                  return Center(
+                    child: Text(
+                      AppLocalization.of(context)!.notNews,
+                      style: ThemeProvider.getTheme().textTheme.headline2,
+                    ),
+                  );
+                },
+                error: () {
+                  return Center(
+                    child: Text(
+                      AppLocalization.of(context)!.wrong,
+                      style: ThemeProvider.getTheme().textTheme.headline2,
+                    ),
+                  );
+                },
               ),
             ),
-            child: state.when(
-              initState: () {
-                BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
-              },
-              loading: () {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              content: (list) {
-                return _scrollView(context, list);
-              },
-              contentEmpty: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.notNews,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
-                  ),
-                );
-              },
-              error: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.wrong,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
-                  ),
-                );
-              },
-            ),
-          ),
-          drawer: const Menu(),
-        );
-      },
+            drawer: const Menu(),
+          );
+        },
+      ),
     );
   }
 
-  Widget _scrollView(context, list) {
+  Widget _scrollView(_, list, context) {
     return RefreshIndicator(
       onRefresh: () async {
-        BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
+        BlocProvider.of<SavedNewsBloc>(_).add(FetchSavedNewsEvent());
       },
       child: ListView.builder(
         itemCount: list.length,

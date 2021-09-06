@@ -9,7 +9,6 @@ import 'package:shop/core/bloc/bloc_settings/settings_event.dart';
 import 'package:shop/core/bloc/bloc_settings/settings_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
-
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -20,54 +19,57 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingBloc, SettingState>(
-      builder: (context, state) {
-        state.when(
-          initState: () {},
-          loading: () {
-            BlocProvider.of<SettingBloc>(context).add(ResetPage());
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        );
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              AppLocalization.of(context)!.settings,
-              style: ThemeProvider.getTheme().textTheme.headline2,
+    return BlocProvider<SettingBloc>(
+      create: (context) => SettingBloc(),
+      child: BlocBuilder<SettingBloc, SettingState>(
+        builder: (context, state) {
+          state.when(
+            initState: () {},
+            loading: () {
+              BlocProvider.of<SettingBloc>(context).add(ResetPage());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          );
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                AppLocalization.of(context)!.settings,
+                style: ThemeProvider.getTheme().textTheme.headline2,
+              ),
+              backgroundColor: Colors.black54,
             ),
-            backgroundColor: Colors.black54,
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('asset/image/image.jpg'),
-                fit: BoxFit.cover,
+            body: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('asset/image/image.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                children: [
+                  SizedBox(
+                    child: Text(
+                      AppLocalization.of(context)!.settings,
+                      style: ThemeProvider.getTheme().textTheme.headline4,
+                    ),
+                  ),
+                  const CustomDivider(),
+                  _switchLanguage(context),
+                ],
               ),
             ),
-            child: ListView(
-              padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-              children: [
-                SizedBox(
-                  child: Text(
-                    AppLocalization.of(context)!.settings,
-                    style: ThemeProvider.getTheme().textTheme.headline4,
-                  ),
-                ),
-                const CustomDivider(),
-                _switchLanguage(context),
-              ],
-            ),
-          ),
-          drawer: const Menu(),
-        );
-      },
+            drawer: const Menu(),
+          );
+        },
+      ),
     );
   }
 
-  Widget _switchLanguage(context){
+  Widget _switchLanguage(context) {
     return ListTile(
       title: Text(
         AppLocalization.of(context)!.changeLanguage,
@@ -81,7 +83,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onTap: () {
         showDialog(
           context: context,
-          builder: (BuildContext context) {
+          builder: (BuildContext ctx) {
             return AlertDialog(
               title: Text(AppLocalization.of(context)!.chooseLanguage),
               content: SingleChildScrollView(

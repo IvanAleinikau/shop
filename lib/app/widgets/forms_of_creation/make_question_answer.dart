@@ -8,6 +8,10 @@ class MakeQuestionAnswerForm extends StatelessWidget {
   final TextEditingController _question = TextEditingController();
   final TextEditingController _answer = TextEditingController();
 
+  final _context;
+
+  MakeQuestionAnswerForm(this._context);
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -45,8 +49,8 @@ class MakeQuestionAnswerForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            BlocProvider.of<FqaBloc>(context).add(CreateQuestionAnswerEvent(_question.text.trim(), _answer.text.trim()));
-            BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
+            BlocProvider.of<FqaBloc>(_context).add(CreateQuestionAnswerEvent(_question.text.trim(), _answer.text.trim()));
+            BlocProvider.of<FqaBloc>(_context).add(FqaQuestionAnswerEvent());
             _question.text = '';
             _answer.text = '';
             Navigator.of(context).pop();

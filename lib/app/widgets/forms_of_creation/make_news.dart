@@ -9,6 +9,10 @@ class MakeNewsForm extends StatelessWidget {
   final TextEditingController _text = TextEditingController();
   final TextEditingController _url = TextEditingController();
 
+  final _context;
+
+  MakeNewsForm(this._context);
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -55,7 +59,7 @@ class MakeNewsForm extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            BlocProvider.of<NewsBloc>(context).add(
+            BlocProvider.of<NewsBloc>(_context).add(
               CreateNewsEvent(
                 title: _title.text.trim(),
                 text: _text.text.trim(),
@@ -65,6 +69,7 @@ class MakeNewsForm extends StatelessWidget {
             _title.text = '';
             _text.text = '';
             _url.text = '';
+            BlocProvider.of<NewsBloc>(_context).add(FetchNewsEvent());
             Navigator.of(context).pop();
           },
           child: Text(AppLocalization.of(context)!.add),

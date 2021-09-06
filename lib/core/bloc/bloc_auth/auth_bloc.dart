@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_state.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_bloc.dart';
@@ -8,8 +9,7 @@ import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
 import 'package:shop/data/repositories/auth_repository.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthRepository repository = AuthRepository();
-
+  final repository = GetIt.instance<AuthRepository>();
   final SplashBloc splashBloc;
 
   AuthBloc(this.splashBloc) : super(AuthState.initAuthState());

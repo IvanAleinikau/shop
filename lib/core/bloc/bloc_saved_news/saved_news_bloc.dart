@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_event.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_state.dart';
 import 'package:shop/core/models/saved_news_model.dart';
@@ -9,7 +10,7 @@ import 'package:shop/data/repositories/local_database_repository.dart';
 
 class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
-  LocalDatabaseRepository database = LocalDatabaseRepository();
+  final repository = GetIt.instance<LocalDatabaseRepository>();
   late List<SavedNews> allSavedNews;
   late List<SavedNews> currentUserSavedNews;
 
@@ -29,7 +30,7 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
     try {
       allSavedNews = [];
       currentUserSavedNews = [];
-      allSavedNews = await database.retrieveSavedNews();
+      allSavedNews = await repository.retrieveSavedNews();
       if (allSavedNews.isNotEmpty) {
         for (int i = 0; i < allSavedNews.length; i++) {
           if (allSavedNews[i].user == user.toString()) {
@@ -46,7 +47,7 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   }
 
   Stream<SavedNewsState> _createSavedNews(CreateSavedNewsEvent event) async* {
-    await database.insertSavedNews(
+    await repository.insertSavedNews(
       SavedNews(
         user: user.toString(),
         title: event.title,
@@ -58,7 +59,7 @@ class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   }
 
   Stream<SavedNewsState> _deleteSavedNews(DeleteSavedNewsEvent event) async* {
-    await database.deleteSavedNews(event.index);
+    await repository.deleteSavedNews(event.index);
     yield SavedNewsState.loading();
   }
 }

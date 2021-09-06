@@ -4,18 +4,16 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
-class MakeVinylRecord extends StatefulWidget {
-  @override
-  _MakeVinylRecordState createState() => _MakeVinylRecordState();
-}
-
-class _MakeVinylRecordState extends State<MakeVinylRecord> {
+class MakeVinylRecord extends StatelessWidget {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _author = TextEditingController();
   final TextEditingController _year = TextEditingController();
   final TextEditingController _description = TextEditingController();
   final TextEditingController _cost = TextEditingController();
   final TextEditingController _image = TextEditingController();
+  final _context;
+
+  MakeVinylRecord(this._context);
 
   @override
   Widget build(BuildContext context) {
@@ -114,3 +112,4 @@ class _MakeVinylRecordState extends State<MakeVinylRecord> {
     );
   }
 }
+

@@ -15,7 +15,6 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/core/search/search.dart';
 
-
 import 'video_page.dart';
 
 class ShopPage extends StatefulWidget {
@@ -28,92 +27,98 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VinylRecordBloc, VinylRecordState>(
-      builder: (context, state) {
-        final VinylRecordBloc _bloc = BlocProvider.of<VinylRecordBloc>(context);
-        BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: ColorPalette.primaryColor,
-            title: Text(
-              AppLocalization.of(context)!.shop,
-              style: ThemeProvider.getTheme().textTheme.headline2,
-            ),
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.search,
+    return BlocProvider<VinylRecordBloc>(
+      create: (context) => VinylRecordBloc(),
+      child: BlocProvider<ShoppingCartBloc>(
+        create: (context) => ShoppingCartBloc(),
+        child: BlocBuilder<VinylRecordBloc, VinylRecordState>(
+          builder: (context, state) {
+            final VinylRecordBloc _bloc = BlocProvider.of<VinylRecordBloc>(context);
+            BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
+            return Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                backgroundColor: ColorPalette.primaryColor,
+                title: Text(
+                  AppLocalization.of(context)!.shop,
+                  style: ThemeProvider.getTheme().textTheme.headline2,
                 ),
-                onPressed: () {
-                  showSearch(context: context, delegate: Search(_bloc.names));
-                },
+                actions: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                    ),
+                    onPressed: () {
+                      showSearch(context: context, delegate: Search(_bloc.names));
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.shopping_cart_outlined,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ShoppingCartPage()),
+                      );
+                    },
+                  ),
+                ],
               ),
-              IconButton(
-                icon: const Icon(
-                  Icons.shopping_cart_outlined,
+              body: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('asset/image/image.jpg'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                child: state.when(
+                  initState: () {
+                    BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
+                  },
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  content: (list) {
+                    return _scrollView(context, list, _bloc);
+                  },
+                  contentEmpty: () {
+                    return Center(
+                      child: Text(
+                        AppLocalization.of(context)!.notVinyl,
+                        style: ThemeProvider.getTheme().textTheme.headline3,
+                      ),
+                    );
+                  },
+                  error: () {
+                    return Center(
+                      child: Text(
+                        AppLocalization.of(context)!.wrong,
+                        style: ThemeProvider.getTheme().textTheme.headline3,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              drawer: const Menu(),
+              floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ShoppingCartPage()),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return MakeVinylRecord(context);
+                    },
                   );
                 },
+                child: const Icon(Icons.add),
+                backgroundColor: ColorPalette.primaryColor,
               ),
-            ],
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('asset/image/image.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: state.when(
-              initState: () {
-                BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
-              },
-              loading: () {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              content: (list) {
-                return _scrollView(context, list, _bloc);
-              },
-              contentEmpty: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.notVinyl,
-                    style: ThemeProvider.getTheme().textTheme.headline3,
-                  ),
-                );
-              },
-              error: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.wrong,
-                    style: ThemeProvider.getTheme().textTheme.headline3,
-                  ),
-                );
-              },
-            ),
-          ),
-          drawer: const Menu(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return MakeVinylRecord();
-                },
-              );
-            },
-            child: const Icon(Icons.add),
-            backgroundColor: ColorPalette.primaryColor,
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -156,8 +161,8 @@ class _ShopPageState extends State<ShopPage> {
       ),
     );
   }
-  
-  Widget _vinylCard(context,list,index){
+
+  Widget _vinylCard(context, list, index) {
     return Container(
       padding: const EdgeInsets.all(3),
       child: ClipRRect(

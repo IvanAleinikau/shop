@@ -10,7 +10,6 @@ import 'package:shop/core/localization/app_localization.dart';
 
 import 'maps_page.dart';
 
-
 class ShoppingCartPage extends StatefulWidget {
   const ShoppingCartPage({Key? key}) : super(key: key);
 
@@ -21,69 +20,72 @@ class ShoppingCartPage extends StatefulWidget {
 class _ShoppingCartPageState extends State<ShoppingCartPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: ColorPalette.primaryColor,
-            title: Text(
-              AppLocalization.of(context)!.cart,
-              style: ThemeProvider.getTheme().textTheme.headline2,
+    return BlocProvider<ShoppingCartBloc>(
+      create: (context) => ShoppingCartBloc(),
+      child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: ColorPalette.primaryColor,
+              title: Text(
+                AppLocalization.of(context)!.cart,
+                style: ThemeProvider.getTheme().textTheme.headline2,
+              ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.add_shopping_cart),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Maps(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.add_shopping_cart),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Maps(),
+            body: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('asset/image/image.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: state.when(
+                initState: () {
+                  BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                content: (list) {
+                  return _scrollView(context, list);
+                },
+                contentEmpty: () {
+                  return Center(
+                    child: Text(
+                      AppLocalization.of(context)!.notVinyl,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
+                    ),
+                  );
+                },
+                error: () {
+                  return Center(
+                    child: Text(
+                      AppLocalization.of(context)!.wrong,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
               ),
-            ],
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('asset/image/image.jpg'),
-                fit: BoxFit.cover,
-              ),
             ),
-            child: state.when(
-              initState: () {
-                BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
-              },
-              loading: () {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              content: (list) {
-                return _scrollView(context, list);
-              },
-              contentEmpty: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.notVinyl,
-                    style: ThemeProvider.getTheme().textTheme.headline3,
-                  ),
-                );
-              },
-              error: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.wrong,
-                    style: ThemeProvider.getTheme().textTheme.headline3,
-                  ),
-                );
-              },
-            ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
