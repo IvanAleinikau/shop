@@ -8,7 +8,7 @@ import 'package:shop/core/models/news_model.dart';
 import 'package:shop/data/repositories/news_repository.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
-  var repository = GetIt.instance<NewsRepository>();
+  final repository = GetIt.instance<NewsRepository>();
   late List<News> list;
 
   NewsBloc() : super(NewsState.initState());

@@ -11,7 +11,7 @@ import 'package:shop/data/repositories/purchase_repository.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
-  var repository = GetIt.instance<PurchaseRepository>();
+  final repository = GetIt.instance<PurchaseRepository>();
   late Purchase purchase;
   late VinylRecord vinylRecord;
   late List<Purchase> allPurchase;

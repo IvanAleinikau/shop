@@ -22,6 +22,7 @@ class PurchaseRepository {
   }
 
   Future<List<Purchase>> fetchPurchase() async {
+    list=[];
     final collection = await FirebaseFirestore.instance.collection('purchase').get();
     collection.docs.forEach((doc) {
       Purchase purchase = Purchase(

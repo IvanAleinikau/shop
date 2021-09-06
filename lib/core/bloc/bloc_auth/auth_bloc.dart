@@ -9,7 +9,7 @@ import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
 import 'package:shop/data/repositories/auth_repository.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  var repository = GetIt.instance<AuthRepository>();
+  final repository = GetIt.instance<AuthRepository>();
   final SplashBloc splashBloc;
 
   AuthBloc(this.splashBloc) : super(AuthState.initAuthState());

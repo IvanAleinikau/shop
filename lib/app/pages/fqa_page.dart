@@ -9,7 +9,6 @@ import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
-
 class FQAPage extends StatefulWidget {
   @override
   _FQAPageState createState() => _FQAPageState();
@@ -18,65 +17,68 @@ class FQAPage extends StatefulWidget {
 class _FQAPageState extends State<FQAPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FqaBloc, FqaState>(
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              AppLocalization.of(context)!.faq,
-              style: ThemeProvider.getTheme().textTheme.headline2,
+    return BlocProvider<FqaBloc>(
+      create: (context) => FqaBloc(),
+      child: BlocBuilder<FqaBloc, FqaState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(
+                AppLocalization.of(context)!.faq,
+                style: ThemeProvider.getTheme().textTheme.headline2,
+              ),
+              backgroundColor: ColorPalette.primaryColor,
             ),
-            backgroundColor: ColorPalette.primaryColor,
-          ),
-          body: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('asset/image/image.jpg'),
-                fit: BoxFit.cover,
+            body: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('asset/image/image.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: state.when(
+                loading: () {
+                  return const CircularProgressIndicator();
+                },
+                content: (list) {
+                  return _scrollView(context, list);
+                },
+                contentEmpty: () {
+                  return Center(
+                    child: Text(
+                      AppLocalization.of(context)!.notFqa,
+                      style: ThemeProvider.getTheme().textTheme.headline2,
+                    ),
+                  );
+                },
+                error: () {
+                  return Center(
+                    child: Text(
+                      AppLocalization.of(context)!.wrong,
+                      style: ThemeProvider.getTheme().textTheme.headline2,
+                    ),
+                  );
+                },
+                initState: () {
+                  BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
+                },
               ),
             ),
-            child: state.when(
-              loading: () {
-                return const CircularProgressIndicator();
-              },
-              content: (list) {
-                return _scrollView(context, list);
-              },
-              contentEmpty: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.notFqa,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
-                  ),
+            drawer: const Menu(),
+            floatingActionButton: FloatingActionButton(
+              child: const Icon(Icons.add),
+              backgroundColor: ColorPalette.primaryColor,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext ctx) => MakeQuestionAnswerForm(context),
                 );
-              },
-              error: () {
-                return Center(
-                  child: Text(
-                    AppLocalization.of(context)!.wrong,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
-                  ),
-                );
-              },
-              initState: () {
-                BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
               },
             ),
-          ),
-          drawer: const Menu(),
-          floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            backgroundColor: ColorPalette.primaryColor,
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => MakeQuestionAnswerForm(),
-              );
-            },
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

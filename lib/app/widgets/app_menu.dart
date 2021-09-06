@@ -141,9 +141,9 @@ class _MenuState extends State<Menu> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FQAPage(),
-                  ),
-                );
+                    builder: (context) =>  FQAPage(),
+                    ),
+                  );
               },
             ),
             ListTile(

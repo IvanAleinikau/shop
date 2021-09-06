@@ -43,29 +43,11 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<SavedNewsBloc>(
-          create: (context) => SavedNewsBloc(),
-        ),
-        BlocProvider<FqaBloc>(
-          create: (context) => FqaBloc(),
-        ),
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(splashBloc),
         ),
-        BlocProvider<SettingBloc>(
-          create: (context) => SettingBloc(),
-        ),
         BlocProvider<RegisterBloc>(
           create: (context) => RegisterBloc(splashBloc),
-        ),
-        BlocProvider<NewsBloc>(
-          create: (context) => NewsBloc(),
-        ),
-        BlocProvider<VinylRecordBloc>(
-          create: (context) => VinylRecordBloc(),
-        ),
-        BlocProvider<ShoppingCartBloc>(
-          create: (context) => ShoppingCartBloc(),
         ),
         BlocProvider<SplashBloc>(
           create: (context) => splashBloc..add(CheckCurrentUser()),

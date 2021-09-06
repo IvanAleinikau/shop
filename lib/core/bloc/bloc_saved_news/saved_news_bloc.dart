@@ -10,7 +10,7 @@ import 'package:shop/data/repositories/local_database_repository.dart';
 
 class SavedNewsBloc extends Bloc<SavedNewsEvent, SavedNewsState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
-  var repository = GetIt.instance<LocalDatabaseRepository>();
+  final repository = GetIt.instance<LocalDatabaseRepository>();
   late List<SavedNews> allSavedNews;
   late List<SavedNews> currentUserSavedNews;
 

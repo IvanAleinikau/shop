@@ -8,7 +8,7 @@ import 'package:shop/core/models/question_answer_model.dart';
 import 'package:shop/data/repositories/local_database_repository.dart';
 
 class FqaBloc extends Bloc<FqaEvent, FqaState> {
-  var repository = GetIt.instance<LocalDatabaseRepository>();
+  final repository = GetIt.instance<LocalDatabaseRepository>();
   late List<QuestionAnswer> allQuestionAnswer;
 
   FqaBloc() : super(FqaState.initState());

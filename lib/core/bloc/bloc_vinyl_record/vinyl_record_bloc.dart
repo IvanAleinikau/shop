@@ -8,7 +8,7 @@ import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:shop/data/repositories/vinyl_record_repository.dart';
 
 class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
-  var repository = GetIt.instance<VinylRecordRepository>();
+  final repository = GetIt.instance<VinylRecordRepository>();
   late List<VinylRecord> allVinylRecord;
   final List<String> names = [];
 
