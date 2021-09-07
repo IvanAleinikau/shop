@@ -72,7 +72,7 @@ class _FQAPageState extends State<FQAPage> {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (BuildContext ctx) => MakeQuestionAnswerForm(context),
+                  builder: (BuildContext ctx) => MakeQuestionAnswerForm(),
                 );
               },
             ),

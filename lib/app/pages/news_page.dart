@@ -79,7 +79,7 @@ class _NewsPageState extends State<NewsPage> {
                   showDialog(
                     context: context,
                     builder: (BuildContext ctx) {
-                      return MakeNewsForm(context);
+                      return MakeNewsForm();
                     },
                   );
                 },

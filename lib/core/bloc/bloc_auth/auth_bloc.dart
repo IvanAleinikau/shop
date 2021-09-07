@@ -6,10 +6,10 @@ import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_state.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_bloc.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
-import 'package:shop/data/repositories/auth_repository.dart';
+import 'package:shop/data/service/auth_service.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final repository = GetIt.instance<AuthRepository>();
+  final service = GetIt.instance<AuthService>();
   final SplashBloc splashBloc;
 
   AuthBloc(this.splashBloc) : super(AuthState.initAuthState());
@@ -23,14 +23,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Stream<AuthState> _logInEvent(LogInEvent event) async* {
-    final user = await repository.signIn(email: event.email, password: event.password);
+    final user = await service.signIn(email: event.email, password: event.password);
     if (user == 'Welcome') {
       splashBloc.add(CheckCurrentUser());
     }
   }
 
   Stream<AuthState> _logOutEvent(LogOutEvent event) async* {
-    final user = await repository.signOut();
+    final user = await service.signOut();
     if (user == 'singOut') {
       splashBloc.add(CheckCurrentUser());
     }

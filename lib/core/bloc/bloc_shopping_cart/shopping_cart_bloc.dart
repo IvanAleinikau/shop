@@ -7,11 +7,11 @@ import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_state.dart';
 import 'package:shop/core/models/purchase_model.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
-import 'package:shop/data/repositories/purchase_repository.dart';
+import 'package:shop/data/service/purchase_service.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   String? user = FirebaseAuth.instance.currentUser!.email;
-  final repository = GetIt.instance<PurchaseRepository>();
+  final service = GetIt.instance<PurchaseService>();
   late Purchase purchase;
   late VinylRecord vinylRecord;
   late List<Purchase> allPurchase;
@@ -31,7 +31,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   Stream<ShoppingCartState> _fetchShoppingCart(FetchShoppingCartEvent event) async* {
     allPurchase = [];
     currentUserPurchase = [];
-    allPurchase = await repository.fetchPurchase();
+    allPurchase = await service.fetchPurchase();
     try {
       for (int i = 0; i < allPurchase.length; i++) {
         if (allPurchase[i].user == user) {
@@ -62,6 +62,6 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
       isActive: true,
       vinylRecord: vinylRecord,
     );
-    repository.makePurchase(purchase);
+    service.makePurchase(purchase);
   }
 }
