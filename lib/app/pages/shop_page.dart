@@ -108,7 +108,7 @@ class _ShopPageState extends State<ShopPage> {
                   showDialog(
                     context: context,
                     builder: (BuildContext ctx) {
-                      return MakeVinylRecord(context);
+                      return MakeVinylRecord();
                     },
                   );
                 },

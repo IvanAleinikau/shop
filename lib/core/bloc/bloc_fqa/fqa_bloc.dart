@@ -5,10 +5,10 @@ import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
 import 'package:shop/core/models/question_answer_model.dart';
-import 'package:shop/data/repositories/local_database_repository.dart';
+import 'package:shop/data/service/question_answer_service.dart';
 
 class FqaBloc extends Bloc<FqaEvent, FqaState> {
-  final repository = GetIt.instance<LocalDatabaseRepository>();
+  final service = GetIt.instance<QuestionAnswerService>();
   late List<QuestionAnswer> allQuestionAnswer;
 
   FqaBloc() : super(FqaState.initState());
@@ -25,7 +25,7 @@ class FqaBloc extends Bloc<FqaEvent, FqaState> {
   Stream<FqaState> _fetchQuestionAnswer(FqaQuestionAnswerEvent event) async* {
     yield FqaState.loading();
     try {
-      allQuestionAnswer = await repository.retrieveQuestionAnswer();
+      allQuestionAnswer = await service.retrieveQuestionAnswer();
       if (allQuestionAnswer.isNotEmpty) {
         yield FqaState.content(allQuestionAnswer);
       } else {
@@ -37,12 +37,12 @@ class FqaBloc extends Bloc<FqaEvent, FqaState> {
   }
 
   Stream<FqaState> _createQuestionAnswer(CreateQuestionAnswerEvent event) async* {
-    await repository.insertQuestionAnswer(QuestionAnswer(question: event.question, answer: event.answer));
+    await service.insertQuestionAnswer(QuestionAnswer(question: event.question, answer: event.answer));
     yield FqaState.loading();
   }
 
   Stream<FqaState> _deleteQuestionAnswer(DeleteQuestionAnswerEvent event) async* {
-    await repository.deleteQuestionAnswer(event.index);
+    await service.deleteQuestionAnswer(event.index);
     yield FqaState.loading();
   }
 }

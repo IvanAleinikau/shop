@@ -6,9 +6,10 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:shop/data/repositories/vinyl_record_repository.dart';
+import 'package:shop/data/service/vinyl_record_service.dart';
 
 class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
-  final repository = GetIt.instance<VinylRecordRepository>();
+  final service = GetIt.instance<VinylRecordService>();
   late List<VinylRecord> allVinylRecord;
   final List<String> names = [];
 
@@ -27,7 +28,7 @@ class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
   Stream<VinylRecordState> _fetchNews(FetchVinylRecord event) async* {
     try {
       allVinylRecord=[];
-      allVinylRecord = await repository.fetchVinylRecord();
+      allVinylRecord = await service.fetchVinylRecord();
       yield VinylRecordState.content(allVinylRecord);
     } catch (_) {
       yield VinylRecordState.error();
@@ -35,7 +36,7 @@ class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
   }
 
   Stream<VinylRecordState> _createVinylRecord(CreateVinylRecord event) async* {
-    repository.makeVinylRecord(VinylRecord(
+    service.makeVinylRecord(VinylRecord(
       name: event.name,
       author: event.author,
       year: event.year,
