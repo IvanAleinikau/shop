@@ -27,5 +27,8 @@ class SetupGetIt {
     GetIt.instance.registerSingleton(PurchaseService());
     GetIt.instance.registerSingleton(SavedNewsService());
     GetIt.instance.registerSingleton(VinylRecordService());
+
+    GetIt.instance<SavedNewsRepository>().initializeDatabase();
+    GetIt.instance<QuestionAnswerRepository>().initializeDatabase();
   }
 }
