@@ -18,3 +18,4 @@ linter:
     avoid_print: true
     prefer_single_quotes: true
     close_sinks: true
+    prefer_const_literals_to_create_immutables: false

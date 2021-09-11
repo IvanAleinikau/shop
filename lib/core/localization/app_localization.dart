@@ -33,6 +33,20 @@ class AppLocalization {
     );
   }
 
+  String get search {
+    return Intl.message(
+      '',
+      name: 'search',
+    );
+  }
+
+  String get noResult {
+    return Intl.message(
+      '',
+      name: 'no_result',
+    );
+  }
+
   String get notVinyl {
     return Intl.message(
       '',
