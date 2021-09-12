@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:shop/app/widgets/search_items/failure.dart';
 import 'package:shop/app/pages/vinyl_record_page.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_bloc.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
+import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_state.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';
@@ -56,17 +58,40 @@ class _ShopPageState extends State<ShopPage> {
                       showSearch(context: context, delegate: _search(context, _bloc.allVinylRecord, _bloc));
                     },
                   ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.shopping_cart_outlined,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ShoppingCartPage()),
-                      );
-                    },
-                  ),
+                  BlocBuilder<ShoppingCartBloc, ShoppingCartState>(builder: (context, purchaseState) {
+                    return Badge(
+                      position: BadgePosition.topStart(top: 3, start: 2),
+                      badgeContent: purchaseState.when(
+                        initState: () {
+                          BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
+                        },
+                        loading: () {
+                          return const Text('0');
+                        },
+                        content: (list) {
+                          return Text(list.length.toString());
+                        },
+                        contentEmpty: () {
+                          return const Text('0');
+                        },
+                        error: () {},
+                      ),
+                      badgeColor: ColorPalette.badgeColor,
+                      toAnimate: true,
+                      animationType: BadgeAnimationType.fade,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.shopping_cart_outlined,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ShoppingCartPage()),
+                          );
+                        },
+                      ),
+                    );
+                  }),
                 ],
               ),
               body: Container(
@@ -212,6 +237,7 @@ class _ShopPageState extends State<ShopPage> {
                                   list[index].image,
                                 ),
                               );
+                              BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
                             },
                             child: Text(
                               AppLocalization.of(context)!.buy,
