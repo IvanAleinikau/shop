@@ -28,7 +28,7 @@ class _FQAPageState extends State<FQAPage> {
                 AppLocalization.of(context)!.faq,
                 style: ThemeProvider.getTheme().textTheme.headline2,
               ),
-              backgroundColor: ColorPalette.primaryColor,
+              backgroundColor: ColorPalette.appBarColor,
             ),
             body: Container(
               decoration: const BoxDecoration(
@@ -68,7 +68,7 @@ class _FQAPageState extends State<FQAPage> {
             drawer: const Menu(),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
-              backgroundColor: ColorPalette.primaryColor,
+              backgroundColor: ColorPalette.appBarColor,
               onPressed: () {
                 showDialog(
                   context: context,

@@ -27,7 +27,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
           return Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              backgroundColor: ColorPalette.primaryColor,
+              backgroundColor: ColorPalette.appBarColor,
               title: Text(
                 AppLocalization.of(context)!.cart,
                 style: ThemeProvider.getTheme().textTheme.headline2,

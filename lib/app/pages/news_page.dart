@@ -33,7 +33,7 @@ class _NewsPageState extends State<NewsPage> {
               appBar: AppBar(
                 centerTitle: true,
                 title: Text(AppLocalization.of(context)!.news, style: ThemeProvider.getTheme().textTheme.headline2),
-                backgroundColor: ColorPalette.primaryColor,
+                backgroundColor: ColorPalette.appBarColor,
               ),
               body: Container(
                 decoration: const BoxDecoration(
@@ -86,7 +86,7 @@ class _NewsPageState extends State<NewsPage> {
                 child: const Icon(
                   Icons.add,
                 ),
-                backgroundColor: ColorPalette.primaryColor,
+                backgroundColor: ColorPalette.appBarColor,
               ),
             );
           },
@@ -187,7 +187,7 @@ class _NewsPageState extends State<NewsPage> {
               },
               icon: const Icon(
                 Icons.save,
-                color: ColorPalette.iconColor,
+                color: ColorPalette.iconnColor,
               ),
             ),
           ],

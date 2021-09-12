@@ -27,7 +27,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
                 AppLocalization.of(context)!.savedNews,
                 style: ThemeProvider.getTheme().textTheme.headline2,
               ),
-              backgroundColor: ColorPalette.primaryColor,
+              backgroundColor: ColorPalette.appBarColor,
             ),
             body: Container(
               decoration: const BoxDecoration(

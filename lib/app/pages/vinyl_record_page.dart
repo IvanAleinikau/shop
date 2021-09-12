@@ -22,7 +22,7 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorPalette.primaryColor,
+        backgroundColor: ColorPalette.appBarColor,
         title: Text(widget.vinylRecord.name),
       ),
       body: Container(
@@ -71,3 +71,41 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
     );
   }
 }
+/*
+Container(
+height: 20,
+padding: const EdgeInsets.fromLTRB(0, 0, 2, 2),
+child: Align(
+alignment: Alignment.topRight,
+child: ElevatedButton(
+onPressed: () {
+BlocProvider.of<ShoppingCartBloc>(context).add(
+CreateShoppingCart(
+list[index].name,
+list[index].author,
+list[index].year,
+list[index].description,
+list[index].cost,
+list[index].image,
+),
+);
+BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
+},
+child: Text(
+AppLocalization.of(context)!.buy,
+style: ThemeProvider.getTheme().textTheme.headline2,
+),
+style: ButtonStyle(
+backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
+textStyle: MaterialStateProperty.all(
+const TextStyle(),
+),
+shape: MaterialStateProperty.all(
+RoundedRectangleBorder(
+borderRadius: BorderRadius.circular(15.0),
+),
+),
+),
+),
+),
+),*/

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/pages/shopping_cart_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/forms_of_creation/make_vinyl_record.dart';
@@ -44,7 +45,7 @@ class _ShopPageState extends State<ShopPage> {
             return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                backgroundColor: ColorPalette.primaryColor,
+                backgroundColor: Colors.blueGrey.shade900,
                 title: Text(
                   AppLocalization.of(context)!.shop,
                   style: ThemeProvider.getTheme().textTheme.headline2,
@@ -127,18 +128,6 @@ class _ShopPageState extends State<ShopPage> {
                 ),
               ),
               drawer: const Menu(),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext ctx) {
-                      return MakeVinylRecord();
-                    },
-                  );
-                },
-                child: const Icon(Icons.add),
-                backgroundColor: ColorPalette.primaryColor,
-              ),
             );
           },
         ),
@@ -187,81 +176,48 @@ class _ShopPageState extends State<ShopPage> {
     return Container(
       padding: const EdgeInsets.all(3),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(17),
+        borderRadius: BorderRadius.circular(20),
         child: Card(
-          color: Colors.transparent,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child: Image.network(list[index].image),
-                ),
-                ListTile(
-                  title: Text(
-                    list[index].name,
-                    style: ThemeProvider.getTheme().textTheme.headline1,
-                  ),
-                  subtitle: Text(
-                    list[index].author,
-                    style: ThemeProvider.getTheme().textTheme.headline2,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.zero,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                            child: Text(
-                              list[index].cost + '\$',
-                              style: ThemeProvider.getTheme().textTheme.headline3,
-                            ),
-                          )),
-                      Container(
-                        height: 20,
-                        padding: const EdgeInsets.fromLTRB(0, 0, 2, 2),
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              BlocProvider.of<ShoppingCartBloc>(context).add(
-                                CreateShoppingCart(
-                                  list[index].name,
-                                  list[index].author,
-                                  list[index].year,
-                                  list[index].description,
-                                  list[index].cost,
-                                  list[index].image,
-                                ),
-                              );
-                              BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
-                            },
-                            child: Text(
-                              AppLocalization.of(context)!.buy,
-                              style: ThemeProvider.getTheme().textTheme.headline2,
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
-                              textStyle: MaterialStateProperty.all(
-                                const TextStyle(),
-                              ),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+          color: ColorPalette.cardColor,
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Image.network(list[index].image),
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                child: Text(
+                  list[index].cost + ' \$',
+                  style: const TextStyle(
+                    color: ColorPalette.costColor,
+                    fontSize: FontSize.costFont,
                   ),
                 ),
-              ],
-            ),
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.fromLTRB(10, 3, 0, 0),
+                child: Text(
+                  list[index].name,
+                  style: const TextStyle(
+                    color: ColorPalette.titleColor,
+                    fontSize: FontSize.titleFont,
+                  ),
+                ),
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Text(
+                  list[index].author,
+                  style: const TextStyle(
+                    color: ColorPalette.subtitleColor,
+                    fontSize: FontSize.subtitleFont,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -271,7 +227,7 @@ class _ShopPageState extends State<ShopPage> {
   SearchPage<VinylRecord> _search(context, list, _bloc) {
     return SearchPage<VinylRecord>(
       barTheme: ThemeData(
-        primaryColor: ColorPalette.searchBarColor,
+        primaryColor: ColorPalette.appBarColor,
         dividerColor: ColorPalette.backgroundColor,
         accentColor: ColorPalette.backgroundColor,
         scaffoldBackgroundColor: ColorPalette.backgroundColor,
@@ -308,40 +264,57 @@ class _ShopPageState extends State<ShopPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(17),
                   child: Card(
-                    color: Colors.transparent,
+                    color: ColorPalette.cardColor,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           flex: 3,
                           child: Container(
-                            height: 150,
+                            height: 170,
                             child: Image.network(
                               vinylRecord.image,
                             ),
                           ),
                         ),
                         Expanded(
-                          flex: 3,
-                          child: ListTile(
-                            title: Text(
-                              vinylRecord.name,
-                              style: ThemeProvider.getTheme().textTheme.headline1,
-                            ),
-                            subtitle: Text(
-                              vinylRecord.author,
-                              style: ThemeProvider.getTheme().textTheme.headline2,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              vinylRecord.cost + '\$',
-                              style: ThemeProvider.getTheme().textTheme.headline1,
-                            ),
+                          flex: 4,
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                child: Text(
+                                  vinylRecord.cost + ' \$',
+                                  style: const TextStyle(
+                                    color: ColorPalette.costColor,
+                                    fontSize: FontSize.costFont,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: const EdgeInsets.fromLTRB(10, 3, 0, 0),
+                                child: Text(
+                                  vinylRecord.name,
+                                  style: const TextStyle(
+                                    color: ColorPalette.titleColor,
+                                    fontSize: FontSize.titleFont,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.topLeft,
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: Text(
+                                  vinylRecord.author,
+                                  style: const TextStyle(
+                                    color: ColorPalette.subtitleColor,
+                                    fontSize: FontSize.subtitleFont,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

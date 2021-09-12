@@ -89,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         child: Text(AppLocalization.of(context)!.singUp),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(ColorPalette.primaryColor),
+                          backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
                           textStyle: MaterialStateProperty.all(
                             const TextStyle(
                               fontSize: 25.0,
