@@ -81,5 +81,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_vinyl" : MessageLookupByLibrary.simpleMessage("Not vinyl records"),
     "search" : MessageLookupByLibrary.simpleMessage("Search vinyl record"),
     "no_result" : MessageLookupByLibrary.simpleMessage("NO RESULT FOUND"),
+    "pay" : MessageLookupByLibrary.simpleMessage("Pay"),
+    "total" : MessageLookupByLibrary.simpleMessage("The total cost: "),
+    "dowant" : MessageLookupByLibrary.simpleMessage("Delete from shopping cart? "),
+    "yes" : MessageLookupByLibrary.simpleMessage("Yes"),
+    "no" : MessageLookupByLibrary.simpleMessage("No"),
   };
 }

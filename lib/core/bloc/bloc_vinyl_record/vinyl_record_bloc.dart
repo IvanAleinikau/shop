@@ -41,7 +41,7 @@ class VinylRecordBloc extends Bloc<VinylRecordEvent, VinylRecordState> {
       author: event.author,
       year: event.year,
       description: event.description,
-      cost: event.cost,
+      cost: event.cost.toString(),
       image: event.image,
     ));
   }

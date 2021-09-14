@@ -8,6 +8,8 @@ abstract class ColorPalette {
   static const badgeColor = Color(0xFFF44336);
   static const iconColor = Color(0xFF263238);
   static const cardColor = Color(0xFFFFFFFF);
+  static const cancelButtonColor = Color(0xFFF44336);
+  static const confirmButtonColor = Color(0xFF4CAF50);
 
   //page colors
   static const appBarColor = Color(0xFF263238);

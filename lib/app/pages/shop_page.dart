@@ -9,7 +9,6 @@ import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/app_menu.dart';
-import 'package:shop/app/widgets/forms_of_creation/make_vinyl_record.dart';
 import 'package:shop/app/widgets/search_items/failure.dart';
 import 'package:shop/app/pages/vinyl_record_page.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_bloc.dart';
@@ -60,14 +59,15 @@ class _ShopPageState extends State<ShopPage> {
                     },
                   ),
                   BlocBuilder<ShoppingCartBloc, ShoppingCartState>(builder: (context, purchaseState) {
+                    final ShoppingCartBloc _bloc = BlocProvider.of<ShoppingCartBloc>(context);
+                    _bloc.add(FetchShoppingCartEvent());
                     return Badge(
                       position: BadgePosition.topStart(top: 3, start: 2),
                       badgeContent: purchaseState.when(
                         initState: () {
-                          BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
+                          _bloc.add(FetchShoppingCartEvent());
                         },
                         loading: () {
-                          return const Text('0');
                         },
                         content: (list) {
                           return Text(list.length.toString());
@@ -148,12 +148,6 @@ class _ShopPageState extends State<ShopPage> {
               tag: '${list[index].name}',
               child: GestureDetector(
                 onLongPress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const VideoPlayerScreen(),
-                    ),
-                  );
                 },
                 onTap: () {
                   Navigator.push(
@@ -179,45 +173,47 @@ class _ShopPageState extends State<ShopPage> {
         borderRadius: BorderRadius.circular(20),
         child: Card(
           color: ColorPalette.cardColor,
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: Image.network(list[index].image),
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                child: Text(
-                  list[index].cost + ' \$',
-                  style: const TextStyle(
-                    color: ColorPalette.costColor,
-                    fontSize: FontSize.costFont,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  child: Image.network(list[index].image),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                  child: Text(
+                    list[index].cost + ' \$',
+                    style: const TextStyle(
+                      color: ColorPalette.costColor,
+                      fontSize: FontSize.costFont,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.fromLTRB(10, 3, 0, 0),
-                child: Text(
-                  list[index].name,
-                  style: const TextStyle(
-                    color: ColorPalette.titleColor,
-                    fontSize: FontSize.titleFont,
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.fromLTRB(10, 3, 0, 0),
+                  child: Text(
+                    list[index].name,
+                    style: const TextStyle(
+                      color: ColorPalette.titleColor,
+                      fontSize: FontSize.titleFont,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Text(
-                  list[index].author,
-                  style: const TextStyle(
-                    color: ColorPalette.subtitleColor,
-                    fontSize: FontSize.subtitleFont,
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: Text(
+                    list[index].author,
+                    style: const TextStyle(
+                      color: ColorPalette.subtitleColor,
+                      fontSize: FontSize.subtitleFont,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -250,7 +246,8 @@ class _ShopPageState extends State<ShopPage> {
           child: Hero(
             tag: vinylRecord.name,
             child: GestureDetector(
-              onLongPress: () {},
+              onLongPress: () {
+              },
               onTap: () {
                 Navigator.push(
                   context,

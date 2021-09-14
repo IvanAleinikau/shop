@@ -24,6 +24,26 @@ class _$ShoppingCartEventTearOff {
     return ShoppingCartEmpty();
   }
 
+  CountIncrement increment(int count, int index) {
+    return CountIncrement(
+      count,
+      index,
+    );
+  }
+
+  CountDecrement decrement(int count, int index) {
+    return CountDecrement(
+      count,
+      index,
+    );
+  }
+
+  Delete delete(int index) {
+    return Delete(
+      index,
+    );
+  }
+
   CreateShoppingCart createShoppingCart(String name, String author, String year,
       String description, String cost, String image) {
     return CreateShoppingCart(
@@ -46,6 +66,9 @@ mixin _$ShoppingCartEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() fetchShoppingCart,
     required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -55,6 +78,9 @@ mixin _$ShoppingCartEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchShoppingCart,
     TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -65,6 +91,9 @@ mixin _$ShoppingCartEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
     required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +101,9 @@ mixin _$ShoppingCartEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
     TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) =>
@@ -137,6 +169,9 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() fetchShoppingCart,
     required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -149,6 +184,9 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchShoppingCart,
     TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -165,6 +203,9 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
     required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return fetchShoppingCart(this);
@@ -175,6 +216,9 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
     TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -231,6 +275,9 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() fetchShoppingCart,
     required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -243,6 +290,9 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchShoppingCart,
     TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -259,6 +309,9 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
   TResult map<TResult extends Object?>({
     required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
     required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return empty(this);
@@ -269,6 +322,9 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
     TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -281,6 +337,434 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
 
 abstract class ShoppingCartEmpty implements ShoppingCartEvent {
   factory ShoppingCartEmpty() = _$ShoppingCartEmpty;
+}
+
+/// @nodoc
+abstract class $CountIncrementCopyWith<$Res> {
+  factory $CountIncrementCopyWith(
+          CountIncrement value, $Res Function(CountIncrement) then) =
+      _$CountIncrementCopyWithImpl<$Res>;
+  $Res call({int count, int index});
+}
+
+/// @nodoc
+class _$CountIncrementCopyWithImpl<$Res>
+    extends _$ShoppingCartEventCopyWithImpl<$Res>
+    implements $CountIncrementCopyWith<$Res> {
+  _$CountIncrementCopyWithImpl(
+      CountIncrement _value, $Res Function(CountIncrement) _then)
+      : super(_value, (v) => _then(v as CountIncrement));
+
+  @override
+  CountIncrement get _value => super._value as CountIncrement;
+
+  @override
+  $Res call({
+    Object? count = freezed,
+    Object? index = freezed,
+  }) {
+    return _then(CountIncrement(
+      count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CountIncrement implements CountIncrement {
+  _$CountIncrement(this.count, this.index);
+
+  @override
+  final int count;
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'ShoppingCartEvent.increment(count: $count, index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is CountIncrement &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)) &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(count) ^
+      const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  $CountIncrementCopyWith<CountIncrement> get copyWith =>
+      _$CountIncrementCopyWithImpl<CountIncrement>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchShoppingCart,
+    required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
+    required TResult Function(String name, String author, String year,
+            String description, String cost, String image)
+        createShoppingCart,
+  }) {
+    return increment(count, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchShoppingCart,
+    TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
+    TResult Function(String name, String author, String year,
+            String description, String cost, String image)?
+        createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (increment != null) {
+      return increment(count, index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
+    required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
+    required TResult Function(CreateShoppingCart value) createShoppingCart,
+  }) {
+    return increment(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
+    TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
+    TResult Function(CreateShoppingCart value)? createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (increment != null) {
+      return increment(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CountIncrement implements ShoppingCartEvent {
+  factory CountIncrement(int count, int index) = _$CountIncrement;
+
+  int get count => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CountIncrementCopyWith<CountIncrement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CountDecrementCopyWith<$Res> {
+  factory $CountDecrementCopyWith(
+          CountDecrement value, $Res Function(CountDecrement) then) =
+      _$CountDecrementCopyWithImpl<$Res>;
+  $Res call({int count, int index});
+}
+
+/// @nodoc
+class _$CountDecrementCopyWithImpl<$Res>
+    extends _$ShoppingCartEventCopyWithImpl<$Res>
+    implements $CountDecrementCopyWith<$Res> {
+  _$CountDecrementCopyWithImpl(
+      CountDecrement _value, $Res Function(CountDecrement) _then)
+      : super(_value, (v) => _then(v as CountDecrement));
+
+  @override
+  CountDecrement get _value => super._value as CountDecrement;
+
+  @override
+  $Res call({
+    Object? count = freezed,
+    Object? index = freezed,
+  }) {
+    return _then(CountDecrement(
+      count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CountDecrement implements CountDecrement {
+  _$CountDecrement(this.count, this.index);
+
+  @override
+  final int count;
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'ShoppingCartEvent.decrement(count: $count, index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is CountDecrement &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)) &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(count) ^
+      const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  $CountDecrementCopyWith<CountDecrement> get copyWith =>
+      _$CountDecrementCopyWithImpl<CountDecrement>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchShoppingCart,
+    required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
+    required TResult Function(String name, String author, String year,
+            String description, String cost, String image)
+        createShoppingCart,
+  }) {
+    return decrement(count, index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchShoppingCart,
+    TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
+    TResult Function(String name, String author, String year,
+            String description, String cost, String image)?
+        createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (decrement != null) {
+      return decrement(count, index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
+    required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
+    required TResult Function(CreateShoppingCart value) createShoppingCart,
+  }) {
+    return decrement(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
+    TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
+    TResult Function(CreateShoppingCart value)? createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (decrement != null) {
+      return decrement(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CountDecrement implements ShoppingCartEvent {
+  factory CountDecrement(int count, int index) = _$CountDecrement;
+
+  int get count => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CountDecrementCopyWith<CountDecrement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DeleteCopyWith<$Res> {
+  factory $DeleteCopyWith(Delete value, $Res Function(Delete) then) =
+      _$DeleteCopyWithImpl<$Res>;
+  $Res call({int index});
+}
+
+/// @nodoc
+class _$DeleteCopyWithImpl<$Res> extends _$ShoppingCartEventCopyWithImpl<$Res>
+    implements $DeleteCopyWith<$Res> {
+  _$DeleteCopyWithImpl(Delete _value, $Res Function(Delete) _then)
+      : super(_value, (v) => _then(v as Delete));
+
+  @override
+  Delete get _value => super._value as Delete;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(Delete(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$Delete implements Delete {
+  _$Delete(this.index);
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'ShoppingCartEvent.delete(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Delete &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  $DeleteCopyWith<Delete> get copyWith =>
+      _$DeleteCopyWithImpl<Delete>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchShoppingCart,
+    required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
+    required TResult Function(String name, String author, String year,
+            String description, String cost, String image)
+        createShoppingCart,
+  }) {
+    return delete(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchShoppingCart,
+    TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
+    TResult Function(String name, String author, String year,
+            String description, String cost, String image)?
+        createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
+    required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
+    required TResult Function(CreateShoppingCart value) createShoppingCart,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
+    TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
+    TResult Function(CreateShoppingCart value)? createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Delete implements ShoppingCartEvent {
+  factory Delete(int index) = _$Delete;
+
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DeleteCopyWith<Delete> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -409,6 +893,9 @@ class _$CreateShoppingCart implements CreateShoppingCart {
   TResult when<TResult extends Object?>({
     required TResult Function() fetchShoppingCart,
     required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -421,6 +908,9 @@ class _$CreateShoppingCart implements CreateShoppingCart {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchShoppingCart,
     TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -437,6 +927,9 @@ class _$CreateShoppingCart implements CreateShoppingCart {
   TResult map<TResult extends Object?>({
     required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
     required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return createShoppingCart(this);
@@ -447,6 +940,9 @@ class _$CreateShoppingCart implements CreateShoppingCart {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
     TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {

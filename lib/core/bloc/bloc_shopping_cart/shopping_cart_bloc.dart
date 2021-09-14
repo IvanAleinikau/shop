@@ -16,6 +16,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   late VinylRecord vinylRecord;
   late List<Purchase> allPurchase;
   late List<Purchase> currentUserPurchase;
+  int totalCost = 0;
 
   ShoppingCartBloc() : super(ShoppingCartState.initState());
 
@@ -25,18 +26,37 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
       fetchShoppingCart: _fetchShoppingCart,
       empty: _empty,
       createShoppingCart: _createShoppingCart,
+      increment: _increment,
+      decrement: _decrement,
+      delete: _delete,
     );
+  }
+
+  Stream<ShoppingCartState> _delete(Delete event) async* {
+    await service.delete(event.index);
+  }
+
+  Stream<ShoppingCartState> _increment(CountIncrement event) async* {
+    await service.incrementCount(event.count, event.index);
+  }
+
+  Stream<ShoppingCartState> _decrement(CountDecrement event) async* {
+    await service.decrementCount(event.count, event.index);
   }
 
   Stream<ShoppingCartState> _fetchShoppingCart(FetchShoppingCartEvent event) async* {
     allPurchase = [];
     currentUserPurchase = [];
+    totalCost = 0;
     allPurchase = await service.fetchPurchase();
     try {
       for (int i = 0; i < allPurchase.length; i++) {
         if (allPurchase[i].user == user) {
           currentUserPurchase.add(allPurchase[i]);
         }
+      }
+      for (int i = 0; i < currentUserPurchase.length; i++) {
+        totalCost += currentUserPurchase[i].count * int.parse(currentUserPurchase[i].vinylRecord.cost);
       }
       yield ShoppingCartState.content(currentUserPurchase);
     } catch (_) {
@@ -59,8 +79,9 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     );
     purchase = Purchase(
       user: user.toString(),
-      isActive: true,
+      isActive: false,
       vinylRecord: vinylRecord,
+      count: 1,
     );
     service.makePurchase(purchase);
   }

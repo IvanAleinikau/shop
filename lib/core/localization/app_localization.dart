@@ -47,6 +47,40 @@ class AppLocalization {
     );
   }
 
+  String get pay {
+    return Intl.message(
+      '',
+      name: 'pay',
+    );
+  }
+  String get total {
+    return Intl.message(
+      '',
+      name: 'total',
+    );
+  }
+
+  String get doWant {
+    return Intl.message(
+      '',
+      name: 'dowant',
+    );
+  }
+
+  String get no {
+    return Intl.message(
+      '',
+      name: 'no',
+    );
+  }
+
+  String get yes {
+    return Intl.message(
+      '',
+      name: 'yes',
+    );
+  }
+
   String get notVinyl {
     return Intl.message(
       '',

@@ -81,5 +81,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_vinyl" : MessageLookupByLibrary.simpleMessage("Нет виниловых пластинок"),
     "search" : MessageLookupByLibrary.simpleMessage("Поиск выниловых пластинок"),
     "no_result" : MessageLookupByLibrary.simpleMessage("Результатов не найдено"),
+    "pay" : MessageLookupByLibrary.simpleMessage("Оплатить"),
+    "total" : MessageLookupByLibrary.simpleMessage("Итоговая стоимость: "),
+    "dowant" : MessageLookupByLibrary.simpleMessage("Удалить из корзины? "),
+    "yes" : MessageLookupByLibrary.simpleMessage("Да"),
+    "no" : MessageLookupByLibrary.simpleMessage("Нет"),
   };
 }

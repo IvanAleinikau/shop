@@ -4,9 +4,11 @@ import 'package:shop/core/models/vinyl_record_model.dart';
 
 class PurchaseRepository {
   late List<Purchase> list = [];
+  late List<String> keys = [];
+  final _collection = FirebaseFirestore.instance.collection('purchase');
 
   Future<String> makePurchase(Purchase purchase) async {
-    await FirebaseFirestore.instance.collection('purchase').add(
+    _collection.add(
       {
         'user': purchase.user,
         'is_active': purchase.isActive,
@@ -15,16 +17,19 @@ class PurchaseRepository {
         'year': purchase.vinylRecord.year,
         'description': purchase.vinylRecord.description,
         'cost': purchase.vinylRecord.cost,
-        'image': purchase.vinylRecord.image
+        'image': purchase.vinylRecord.image,
+        'count': purchase.count,
       },
     );
     return 'Purchase made';
   }
 
   Future<List<Purchase>> fetchPurchase() async {
-    list=[];
-    final collection = await FirebaseFirestore.instance.collection('purchase').get();
+    list = [];
+    keys = [];
+    final collection = await _collection.get();
     collection.docs.forEach((doc) {
+      keys.add(doc.id);
       Purchase purchase = Purchase(
         user: doc['user'],
         isActive: doc['is_active'],
@@ -36,9 +41,25 @@ class PurchaseRepository {
           cost: doc['cost'],
           image: doc['image'],
         ),
+        count: doc['count'],
       );
       list.add(purchase);
     });
     return list;
+  }
+
+  Future<void> incrementCount(int count, int index) async {
+    await _collection.doc(keys[index].toString()).update({'count': count + 1});
+    await fetchPurchase();
+  }
+
+  Future<void> decrementCount(int count, int index) async {
+    await _collection.doc(keys[index].toString()).update({'count': count - 1});
+    await fetchPurchase();
+  }
+
+  Future<void> delete(int index) async {
+    await _collection.doc(keys[index].toString()).delete();
+    await fetchPurchase();
   }
 }
