@@ -86,5 +86,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "dowant" : MessageLookupByLibrary.simpleMessage("Delete from shopping cart? "),
     "yes" : MessageLookupByLibrary.simpleMessage("Yes"),
     "no" : MessageLookupByLibrary.simpleMessage("No"),
+    "my_data" : MessageLookupByLibrary.simpleMessage("My data"),
+    "gender" : MessageLookupByLibrary.simpleMessage("Gender"),
+    "post_office" : MessageLookupByLibrary.simpleMessage("Post office index"),
+    "first_name" : MessageLookupByLibrary.simpleMessage("First name"),
+    "surname" : MessageLookupByLibrary.simpleMessage("Surname"),
+    "ok" : MessageLookupByLibrary.simpleMessage("OK"),
+    "female" : MessageLookupByLibrary.simpleMessage("Female"),
+    "male" : MessageLookupByLibrary.simpleMessage("Male"),
+    "" : MessageLookupByLibrary.simpleMessage(""),
+    "" : MessageLookupByLibrary.simpleMessage(""),
+
   };
 }

@@ -187,7 +187,7 @@ class _NewsPageState extends State<NewsPage> {
               },
               icon: const Icon(
                 Icons.save,
-                color: ColorPalette.iconnColor,
+                color: ColorPalette.iconColor,
               ),
             ),
           ],

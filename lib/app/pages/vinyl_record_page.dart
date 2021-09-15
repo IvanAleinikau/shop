@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/pages/shop_page.dart';
+import 'package:shop/app/pages/shopping_cart_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
@@ -31,12 +32,12 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
       child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: ColorPalette.backgroundColor,
             appBar: AppBar(
               backgroundColor: ColorPalette.appBarColor,
               title: Text(widget.vinylRecord.name),
             ),
             body: Container(
-              color: ColorPalette.backgroundColor,
               child: Hero(
                 tag: widget.vinylRecord.name,
                 child: SingleChildScrollView(

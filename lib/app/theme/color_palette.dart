@@ -2,7 +2,6 @@ import 'dart:ui';
 
 abstract class ColorPalette {
   static const authBackColor = Color(0xB3FFFFFF);
-  static const iconnColor = Color(0xFF9E9E9E);
 
   //widgets colors
   static const badgeColor = Color(0xFFF44336);
@@ -23,4 +22,5 @@ abstract class ColorPalette {
 
   //other colors
   static const dismissibleColor = Color(0xFFF44336);
+  static const dividerColor = Color(0xFF000000);
 }

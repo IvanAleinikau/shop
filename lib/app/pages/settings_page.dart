@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/pages/control_page.dart';
+import 'package:shop/app/pages/user_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/divider.dart';
@@ -34,13 +36,14 @@ class _SettingsPageState extends State<SettingsPage> {
             },
           );
           return Scaffold(
+            backgroundColor: ColorPalette.backgroundColor,
             appBar: AppBar(
               centerTitle: true,
+              backgroundColor: ColorPalette.appBarColor,
               title: Text(
                 AppLocalization.of(context)!.settings,
                 style: ThemeProvider.getTheme().textTheme.headline2,
               ),
-              backgroundColor: Colors.black54,
               actions: [
                 IconButton(
                   icon: const Icon(
@@ -53,22 +56,29 @@ class _SettingsPageState extends State<SettingsPage> {
                     );
                   },
                 ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.account_circle,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => UserPage()),
+                    );
+                  },
+                ),
               ],
             ),
             body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('asset/image/image.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
                 children: [
                   SizedBox(
                     child: Text(
                       AppLocalization.of(context)!.settings,
-                      style: ThemeProvider.getTheme().textTheme.headline4,
+                      style: const TextStyle(
+                        fontSize: FontSize.settingsFont,
+                      ),
                     ),
                   ),
                   const CustomDivider(),
@@ -87,12 +97,13 @@ class _SettingsPageState extends State<SettingsPage> {
     return ListTile(
       title: Text(
         AppLocalization.of(context)!.changeLanguage,
-        style: ThemeProvider.getTheme().textTheme.headline5,
+        style: const TextStyle(
+          fontSize: FontSize.settingsFont,
+        ),
       ),
       leading: const Icon(
         Icons.language,
-        color: ColorPalette.textColor,
-        size: 30,
+        size: FontSize.iconFont,
       ),
       onTap: () {
         showDialog(

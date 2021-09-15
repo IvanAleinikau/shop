@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shop/data/repositories/user_repository.dart';
 
 class AuthRepository {
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = FirebaseAuth.instance.currentUser;
+  final repository = GetIt.instance<UserRepository>();
 
   Future<String> createAccount({required String email, required String password}) async {
     try {
@@ -10,6 +13,7 @@ class AuthRepository {
         email: email,
         password: password,
       );
+      await repository.makeUser(email);
       return 'Account created';
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

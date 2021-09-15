@@ -81,6 +81,62 @@ class AppLocalization {
     );
   }
 
+  String get myData {
+    return Intl.message(
+      '',
+      name: 'my_data',
+    );
+  }
+
+  String get gender {
+    return Intl.message(
+      '',
+      name: 'gender',
+    );
+  }
+
+  String get postOffice {
+    return Intl.message(
+      '',
+      name: 'post_office',
+    );
+  }
+
+  String get firstName {
+    return Intl.message(
+      '',
+      name: 'first_name',
+    );
+  }
+
+  String get surname {
+    return Intl.message(
+      '',
+      name: 'surname',
+    );
+  }
+
+  String get ok {
+    return Intl.message(
+      '',
+      name: 'ok',
+    );
+  }
+
+  String get female {
+    return Intl.message(
+      '',
+      name: 'female',
+    );
+  }
+
+  String get male {
+    return Intl.message(
+      '',
+      name: 'male',
+    );
+  }
+
   String get notVinyl {
     return Intl.message(
       '',

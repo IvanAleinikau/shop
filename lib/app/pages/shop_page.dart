@@ -41,6 +41,7 @@ class _ShopPageState extends State<ShopPage> {
           builder: (context, state) {
             final VinylRecordBloc _bloc = BlocProvider.of<VinylRecordBloc>(context);
             BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
+            BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
             return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
@@ -69,7 +70,7 @@ class _ShopPageState extends State<ShopPage> {
                         },
                         loading: () {
                         },
-                        content: (list) {
+                        content: (list , total) {
                           return Text(list.length.toString());
                         },
                         contentEmpty: () {

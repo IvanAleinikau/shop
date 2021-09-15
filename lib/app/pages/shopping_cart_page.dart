@@ -60,8 +60,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                     child: CircularProgressIndicator(),
                   );
                 },
-                content: (list) {
-                  return _scrollView(context, list);
+                content: (list, total) {
+                  return _scrollView(context, list, total);
                 },
                 contentEmpty: () {
                   return Center(
@@ -87,7 +87,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
     );
   }
 
-  Widget _scrollView(context, List<Purchase> list) {
+  Widget _scrollView(context, List<Purchase> list, total) {
     final ShoppingCartBloc _bloc = BlocProvider.of<ShoppingCartBloc>(context);
     return Column(
       children: <Widget>[
@@ -159,63 +159,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                                           showDialog(
                                             context: context,
                                             builder: (BuildContext ctx) {
-                                              return AlertDialog(
-                                                title: Text(AppLocalization.of(context)!.doWant),
-                                                content: SingleChildScrollView(
-                                                  child: Row(
-                                                    children: [
-                                                      Container(
-                                                        padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                          },
-                                                          child: Text(AppLocalization.of(context)!.no),
-                                                          style: ButtonStyle(
-                                                            fixedSize: MaterialStateProperty.all(const Size(100, 50)),
-                                                            backgroundColor: MaterialStateProperty.all(ColorPalette.cancelButtonColor),
-                                                            textStyle: MaterialStateProperty.all(
-                                                              const TextStyle(
-                                                                fontSize: FontSize.buttonFont,
-                                                              ),
-                                                            ),
-                                                            shape: MaterialStateProperty.all(
-                                                              RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        padding: const EdgeInsets.fromLTRB(10, 0, 15, 5),
-                                                        child: ElevatedButton(
-                                                          onPressed: () {
-                                                            Navigator.of(context).pop();
-                                                            _bloc.add(Delete(index));
-                                                            _bloc.add(FetchShoppingCartEvent());
-                                                          },
-                                                          child: Text(AppLocalization.of(context)!.yes),
-                                                          style: ButtonStyle(
-                                                            fixedSize: MaterialStateProperty.all(const Size(100, 50)),
-                                                            backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
-                                                            textStyle: MaterialStateProperty.all(
-                                                              const TextStyle(
-                                                                fontSize: FontSize.buttonFont,
-                                                              ),
-                                                            ),
-                                                            shape: MaterialStateProperty.all(
-                                                              RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              );
+                                              return _deleteDialog(context, index, _bloc);
                                             },
                                           );
                                         } else {
@@ -269,7 +213,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
               Row(
                 children: [
                   Text(
-                    AppLocalization.of(context)!.total + '${_bloc.totalCost} \$',
+                    AppLocalization.of(context)!.total + '${total.toString()} \$',
                     style: const TextStyle(
                       color: ColorPalette.costColor,
                       fontSize: FontSize.totalFont,
@@ -283,7 +227,14 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext ctx) {
+                            return _purchaseConfirm(context, list, _bloc);
+                          },
+                        );
+                      },
                       child: Text(AppLocalization.of(context)!.pay),
                       style: ButtonStyle(
                         fixedSize: MaterialStateProperty.all(const Size(150, 50)),
@@ -307,6 +258,78 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _deleteDialog(context, index, _bloc) {
+    return AlertDialog(
+      title: Text(AppLocalization.of(context)!.doWant),
+      content: SingleChildScrollView(
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(AppLocalization.of(context)!.no),
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(100, 50)),
+                  backgroundColor: MaterialStateProperty.all(ColorPalette.cancelButtonColor),
+                  textStyle: MaterialStateProperty.all(
+                    const TextStyle(
+                      fontSize: FontSize.buttonFont,
+                    ),
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 0, 15, 5),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _bloc.add(Delete(index));
+                  _bloc.add(FetchShoppingCartEvent());
+                },
+                child: Text(AppLocalization.of(context)!.yes),
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(100, 50)),
+                  backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
+                  textStyle: MaterialStateProperty.all(
+                    const TextStyle(
+                      fontSize: FontSize.buttonFont,
+                    ),
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _purchaseConfirm(context, list, _bloc) {
+    return AlertDialog(
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+            //TODO
+          ],
+        ),
+      ),
     );
   }
 }

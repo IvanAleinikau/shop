@@ -86,5 +86,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "dowant" : MessageLookupByLibrary.simpleMessage("Удалить из корзины? "),
     "yes" : MessageLookupByLibrary.simpleMessage("Да"),
     "no" : MessageLookupByLibrary.simpleMessage("Нет"),
+    "my_data" : MessageLookupByLibrary.simpleMessage("Мои данные"),
+    "gender" : MessageLookupByLibrary.simpleMessage("Пол"),
+    "post_office" : MessageLookupByLibrary.simpleMessage("Почтовый индекс"),
+    "first_name" : MessageLookupByLibrary.simpleMessage("Имя"),
+    "surname" : MessageLookupByLibrary.simpleMessage("Фамилия"),
+    "ok" : MessageLookupByLibrary.simpleMessage("Подтвердить"),
+    "female" : MessageLookupByLibrary.simpleMessage("Женский"),
+    "male" : MessageLookupByLibrary.simpleMessage("Мужской"),
+    "" : MessageLookupByLibrary.simpleMessage(""),
+    "" : MessageLookupByLibrary.simpleMessage(""),
   };
 }
