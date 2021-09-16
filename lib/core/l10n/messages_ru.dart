@@ -82,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "search" : MessageLookupByLibrary.simpleMessage("Поиск выниловых пластинок"),
     "no_result" : MessageLookupByLibrary.simpleMessage("Результатов не найдено"),
     "pay" : MessageLookupByLibrary.simpleMessage("Оплатить"),
-    "total" : MessageLookupByLibrary.simpleMessage("Итоговая стоимость: "),
+    "total" : MessageLookupByLibrary.simpleMessage("Итог: "),
     "dowant" : MessageLookupByLibrary.simpleMessage("Удалить из корзины? "),
     "yes" : MessageLookupByLibrary.simpleMessage("Да"),
     "no" : MessageLookupByLibrary.simpleMessage("Нет"),

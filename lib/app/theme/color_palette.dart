@@ -23,4 +23,5 @@ abstract class ColorPalette {
   //other colors
   static const dismissibleColor = Color(0xFFF44336);
   static const dividerColor = Color(0xFF000000);
+  static const buttonColor = Color(0xFFF06292);
 }

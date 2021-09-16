@@ -206,56 +206,48 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
             },
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    AppLocalization.of(context)!.total + '${total.toString()} \$',
-                    style: const TextStyle(
-                      color: ColorPalette.costColor,
-                      fontSize: FontSize.totalFont,
-                    ),
-                  ),
-                ],
+        Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(left: 25),
+              alignment: Alignment.topLeft,
+              child: Text(
+                AppLocalization.of(context)!.total + '${total.toString()} \$',
+                style: const TextStyle(
+                  fontSize: FontSize.totalFont,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext ctx) {
-                            return _purchaseConfirm(context, list, _bloc);
-                          },
-                        );
-                      },
-                      child: Text(AppLocalization.of(context)!.pay),
-                      style: ButtonStyle(
-                        fixedSize: MaterialStateProperty.all(const Size(150, 50)),
-                        backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
-                        textStyle: MaterialStateProperty.all(
-                          const TextStyle(
-                            fontSize: FontSize.buttonFont,
-                          ),
-                        ),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                        ),
-                      ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
+              child: ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return _purchaseConfirm(context, list, _bloc);
+                    },
+                  );
+                },
+                child: Text(AppLocalization.of(context)!.pay),
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(const Size(350, 50)),
+                  backgroundColor: MaterialStateProperty.all(ColorPalette.buttonColor),
+                  textStyle: MaterialStateProperty.all(
+                    const TextStyle(
+                      fontSize: FontSize.buttonFont,
                     ),
                   ),
-                ],
-              )
-            ],
-          ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
       ],
     );
