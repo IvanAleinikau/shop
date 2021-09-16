@@ -14,4 +14,8 @@ abstract class FontSize{
   static const double genderFont = 17;
   static const double indexFont = 17;
   static const double settingsFont = 20;
+  static const double orderFont = 25;
+  static const double customerFont = 20;
+  static const double infoFont = 20;
+  static const double thanksFont = 20;
 }

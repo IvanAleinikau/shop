@@ -53,6 +53,35 @@ class AppLocalization {
       name: 'pay',
     );
   }
+
+  String get order {
+    return Intl.message(
+      '',
+      name: 'order',
+    );
+  }
+
+  String get customer {
+    return Intl.message(
+      '',
+      name: 'customer',
+    );
+  }
+
+  String get order2 {
+    return Intl.message(
+      '',
+      name: 'order2',
+    );
+  }
+
+  String get thanks {
+    return Intl.message(
+      '',
+      name: 'thanks',
+    );
+  }
+
   String get total {
     return Intl.message(
       '',

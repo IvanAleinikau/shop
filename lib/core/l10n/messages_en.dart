@@ -94,8 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "ok" : MessageLookupByLibrary.simpleMessage("OK"),
     "female" : MessageLookupByLibrary.simpleMessage("Female"),
     "male" : MessageLookupByLibrary.simpleMessage("Male"),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-    "" : MessageLookupByLibrary.simpleMessage(""),
-
+    "order" : MessageLookupByLibrary.simpleMessage("Your order"),
+    "customer" : MessageLookupByLibrary.simpleMessage("Customer: "),
+    "order2" : MessageLookupByLibrary.simpleMessage("The order will be delivered to the post office with postal code"),
+    "thanks" : MessageLookupByLibrary.simpleMessage("Thank you for your purchase!"),
   };
 }
