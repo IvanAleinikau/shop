@@ -19,4 +19,8 @@ abstract class FontSize{
   static const double infoFont = 20;
   static const double thanksFont = 20;
   static const double bottomBarIconFont = 30;
+
+  //news fonts
+  static const double newsTitleFont = 25;
+  static const double newsTextFont = 20;
 }
