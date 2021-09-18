@@ -98,5 +98,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "customer" : MessageLookupByLibrary.simpleMessage("Customer: "),
     "order2" : MessageLookupByLibrary.simpleMessage("The order will be delivered to the post office with postal code"),
     "thanks" : MessageLookupByLibrary.simpleMessage("Thank you for your purchase!"),
+    "hello" : MessageLookupByLibrary.simpleMessage("Hello"),
   };
 }

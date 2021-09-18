@@ -4,147 +4,161 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
+import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
+import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class UserPage extends StatelessWidget {
+
+  const UserPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserBloc>(
-      create: (context) => UserBloc(),
-      child: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          final UserBloc _bloc = BlocProvider.of<UserBloc>(context);
-          return Scaffold(
-            backgroundColor: ColorPalette.backgroundColor,
-            appBar: AppBar(
-              backgroundColor: ColorPalette.appBarColor,
-              title: Text(
-                AppLocalization.of(context)!.myData,
-                style: ThemeProvider.getTheme().textTheme.headline2,
-              ),
-              centerTitle: true,
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    CupertinoIcons.pen,
-                  ),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext ctx) {
-                        return _namesForm(context, state, _bloc);
-                      },
-                    );
-                  },
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        final UserBloc _bloc = BlocProvider.of<UserBloc>(context);
+        return Scaffold(
+          backgroundColor: ColorPalette.backgroundColor,
+          appBar: AppBar(
+            backgroundColor: ColorPalette.appBarColor,
+            title: Text(
+              AppLocalization.of(context)!.myData,
+              style: ThemeProvider.getTheme().textTheme.headline2,
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                icon: const Icon(
+                  CupertinoIcons.pen,
                 ),
-              ],
-            ),
-            body: state.when(
-              initState: () {
-                _bloc.add(FetchUser());
-              },
-              user: (user) {
-                return Container(
-                  child: ListView(
-                    children: [
-                      Row(
-                        children: [
-                          const Expanded(
-                            flex: 1,
-                            child: Icon(
-                              Icons.account_circle_sharp,
-                              size: FontSize.userIconFont,
-                            ),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext ctx) {
+                      return _namesForm(context, state, _bloc);
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+          body: state.when(
+            initState: () {
+              _bloc.add(FetchUser());
+            },
+            user: (user) {
+              return Container(
+                child: ListView(
+                  children: [
+                    Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: Icon(
+                            Icons.account_circle_sharp,
+                            size: FontSize.userIconFont,
                           ),
-                          Expanded(
-                            flex: 5,
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
-                                  child: Text(
-                                    user.firstName,
-                                    style: const TextStyle(
-                                      fontSize: FontSize.nameFont,
-                                    ),
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
+                                child: Text(
+                                  user.firstName,
+                                  style: const TextStyle(
+                                    fontSize: FontSize.nameFont,
                                   ),
                                 ),
-                                Container(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    user.surname,
-                                    style: const TextStyle(
-                                      fontSize: FontSize.surnameFont,
-                                    ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  user.surname,
+                                  style: const TextStyle(
+                                    fontSize: FontSize.surnameFont,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          _divider(),
-                          ListTile(
-                            title: Text(
-                              AppLocalization.of(context)!.email,
-                              style: const TextStyle(
-                                fontSize: FontSize.emailFont,
                               ),
-                            ),
-                            subtitle: Text(user.email),
+                            ],
                           ),
-                          ListTile(
-                            title: Text(
-                              AppLocalization.of(context)!.gender,
-                              style: const TextStyle(
-                                fontSize: FontSize.genderFont,
-                              ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        _divider(),
+                        ListTile(
+                          title: Text(
+                            AppLocalization.of(context)!.email,
+                            style: const TextStyle(
+                              fontSize: FontSize.emailFont,
                             ),
-                            subtitle: Text(user.gender),
-                            trailing: const Icon(Icons.keyboard_arrow_right),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext ctx) {
-                                  return _genderForm(context, state, _bloc);
-                                },
-                              );
-                            },
                           ),
-                          ListTile(
-                            title: Text(
-                              AppLocalization.of(context)!.postOffice,
-                              style: const TextStyle(
-                                fontSize: FontSize.indexFont,
-                              ),
+                          subtitle: Text(user.email),
+                        ),
+                        ListTile(
+                          title: Text(
+                            AppLocalization.of(context)!.gender,
+                            style: const TextStyle(
+                              fontSize: FontSize.genderFont,
                             ),
-                            subtitle: Text(user.postOfficeIndex.toString()),
-                            trailing: const Icon(Icons.keyboard_arrow_right),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext ctx) {
-                                  return _postOfficeForm(context, state, _bloc);
-                                },
-                              );
-                            },
                           ),
-                          _divider(),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
+                          subtitle: Text(user.gender),
+                          trailing: const Icon(Icons.keyboard_arrow_right),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return _genderForm(context, state, _bloc);
+                              },
+                            );
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            AppLocalization.of(context)!.postOffice,
+                            style: const TextStyle(
+                              fontSize: FontSize.indexFont,
+                            ),
+                          ),
+                          subtitle: Text(user.postOfficeIndex.toString()),
+                          trailing: const Icon(Icons.keyboard_arrow_right),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return _postOfficeForm(context, state, _bloc);
+                              },
+                            );
+                          },
+                        ),
+                        _divider(),
+                        ListTile(
+                          title: Text(
+                            AppLocalization.of(context)!.logout,
+                            style: const TextStyle(
+                              fontSize: FontSize.nameFont,
+                              color: ColorPalette.dismissibleColor,
+                            ),
+                          ),
+                          onTap: () {
+                            BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 

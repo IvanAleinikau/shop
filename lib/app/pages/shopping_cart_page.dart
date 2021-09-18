@@ -321,113 +321,109 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   }
 
   Widget _purchaseConfirm(context, List<Purchase> list) {
-    return BlocProvider<UserBloc>(
-      create: (context) => UserBloc(),
-      child: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          final UserBloc _bloc = BlocProvider.of<UserBloc>(context);
-
-          return Dialog(
-            child: SingleChildScrollView(
-              child: Container(
-                height: 400,
-                color: ColorPalette.backgroundColor,
-                child: state.when(
-                  initState: () {
-                    _bloc.add(FetchUser());
-                  },
-                  user: (user) {
-                    return Column(
-                      children: [
-                        Container(
-                          child: Text(
-                            AppLocalization.of(context)!.order,
-                            style: const TextStyle(
-                              fontSize: FontSize.orderFont,
-                            ),
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        final UserBloc _bloc = BlocProvider.of<UserBloc>(context);
+        return Dialog(
+          child: SingleChildScrollView(
+            child: Container(
+              height: 400,
+              color: ColorPalette.backgroundColor,
+              child: state.when(
+                initState: () {
+                  _bloc.add(FetchUser());
+                },
+                user: (user) {
+                  return Column(
+                    children: [
+                      Container(
+                        child: Text(
+                          AppLocalization.of(context)!.order,
+                          style: const TextStyle(
+                            fontSize: FontSize.orderFont,
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            AppLocalization.of(context)!.customer + ' ' + user.firstName + ' ' + user.surname,
-                            style: const TextStyle(
-                              fontSize: FontSize.customerFont,
-                            ),
+                      ),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          AppLocalization.of(context)!.customer + ' ' + user.firstName + ' ' + user.surname,
+                          style: const TextStyle(
+                            fontSize: FontSize.customerFont,
                           ),
                         ),
-                        const CustomDivider(),
-                        Expanded(
-                          child: Container(
-                            child: ListView.builder(
-                              itemCount: list.length,
-                              itemBuilder: (BuildContext context, index) {
-                                return Container(
-                                  padding: const EdgeInsets.fromLTRB(5, 5, 0, 5),
-                                  child: Text(
-                                    '${index + 1}. ${list[index].vinylRecord.name} x ${list[index].count} - ${list[index].count * int.parse(list[index].vinylRecord.cost)} \$',
-                                    style: const TextStyle(
-                                      fontSize: FontSize.nameFont,
-                                    ),
+                      ),
+                      const CustomDivider(),
+                      Expanded(
+                        child: Container(
+                          child: ListView.builder(
+                            itemCount: list.length,
+                            itemBuilder: (BuildContext context, index) {
+                              return Container(
+                                padding: const EdgeInsets.fromLTRB(5, 5, 0, 5),
+                                child: Text(
+                                  '${index + 1}. ${list[index].vinylRecord.name} x ${list[index].count} - ${list[index].count * int.parse(list[index].vinylRecord.cost)} \$',
+                                  style: const TextStyle(
+                                    fontSize: FontSize.nameFont,
                                   ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        const CustomDivider(),
-                        Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          alignment: Alignment.center,
-                          child: Text(
-                            AppLocalization.of(context)!.order2 + ' ' + user.postOfficeIndex.toString()+'.',
-                            style: const TextStyle(
-                              fontSize: FontSize.infoFont,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Text(
-                            AppLocalization.of(context)!.thanks,
-                            style: const TextStyle(
-                              fontSize: FontSize.thanksFont,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 5),
-                          alignment: Alignment.bottomRight,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
+                                ),
+                              );
                             },
-                            child: Text(AppLocalization.of(context)!.ok),
-                            style: ButtonStyle(
-                              fixedSize: MaterialStateProperty.all(const Size(80, 30)),
-                              backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
-                              textStyle: MaterialStateProperty.all(
-                                const TextStyle(
-                                  fontSize: FontSize.buttonFont,
-                                ),
+                          ),
+                        ),
+                      ),
+                      const CustomDivider(),
+                      Container(
+                        padding: const EdgeInsets.only(top: 10),
+                        alignment: Alignment.center,
+                        child: Text(
+                          AppLocalization.of(context)!.order2 + ' ' + user.postOfficeIndex.toString()+'.',
+                          style: const TextStyle(
+                            fontSize: FontSize.infoFont,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          AppLocalization.of(context)!.thanks,
+                          style: const TextStyle(
+                            fontSize: FontSize.thanksFont,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 10, 5),
+                        alignment: Alignment.bottomRight,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(AppLocalization.of(context)!.ok),
+                          style: ButtonStyle(
+                            fixedSize: MaterialStateProperty.all(const Size(80, 30)),
+                            backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
+                            textStyle: MaterialStateProperty.all(
+                              const TextStyle(
+                                fontSize: FontSize.buttonFont,
                               ),
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
+                            ),
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    );
-                  },
-                ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/pages/control_page.dart';
-import 'package:shop/app/pages/user_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/core/bloc/bloc_settings/settings_bloc.dart';
 import 'package:shop/core/bloc/bloc_settings/settings_event.dart';
@@ -56,17 +54,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     );
                   },
                 ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.account_circle,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => UserPage()),
-                    );
-                  },
-                ),
               ],
             ),
             body: Container(
@@ -86,7 +73,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
               ),
             ),
-            drawer: const Menu(),
           );
         },
       ),

@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop/app/pages/shop_page.dart';
-import 'package:shop/app/pages/shopping_cart_page.dart';
+
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
-import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_bloc.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_state.dart';

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/forms_of_creation/make_news.dart';
 import 'package:shop/core/bloc/bloc_news/news_bloc.dart';
 import 'package:shop/core/bloc/bloc_news/news_event.dart';
@@ -14,6 +13,9 @@ import 'package:shop/core/bloc/bloc_saved_news/saved_news_event.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class NewsPage extends StatefulWidget {
+
+  const NewsPage({Key? key}) : super(key: key);
+
   @override
   _NewsPageState createState() => _NewsPageState();
 }
@@ -73,7 +75,6 @@ class _NewsPageState extends State<NewsPage> {
                   },
                 ),
               ),
-              drawer: const Menu(),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   showDialog(

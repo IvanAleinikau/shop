@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shop/core/models/user_model.dart';
 
 class UserRepository {
-  User? currentUser = FirebaseAuth.instance.currentUser;
+  final auth = FirebaseAuth.instance;
   final _collection = FirebaseFirestore.instance.collection('info_user');
   late CustomUser user;
   late String key;
@@ -25,7 +25,7 @@ class UserRepository {
     final collection = await _collection.get();
     collection.docs.forEach(
       (doc) {
-        if (doc['email'] == currentUser!.email.toString()) {
+        if (doc['email'] == auth.currentUser!.email.toString()) {
           user = CustomUser(
             email: doc['email'],
             firstName: doc['first_name'],

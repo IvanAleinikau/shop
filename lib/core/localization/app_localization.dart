@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:shop/core/l10n/messages_all.dart';
 
 class AppLocalization {
-
   static Future<AppLocalization> load(Locale locale) {
     final String name = locale.countryCode!.isEmpty
         ? locale.languageCode
@@ -15,7 +14,7 @@ class AppLocalization {
     });
   }
 
-  static AppLocalization? of(BuildContext context) {
+  static  AppLocalization? of(BuildContext context) {
     return Localizations.of<AppLocalization>(context, AppLocalization);
   }
 
@@ -23,6 +22,13 @@ class AppLocalization {
     return Intl.message(
       '',
       name: 'email',
+    );
+  }
+
+  String get hello {
+    return Intl.message(
+      '',
+      name: 'hello',
     );
   }
 

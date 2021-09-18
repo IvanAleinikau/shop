@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/forms_of_creation/make_question_answer.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
@@ -10,6 +9,9 @@ import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class FQAPage extends StatefulWidget {
+
+  const FQAPage({Key? key}) : super(key: key);
+
   @override
   _FQAPageState createState() => _FQAPageState();
 }
@@ -65,7 +67,6 @@ class _FQAPageState extends State<FQAPage> {
                 },
               ),
             ),
-            drawer: const Menu(),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
               backgroundColor: ColorPalette.appBarColor,

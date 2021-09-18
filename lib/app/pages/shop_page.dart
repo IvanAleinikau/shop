@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +6,6 @@ import 'package:shop/app/pages/shopping_cart_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/search_items/failure.dart';
 import 'package:shop/app/pages/vinyl_record_page.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_bloc.dart';
@@ -21,9 +18,11 @@ import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:search_page/search_page.dart';
 
-import 'video_page.dart';
 
 class ShopPage extends StatefulWidget {
+
+  const ShopPage({Key? key}) : super(key: key);
+
   @override
   _ShopPageState createState() => _ShopPageState();
 }
@@ -128,7 +127,6 @@ class _ShopPageState extends State<ShopPage> {
                   },
                 ),
               ),
-              drawer: const Menu(),
             );
           },
         ),

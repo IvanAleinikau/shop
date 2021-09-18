@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_register/register_bloc.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_bloc.dart';
+import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
+import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/get_it.dart';
 import 'package:shop/core/splash.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
@@ -45,6 +47,9 @@ class _AppState extends State<App> {
         BlocProvider<SplashBloc>(
           create: (context) => splashBloc..add(CheckCurrentUser()),
         ),
+        BlocProvider<UserBloc>(
+          create: (context) => UserBloc()..add(FetchUser()),
+        )
       ],
       child: MaterialApp(
         localizationsDelegates: [

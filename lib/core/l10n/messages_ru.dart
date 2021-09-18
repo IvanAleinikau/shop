@@ -98,5 +98,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "customer" : MessageLookupByLibrary.simpleMessage("Заказчик:"),
     "order2" : MessageLookupByLibrary.simpleMessage("Заказ будет доставлен на почту с почтовым индексом"),
     "thanks" : MessageLookupByLibrary.simpleMessage("Спасибо за покупку!"),
+    "hello" : MessageLookupByLibrary.simpleMessage("Привет"),
   };
 }
