@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
+import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
@@ -12,7 +13,6 @@ import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class UserPage extends StatelessWidget {
-
   const UserPage({Key? key}) : super(key: key);
 
   @override
@@ -111,10 +111,11 @@ class UserPage extends StatelessWidget {
                           subtitle: Text(user.gender),
                           trailing: const Icon(Icons.keyboard_arrow_right),
                           onTap: () {
-                            showDialog(
+                            showModalBottomSheet(
+                              backgroundColor: ColorPalette.backgroundColor,
                               context: context,
-                              builder: (BuildContext ctx) {
-                                return _genderForm(context, state, _bloc);
+                              builder: (ctx) {
+                                return _genderForm(context, user, _bloc);
                               },
                             );
                           },
@@ -283,29 +284,52 @@ class UserPage extends StatelessWidget {
     );
   }
 
-  Widget _genderForm(context, state, UserBloc _bloc) {
-    return AlertDialog(
-      content: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListTile(
-              title: Text(AppLocalization.of(context)!.male),
-              onTap: () {
-                _bloc.add(ChangeGender('Male'));
-                _bloc.add(FetchUser());
-                Navigator.of(context).pop();
-              },
+  Widget _genderForm(context, user, UserBloc _bloc) {
+    return Container(
+      height: 170,
+      child: Column(
+        children: [
+          const Icon(
+            CupertinoIcons.minus,
+            size: FontSize.bottomSheepMinusForm,
+          ),
+          ListTile(
+            leading: Radio<Gender>(
+              value: Gender.male,
+              groupValue: _bloc.gender,
+              onChanged: (Gender? value) {},
             ),
-            ListTile(
-              title: Text(AppLocalization.of(context)!.female),
-              onTap: () {
-                _bloc.add(ChangeGender('Female'));
-                _bloc.add(FetchUser());
-                Navigator.of(context).pop();
-              },
+            title: Text(
+              AppLocalization.of(context)!.male,
+              style: const TextStyle(
+                fontSize: FontSize.gendersNameFont,
+              ),
             ),
-          ],
-        ),
+            onTap: () {
+              _bloc.add(ChangeGender('Male'));
+              _bloc.add(FetchUser());
+              Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            leading: Radio<Gender>(
+              value: Gender.female,
+              groupValue: _bloc.gender,
+              onChanged: (Gender? value) {},
+            ),
+            title: Text(
+              AppLocalization.of(context)!.female,
+              style: const TextStyle(
+                fontSize: FontSize.gendersNameFont,
+              ),
+            ),
+            onTap: () {
+              _bloc.add(ChangeGender('Female'));
+              _bloc.add(FetchUser());
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
       ),
     );
   }

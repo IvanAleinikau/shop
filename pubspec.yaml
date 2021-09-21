@@ -99,12 +99,13 @@ flutter:
    - family: Oxygen
      fonts:
       - asset: asset/fonts/Oxygen-Light.ttf
-   - family: Georama
+   - family: Caveat
      fonts:
-      - asset: asset/fonts/Georama-Regular.ttf
-   - family: Atkinson Hyperlegible
+      - asset: asset/fonts/Caveat-Regular.ttf
+   - family: Karla
      fonts:
-      - asset: asset/fonts/AtkinsonHyperlegible-Regular.ttf
+      - asset: asset/fonts/Karla-LightItalic.ttf
+
 
 
   # For details regarding fonts from package dependencies,

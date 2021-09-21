@@ -7,6 +7,7 @@ abstract class FontSize{
   static const double buttonFont = 20;
   static const double iconFont = 30;
   static const double userIconFont = 200;
+  static const double settingsUserIconFont = 100;
   static const double dividerFont = 10;
   static const double nameFont = 20;
   static const double surnameFont = 20;
@@ -19,8 +20,10 @@ abstract class FontSize{
   static const double infoFont = 20;
   static const double thanksFont = 20;
   static const double bottomBarIconFont = 30;
+  static const double appBarTitleFont = 30;
+  static const double bottomSheepMinusForm = 30;
+  static const double gendersNameFont = 20;
 
-  //news fonts
   static const double newsTitleFont = 25;
   static const double newsTextFont = 20;
 }

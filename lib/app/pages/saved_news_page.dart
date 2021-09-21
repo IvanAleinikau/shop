@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_bloc.dart';
 import 'package:shop/core/bloc/bloc_saved_news/saved_news_event.dart';
@@ -23,6 +25,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
       child: BlocBuilder<SavedNewsBloc, SavedNewsState>(
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: ColorPalette.backgroundColor,
             appBar: AppBar(
               centerTitle: true,
               title: Text(
@@ -32,12 +35,6 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
               backgroundColor: ColorPalette.appBarColor,
             ),
             body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('asset/image/image.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: state.when(
                 initState: () {
                   BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
@@ -54,7 +51,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
                   return Center(
                     child: Text(
                       AppLocalization.of(context)!.notNews,
-                      style: ThemeProvider.getTheme().textTheme.headline2,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
@@ -62,7 +59,7 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
                   return Center(
                     child: Text(
                       AppLocalization.of(context)!.wrong,
-                      style: ThemeProvider.getTheme().textTheme.headline2,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
@@ -99,23 +96,36 @@ class _SavedNewsPageState extends State<SavedNewsPage> {
               BlocProvider.of<SavedNewsBloc>(context).add(DeleteSavedNewsEvent(list[index].id!.toInt()));
               BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
             },
-            child: Column(
-              children: [
-                Card(
-                  color: Colors.transparent,
-                  child: ListTile(
+            child: Card(
+              color: ColorPalette.cardColor,
+              child: Column(
+                children: [
+                  ListTile(
                     contentPadding: const EdgeInsets.all(8.0),
                     title: Text(
-                      list[index].title + ' - ' + list[index].date,
-                      style: ThemeProvider.getTheme().textTheme.headline3,
+                      list[index].title,
+                      style: const TextStyle(
+                        fontSize: FontSize.newsTitleFont,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     subtitle: Text(
                       list[index].text,
-                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                    child: Text(
+                      list[index].date,
+                      style: const TextStyle(
+                        color: ColorPalette.dateNewsColor,
+                        fontSize: FontSize.newsTextFont,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

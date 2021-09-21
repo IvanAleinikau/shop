@@ -24,6 +24,7 @@ class _FQAPageState extends State<FQAPage> {
       child: BlocBuilder<FqaBloc, FqaState>(
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: ColorPalette.backgroundColor,
             appBar: AppBar(
               centerTitle: true,
               title: Text(
@@ -33,12 +34,6 @@ class _FQAPageState extends State<FQAPage> {
               backgroundColor: ColorPalette.appBarColor,
             ),
             body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('asset/image/image.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: state.when(
                 loading: () {
                   return const CircularProgressIndicator();
@@ -50,7 +45,7 @@ class _FQAPageState extends State<FQAPage> {
                   return Center(
                     child: Text(
                       AppLocalization.of(context)!.notFqa,
-                      style: ThemeProvider.getTheme().textTheme.headline2,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
@@ -58,7 +53,7 @@ class _FQAPageState extends State<FQAPage> {
                   return Center(
                     child: Text(
                       AppLocalization.of(context)!.wrong,
-                      style: ThemeProvider.getTheme().textTheme.headline2,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
@@ -105,16 +100,14 @@ class _FQAPageState extends State<FQAPage> {
               BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
             },
             child: Card(
-              color: Colors.transparent,
+              color: ColorPalette.cardColor,
               child: ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
                 title: Text(
                   '${index + 1}. ' + list[index].question,
-                  style: ThemeProvider.getTheme().textTheme.headline2,
                 ),
                 subtitle: Text(
                   list[index].answer,
-                  style: ThemeProvider.getTheme().textTheme.headline2,
                 ),
               ),
             ),

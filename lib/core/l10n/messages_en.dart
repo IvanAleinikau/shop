@@ -99,5 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "order2" : MessageLookupByLibrary.simpleMessage("The order will be delivered to the post office with postal code"),
     "thanks" : MessageLookupByLibrary.simpleMessage("Thank you for your purchase!"),
     "hello" : MessageLookupByLibrary.simpleMessage("Hello"),
+    "saved" : MessageLookupByLibrary.simpleMessage("Saved."),
+    "bought" : MessageLookupByLibrary.simpleMessage("Added to cart."),
   };
 }

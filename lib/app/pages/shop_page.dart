@@ -18,9 +18,7 @@ import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:search_page/search_page.dart';
 
-
 class ShopPage extends StatefulWidget {
-
   const ShopPage({Key? key}) : super(key: key);
 
   @override
@@ -44,7 +42,7 @@ class _ShopPageState extends State<ShopPage> {
             return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                backgroundColor: Colors.blueGrey.shade900,
+                backgroundColor: ColorPalette.appBarColor,
                 title: Text(
                   AppLocalization.of(context)!.shop,
                   style: ThemeProvider.getTheme().textTheme.headline2,
@@ -58,41 +56,42 @@ class _ShopPageState extends State<ShopPage> {
                       showSearch(context: context, delegate: _search(context, _bloc.allVinylRecord, _bloc));
                     },
                   ),
-                  BlocBuilder<ShoppingCartBloc, ShoppingCartState>(builder: (context, purchaseState) {
-                    final ShoppingCartBloc _bloc = BlocProvider.of<ShoppingCartBloc>(context);
-                    _bloc.add(FetchShoppingCartEvent());
-                    return Badge(
-                      position: BadgePosition.topStart(top: 3, start: 2),
-                      badgeContent: purchaseState.when(
-                        initState: () {
-                          _bloc.add(FetchShoppingCartEvent());
-                        },
-                        loading: () {
-                        },
-                        content: (list , total) {
-                          return Text(list.length.toString());
-                        },
-                        contentEmpty: () {
-                          return const Text('0');
-                        },
-                        error: () {},
-                      ),
-                      badgeColor: ColorPalette.badgeColor,
-                      toAnimate: true,
-                      animationType: BadgeAnimationType.fade,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.shopping_cart_outlined,
+                  BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                    builder: (context, purchaseState) {
+                      final ShoppingCartBloc _bloc = BlocProvider.of<ShoppingCartBloc>(context);
+                      _bloc.add(FetchShoppingCartEvent());
+                      return Badge(
+                        position: BadgePosition.topStart(top: 3, start: 2),
+                        badgeContent: purchaseState.when(
+                          initState: () {
+                            _bloc.add(FetchShoppingCartEvent());
+                          },
+                          loading: () {},
+                          content: (list, total) {
+                            return Text(list.length.toString());
+                          },
+                          contentEmpty: () {
+                            return const Text('0');
+                          },
+                          error: () {},
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ShoppingCartPage()),
-                          );
-                        },
-                      ),
-                    );
-                  }),
+                        badgeColor: ColorPalette.badgeColor,
+                        toAnimate: true,
+                        animationType: BadgeAnimationType.fade,
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.shopping_cart_outlined,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(builder: (context) => const ShoppingCartPage()),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
               body: Container(
@@ -100,6 +99,9 @@ class _ShopPageState extends State<ShopPage> {
                 child: state.when(
                   initState: () {
                     BlocProvider.of<VinylRecordBloc>(context).add(FetchVinylRecord());
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   },
                   loading: () {
                     return const Center(
@@ -146,8 +148,7 @@ class _ShopPageState extends State<ShopPage> {
             return Hero(
               tag: '${list[index].name}',
               child: GestureDetector(
-                onLongPress: () {
-                },
+                onLongPress: () {},
                 onTap: () {
                   Navigator.push(
                     context,
@@ -178,16 +179,53 @@ class _ShopPageState extends State<ShopPage> {
                 Container(
                   child: Image.network(list[index].image),
                 ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                  child: Text(
-                    list[index].cost + ' \$',
-                    style: const TextStyle(
-                      color: ColorPalette.costColor,
-                      fontSize: FontSize.costFont,
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          list[index].cost + ' \$',
+                          style: const TextStyle(
+                            color: ColorPalette.costColor,
+                            fontSize: FontSize.costFont,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Expanded(
+                      flex: 1,
+                      child: IconButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: Text(AppLocalization.of(context)!.bought),
+                              backgroundColor: ColorPalette.savedNewsBarColor,
+                              duration: const Duration(milliseconds: 700),
+                            ),
+                          );
+                          BlocProvider.of<ShoppingCartBloc>(context).add(
+                            CreateShoppingCart(
+                              list[index].name,
+                              list[index].author,
+                              list[index].year,
+                              list[index].description,
+                              list[index].cost,
+                              list[index].image,
+                            ),
+                          );
+                          BlocProvider.of<ShoppingCartBloc>(context).add(FetchShoppingCartEvent());
+                        },
+                        icon: const Icon(
+                          Icons.shopping_cart_outlined,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   alignment: Alignment.topLeft,
@@ -198,6 +236,7 @@ class _ShopPageState extends State<ShopPage> {
                       color: ColorPalette.titleColor,
                       fontSize: FontSize.titleFont,
                     ),
+                    maxLines: 1,
                   ),
                 ),
                 Container(
@@ -245,8 +284,7 @@ class _ShopPageState extends State<ShopPage> {
           child: Hero(
             tag: vinylRecord.name,
             child: GestureDetector(
-              onLongPress: () {
-              },
+              onLongPress: () {},
               onTap: () {
                 Navigator.push(
                   context,

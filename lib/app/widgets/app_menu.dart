@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/app/pages/account_page.dart';
 import 'package:shop/app/pages/news_page.dart';
@@ -33,7 +34,7 @@ class _AppMenuState extends State<AppMenu> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.auto_stories_rounded,
+              CupertinoIcons.news_solid,
               size: FontSize.bottomBarIconFont,
             ),
             label: '',
@@ -58,6 +59,7 @@ class _AppMenuState extends State<AppMenu> {
         onTap: _onItemTapped,
         backgroundColor: ColorPalette.bottomBarColor,
         showUnselectedLabels: false,
+        showSelectedLabels: false,
       ),
     );
   }

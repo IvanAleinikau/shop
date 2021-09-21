@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
+import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_bloc.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_event.dart';
 import 'package:shop/core/bloc/bloc_shopping_cart/shopping_cart_state.dart';
@@ -51,6 +52,14 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                         alignment: Alignment.topRight,
                         child: ElevatedButton(
                           onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                content: Text(AppLocalization.of(context)!.bought),
+                                backgroundColor: ColorPalette.savedNewsBarColor,
+                                duration: const Duration(milliseconds: 700),
+                              ),
+                            );
                             BlocProvider.of<ShoppingCartBloc>(context).add(
                               CreateShoppingCart(
                                 widget.vinylRecord.name,

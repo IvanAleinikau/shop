@@ -12,8 +12,8 @@ abstract class ColorPalette {
   static const confirmButtonColor = Color(0xFF4CAF50);
 
   //page colors
-  static const appBarColor = Color(0xFF263238);
-  static const bottomBarColor = Color(0xFF263238);
+  static const appBarColor = Color(0xFF8C9EFF);
+  static const bottomBarColor = Color(0xFF8C9EFF);
   static const backgroundColor = Color(0xFFE8EAF6);
 
   //text colors
@@ -29,4 +29,5 @@ abstract class ColorPalette {
   static const dividerColor = Color(0xFF000000);
   static const buttonColor = Color(0xFFF06292);
   static const activeColor = Color(0xFF616161);
+  static const savedNewsBarColor = Color(0xFF4CAF50);
 }

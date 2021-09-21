@@ -25,6 +25,20 @@ class AppLocalization {
     );
   }
 
+  String get saved {
+    return Intl.message(
+      '',
+      name: 'saved',
+    );
+  }
+
+  String get bought {
+    return Intl.message(
+      '',
+      name: 'bought',
+    );
+  }
+
   String get hello {
     return Intl.message(
       '',

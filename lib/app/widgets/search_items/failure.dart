@@ -14,7 +14,7 @@ class Failure extends StatelessWidget {
           children: [
             const Icon(
               Icons.search,
-              size: 40,
+              size: 50,
               color: ColorPalette.textColor,
             ),
             const SizedBox(

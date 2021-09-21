@@ -10,7 +10,7 @@ import 'package:shop/data/service/user_service.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final service = GetIt.instance<UserService>();
   late CustomUser user;
-
+  late Gender? gender;
 
   UserBloc() : super(UserState.initState());
 
@@ -39,5 +39,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   Stream<UserState> _fetchUser(FetchUser event) async* {
     user = await service.fetchUser();
     yield UserState.user(user);
+    if (user.gender == 'Male') {
+      gender = Gender.male;
+    } else if (user.gender == 'Female') {
+      gender = Gender.female;
+    } else {
+      gender = Gender.unknown;
+    }
   }
+}
+
+enum Gender {
+  male,
+  female,
+  unknown,
 }

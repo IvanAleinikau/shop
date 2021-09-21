@@ -99,5 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "order2" : MessageLookupByLibrary.simpleMessage("Заказ будет доставлен на почту с почтовым индексом"),
     "thanks" : MessageLookupByLibrary.simpleMessage("Спасибо за покупку!"),
     "hello" : MessageLookupByLibrary.simpleMessage("Привет"),
+    "saved" : MessageLookupByLibrary.simpleMessage("Сохранено."),
+    "bought" : MessageLookupByLibrary.simpleMessage("Добавлено в корзину."),
   };
 }

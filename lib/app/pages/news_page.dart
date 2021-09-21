@@ -46,6 +46,9 @@ class _NewsPageState extends State<NewsPage> {
                 child: state.when(
                   initState: () {
                     BlocProvider.of<NewsBloc>(context).add(FetchNewsEvent());
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   },
                   loading: () {
                     return const Center(
@@ -117,6 +120,8 @@ class _NewsPageState extends State<NewsPage> {
                     list[index].title,
                     style: const TextStyle(
                       fontSize: FontSize.newsTitleFont,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Karla',
                     ),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -171,6 +176,14 @@ class _NewsPageState extends State<NewsPage> {
                 flex: 1,
                 child: IconButton(
                   onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        content: Text(AppLocalization.of(context)!.saved),
+                        backgroundColor: ColorPalette.savedNewsBarColor,
+                        duration: const Duration(milliseconds: 500),
+                      ),
+                    );
                     BlocProvider.of<SavedNewsBloc>(context).add(
                       CreateSavedNewsEvent(
                         list[index].title,
