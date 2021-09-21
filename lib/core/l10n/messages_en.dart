@@ -81,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_vinyl" : MessageLookupByLibrary.simpleMessage("Not vinyl records"),
     "search" : MessageLookupByLibrary.simpleMessage("Search vinyl record"),
     "no_result" : MessageLookupByLibrary.simpleMessage("NO RESULT FOUND"),
-    "pay" : MessageLookupByLibrary.simpleMessage("Pay"),
+    "pay" : MessageLookupByLibrary.simpleMessage("To ordering"),
     "total" : MessageLookupByLibrary.simpleMessage("Total: "),
     "dowant" : MessageLookupByLibrary.simpleMessage("Delete from shopping cart? "),
     "yes" : MessageLookupByLibrary.simpleMessage("Yes"),
@@ -101,5 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "hello" : MessageLookupByLibrary.simpleMessage("Hello"),
     "saved" : MessageLookupByLibrary.simpleMessage("Saved."),
     "bought" : MessageLookupByLibrary.simpleMessage("Added to cart."),
+    "accept" : MessageLookupByLibrary.simpleMessage("Accept"),
+    "successfully" : MessageLookupByLibrary.simpleMessage("Successfully"),
+    "are_you_sure" : MessageLookupByLibrary.simpleMessage("Are you sure you want to log out?"),
+    "empty_cart" : MessageLookupByLibrary.simpleMessage("Your cart is empty"),
   };
 }

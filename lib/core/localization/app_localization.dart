@@ -39,6 +39,41 @@ class AppLocalization {
     );
   }
 
+  String get accept {
+    return Intl.message(
+      '',
+      name: 'accept',
+    );
+  }
+
+  String get successfully {
+    return Intl.message(
+      '',
+      name: 'successfully',
+    );
+  }
+
+  String get areYouSure {
+    return Intl.message(
+      '',
+      name: 'are_you_sure',
+    );
+  }
+
+  String get yes {
+    return Intl.message(
+      '',
+      name: 'yes',
+    );
+  }
+
+  String get no {
+    return Intl.message(
+      '',
+      name: 'no',
+    );
+  }
+
   String get hello {
     return Intl.message(
       '',
@@ -116,24 +151,17 @@ class AppLocalization {
     );
   }
 
-  String get no {
-    return Intl.message(
-      '',
-      name: 'no',
-    );
-  }
-
-  String get yes {
-    return Intl.message(
-      '',
-      name: 'yes',
-    );
-  }
-
   String get myData {
     return Intl.message(
       '',
       name: 'my_data',
+    );
+  }
+
+  String get emptyCart {
+    return Intl.message(
+      '',
+      name: 'empty_cart',
     );
   }
 

@@ -58,7 +58,11 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
       for (int i = 0; i < currentUserPurchase.length; i++) {
         totalCost += currentUserPurchase[i].count * int.parse(currentUserPurchase[i].vinylRecord.cost);
       }
-      yield ShoppingCartState.content(currentUserPurchase, totalCost);
+      if(currentUserPurchase.isNotEmpty){
+        yield ShoppingCartState.content(currentUserPurchase, totalCost);
+      }else{
+        yield ShoppingCartState.contentEmpty();
+      }
     } catch (_) {
       yield ShoppingCartState.error();
     }

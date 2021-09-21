@@ -81,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "not_vinyl" : MessageLookupByLibrary.simpleMessage("Нет виниловых пластинок"),
     "search" : MessageLookupByLibrary.simpleMessage("Поиск выниловых пластинок"),
     "no_result" : MessageLookupByLibrary.simpleMessage("Результатов не найдено"),
-    "pay" : MessageLookupByLibrary.simpleMessage("Оплатить"),
+    "pay" : MessageLookupByLibrary.simpleMessage("К оформлению"),
     "total" : MessageLookupByLibrary.simpleMessage("Итог: "),
     "dowant" : MessageLookupByLibrary.simpleMessage("Удалить из корзины? "),
     "yes" : MessageLookupByLibrary.simpleMessage("Да"),
@@ -101,5 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "hello" : MessageLookupByLibrary.simpleMessage("Привет"),
     "saved" : MessageLookupByLibrary.simpleMessage("Сохранено."),
     "bought" : MessageLookupByLibrary.simpleMessage("Добавлено в корзину."),
+    "accept" : MessageLookupByLibrary.simpleMessage("Принять"),
+    "successfully" : MessageLookupByLibrary.simpleMessage("Успешно"),
+    "are_you_sure" : MessageLookupByLibrary.simpleMessage("Вы действительно хотите выйти?"),
+    "empty_cart" : MessageLookupByLibrary.simpleMessage("Ваша корзина пуста"),
   };
 }

@@ -69,9 +69,19 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                 },
                 contentEmpty: () {
                   return Center(
-                    child: Text(
-                      AppLocalization.of(context)!.notVinyl,
-                      style: ThemeProvider.getTheme().textTheme.headline3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.shopping_cart_outlined,
+                          size: FontSize.iconFont,
+                          color: ColorPalette.iconColor,
+                        ),
+                        Text(
+                          AppLocalization.of(context)!.emptyCart,
+                          style: ThemeProvider.getTheme().textTheme.headline3,
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -119,16 +129,41 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                           flex: 4,
                           child: Column(
                             children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                                child: Text(
-                                  list[index].vinylRecord.cost + ' \$',
-                                  style: const TextStyle(
-                                    color: ColorPalette.costColor,
-                                    fontSize: FontSize.costFont,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        list[index].vinylRecord.cost + ' \$',
+                                        style: const TextStyle(
+                                          color: ColorPalette.costColor,
+                                          fontSize: FontSize.costFont,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext ctx) {
+                                            return _deleteDialog(context, index, _bloc);
+                                          },
+                                        );
+                                        _bloc.add(FetchShoppingCartEvent());
+                                      },
+                                      icon: const Icon(
+                                        CupertinoIcons.clear,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               Container(
                                 alignment: Alignment.topLeft,
@@ -213,33 +248,20 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
         Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 25),
-              alignment: Alignment.topLeft,
-              child: Text(
-                AppLocalization.of(context)!.total + '${total.toString()} \$',
-                style: const TextStyle(
-                  fontSize: FontSize.totalFont,
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
               child: ElevatedButton(
                 onPressed: () {
                   showDialog(
                     context: context,
                     builder: (BuildContext ctx) {
-                      return _purchaseConfirm(
-                        context,
-                        list,
-                      );
+                      return _purchaseConfirm(context, list);
                     },
                   );
                 },
-                child: Text(AppLocalization.of(context)!.pay),
+                child: Text(AppLocalization.of(context)!.pay + ' - ${total.toString()} \$'),
                 style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(350, 50)),
+                  fixedSize: MaterialStateProperty.all(const Size(double.infinity, 50)),
                   backgroundColor: MaterialStateProperty.all(ColorPalette.buttonColor),
                   textStyle: MaterialStateProperty.all(
                     const TextStyle(
@@ -248,7 +270,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   ),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
                 ),
@@ -261,59 +283,74 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   }
 
   Widget _deleteDialog(context, index, _bloc) {
-    return AlertDialog(
-      title: Text(AppLocalization.of(context)!.doWant),
-      content: SingleChildScrollView(
-        child: Row(
+    return Dialog(
+      child: SingleChildScrollView(
+        child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(AppLocalization.of(context)!.no),
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(100, 50)),
-                  backgroundColor: MaterialStateProperty.all(ColorPalette.cancelButtonColor),
-                  textStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      fontSize: FontSize.buttonFont,
-                    ),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
+              child: Text(
+                AppLocalization.of(context)!.doWant,
+                style: const TextStyle(
+                  fontSize: FontSize.postOfficeIndexFont,
+                  //fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 0, 15, 5),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _bloc.add(Delete(index));
-                  _bloc.add(FetchShoppingCartEvent());
-                },
-                child: Text(AppLocalization.of(context)!.yes),
-                style: ButtonStyle(
-                  fixedSize: MaterialStateProperty.all(const Size(100, 50)),
-                  backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
-                  textStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      fontSize: FontSize.buttonFont,
-                    ),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 5),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(AppLocalization.of(context)!.no),
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(const Size(70, 20)),
+                      backgroundColor: MaterialStateProperty.all(ColorPalette.cancelButtonColor),
+                      textStyle: MaterialStateProperty.all(
+                        const TextStyle(
+                          fontSize: FontSize.buttonFont,
+                        ),
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 15, 5),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _bloc.add(Delete(index));
+                      _bloc.add(FetchShoppingCartEvent());
+                    },
+                    child: Text(AppLocalization.of(context)!.yes),
+                    style: ButtonStyle(
+                      fixedSize: MaterialStateProperty.all(const Size(70, 20)),
+                      backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
+                      textStyle: MaterialStateProperty.all(
+                        const TextStyle(
+                          fontSize: FontSize.buttonFont,
+                        ),
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -321,13 +358,17 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   }
 
   Widget _purchaseConfirm(context, List<Purchase> list) {
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (context, state) {
-        final UserBloc _bloc = BlocProvider.of<UserBloc>(context);
-        return Dialog(
-          child: SingleChildScrollView(
-            child: Container(
-              height: 400,
+    return Dialog(
+      backgroundColor: ColorPalette.backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: SingleChildScrollView(
+        child: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            final UserBloc _bloc = BlocProvider.of<UserBloc>(context);
+            return Container(
+              height: 450,
               color: ColorPalette.backgroundColor,
               child: state.when(
                 initState: () {
@@ -335,26 +376,20 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                 },
                 user: (user) {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
+                        padding: const EdgeInsets.all(10),
                         child: Text(
                           AppLocalization.of(context)!.order,
                           style: const TextStyle(
                             fontSize: FontSize.orderFont,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          AppLocalization.of(context)!.customer + ' ' + user.firstName + ' ' + user.surname,
-                          style: const TextStyle(
-                            fontSize: FontSize.customerFont,
-                          ),
-                        ),
-                      ),
-                      const CustomDivider(),
-                      Expanded(
+                      Flexible(
+                        flex: 3,
                         child: Container(
                           child: ListView.builder(
                             itemCount: list.length,
@@ -372,58 +407,64 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                           ),
                         ),
                       ),
-                      const CustomDivider(),
-                      Container(
-                        padding: const EdgeInsets.only(top: 10),
-                        alignment: Alignment.center,
-                        child: Text(
-                          AppLocalization.of(context)!.order2 + ' ' + user.postOfficeIndex.toString()+'.',
-                          style: const TextStyle(
-                            fontSize: FontSize.infoFont,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          AppLocalization.of(context)!.thanks,
-                          style: const TextStyle(
-                            fontSize: FontSize.thanksFont,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 10, 5),
-                        alignment: Alignment.bottomRight,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(AppLocalization.of(context)!.ok),
-                          style: ButtonStyle(
-                            fixedSize: MaterialStateProperty.all(const Size(80, 30)),
-                            backgroundColor: MaterialStateProperty.all(ColorPalette.confirmButtonColor),
-                            textStyle: MaterialStateProperty.all(
-                              const TextStyle(
-                                fontSize: FontSize.buttonFont,
+                      Flexible(
+                        flex: 3,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const CustomDivider(),
+                            Container(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                AppLocalization.of(context)!.customer + ' ' + user.firstName + ' ' + user.surname,
+                                style: const TextStyle(
+                                  fontSize: FontSize.customerFont,
+                                ),
                               ),
                             ),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              alignment: Alignment.center,
+                              child: Text(
+                                AppLocalization.of(context)!.order2 + ' ' + user.postOfficeIndex.toString() + '.',
+                                style: const TextStyle(
+                                  fontSize: FontSize.infoFont,
+                                ),
                               ),
                             ),
-                          ),
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              child: Text(
+                                AppLocalization.of(context)!.thanks,
+                                style: const TextStyle(
+                                  fontSize: FontSize.thanksFont,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 5),
+                              alignment: Alignment.bottomRight,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(AppLocalization.of(context)!.ok),
+                                style: TextButton.styleFrom(
+                                  textStyle: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   );
                 },
               ),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }

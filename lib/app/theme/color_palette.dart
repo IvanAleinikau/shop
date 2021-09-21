@@ -30,4 +30,5 @@ abstract class ColorPalette {
   static const buttonColor = Color(0xFFF06292);
   static const activeColor = Color(0xFF616161);
   static const savedNewsBarColor = Color(0xFF4CAF50);
+  static const unselectedItemColor = Color(0xFFBDBDBD);
 }

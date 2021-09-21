@@ -5,6 +5,7 @@ import 'package:shop/app/pages/news_page.dart';
 import 'package:shop/app/pages/shop_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
+import 'package:shop/core/localization/app_localization.dart';
 
 class AppMenu extends StatefulWidget {
   @override
@@ -31,35 +32,36 @@ class _AppMenuState extends State<AppMenu> {
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               CupertinoIcons.news_solid,
               size: FontSize.bottomBarIconFont,
             ),
-            label: '',
+            label: AppLocalization.of(context)!.news,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
+           BottomNavigationBarItem(
+            icon: const Icon(
               Icons.shopping_bag,
               size: FontSize.bottomBarIconFont,
             ),
-            label: '',
+            label: AppLocalization.of(context)!.shop,
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.account_circle,
               size: FontSize.bottomBarIconFont,
             ),
-            label: '',
+            label: AppLocalization.of(context)!.account,
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: ColorPalette.iconBarColor,
         onTap: _onItemTapped,
         backgroundColor: ColorPalette.bottomBarColor,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
+        unselectedIconTheme: const IconThemeData(
+            color: ColorPalette.unselectedItemColor
+        ),
       ),
     );
   }

@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/app/pages/login_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
+import 'package:shop/core/models/user_model.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class UserPage extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (BuildContext ctx) {
-                      return _namesForm(context, state, _bloc);
+                      return _namesForm(context, _bloc.user, _bloc);
                     },
                   );
                 },
@@ -112,6 +113,12 @@ class UserPage extends StatelessWidget {
                           trailing: const Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                ),
+                              ),
                               backgroundColor: ColorPalette.backgroundColor,
                               context: context,
                               builder: (ctx) {
@@ -133,7 +140,7 @@ class UserPage extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder: (BuildContext ctx) {
-                                return _postOfficeForm(context, state, _bloc);
+                                return _postOfficeForm(context, user, _bloc);
                               },
                             );
                           },
@@ -148,7 +155,12 @@ class UserPage extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return _logout(context);
+                              },
+                            );
                           },
                         )
                       ],
@@ -163,70 +175,63 @@ class UserPage extends StatelessWidget {
     );
   }
 
-  Widget _divider() {
-    return const Divider(
-      color: ColorPalette.dividerColor,
-      height: FontSize.dividerFont,
-    );
-  }
-
-  Widget _namesForm(context, state, UserBloc _bloc) {
-    final TextEditingController _firstName = TextEditingController();
-    final TextEditingController _surname = TextEditingController();
-    return AlertDialog(
-      content: SingleChildScrollView(
+  Widget _logout(context) {
+    return Dialog(
+      backgroundColor: ColorPalette.backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: TextField(
-                controller: _firstName,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  labelText: AppLocalization.of(context)!.firstName,
-                  hintText: AppLocalization.of(context)!.firstName,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: TextField(
-                controller: _surname,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  labelText: AppLocalization.of(context)!.surname,
-                  hintText: AppLocalization.of(context)!.surname,
-                ),
-              ),
-            ),
             Container(
-              height: 30,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  _bloc.add(ChangeNames(_firstName.text.trim(), _surname.text.trim()));
-                  _bloc.add(FetchUser());
-                  Navigator.of(context).pop();
-                },
-                child: Text(AppLocalization.of(context)!.ok),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
-                  textStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      fontSize: 25.0,
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
+              child: Text(
+                AppLocalization.of(context)!.areYouSure,
+                style: const TextStyle(
+                  fontSize: FontSize.postOfficeIndexFont,
+                  //fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
                     ),
+                    child: Text(
+                      AppLocalization.of(context)!.no,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
+                  child: TextButton(
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Text(
+                      AppLocalization.of(context)!.yes,
+                      style: const TextStyle(color: ColorPalette.dismissibleColor),
+                    ),
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -234,49 +239,152 @@ class UserPage extends StatelessWidget {
     );
   }
 
-  Widget _postOfficeForm(context, state, UserBloc _bloc) {
-    final TextEditingController _index = TextEditingController();
-    return AlertDialog(
-      content: SingleChildScrollView(
+  Widget _divider() {
+    return const Divider(
+      color: ColorPalette.dividerColor,
+      height: FontSize.dividerFont,
+    );
+  }
+
+  Widget _namesForm(context, CustomUser user, UserBloc _bloc) {
+    final TextEditingController _firstName = TextEditingController();
+    final TextEditingController _surname = TextEditingController();
+    return Dialog(
+      backgroundColor: ColorPalette.backgroundColor,
+      insetAnimationDuration: const Duration(seconds: 3),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-              child: TextField(
-                controller: _index,
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+              child: TextFormField(
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+                  icon: const Icon(Icons.account_circle_outlined),
+                  hintText: user.firstName,
+                  labelText: AppLocalization.of(context)!.firstName,
+                ),
+                controller: _firstName,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  icon: const Icon(
+                    Icons.account_circle_outlined,
+                    color: ColorPalette.backgroundColor,
                   ),
-                  labelText: AppLocalization.of(context)!.postOffice,
-                  hintText: AppLocalization.of(context)!.postOffice,
+                  hintText: user.surname,
+                  labelText: AppLocalization.of(context)!.surname,
+                ),
+                controller: _surname,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    child: Text(AppLocalization.of(context)!.cancel),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
+                  child: TextButton(
+                    onPressed: () {
+                      _bloc.add(ChangeNames(_firstName.text.trim(), _surname.text.trim()));
+                      _bloc.add(FetchUser());
+                      Navigator.of(context).pop();
+                      _message(context);
+                    },
+                    child: Text(AppLocalization.of(context)!.accept),
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _postOfficeForm(context, CustomUser user, UserBloc _bloc) {
+    final TextEditingController _index = TextEditingController();
+    return Dialog(
+      backgroundColor: ColorPalette.backgroundColor,
+      insetAnimationDuration: const Duration(seconds: 3),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.topLeft,
+              padding: const EdgeInsets.fromLTRB(20, 15, 0, 0),
+              child: Text(
+                AppLocalization.of(context)!.postOffice,
+                style: const TextStyle(
+                  fontSize: FontSize.postOfficeIndexFont,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Container(
-              height: 30,
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {
-                  _bloc.add(ChangeIndex(int.parse(_index.text.trim())));
-                  _bloc.add(FetchUser());
-                  Navigator.of(context).pop();
-                },
-                child: Text(AppLocalization.of(context)!.ok),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
-                  textStyle: MaterialStateProperty.all(
-                    const TextStyle(
-                      fontSize: 25.0,
+              padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  icon: const Icon(CupertinoIcons.number),
+                  hintText: user.postOfficeIndex.toString(),
+                  labelText: AppLocalization.of(context)!.postOffice,
+                ),
+                controller: _index,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
                     ),
+                    child: Text(AppLocalization.of(context)!.cancel),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
+                  child: TextButton(
+                    onPressed: () {
+                      _bloc.add(ChangeIndex(int.parse(_index.text.trim())));
+                      _bloc.add(FetchUser());
+                      Navigator.of(context).pop();
+                      _message(context);
+                    },
+                    child: Text(AppLocalization.of(context)!.accept),
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 20),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -309,6 +417,7 @@ class UserPage extends StatelessWidget {
               _bloc.add(ChangeGender('Male'));
               _bloc.add(FetchUser());
               Navigator.of(context).pop();
+              _message(context);
             },
           ),
           ListTile(
@@ -327,9 +436,21 @@ class UserPage extends StatelessWidget {
               _bloc.add(ChangeGender('Female'));
               _bloc.add(FetchUser());
               Navigator.of(context).pop();
+              _message(context);
             },
           ),
         ],
+      ),
+    );
+  }
+
+  void _message(context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(AppLocalization.of(context)!.successfully),
+        backgroundColor: ColorPalette.savedNewsBarColor,
+        duration: const Duration(milliseconds: 500),
       ),
     );
   }

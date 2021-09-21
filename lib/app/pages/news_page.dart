@@ -196,7 +196,7 @@ class _NewsPageState extends State<NewsPage> {
                     BlocProvider.of<SavedNewsBloc>(context).add(FetchSavedNewsEvent());
                   },
                   icon: const Icon(
-                    Icons.save,
+                    Icons.save_outlined,
                   ),
                 ),
               ),

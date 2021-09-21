@@ -49,7 +49,8 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                         ),
                       ),
                       Container(
-                        alignment: Alignment.topRight,
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -73,7 +74,7 @@ class _ObjVinylRecordState extends State<ObjVinylRecord> {
                           },
                           child: Text(AppLocalization.of(context)!.buy),
                           style: ButtonStyle(
-                            fixedSize: MaterialStateProperty.all(const Size(150, 40)),
+                            fixedSize: MaterialStateProperty.all(const Size(double.infinity, 40)),
                             backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
                             textStyle: MaterialStateProperty.all(
                               const TextStyle(

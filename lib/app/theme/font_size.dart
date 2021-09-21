@@ -23,7 +23,7 @@ abstract class FontSize{
   static const double appBarTitleFont = 30;
   static const double bottomSheepMinusForm = 30;
   static const double gendersNameFont = 20;
-
+  static const double postOfficeIndexFont = 25;
   static const double newsTitleFont = 25;
   static const double newsTextFont = 20;
 }
