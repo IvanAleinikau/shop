@@ -165,6 +165,20 @@ class AppLocalization {
     );
   }
 
+  String get orders {
+    return Intl.message(
+      '',
+      name: 'orders',
+    );
+  }
+
+  String get notOrders {
+    return Intl.message(
+      '',
+      name: 'not_orders',
+    );
+  }
+
   String get gender {
     return Intl.message(
       '',

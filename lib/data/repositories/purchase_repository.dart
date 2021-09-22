@@ -28,24 +28,32 @@ class PurchaseRepository {
     list = [];
     keys = [];
     final collection = await _collection.get();
-    collection.docs.forEach((doc) {
-      keys.add(doc.id);
-      Purchase purchase = Purchase(
-        user: doc['user'],
-        isActive: doc['is_active'],
-        vinylRecord: VinylRecord(
-          name: doc['name'],
-          author: doc['author'],
-          year: doc['year'],
-          description: doc['description'],
-          cost: doc['cost'],
-          image: doc['image'],
-        ),
-        count: doc['count'],
-      );
-      list.add(purchase);
-    });
+    collection.docs.forEach(
+      (doc) {
+        keys.add(doc.id);
+        Purchase purchase = Purchase(
+          user: doc['user'],
+          isActive: doc['is_active'],
+          vinylRecord: VinylRecord(
+            name: doc['name'],
+            author: doc['author'],
+            year: doc['year'],
+            description: doc['description'],
+            cost: doc['cost'],
+            image: doc['image'],
+          ),
+          count: doc['count'],
+        );
+        list.add(purchase);
+      },
+    );
     return list;
+  }
+
+  Future<void> clear() async {
+    for(int i = 0; i<keys.length;i++){
+      await _collection.doc(keys[i]).delete();
+    }
   }
 
   Future<void> incrementCount(int count, int index) async {

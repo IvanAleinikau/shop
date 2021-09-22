@@ -24,4 +24,8 @@ class PurchaseService {
   Future<void> delete(int index) async {
     await repository.delete(index);
   }
+
+  Future<void> clear() async {
+    await repository.clear();
+  }
 }

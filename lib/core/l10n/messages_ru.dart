@@ -105,5 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfully" : MessageLookupByLibrary.simpleMessage("Успешно"),
     "are_you_sure" : MessageLookupByLibrary.simpleMessage("Вы действительно хотите выйти?"),
     "empty_cart" : MessageLookupByLibrary.simpleMessage("Ваша корзина пуста"),
+    "orders" : MessageLookupByLibrary.simpleMessage("Заказы"),
+    "not_orders" : MessageLookupByLibrary.simpleMessage("Нет заказов"),
   };
 }

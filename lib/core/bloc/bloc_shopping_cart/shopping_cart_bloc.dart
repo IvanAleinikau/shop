@@ -29,7 +29,12 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
       increment: _increment,
       decrement: _decrement,
       delete: _delete,
+      clear: _clear,
     );
+  }
+
+  Stream<ShoppingCartState> _clear(Clear event) async* {
+    await service.clear();
   }
 
   Stream<ShoppingCartState> _delete(Delete event) async* {

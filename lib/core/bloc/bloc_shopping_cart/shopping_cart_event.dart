@@ -14,6 +14,8 @@ abstract class ShoppingCartEvent with _$ShoppingCartEvent {
 
   factory ShoppingCartEvent.delete(int index) = Delete;
 
+  factory ShoppingCartEvent.clear() = Clear;
+
   factory ShoppingCartEvent.createShoppingCart(
     String name,
     String author,

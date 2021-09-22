@@ -105,5 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfully" : MessageLookupByLibrary.simpleMessage("Successfully"),
     "are_you_sure" : MessageLookupByLibrary.simpleMessage("Are you sure you want to log out?"),
     "empty_cart" : MessageLookupByLibrary.simpleMessage("Your cart is empty"),
+    "orders" : MessageLookupByLibrary.simpleMessage("Orders"),
+    "not_orders" : MessageLookupByLibrary.simpleMessage("Not orders"),
   };
 }

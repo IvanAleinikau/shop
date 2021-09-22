@@ -15,6 +15,7 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_bloc.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_event.dart';
 import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
+import 'package:shop/core/models/purchase_model.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:search_page/search_page.dart';
 

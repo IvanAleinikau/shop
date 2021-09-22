@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/pages/fqa_page.dart';
+import 'package:shop/app/pages/orders_page.dart';
 import 'package:shop/app/pages/saved_news_page.dart';
 import 'package:shop/app/pages/settings_page.dart';
 import 'package:shop/app/pages/user_page.dart';
@@ -95,6 +96,22 @@ class AccountPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               CupertinoPageRoute(builder: (context) => const FQAPage()),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: Card(
+                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: ListTile(
+                          title: Text(AppLocalization.of(context)!.orders),
+                          leading: const Icon(Icons.local_shipping_rounded),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(builder: (context) => const OrdersPage()),
                             );
                           },
                         ),

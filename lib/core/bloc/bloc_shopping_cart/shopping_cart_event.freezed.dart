@@ -44,6 +44,10 @@ class _$ShoppingCartEventTearOff {
     );
   }
 
+  Clear clear() {
+    return Clear();
+  }
+
   CreateShoppingCart createShoppingCart(String name, String author, String year,
       String description, String cost, String image) {
     return CreateShoppingCart(
@@ -69,6 +73,7 @@ mixin _$ShoppingCartEvent {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -81,6 +86,7 @@ mixin _$ShoppingCartEvent {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -94,6 +100,7 @@ mixin _$ShoppingCartEvent {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) =>
       throw _privateConstructorUsedError;
@@ -104,6 +111,7 @@ mixin _$ShoppingCartEvent {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) =>
@@ -172,6 +180,7 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -187,6 +196,7 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -206,6 +216,7 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return fetchShoppingCart(this);
@@ -219,6 +230,7 @@ class _$FetchShoppingCartEvent implements FetchShoppingCartEvent {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -278,6 +290,7 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -293,6 +306,7 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -312,6 +326,7 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return empty(this);
@@ -325,6 +340,7 @@ class _$ShoppingCartEmpty implements ShoppingCartEmpty {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -420,6 +436,7 @@ class _$CountIncrement implements CountIncrement {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -435,6 +452,7 @@ class _$CountIncrement implements CountIncrement {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -454,6 +472,7 @@ class _$CountIncrement implements CountIncrement {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return increment(this);
@@ -467,6 +486,7 @@ class _$CountIncrement implements CountIncrement {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -568,6 +588,7 @@ class _$CountDecrement implements CountDecrement {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -583,6 +604,7 @@ class _$CountDecrement implements CountDecrement {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -602,6 +624,7 @@ class _$CountDecrement implements CountDecrement {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return decrement(this);
@@ -615,6 +638,7 @@ class _$CountDecrement implements CountDecrement {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -702,6 +726,7 @@ class _$Delete implements Delete {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -717,6 +742,7 @@ class _$Delete implements Delete {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -736,6 +762,7 @@ class _$Delete implements Delete {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return delete(this);
@@ -749,6 +776,7 @@ class _$Delete implements Delete {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
@@ -765,6 +793,113 @@ abstract class Delete implements ShoppingCartEvent {
   int get index => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $DeleteCopyWith<Delete> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClearCopyWith<$Res> {
+  factory $ClearCopyWith(Clear value, $Res Function(Clear) then) =
+      _$ClearCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ClearCopyWithImpl<$Res> extends _$ShoppingCartEventCopyWithImpl<$Res>
+    implements $ClearCopyWith<$Res> {
+  _$ClearCopyWithImpl(Clear _value, $Res Function(Clear) _then)
+      : super(_value, (v) => _then(v as Clear));
+
+  @override
+  Clear get _value => super._value as Clear;
+}
+
+/// @nodoc
+
+class _$Clear implements Clear {
+  _$Clear();
+
+  @override
+  String toString() {
+    return 'ShoppingCartEvent.clear()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is Clear);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchShoppingCart,
+    required TResult Function() empty,
+    required TResult Function(int count, int index) increment,
+    required TResult Function(int count, int index) decrement,
+    required TResult Function(int index) delete,
+    required TResult Function() clear,
+    required TResult Function(String name, String author, String year,
+            String description, String cost, String image)
+        createShoppingCart,
+  }) {
+    return clear();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchShoppingCart,
+    TResult Function()? empty,
+    TResult Function(int count, int index)? increment,
+    TResult Function(int count, int index)? decrement,
+    TResult Function(int index)? delete,
+    TResult Function()? clear,
+    TResult Function(String name, String author, String year,
+            String description, String cost, String image)?
+        createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (clear != null) {
+      return clear();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FetchShoppingCartEvent value) fetchShoppingCart,
+    required TResult Function(ShoppingCartEmpty value) empty,
+    required TResult Function(CountIncrement value) increment,
+    required TResult Function(CountDecrement value) decrement,
+    required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
+    required TResult Function(CreateShoppingCart value) createShoppingCart,
+  }) {
+    return clear(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FetchShoppingCartEvent value)? fetchShoppingCart,
+    TResult Function(ShoppingCartEmpty value)? empty,
+    TResult Function(CountIncrement value)? increment,
+    TResult Function(CountDecrement value)? decrement,
+    TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
+    TResult Function(CreateShoppingCart value)? createShoppingCart,
+    required TResult orElse(),
+  }) {
+    if (clear != null) {
+      return clear(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Clear implements ShoppingCartEvent {
+  factory Clear() = _$Clear;
 }
 
 /// @nodoc
@@ -896,6 +1031,7 @@ class _$CreateShoppingCart implements CreateShoppingCart {
     required TResult Function(int count, int index) increment,
     required TResult Function(int count, int index) decrement,
     required TResult Function(int index) delete,
+    required TResult Function() clear,
     required TResult Function(String name, String author, String year,
             String description, String cost, String image)
         createShoppingCart,
@@ -911,6 +1047,7 @@ class _$CreateShoppingCart implements CreateShoppingCart {
     TResult Function(int count, int index)? increment,
     TResult Function(int count, int index)? decrement,
     TResult Function(int index)? delete,
+    TResult Function()? clear,
     TResult Function(String name, String author, String year,
             String description, String cost, String image)?
         createShoppingCart,
@@ -930,6 +1067,7 @@ class _$CreateShoppingCart implements CreateShoppingCart {
     required TResult Function(CountIncrement value) increment,
     required TResult Function(CountDecrement value) decrement,
     required TResult Function(Delete value) delete,
+    required TResult Function(Clear value) clear,
     required TResult Function(CreateShoppingCart value) createShoppingCart,
   }) {
     return createShoppingCart(this);
@@ -943,6 +1081,7 @@ class _$CreateShoppingCart implements CreateShoppingCart {
     TResult Function(CountIncrement value)? increment,
     TResult Function(CountDecrement value)? decrement,
     TResult Function(Delete value)? delete,
+    TResult Function(Clear value)? clear,
     TResult Function(CreateShoppingCart value)? createShoppingCart,
     required TResult orElse(),
   }) {
