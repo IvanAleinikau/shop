@@ -8,6 +8,7 @@ import 'package:shop/app/pages/settings_page.dart';
 import 'package:shop/app/pages/user_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/theme_provider.dart';
+import 'package:shop/app/widgets/account_button.dart';
 import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
@@ -43,7 +44,8 @@ class AccountPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        CupertinoPageRoute(builder: (context) => const UserPage()),
+                        CupertinoPageRoute(
+                            builder: (context) => const UserPage()),
                       );
                     },
                   ),
@@ -53,69 +55,25 @@ class AccountPage extends StatelessWidget {
                 color: ColorPalette.backgroundColor,
                 child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(28),
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: ListTile(
-                          title: Text(AppLocalization.of(context)!.settings),
-                          leading: const Icon(Icons.settings),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(builder: (context) => const SettingsPage()),
-                            );
-                          },
-                        ),
-                      ),
+                    ButtonListTile(
+                      title: AppLocalization.of(context)!.settings,
+                      icon: Icons.settings,
+                      page: () => const SettingsPage(),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(28),
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: ListTile(
-                          title: Text(AppLocalization.of(context)!.savedNews),
-                          leading: const Icon(Icons.announcement_sharp),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(builder: (context) => const SavedNewsPage()),
-                            );
-                          },
-                        ),
-                      ),
+                    ButtonListTile(
+                      title:AppLocalization.of(context)!.savedNews,
+                      icon: Icons.announcement_sharp,
+                      page: () => const SavedNewsPage(),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(28),
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: ListTile(
-                          title: Text(AppLocalization.of(context)!.faq),
-                          leading: const Icon(Icons.question_answer),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(builder: (context) => const FQAPage()),
-                            );
-                          },
-                        ),
-                      ),
+                    ButtonListTile(
+                      title: AppLocalization.of(context)!.faq,
+                      icon: Icons.question_answer,
+                      page: () => const FQAPage(),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(28),
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                        child: ListTile(
-                          title: Text(AppLocalization.of(context)!.orders),
-                          leading: const Icon(Icons.local_shipping_rounded),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(builder: (context) => const OrdersPage()),
-                            );
-                          },
-                        ),
-                      ),
+                    ButtonListTile(
+                      title: AppLocalization.of(context)!.orders,
+                      icon: Icons.local_shipping_rounded,
+                      page: () => const OrdersPage(),
                     ),
                   ],
                 ),

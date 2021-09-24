@@ -61,15 +61,18 @@ class _OrdersPageState extends State<OrdersPage> {
                                     padding: const EdgeInsets.all(5),
                                     height: 100,
                                     child: ClipRRect(
-                                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                      child: Image.network(list[index].vinylRecord.image),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                      child: Image.network(
+                                          list[index].vinylRecord.image),
                                     ),
                                   ),
                                 ),
                                 Flexible(
                                   flex: 3,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         child: Text(
@@ -80,7 +83,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                             fontFamily: 'Karla',
                                           ),
                                         ),
-                                        padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 10, 10, 0),
                                       ),
                                       Container(
                                         child: Text(
@@ -90,7 +94,8 @@ class _OrdersPageState extends State<OrdersPage> {
                                             fontFamily: 'Karla',
                                           ),
                                         ),
-                                        padding: const EdgeInsets.fromLTRB(10, 3, 10, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 3, 10, 0),
                                       ),
                                     ],
                                   ),
@@ -101,7 +106,8 @@ class _OrdersPageState extends State<OrdersPage> {
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.fromLTRB(10, 8, 0, 8),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 8, 0, 8),
                                   child: Text(
                                     list[index].vinylRecord.cost + ' \$',
                                     style: const TextStyle(
@@ -111,10 +117,12 @@ class _OrdersPageState extends State<OrdersPage> {
                                   ),
                                 ),
                                 Container(
-                                  child: Text(' x ${list[index].count}',
-                                      style: const TextStyle(
-                                        fontSize: FontSize.costFont,
-                                      )),
+                                  child: Text(
+                                    ' x ${list[index].count}',
+                                    style: const TextStyle(
+                                      fontSize: FontSize.costFont,
+                                    ),
+                                  ),
                                 ),
                               ],
                             )

@@ -40,7 +40,6 @@ class PurchaseBloc extends Bloc<PurchaseEvent, PurchaseState> {
         yield PurchaseState.contentEmpty();
       }
     } catch (_) {
-      print(_);
       yield PurchaseState.error();
     }
   }
