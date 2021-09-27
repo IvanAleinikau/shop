@@ -8,6 +8,7 @@ class Purchase with _$Purchase {
   factory Purchase({
     required String user,
     required bool isActive,
-    required VinylRecord vinylRecord,}
-  ) = _Purchase;
+    required VinylRecord vinylRecord,
+    required int count,
+  }) = _Purchase;
 }

@@ -1,165 +1,66 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop/app/pages/fqa_page.dart';
+import 'package:shop/app/pages/account_page.dart';
 import 'package:shop/app/pages/news_page.dart';
-import 'package:shop/app/pages/saved_news_page.dart';
-import 'package:shop/app/pages/settings_page.dart';
 import 'package:shop/app/pages/shop_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
-import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/divider.dart';
-import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
-import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
+import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({Key? key}) : super(key: key);
-
+class AppMenu extends StatefulWidget {
   @override
-  _MenuState createState() => _MenuState();
+  _AppMenuState createState() => _AppMenuState();
 }
 
-class _MenuState extends State<Menu> {
-  String? user = FirebaseAuth.instance.currentUser!.email;
+class _AppMenuState extends State<AppMenu> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    NewsPage(),
+    ShopPage(),
+    AccountPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('asset/image/image2.jpg'),
-            fit: BoxFit.cover,
+    return Scaffold(
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: const Icon(
+              CupertinoIcons.news_solid,
+              size: FontSize.bottomBarIconFont,
+            ),
+            label: AppLocalization.of(context)!.news,
           ),
-        ),
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                accountName: Text(
-                  AppLocalization.of(context)!.email,
-                ),
-                accountEmail: Text(user!),
-                currentAccountPicture: const Icon(
-                  Icons.account_circle_sharp,
-                  color: ColorPalette.textColor,
-                  size: 70,
-                ),
-              ),
-              decoration: const BoxDecoration(
-                color: Colors.transparent,
-              ),
+           BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.shopping_bag,
+              size: FontSize.bottomBarIconFont,
             ),
-            const CustomDivider(),
-            ListTile(
-              title: Text(
-                AppLocalization.of(context)!.home,
-                style: ThemeProvider.getTheme().textTheme.headline1,
-              ),
-              leading: const Icon(
-                Icons.home,
-                color: ColorPalette.textColor,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NewsPage(),
-                  ),
-                );
-              },
+            label: AppLocalization.of(context)!.shop,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.account_circle,
+              size: FontSize.bottomBarIconFont,
             ),
-            ListTile(
-              title: Text(
-                AppLocalization.of(context)!.shop,
-                style: ThemeProvider.getTheme().textTheme.headline1,
-              ),
-              leading: const Icon(
-                Icons.shopping_bag,
-                color: ColorPalette.textColor,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ShopPage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text(
-                AppLocalization.of(context)!.savedNews,
-                style: ThemeProvider.getTheme().textTheme.headline1,
-              ),
-              leading: const Icon(
-                Icons.announcement_sharp,
-                color: ColorPalette.textColor,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SavedNewsPage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text(
-                AppLocalization.of(context)!.settings,
-                style: ThemeProvider.getTheme().textTheme.headline1,
-              ),
-              leading: const Icon(
-                Icons.settings,
-                color: ColorPalette.textColor,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsPage(),
-                  ),
-                );
-              },
-            ),
-            const CustomDivider(),
-            ListTile(
-              title: Text(
-                AppLocalization.of(context)!.faq,
-                style: ThemeProvider.getTheme().textTheme.headline1,
-              ),
-              leading: const Icon(
-                Icons.question_answer,
-                color: ColorPalette.textColor,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>  FQAPage(),
-                    ),
-                  );
-              },
-            ),
-            ListTile(
-              title: Text(
-                AppLocalization.of(context)!.logout,
-                style: ThemeProvider.getTheme().textTheme.headline1,
-              ),
-              leading: const Icon(
-                Icons.logout,
-                color: ColorPalette.textColor,
-              ),
-              onTap: () {
-                BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
-              },
-            ),
-          ],
+            label: AppLocalization.of(context)!.account,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: ColorPalette.iconBarColor,
+        onTap: _onItemTapped,
+        backgroundColor: ColorPalette.bottomBarColor,
+        unselectedIconTheme: const IconThemeData(
+            color: ColorPalette.unselectedItemColor
         ),
       ),
     );

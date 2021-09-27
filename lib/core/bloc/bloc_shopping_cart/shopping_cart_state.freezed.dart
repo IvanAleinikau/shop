@@ -24,9 +24,10 @@ class _$ShoppingCartStateTearOff {
     return _ShoppingCartLoading();
   }
 
-  _ShoppingCartContent content(List<Purchase> list) {
+  _ShoppingCartContent content(List<Purchase> list, int cost) {
     return _ShoppingCartContent(
       list,
+      cost,
     );
   }
 
@@ -48,7 +49,7 @@ mixin _$ShoppingCartState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(List<Purchase> list) content,
+    required TResult Function(List<Purchase> list, int cost) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) =>
@@ -57,7 +58,7 @@ mixin _$ShoppingCartState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(List<Purchase> list)? content,
+    TResult Function(List<Purchase> list, int cost)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -142,7 +143,7 @@ class _$_InitState implements _InitState {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(List<Purchase> list) content,
+    required TResult Function(List<Purchase> list, int cost) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -154,7 +155,7 @@ class _$_InitState implements _InitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(List<Purchase> list)? content,
+    TResult Function(List<Purchase> list, int cost)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -240,7 +241,7 @@ class _$_ShoppingCartLoading implements _ShoppingCartLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(List<Purchase> list) content,
+    required TResult Function(List<Purchase> list, int cost) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -252,7 +253,7 @@ class _$_ShoppingCartLoading implements _ShoppingCartLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(List<Purchase> list)? content,
+    TResult Function(List<Purchase> list, int cost)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -301,7 +302,7 @@ abstract class _$ShoppingCartContentCopyWith<$Res> {
   factory _$ShoppingCartContentCopyWith(_ShoppingCartContent value,
           $Res Function(_ShoppingCartContent) then) =
       __$ShoppingCartContentCopyWithImpl<$Res>;
-  $Res call({List<Purchase> list});
+  $Res call({List<Purchase> list, int cost});
 }
 
 /// @nodoc
@@ -318,12 +319,17 @@ class __$ShoppingCartContentCopyWithImpl<$Res>
   @override
   $Res call({
     Object? list = freezed,
+    Object? cost = freezed,
   }) {
     return _then(_ShoppingCartContent(
       list == freezed
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as List<Purchase>,
+      cost == freezed
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -331,14 +337,16 @@ class __$ShoppingCartContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ShoppingCartContent implements _ShoppingCartContent {
-  _$_ShoppingCartContent(this.list);
+  _$_ShoppingCartContent(this.list, this.cost);
 
   @override
   final List<Purchase> list;
+  @override
+  final int cost;
 
   @override
   String toString() {
-    return 'ShoppingCartState.content(list: $list)';
+    return 'ShoppingCartState.content(list: $list, cost: $cost)';
   }
 
   @override
@@ -346,12 +354,16 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
     return identical(this, other) ||
         (other is _ShoppingCartContent &&
             (identical(other.list, list) ||
-                const DeepCollectionEquality().equals(other.list, list)));
+                const DeepCollectionEquality().equals(other.list, list)) &&
+            (identical(other.cost, cost) ||
+                const DeepCollectionEquality().equals(other.cost, cost)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(list);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(list) ^
+      const DeepCollectionEquality().hash(cost);
 
   @JsonKey(ignore: true)
   @override
@@ -364,11 +376,11 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(List<Purchase> list) content,
+    required TResult Function(List<Purchase> list, int cost) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
-    return content(list);
+    return content(list, cost);
   }
 
   @override
@@ -376,13 +388,13 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(List<Purchase> list)? content,
+    TResult Function(List<Purchase> list, int cost)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (content != null) {
-      return content(list);
+      return content(list, cost);
     }
     return orElse();
   }
@@ -417,9 +429,11 @@ class _$_ShoppingCartContent implements _ShoppingCartContent {
 }
 
 abstract class _ShoppingCartContent implements ShoppingCartState {
-  factory _ShoppingCartContent(List<Purchase> list) = _$_ShoppingCartContent;
+  factory _ShoppingCartContent(List<Purchase> list, int cost) =
+      _$_ShoppingCartContent;
 
   List<Purchase> get list => throw _privateConstructorUsedError;
+  int get cost => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ShoppingCartContentCopyWith<_ShoppingCartContent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -467,7 +481,7 @@ class _$_ShoppingCartEmpty implements _ShoppingCartEmpty {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(List<Purchase> list) content,
+    required TResult Function(List<Purchase> list, int cost) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -479,7 +493,7 @@ class _$_ShoppingCartEmpty implements _ShoppingCartEmpty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(List<Purchase> list)? content,
+    TResult Function(List<Purchase> list, int cost)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),
@@ -565,7 +579,7 @@ class _$_ShoppingCartError implements _ShoppingCartError {
   TResult when<TResult extends Object?>({
     required TResult Function() initState,
     required TResult Function() loading,
-    required TResult Function(List<Purchase> list) content,
+    required TResult Function(List<Purchase> list, int cost) content,
     required TResult Function() contentEmpty,
     required TResult Function() error,
   }) {
@@ -577,7 +591,7 @@ class _$_ShoppingCartError implements _ShoppingCartError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initState,
     TResult Function()? loading,
-    TResult Function(List<Purchase> list)? content,
+    TResult Function(List<Purchase> list, int cost)? content,
     TResult Function()? contentEmpty,
     TResult Function()? error,
     required TResult orElse(),

@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:shop/core/l10n/messages_all.dart';
 
 class AppLocalization {
-
   static Future<AppLocalization> load(Locale locale) {
     final String name = locale.countryCode!.isEmpty
         ? locale.languageCode
@@ -15,7 +14,7 @@ class AppLocalization {
     });
   }
 
-  static AppLocalization? of(BuildContext context) {
+  static  AppLocalization? of(BuildContext context) {
     return Localizations.of<AppLocalization>(context, AppLocalization);
   }
 
@@ -26,10 +25,206 @@ class AppLocalization {
     );
   }
 
+  String get saved {
+    return Intl.message(
+      '',
+      name: 'saved',
+    );
+  }
+
+  String get bought {
+    return Intl.message(
+      '',
+      name: 'bought',
+    );
+  }
+
+  String get accept {
+    return Intl.message(
+      '',
+      name: 'accept',
+    );
+  }
+
+  String get successfully {
+    return Intl.message(
+      '',
+      name: 'successfully',
+    );
+  }
+
+  String get areYouSure {
+    return Intl.message(
+      '',
+      name: 'are_you_sure',
+    );
+  }
+
+  String get yes {
+    return Intl.message(
+      '',
+      name: 'yes',
+    );
+  }
+
+  String get no {
+    return Intl.message(
+      '',
+      name: 'no',
+    );
+  }
+
+  String get hello {
+    return Intl.message(
+      '',
+      name: 'hello',
+    );
+  }
+
   String get wrong {
     return Intl.message(
       '',
       name: 'wrong',
+    );
+  }
+
+  String get search {
+    return Intl.message(
+      '',
+      name: 'search',
+    );
+  }
+
+  String get noResult {
+    return Intl.message(
+      '',
+      name: 'no_result',
+    );
+  }
+
+  String get pay {
+    return Intl.message(
+      '',
+      name: 'pay',
+    );
+  }
+
+  String get order {
+    return Intl.message(
+      '',
+      name: 'order',
+    );
+  }
+
+  String get customer {
+    return Intl.message(
+      '',
+      name: 'customer',
+    );
+  }
+
+  String get order2 {
+    return Intl.message(
+      '',
+      name: 'order2',
+    );
+  }
+
+  String get thanks {
+    return Intl.message(
+      '',
+      name: 'thanks',
+    );
+  }
+
+  String get total {
+    return Intl.message(
+      '',
+      name: 'total',
+    );
+  }
+
+  String get doWant {
+    return Intl.message(
+      '',
+      name: 'dowant',
+    );
+  }
+
+  String get myData {
+    return Intl.message(
+      '',
+      name: 'my_data',
+    );
+  }
+
+  String get emptyCart {
+    return Intl.message(
+      '',
+      name: 'empty_cart',
+    );
+  }
+
+  String get orders {
+    return Intl.message(
+      '',
+      name: 'orders',
+    );
+  }
+
+  String get notOrders {
+    return Intl.message(
+      '',
+      name: 'not_orders',
+    );
+  }
+
+  String get gender {
+    return Intl.message(
+      '',
+      name: 'gender',
+    );
+  }
+
+  String get postOffice {
+    return Intl.message(
+      '',
+      name: 'post_office',
+    );
+  }
+
+  String get firstName {
+    return Intl.message(
+      '',
+      name: 'first_name',
+    );
+  }
+
+  String get surname {
+    return Intl.message(
+      '',
+      name: 'surname',
+    );
+  }
+
+  String get ok {
+    return Intl.message(
+      '',
+      name: 'ok',
+    );
+  }
+
+  String get female {
+    return Intl.message(
+      '',
+      name: 'female',
+    );
+  }
+
+  String get male {
+    return Intl.message(
+      '',
+      name: 'male',
     );
   }
 

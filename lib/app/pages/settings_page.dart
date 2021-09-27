@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop/app/pages/control_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/core/bloc/bloc_settings/settings_bloc.dart';
 import 'package:shop/core/bloc/bloc_settings/settings_event.dart';
 import 'package:shop/core/bloc/bloc_settings/settings_state.dart';
+import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
+import 'package:shop/core/bloc/bloc_user/user_event.dart';
+import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -23,73 +27,87 @@ class _SettingsPageState extends State<SettingsPage> {
       create: (context) => SettingBloc(),
       child: BlocBuilder<SettingBloc, SettingState>(
         builder: (context, state) {
+          final SettingBloc _bloc = BlocProvider.of<SettingBloc>(context);
           state.when(
             initState: () {},
             loading: () {
-              BlocProvider.of<SettingBloc>(context).add(ResetPage());
+              _bloc.add(ResetPage());
               return const Center(
                 child: CircularProgressIndicator(),
               );
             },
           );
           return Scaffold(
+            backgroundColor: ColorPalette.backgroundColor,
             appBar: AppBar(
               centerTitle: true,
+              backgroundColor: ColorPalette.appBarColor,
               title: Text(
                 AppLocalization.of(context)!.settings,
                 style: ThemeProvider.getTheme().textTheme.headline2,
               ),
-              backgroundColor: Colors.black54,
+              actions: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.admin_panel_settings,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ControlPage()),
+                    );
+                  },
+                ),
+              ],
             ),
             body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('asset/image/image.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
                 children: [
-                  SizedBox(
-                    child: Text(
-                      AppLocalization.of(context)!.settings,
-                      style: ThemeProvider.getTheme().textTheme.headline4,
-                    ),
-                  ),
                   const CustomDivider(),
-                  _switchLanguage(context),
+                  _userDetails(context),
+                  const CustomDivider(),
+                  _switchLanguage(context, _bloc),
                 ],
               ),
             ),
-            drawer: const Menu(),
           );
         },
       ),
     );
   }
 
-  Widget _switchLanguage(context) {
+  Widget _switchLanguage(context, SettingBloc _bloc) {
     return ListTile(
       title: Text(
         AppLocalization.of(context)!.changeLanguage,
-        style: ThemeProvider.getTheme().textTheme.headline5,
+        style: const TextStyle(
+          fontSize: FontSize.settingsFont,
+        ),
       ),
       leading: const Icon(
         Icons.language,
-        color: ColorPalette.textColor,
-        size: 30,
+        size: FontSize.iconFont,
+      ),
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
       ),
       onTap: () {
         showDialog(
           context: context,
           builder: (BuildContext ctx) {
             return AlertDialog(
+              backgroundColor: ColorPalette.backgroundColor,
               title: Text(AppLocalization.of(context)!.chooseLanguage),
               content: SingleChildScrollView(
                 child: Column(
                   children: [
                     ListTile(
+                      leading: Radio<Languages>(
+                        value: Languages.english,
+                        groupValue: _bloc.language,
+                        onChanged: (Languages? value) {},
+                      ),
                       title: const Text('English'),
                       onTap: () {
                         BlocProvider.of<SettingBloc>(context).add(LoadEng());
@@ -97,6 +115,11 @@ class _SettingsPageState extends State<SettingsPage> {
                       },
                     ),
                     ListTile(
+                      leading: Radio<Languages>(
+                        value: Languages.russian,
+                        groupValue: _bloc.language,
+                        onChanged: (Languages? value) {},
+                      ),
                       title: const Text('Русский'),
                       onTap: () {
                         BlocProvider.of<SettingBloc>(context).add(LoadRus());
@@ -106,6 +129,54 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
               ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _userDetails(context) {
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return state.when(
+          initState: () {
+            BlocProvider.of<UserBloc>(context).add(FetchUser());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          user: (user) {
+            return Row(
+              children: [
+                const Flexible(
+                  child: Icon(
+                    Icons.account_circle_sharp,
+                    size: FontSize.settingsUserIconFont,
+                  ),
+                ),
+                Flexible(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Text(
+                          user.firstName + ' ' + user.surname,
+                          style: const TextStyle(
+                            fontSize: FontSize.nameFont,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        padding: const EdgeInsets.fromLTRB(30, 0, 0, 5),
+                      ),
+                      Container(
+                        child: Text(
+                          user.email,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             );
           },
         );

@@ -152,7 +152,7 @@ class _MapsState extends State<Maps> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: ColorPalette.primaryColor,
+        backgroundColor: ColorPalette.appBarColor,
       ),
       body: Stack(
         children: [

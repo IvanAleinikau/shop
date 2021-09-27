@@ -1,49 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:shop/app/theme/color_palette.dart';
+import 'package:shop/app/theme/font_size.dart';
 
 
 class ThemeProvider{
   static ThemeData getTheme(){
     return ThemeData(
       textTheme: const TextTheme(
-        headline1: _TextStyle.headline1,
-        headline2: _TextStyle.headline2,
-        headline3: _TextStyle.headline3,
-        headline4: _TextStyle.headline4,
-        headline5: _TextStyle.headline5,
-        headline6: _TextStyle.headline6,
+        headline1:  _TextStyle.textStyle,
+        headline2: _TextStyle.appBar,
+        headline3: _TextStyle.info,
       )
     );
   }
 }
 
 class _TextStyle{
-  static const headline1 = TextStyle(
+  static const appBar = TextStyle(
     color: ColorPalette.textColor,
-    fontFamily: 'Oxygen' ,
-    fontSize: 17,
+    fontFamily: 'Karla',
+    fontSize: FontSize.appBarTitleFont,
   );
 
-  static const headline2 = TextStyle(
-    color: ColorPalette.textColor,
-    fontFamily: 'Oxygen',
+  static const info = TextStyle(
+    fontFamily: 'Caveat',
+    fontSize: FontSize.appBarTitleFont,
   );
 
-  static const headline3 = TextStyle(
-    color: ColorPalette.textColor,
-  );
-
-  static const headline4 = TextStyle(
-    color: ColorPalette.textColor,
-    fontSize: 25,
-  );
-
-  static const headline5 = TextStyle(
-    color: ColorPalette.textColor,
-    fontSize: 20,
-  );
-
-  static const headline6 = TextStyle(
-    fontFamily: 'Oxygen' ,
+  static const textStyle = TextStyle(
+    fontFamily: 'Karla',
   );
 }

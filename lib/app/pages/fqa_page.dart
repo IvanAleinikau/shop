@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/theme_provider.dart';
-import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/forms_of_creation/make_question_answer.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
@@ -10,6 +9,9 @@ import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class FQAPage extends StatefulWidget {
+
+  const FQAPage({Key? key}) : super(key: key);
+
   @override
   _FQAPageState createState() => _FQAPageState();
 }
@@ -22,21 +24,16 @@ class _FQAPageState extends State<FQAPage> {
       child: BlocBuilder<FqaBloc, FqaState>(
         builder: (context, state) {
           return Scaffold(
+            backgroundColor: ColorPalette.backgroundColor,
             appBar: AppBar(
               centerTitle: true,
               title: Text(
                 AppLocalization.of(context)!.faq,
                 style: ThemeProvider.getTheme().textTheme.headline2,
               ),
-              backgroundColor: ColorPalette.primaryColor,
+              backgroundColor: ColorPalette.appBarColor,
             ),
             body: Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('asset/image/image.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: state.when(
                 loading: () {
                   return const CircularProgressIndicator();
@@ -48,7 +45,7 @@ class _FQAPageState extends State<FQAPage> {
                   return Center(
                     child: Text(
                       AppLocalization.of(context)!.notFqa,
-                      style: ThemeProvider.getTheme().textTheme.headline2,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
@@ -56,7 +53,7 @@ class _FQAPageState extends State<FQAPage> {
                   return Center(
                     child: Text(
                       AppLocalization.of(context)!.wrong,
-                      style: ThemeProvider.getTheme().textTheme.headline2,
+                      style: ThemeProvider.getTheme().textTheme.headline3,
                     ),
                   );
                 },
@@ -65,10 +62,9 @@ class _FQAPageState extends State<FQAPage> {
                 },
               ),
             ),
-            drawer: const Menu(),
             floatingActionButton: FloatingActionButton(
               child: const Icon(Icons.add),
-              backgroundColor: ColorPalette.primaryColor,
+              backgroundColor: ColorPalette.appBarColor,
               onPressed: () {
                 showDialog(
                   context: context,
@@ -104,16 +100,14 @@ class _FQAPageState extends State<FQAPage> {
               BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
             },
             child: Card(
-              color: Colors.transparent,
+              color: ColorPalette.cardColor,
               child: ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
                 title: Text(
                   '${index + 1}. ' + list[index].question,
-                  style: ThemeProvider.getTheme().textTheme.headline2,
                 ),
                 subtitle: Text(
                   list[index].answer,
-                  style: ThemeProvider.getTheme().textTheme.headline2,
                 ),
               ),
             ),

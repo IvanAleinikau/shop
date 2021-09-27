@@ -19,11 +19,13 @@ class _$PurchaseTearOff {
   _Purchase call(
       {required String user,
       required bool isActive,
-      required VinylRecord vinylRecord}) {
+      required VinylRecord vinylRecord,
+      required int count}) {
     return _Purchase(
       user: user,
       isActive: isActive,
       vinylRecord: vinylRecord,
+      count: count,
     );
   }
 }
@@ -36,6 +38,7 @@ mixin _$Purchase {
   String get user => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
   VinylRecord get vinylRecord => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PurchaseCopyWith<Purchase> get copyWith =>
@@ -46,7 +49,7 @@ mixin _$Purchase {
 abstract class $PurchaseCopyWith<$Res> {
   factory $PurchaseCopyWith(Purchase value, $Res Function(Purchase) then) =
       _$PurchaseCopyWithImpl<$Res>;
-  $Res call({String user, bool isActive, VinylRecord vinylRecord});
+  $Res call({String user, bool isActive, VinylRecord vinylRecord, int count});
 
   $VinylRecordCopyWith<$Res> get vinylRecord;
 }
@@ -64,6 +67,7 @@ class _$PurchaseCopyWithImpl<$Res> implements $PurchaseCopyWith<$Res> {
     Object? user = freezed,
     Object? isActive = freezed,
     Object? vinylRecord = freezed,
+    Object? count = freezed,
   }) {
     return _then(_value.copyWith(
       user: user == freezed
@@ -78,6 +82,10 @@ class _$PurchaseCopyWithImpl<$Res> implements $PurchaseCopyWith<$Res> {
           ? _value.vinylRecord
           : vinylRecord // ignore: cast_nullable_to_non_nullable
               as VinylRecord,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -94,7 +102,7 @@ abstract class _$PurchaseCopyWith<$Res> implements $PurchaseCopyWith<$Res> {
   factory _$PurchaseCopyWith(_Purchase value, $Res Function(_Purchase) then) =
       __$PurchaseCopyWithImpl<$Res>;
   @override
-  $Res call({String user, bool isActive, VinylRecord vinylRecord});
+  $Res call({String user, bool isActive, VinylRecord vinylRecord, int count});
 
   @override
   $VinylRecordCopyWith<$Res> get vinylRecord;
@@ -114,6 +122,7 @@ class __$PurchaseCopyWithImpl<$Res> extends _$PurchaseCopyWithImpl<$Res>
     Object? user = freezed,
     Object? isActive = freezed,
     Object? vinylRecord = freezed,
+    Object? count = freezed,
   }) {
     return _then(_Purchase(
       user: user == freezed
@@ -128,6 +137,10 @@ class __$PurchaseCopyWithImpl<$Res> extends _$PurchaseCopyWithImpl<$Res>
           ? _value.vinylRecord
           : vinylRecord // ignore: cast_nullable_to_non_nullable
               as VinylRecord,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -136,7 +149,10 @@ class __$PurchaseCopyWithImpl<$Res> extends _$PurchaseCopyWithImpl<$Res>
 
 class _$_Purchase implements _Purchase {
   _$_Purchase(
-      {required this.user, required this.isActive, required this.vinylRecord});
+      {required this.user,
+      required this.isActive,
+      required this.vinylRecord,
+      required this.count});
 
   @override
   final String user;
@@ -144,10 +160,12 @@ class _$_Purchase implements _Purchase {
   final bool isActive;
   @override
   final VinylRecord vinylRecord;
+  @override
+  final int count;
 
   @override
   String toString() {
-    return 'Purchase(user: $user, isActive: $isActive, vinylRecord: $vinylRecord)';
+    return 'Purchase(user: $user, isActive: $isActive, vinylRecord: $vinylRecord, count: $count)';
   }
 
   @override
@@ -161,7 +179,9 @@ class _$_Purchase implements _Purchase {
                     .equals(other.isActive, isActive)) &&
             (identical(other.vinylRecord, vinylRecord) ||
                 const DeepCollectionEquality()
-                    .equals(other.vinylRecord, vinylRecord)));
+                    .equals(other.vinylRecord, vinylRecord)) &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)));
   }
 
   @override
@@ -169,7 +189,8 @@ class _$_Purchase implements _Purchase {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(isActive) ^
-      const DeepCollectionEquality().hash(vinylRecord);
+      const DeepCollectionEquality().hash(vinylRecord) ^
+      const DeepCollectionEquality().hash(count);
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +202,8 @@ abstract class _Purchase implements Purchase {
   factory _Purchase(
       {required String user,
       required bool isActive,
-      required VinylRecord vinylRecord}) = _$_Purchase;
+      required VinylRecord vinylRecord,
+      required int count}) = _$_Purchase;
 
   @override
   String get user => throw _privateConstructorUsedError;
@@ -189,6 +211,8 @@ abstract class _Purchase implements Purchase {
   bool get isActive => throw _privateConstructorUsedError;
   @override
   VinylRecord get vinylRecord => throw _privateConstructorUsedError;
+  @override
+  int get count => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PurchaseCopyWith<_Purchase> get copyWith =>

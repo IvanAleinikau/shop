@@ -10,7 +10,7 @@ abstract class ShoppingCartState with _$ShoppingCartState{
 
   factory ShoppingCartState.loading() = _ShoppingCartLoading;
 
-  factory ShoppingCartState.content(List<Purchase> list) = _ShoppingCartContent;
+  factory ShoppingCartState.content(List<Purchase> list, int cost) = _ShoppingCartContent;
 
   factory ShoppingCartState.contentEmpty() = _ShoppingCartEmpty;
 

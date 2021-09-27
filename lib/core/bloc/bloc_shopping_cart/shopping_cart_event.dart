@@ -8,6 +8,14 @@ abstract class ShoppingCartEvent with _$ShoppingCartEvent {
 
   factory ShoppingCartEvent.empty() = ShoppingCartEmpty;
 
+  factory ShoppingCartEvent.increment(int count, int index) = CountIncrement;
+
+  factory ShoppingCartEvent.decrement(int count, int index) = CountDecrement;
+
+  factory ShoppingCartEvent.delete(int index) = Delete;
+
+  factory ShoppingCartEvent.clear() = Clear;
+
   factory ShoppingCartEvent.createShoppingCart(
     String name,
     String author,
