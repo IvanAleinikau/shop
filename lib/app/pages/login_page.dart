@@ -33,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       Container(
-                        height: 320,
                         child: AppLogo(),
                       ),
                       Padding(

@@ -8,23 +8,25 @@ class Failure extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: ColorPalette.backgroundColor,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.search,
-              size: 50,
-              color: ColorPalette.textColor,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              AppLocalization.of(context)!.noResult,
-              style: ThemeProvider.getTheme().textTheme.headline3,
-            ),
-          ],
+      child: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.search,
+                size: 50,
+                color: ColorPalette.textColor,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                AppLocalization.of(context)!.noResult,
+                style: ThemeProvider.getTheme().textTheme.headline3,
+              ),
+            ],
+          ),
         ),
       ),
     );
