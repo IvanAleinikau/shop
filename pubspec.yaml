@@ -58,6 +58,7 @@ dependencies:
   get_it: ^7.2.0
   search_page: ^2.0.0+1
   golden_toolkit: ^0.10.0
+  get: ^4.3.8
 
 
 dev_dependencies:

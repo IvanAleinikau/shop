@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop/core/navigator_service.dart';
 
 class ButtonListTile extends StatelessWidget {
   final String title;
   final IconData icon;
-  final Widget Function() page;
+  final Pages page;
 
   const ButtonListTile({
     Key? key,
@@ -23,10 +24,7 @@ class ButtonListTile extends StatelessWidget {
           title: Text(title),
           leading: Icon(icon),
           onTap: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(builder: (context) => page()),
-            );
+            NavigatorService().navigateTo(page);
           },
         ),
       ),

@@ -12,6 +12,7 @@ import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
+import 'package:shop/core/navigator_service.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -52,10 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Icons.admin_panel_settings,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ControlPage()),
-                    );
+                    NavigatorService().navigateTo(Pages.control);
                   },
                 ),
               ],

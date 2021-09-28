@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop/app/pages/fqa_page.dart';
-import 'package:shop/app/pages/orders_page.dart';
-import 'package:shop/app/pages/saved_news_page.dart';
-import 'package:shop/app/pages/settings_page.dart';
-import 'package:shop/app/pages/user_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/account_button.dart';
@@ -13,6 +8,7 @@ import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
+import 'package:shop/core/navigator_service.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -42,11 +38,7 @@ class AccountPage extends StatelessWidget {
                       Icons.account_circle_outlined,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => const UserPage()),
-                      );
+                      NavigatorService().navigateTo(Pages.user);
                     },
                   ),
                 ],
@@ -58,22 +50,22 @@ class AccountPage extends StatelessWidget {
                     ButtonListTile(
                       title: AppLocalization.of(context)!.settings,
                       icon: Icons.settings,
-                      page: () => const SettingsPage(),
+                      page: Pages.settings,
                     ),
                     ButtonListTile(
-                      title:AppLocalization.of(context)!.savedNews,
+                      title: AppLocalization.of(context)!.savedNews,
                       icon: Icons.announcement_sharp,
-                      page: () => const SavedNewsPage(),
+                      page: Pages.savedNews,
                     ),
                     ButtonListTile(
                       title: AppLocalization.of(context)!.faq,
                       icon: Icons.question_answer,
-                      page: () => const FQAPage(),
+                      page: Pages.fqa,
                     ),
                     ButtonListTile(
                       title: AppLocalization.of(context)!.orders,
                       icon: Icons.local_shipping_rounded,
-                      page: () => const OrdersPage(),
+                      page: Pages.orders,
                     ),
                   ],
                 ),

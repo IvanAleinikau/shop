@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:shop/app/pages/saved_news_page.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_register/register_bloc.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/get_it.dart';
+import 'package:shop/core/get_pages.dart';
 import 'package:shop/core/splash.dart';
 import 'package:shop/core/bloc/bloc_splash/splash_event.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,7 +28,8 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final AppLocalizationDelegate _localeOverrideDelegate = const AppLocalizationDelegate(Locale('en', 'US'));
+  final AppLocalizationDelegate _localeOverrideDelegate =
+      const AppLocalizationDelegate(Locale('en', 'US'));
   late SplashBloc splashBloc;
 
   @override
@@ -51,7 +55,9 @@ class _AppState extends State<App> {
           create: (context) => UserBloc()..add(FetchUser()),
         )
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
+        initialRoute: '/',
+        getPages: GetPages().getPages(),
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

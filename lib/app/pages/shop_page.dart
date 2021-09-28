@@ -17,6 +17,7 @@ import 'package:shop/core/bloc/bloc_vinyl_record/vinyl_record_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/core/models/vinyl_record_model.dart';
 import 'package:search_page/search_page.dart';
+import 'package:shop/core/navigator_service.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({Key? key}) : super(key: key);
@@ -83,10 +84,7 @@ class _ShopPageState extends State<ShopPage> {
                             Icons.shopping_cart_outlined,
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(builder: (context) => const ShoppingCartPage()),
-                            );
+                            NavigatorService().navigateTo(Pages.shoppingCart);
                           },
                         ),
                       );

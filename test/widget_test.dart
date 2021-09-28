@@ -5,6 +5,7 @@ import 'package:shop/app/pages/settings_page.dart';
 import 'package:shop/app/widgets/account_button.dart';
 import 'package:shop/app/widgets/app_logo.dart';
 import 'package:shop/app/widgets/divider.dart';
+import 'package:shop/core/navigator_service.dart';
 
 void main() {
   group(
@@ -14,7 +15,7 @@ void main() {
         final widget = ButtonListTile(
           title: 'Settings',
           icon: Icons.settings,
-          page: () => const SettingsPage(),
+          page: Pages.settings,
         );
         final builder = GoldenBuilder.column()
           ..addScenario('Settings', widget)
