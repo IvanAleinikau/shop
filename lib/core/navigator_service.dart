@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class NavigatorService {
-  void navigateTo(dynamic page,) {
+  void navigateTo(dynamic page) {
     late String route;
 
     switch (page) {
@@ -30,7 +30,7 @@ class NavigatorService {
         route = '/vinyl_record';
         break;
     }
-    Get.toNamed(route,);
+    Get.toNamed(route);
   }
 
   void close() {
