@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:shop/core/navigator_service.dart';
 import 'package:shop/data/repositories/history_of_orders_repository.dart';
 import 'package:shop/data/repositories/user_repository.dart';
 import 'package:shop/data/service/auth_service.dart';
@@ -35,6 +36,7 @@ class SetupGetIt {
     GetIt.instance.registerSingleton(SavedNewsService());
     GetIt.instance.registerSingleton(VinylRecordService());
     GetIt.instance.registerSingleton(UserService());
+    GetIt.instance.registerSingleton(NavigatorService());
 
     GetIt.instance<SavedNewsRepository>().initializeDatabase();
     GetIt.instance<QuestionAnswerRepository>().initializeDatabase();

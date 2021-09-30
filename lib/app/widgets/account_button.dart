@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shop/core/navigator_service.dart';
 
 class ButtonListTile extends StatelessWidget {
@@ -24,7 +25,7 @@ class ButtonListTile extends StatelessWidget {
           title: Text(title),
           leading: Icon(icon),
           onTap: () {
-            NavigatorService().navigateTo(page);
+            GetIt.instance<NavigatorService>().navigateTo(page);
           },
         ),
       ),
