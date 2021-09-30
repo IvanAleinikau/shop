@@ -107,5 +107,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "empty_cart" : MessageLookupByLibrary.simpleMessage("Ваша корзина пуста"),
     "orders" : MessageLookupByLibrary.simpleMessage("Заказы"),
     "not_orders" : MessageLookupByLibrary.simpleMessage("Нет заказов"),
+    "vendro_code" : MessageLookupByLibrary.simpleMessage("Артикул"),
+    "options" : MessageLookupByLibrary.simpleMessage("Параметры"),
+    "packing_width" : MessageLookupByLibrary.simpleMessage("Ширина упаковки"),
+    "packing_height" : MessageLookupByLibrary.simpleMessage("Высота упаковки"),
+    "packing_depth" : MessageLookupByLibrary.simpleMessage("Глубина упаковки"),
+    "manufacturer_country" : MessageLookupByLibrary.simpleMessage("Cтрана производитель"),
   };
 }

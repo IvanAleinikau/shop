@@ -20,6 +20,7 @@ abstract class ColorPalette {
   static const textColor = Color(0xFFFFFFFF);
   static const titleColor = Color(0xFF000000);
   static const subtitleColor = Color(0xFF616161);
+  static const vendorCodeColor = Color(0xFF616161);
   static const costColor = Color(0xFFF06292);
   static const textNewsColor = Color(0xFF424242);
   static const dateNewsColor = Color(0xFF9E9E9E);

@@ -107,5 +107,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "empty_cart" : MessageLookupByLibrary.simpleMessage("Your cart is empty"),
     "orders" : MessageLookupByLibrary.simpleMessage("Orders"),
     "not_orders" : MessageLookupByLibrary.simpleMessage("Not orders"),
+    "vendro_code" : MessageLookupByLibrary.simpleMessage("Vendor code"),
+    "options" : MessageLookupByLibrary.simpleMessage("Options"),
+    "packing_width" : MessageLookupByLibrary.simpleMessage("Packing width"),
+    "packing_height" : MessageLookupByLibrary.simpleMessage("Packing height"),
+    "packing_depth" : MessageLookupByLibrary.simpleMessage("Packing depth"),
+    "manufacturer_country" : MessageLookupByLibrary.simpleMessage("Manufacturer country"),
   };
 }

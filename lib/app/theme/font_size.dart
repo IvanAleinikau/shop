@@ -26,4 +26,10 @@ abstract class FontSize{
   static const double postOfficeIndexFont = 25;
   static const double newsTitleFont = 25;
   static const double newsTextFont = 20;
+  static const double vinylNameFont = 23;
+  static const double vinylAuthorFont = 20;
+  static const double vinylDescriptionFont = 20;
+  static const double vendorCodeFont = 17;
+  static const double optionsFont = 20;
+  static const double argsFont = 17;
 }
