@@ -6,4 +6,6 @@ part 'splash_event.freezed.dart';
 abstract class SplashEvent with _$SplashEvent{
 
   factory SplashEvent.checkCurrentUser() = CheckCurrentUser;
+
+  factory SplashEvent.accountCreated() = AccountCreated;
 }

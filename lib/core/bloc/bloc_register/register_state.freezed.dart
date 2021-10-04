@@ -19,6 +19,10 @@ class _$RegisterStateTearOff {
   _InitRegisterState initRegisterState() {
     return _InitRegisterState();
   }
+
+  _Created created() {
+    return _Created();
+  }
 }
 
 /// @nodoc
@@ -29,22 +33,26 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initRegisterState,
+    required TResult Function() created,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initRegisterState,
+    TResult Function()? created,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitRegisterState value) initRegisterState,
+    required TResult Function(_Created value) created,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitRegisterState value)? initRegisterState,
+    TResult Function(_Created value)? created,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -108,6 +116,7 @@ class _$_InitRegisterState implements _InitRegisterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initRegisterState,
+    required TResult Function() created,
   }) {
     return initRegisterState();
   }
@@ -116,6 +125,7 @@ class _$_InitRegisterState implements _InitRegisterState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initRegisterState,
+    TResult Function()? created,
     required TResult orElse(),
   }) {
     if (initRegisterState != null) {
@@ -128,6 +138,7 @@ class _$_InitRegisterState implements _InitRegisterState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitRegisterState value) initRegisterState,
+    required TResult Function(_Created value) created,
   }) {
     return initRegisterState(this);
   }
@@ -136,6 +147,7 @@ class _$_InitRegisterState implements _InitRegisterState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitRegisterState value)? initRegisterState,
+    TResult Function(_Created value)? created,
     required TResult orElse(),
   }) {
     if (initRegisterState != null) {
@@ -147,4 +159,87 @@ class _$_InitRegisterState implements _InitRegisterState {
 
 abstract class _InitRegisterState implements RegisterState {
   factory _InitRegisterState() = _$_InitRegisterState;
+}
+
+/// @nodoc
+abstract class _$CreatedCopyWith<$Res> {
+  factory _$CreatedCopyWith(_Created value, $Res Function(_Created) then) =
+      __$CreatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$CreatedCopyWithImpl<$Res> extends _$RegisterStateCopyWithImpl<$Res>
+    implements _$CreatedCopyWith<$Res> {
+  __$CreatedCopyWithImpl(_Created _value, $Res Function(_Created) _then)
+      : super(_value, (v) => _then(v as _Created));
+
+  @override
+  _Created get _value => super._value as _Created;
+}
+
+/// @nodoc
+
+class _$_Created implements _Created {
+  _$_Created();
+
+  @override
+  String toString() {
+    return 'RegisterState.created()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Created);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initRegisterState,
+    required TResult Function() created,
+  }) {
+    return created();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initRegisterState,
+    TResult Function()? created,
+    required TResult orElse(),
+  }) {
+    if (created != null) {
+      return created();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitRegisterState value) initRegisterState,
+    required TResult Function(_Created value) created,
+  }) {
+    return created(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitRegisterState value)? initRegisterState,
+    TResult Function(_Created value)? created,
+    required TResult orElse(),
+  }) {
+    if (created != null) {
+      return created(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Created implements RegisterState {
+  factory _Created() = _$_Created;
 }

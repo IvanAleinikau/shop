@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shop/app/pages/export_pages.dart';
+import 'package:shop/app/widgets/app_menu.dart';
 
 class GetPages {
   List<GetPage<dynamic>> getPages() {
@@ -18,6 +19,7 @@ class GetPages {
       GetPage(name: '/shopping_cart', page: () => const ShoppingCartPage()),
       GetPage(name: '/user', page: () => const UserPage()),
       GetPage(name: '/video', page: () => const VideoPlayerScreen()),
+      GetPage(name: '/home', page: () => AppMenu()),
     ];
   }
 }

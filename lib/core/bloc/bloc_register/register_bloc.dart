@@ -24,7 +24,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Stream<RegisterState> _registerEvent(RegisterUserEvent event) async* {
     final account = await service.createAccount(email: event.email, password: event.password);
     if (account == 'Account created') {
-      splashBloc.add(CheckCurrentUser());
+      splashBloc.add(AccountCreated());
+      yield RegisterState.created();
     }
   }
 }

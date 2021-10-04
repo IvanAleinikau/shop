@@ -113,5 +113,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "packing_height" : MessageLookupByLibrary.simpleMessage("Высота упаковки"),
     "packing_depth" : MessageLookupByLibrary.simpleMessage("Глубина упаковки"),
     "manufacturer_country" : MessageLookupByLibrary.simpleMessage("Cтрана производитель"),
+    "other" : MessageLookupByLibrary.simpleMessage("Другое"),
   };
 }

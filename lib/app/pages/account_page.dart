@@ -33,16 +33,6 @@ class AccountPage extends StatelessWidget {
                   style: ThemeProvider.getTheme().textTheme.headline2,
                 ),
                 backgroundColor: ColorPalette.appBarColor,
-                actions: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.account_circle_outlined,
-                    ),
-                    onPressed: () {
-                      GetIt.instance<NavigatorService>().navigateTo(Pages.user);
-                    },
-                  ),
-                ],
               ),
               body: Container(
                 color: ColorPalette.backgroundColor,

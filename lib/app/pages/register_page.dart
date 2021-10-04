@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/widgets/app_logo.dart';
+import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/core/bloc/bloc_register/register_bloc.dart';
 import 'package:shop/core/bloc/bloc_register/register_event.dart';
 import 'package:shop/core/bloc/bloc_register/register_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
-
 
 import 'login_page.dart';
 
@@ -69,8 +69,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          labelText: AppLocalization.of(context)!.confirmPassword,
-                          hintText: AppLocalization.of(context)!.confirmPassword,
+                          labelText:
+                              AppLocalization.of(context)!.confirmPassword,
+                          hintText:
+                              AppLocalization.of(context)!.confirmPassword,
                         ),
                       ),
                     ),
@@ -89,7 +91,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         child: Text(AppLocalization.of(context)!.singUp),
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
+                          backgroundColor: MaterialStateProperty.all(
+                              ColorPalette.appBarColor),
                           textStyle: MaterialStateProperty.all(
                             const TextStyle(
                               fontSize: 25.0,
@@ -124,6 +127,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ],
                 ),
               );
+            },
+            created: () {
+              return AppMenu();
             },
           ),
         );

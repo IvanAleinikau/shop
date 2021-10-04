@@ -19,6 +19,10 @@ class _$SplashEventTearOff {
   CheckCurrentUser checkCurrentUser() {
     return CheckCurrentUser();
   }
+
+  AccountCreated accountCreated() {
+    return AccountCreated();
+  }
 }
 
 /// @nodoc
@@ -29,22 +33,26 @@ mixin _$SplashEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkCurrentUser,
+    required TResult Function() accountCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkCurrentUser,
+    TResult Function()? accountCreated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CheckCurrentUser value) checkCurrentUser,
+    required TResult Function(AccountCreated value) accountCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CheckCurrentUser value)? checkCurrentUser,
+    TResult Function(AccountCreated value)? accountCreated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +115,7 @@ class _$CheckCurrentUser implements CheckCurrentUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkCurrentUser,
+    required TResult Function() accountCreated,
   }) {
     return checkCurrentUser();
   }
@@ -115,6 +124,7 @@ class _$CheckCurrentUser implements CheckCurrentUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkCurrentUser,
+    TResult Function()? accountCreated,
     required TResult orElse(),
   }) {
     if (checkCurrentUser != null) {
@@ -127,6 +137,7 @@ class _$CheckCurrentUser implements CheckCurrentUser {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(CheckCurrentUser value) checkCurrentUser,
+    required TResult Function(AccountCreated value) accountCreated,
   }) {
     return checkCurrentUser(this);
   }
@@ -135,6 +146,7 @@ class _$CheckCurrentUser implements CheckCurrentUser {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CheckCurrentUser value)? checkCurrentUser,
+    TResult Function(AccountCreated value)? accountCreated,
     required TResult orElse(),
   }) {
     if (checkCurrentUser != null) {
@@ -146,4 +158,89 @@ class _$CheckCurrentUser implements CheckCurrentUser {
 
 abstract class CheckCurrentUser implements SplashEvent {
   factory CheckCurrentUser() = _$CheckCurrentUser;
+}
+
+/// @nodoc
+abstract class $AccountCreatedCopyWith<$Res> {
+  factory $AccountCreatedCopyWith(
+          AccountCreated value, $Res Function(AccountCreated) then) =
+      _$AccountCreatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$AccountCreatedCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
+    implements $AccountCreatedCopyWith<$Res> {
+  _$AccountCreatedCopyWithImpl(
+      AccountCreated _value, $Res Function(AccountCreated) _then)
+      : super(_value, (v) => _then(v as AccountCreated));
+
+  @override
+  AccountCreated get _value => super._value as AccountCreated;
+}
+
+/// @nodoc
+
+class _$AccountCreated implements AccountCreated {
+  _$AccountCreated();
+
+  @override
+  String toString() {
+    return 'SplashEvent.accountCreated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is AccountCreated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkCurrentUser,
+    required TResult Function() accountCreated,
+  }) {
+    return accountCreated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkCurrentUser,
+    TResult Function()? accountCreated,
+    required TResult orElse(),
+  }) {
+    if (accountCreated != null) {
+      return accountCreated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CheckCurrentUser value) checkCurrentUser,
+    required TResult Function(AccountCreated value) accountCreated,
+  }) {
+    return accountCreated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CheckCurrentUser value)? checkCurrentUser,
+    TResult Function(AccountCreated value)? accountCreated,
+    required TResult orElse(),
+  }) {
+    if (accountCreated != null) {
+      return accountCreated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AccountCreated implements SplashEvent {
+  factory AccountCreated() = _$AccountCreated;
 }

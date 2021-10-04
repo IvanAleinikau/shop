@@ -29,6 +29,12 @@ class NavigatorService {
       case Pages.vinylRecord:
         route = '/vinyl_record';
         break;
+      case Pages.home:
+        route = '/home';
+        break;
+      case Pages.login:
+        route = '/login';
+        break;
     }
     Get.toNamed(route);
   }
@@ -54,4 +60,5 @@ enum Pages {
   user,
   video,
   vinylRecord,
+  home,
 }

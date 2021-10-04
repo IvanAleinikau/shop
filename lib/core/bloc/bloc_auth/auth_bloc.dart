@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
@@ -25,14 +26,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> _logInEvent(LogInEvent event) async* {
     final user = await service.signIn(email: event.email, password: event.password);
     if (user == 'Welcome') {
-      splashBloc.add(CheckCurrentUser());
+      splashBloc.add(AccountCreated());
     }
   }
 
   Stream<AuthState> _logOutEvent(LogOutEvent event) async* {
     final user = await service.signOut();
     if (user == 'singOut') {
-      splashBloc.add(CheckCurrentUser());
+      splashBloc.add(AccountCreated());
     }
   }
 }

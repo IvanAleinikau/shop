@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:shop/app/pages/login_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
@@ -12,6 +13,7 @@ import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 import 'package:shop/core/models/user_model.dart';
+import 'package:shop/core/splash.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
@@ -68,7 +70,8 @@ class UserPage extends StatelessWidget {
                           child: Column(
                             children: [
                               Container(
-                                padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 0, 10),
                                 child: Text(
                                   user.firstName,
                                   style: const TextStyle(
@@ -217,14 +220,12 @@ class UserPage extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       AppLocalization.of(context)!.yes,
-                      style: const TextStyle(color: ColorPalette.dismissibleColor),
+                      style:
+                          const TextStyle(color: ColorPalette.dismissibleColor),
                     ),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 20),
@@ -302,7 +303,8 @@ class UserPage extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 10, 10, 7),
                   child: TextButton(
                     onPressed: () {
-                      _bloc.add(ChangeNames(_firstName.text.trim(), _surname.text.trim()));
+                      _bloc.add(ChangeNames(
+                          _firstName.text.trim(), _surname.text.trim()));
                       _bloc.add(FetchUser());
                       Navigator.of(context).pop();
                       _message(context);

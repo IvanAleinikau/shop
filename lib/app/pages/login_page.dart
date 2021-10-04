@@ -44,7 +44,8 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               labelText: AppLocalization.of(context)!.email,
-                              hintText: AppLocalization.of(context)!.enterEmail),
+                              hintText:
+                                  AppLocalization.of(context)!.enterEmail),
                         ),
                       ),
                       Padding(
@@ -57,7 +58,8 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             labelText: AppLocalization.of(context)!.password,
-                            hintText: AppLocalization.of(context)!.enterPassword,
+                            hintText:
+                                AppLocalization.of(context)!.enterPassword,
                           ),
                         ),
                       ),
@@ -66,11 +68,15 @@ class _LoginPageState extends State<LoginPage> {
                         width: 200,
                         child: ElevatedButton(
                           onPressed: () {
-                            BlocProvider.of<AuthBloc>(context).add(LogInEvent(_email.text.trim(), _password.text.trim()));
+                            BlocProvider.of<AuthBloc>(context).add(LogInEvent(
+                              _email.text.trim(),
+                              _password.text.trim(),
+                            ));
                           },
                           child: Text(AppLocalization.of(context)!.logIn),
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(ColorPalette.appBarColor),
+                            backgroundColor: MaterialStateProperty.all(
+                                ColorPalette.appBarColor),
                             textStyle: MaterialStateProperty.all(
                               const TextStyle(
                                 fontSize: 25.0,
@@ -88,19 +94,20 @@ class _LoginPageState extends State<LoginPage> {
                         height: 130,
                       ),
                       TextButton(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            textStyle: const TextStyle(fontSize: 15),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterPage(),
-                              ),
-                            );
-                          },
-                          child: Text(AppLocalization.of(context)!.haveAcc)),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          textStyle: const TextStyle(fontSize: 15),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegisterPage(),
+                            ),
+                          );
+                        },
+                        child: Text(AppLocalization.of(context)!.haveAcc),
+                      ),
                     ],
                   ),
                 ),

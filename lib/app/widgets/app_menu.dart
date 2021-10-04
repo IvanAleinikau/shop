@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/app/pages/account_page.dart';
+import 'package:shop/app/pages/export_pages.dart';
 import 'package:shop/app/pages/news_page.dart';
 import 'package:shop/app/pages/shop_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
@@ -19,6 +20,7 @@ class _AppMenuState extends State<AppMenu> {
     NewsPage(),
     ShopPage(),
     AccountPage(),
+    UserPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -39,6 +41,7 @@ class _AppMenuState extends State<AppMenu> {
               size: FontSize.bottomBarIconFont,
             ),
             label: AppLocalization.of(context)!.news,
+            backgroundColor: ColorPalette.bottomBarColor,
           ),
            BottomNavigationBarItem(
             icon: const Icon(
@@ -46,6 +49,15 @@ class _AppMenuState extends State<AppMenu> {
               size: FontSize.bottomBarIconFont,
             ),
             label: AppLocalization.of(context)!.shop,
+            backgroundColor: ColorPalette.bottomBarColor,
+          ),
+        BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.auto_awesome_motion,
+              size: FontSize.bottomBarIconFont,
+            ),
+            label: AppLocalization.of(context)!.other,
+            backgroundColor: ColorPalette.bottomBarColor,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
@@ -53,12 +65,12 @@ class _AppMenuState extends State<AppMenu> {
               size: FontSize.bottomBarIconFont,
             ),
             label: AppLocalization.of(context)!.account,
+            backgroundColor: ColorPalette.bottomBarColor,
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: ColorPalette.iconBarColor,
         onTap: _onItemTapped,
-        backgroundColor: ColorPalette.bottomBarColor,
         unselectedIconTheme: const IconThemeData(
             color: ColorPalette.unselectedItemColor
         ),
