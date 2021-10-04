@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:shop/app/pages/export_pages.dart';
-import 'package:shop/core/models/vinyl_record_model.dart';
 
 class GetPages {
   List<GetPage<dynamic>> getPages() {

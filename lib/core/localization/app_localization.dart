@@ -32,6 +32,48 @@ class AppLocalization {
     );
   }
 
+  String get vendorCode {
+    return Intl.message(
+      '',
+      name: 'vendro_code',
+    );
+  }
+
+  String get options {
+    return Intl.message(
+      '',
+      name: 'options',
+    );
+  }
+
+  String get packingDepth {
+    return Intl.message(
+      '',
+      name: 'packing_depth',
+    );
+  }
+
+  String get packingHeight {
+    return Intl.message(
+      '',
+      name: 'packing_height',
+    );
+  }
+
+  String get manufacturerCountry {
+    return Intl.message(
+      '',
+      name: 'manufacturer_country',
+    );
+  }
+
+  String get packingWidth {
+    return Intl.message(
+      '',
+      name: 'packing_width',
+    );
+  }
+
   String get bought {
     return Intl.message(
       '',

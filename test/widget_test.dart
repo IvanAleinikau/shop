@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
-import 'package:shop/app/pages/settings_page.dart';
 import 'package:shop/app/widgets/account_button.dart';
 import 'package:shop/app/widgets/app_logo.dart';
 import 'package:shop/app/widgets/divider.dart';
