@@ -1,7 +1,5 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get_it/get_it.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/account_button.dart';
@@ -14,52 +12,12 @@ import 'package:shop/app/widgets/divider.dart';
 import 'package:shop/app/widgets/fqa_page/dismissible_card.dart';
 import 'package:shop/app/widgets/fqa_page/dismissible_element.dart';
 import 'package:shop/app/widgets/horizontal_line.dart';
-import 'package:shop/app/widgets/news_page/news_card.dart';
 import 'package:shop/app/widgets/text_container.dart';
-import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
-import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
-import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
-import 'package:shop/core/models/news_model.dart';
 import 'package:shop/core/models/question_answer_model.dart';
 import 'package:shop/core/navigator_service.dart';
-import 'package:shop/data/repositories/question_answer_repository.dart';
-import 'package:shop/data/service/question_answer_service.dart';
 
 void main() {
   mainGolden();
-  testBlocs();
-}
-
-void testBlocs() {
-  group('FqaBloc', () {
-    late FqaBloc fqaBloc;
-
-    setUpAll(() {
-      GetIt.instance.registerSingleton(QuestionAnswerRepository());
-      GetIt.instance.registerSingleton(QuestionAnswerService());
-      GetIt.instance<QuestionAnswerRepository>().initializeDatabase();
-    });
-
-    setUp(() {
-      fqaBloc = FqaBloc();
-    });
-
-    blocTest<FqaBloc, FqaState>(
-      '',
-      build: () => fqaBloc,
-      expect: () => [],
-    );
-
-    blocTest<FqaBloc, FqaState>(
-      '',
-      build: () => fqaBloc,
-      act: (_) => _..add(FqaQuestionAnswerEvent()),
-      expect: () => [
-        FqaState.loading(),
-        FqaState.error(),
-      ],
-    );
-  });
 }
 
 void mainGolden() {
