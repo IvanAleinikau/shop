@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/theme_provider.dart';
+import 'package:shop/app/widgets/content/content_message.dart';
 import 'package:shop/app/widgets/forms_of_creation/make_question_answer.dart';
+import 'package:shop/app/widgets/fqa_page/dismissible_element.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
 import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
 
 class FQAPage extends StatefulWidget {
-
   const FQAPage({Key? key}) : super(key: key);
 
   @override
@@ -42,23 +43,20 @@ class _FQAPageState extends State<FQAPage> {
                   return _scrollView(context, list);
                 },
                 contentEmpty: () {
-                  return Center(
-                    child: Text(
-                      AppLocalization.of(context)!.notFqa,
-                      style: ThemeProvider.getTheme().textTheme.headline3,
-                    ),
+                  return ContentMessage(
+                    text: AppLocalization.of(context)!.notFqa,
+                    textStyle: ThemeProvider.getTheme().textTheme.headline3,
                   );
                 },
                 error: () {
-                  return Center(
-                    child: Text(
-                      AppLocalization.of(context)!.wrong,
-                      style: ThemeProvider.getTheme().textTheme.headline3,
-                    ),
+                  return ContentMessage(
+                    text: AppLocalization.of(context)!.wrong,
+                    textStyle: ThemeProvider.getTheme().textTheme.headline3,
                   );
                 },
                 initState: () {
-                  BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
+                  BlocProvider.of<FqaBloc>(context)
+                      .add(FqaQuestionAnswerEvent());
                 },
               ),
             ),
@@ -86,31 +84,9 @@ class _FQAPageState extends State<FQAPage> {
       child: ListView.builder(
         itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {
-          return Dismissible(
-            direction: DismissDirection.endToStart,
-            background: Container(
-              color: Colors.red,
-              alignment: Alignment.centerRight,
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: const Icon(Icons.delete_forever),
-            ),
-            key: ValueKey<int>(list[index].id!.toInt()),
-            onDismissed: (DismissDirection direction) {
-              BlocProvider.of<FqaBloc>(context).add(DeleteQuestionAnswerEvent(list[index].id!.toInt()));
-              BlocProvider.of<FqaBloc>(context).add(FqaQuestionAnswerEvent());
-            },
-            child: Card(
-              color: ColorPalette.cardColor,
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(8.0),
-                title: Text(
-                  '${index + 1}. ' + list[index].question,
-                ),
-                subtitle: Text(
-                  list[index].answer,
-                ),
-              ),
-            ),
+          return DissmissibleElement(
+            element: list[index],
+            index: index,
           );
         },
       ),

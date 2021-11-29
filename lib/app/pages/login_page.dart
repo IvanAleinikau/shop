@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/app/pages/register_page.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/widgets/app_logo.dart';
+import 'package:shop/app/widgets/auth/auth_button.dart';
+import 'package:shop/app/widgets/auth/auth_input.dart';
+import 'package:shop/app/widgets/auth/auth_text_button.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_bloc.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_event.dart';
 import 'package:shop/core/bloc/bloc_auth/auth_state.dart';
@@ -32,81 +35,43 @@ class _LoginPageState extends State<LoginPage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
-                        child: AppLogo(),
-                      ),
-                      Padding(
+                      AppLogo(),
+                      AuthInput(
+                        controller: _email,
                         padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                        child: TextField(
-                          controller: _email,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              labelText: AppLocalization.of(context)!.email,
-                              hintText:
-                                  AppLocalization.of(context)!.enterEmail),
-                        ),
+                        obscure: false,
+                        labelText: AppLocalization.of(context)!.email,
+                        hintText: AppLocalization.of(context)!.enterEmail,
                       ),
-                      Padding(
+                      AuthInput(
+                        controller: _password,
                         padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
-                        child: TextField(
-                          obscureText: true,
-                          controller: _password,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            labelText: AppLocalization.of(context)!.password,
-                            hintText:
-                                AppLocalization.of(context)!.enterPassword,
-                          ),
-                        ),
+                        obscure: true,
+                        labelText: AppLocalization.of(context)!.password,
+                        hintText: AppLocalization.of(context)!.enterPassword,
                       ),
-                      Container(
-                        height: 50,
-                        width: 200,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            BlocProvider.of<AuthBloc>(context).add(LogInEvent(
-                              _email.text.trim(),
-                              _password.text.trim(),
-                            ));
-                          },
-                          child: Text(AppLocalization.of(context)!.logIn),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                ColorPalette.appBarColor),
-                            textStyle: MaterialStateProperty.all(
-                              const TextStyle(
-                                fontSize: 25.0,
-                              ),
-                            ),
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                            ),
+                      AuthButton(
+                        text: AppLocalization.of(context)!.logIn,
+                        onPressed: () => BlocProvider.of<AuthBloc>(context).add(
+                          LogInEvent(
+                            _email.text.trim(),
+                            _password.text.trim(),
                           ),
                         ),
                       ),
                       const SizedBox(
                         height: 130,
                       ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          textStyle: const TextStyle(fontSize: 15),
+                      AuthTextButton(
+                        padding: const EdgeInsets.only(bottom: 15),
+                        textStyle: const TextStyle(fontSize: 15),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegisterPage(),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => RegisterPage(),
-                            ),
-                          );
-                        },
-                        child: Text(AppLocalization.of(context)!.haveAcc),
+                        text: AppLocalization.of(context)!.haveAcc,
                       ),
                     ],
                   ),

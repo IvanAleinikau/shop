@@ -23,7 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Stream<AuthState> _logInEvent(LogInEvent event) async* {
-    final user = await service.signIn(email: event.email, password: event.password);
+    final user =
+        await service.signIn(email: event.email, password: event.password);
     if (user == 'Welcome') {
       splashBloc.add(AccountCreated());
     }

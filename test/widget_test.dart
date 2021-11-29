@@ -1,12 +1,68 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/account_button.dart';
 import 'package:shop/app/widgets/app_logo.dart';
+import 'package:shop/app/widgets/auth/auth_button.dart';
+import 'package:shop/app/widgets/auth/auth_input.dart';
+import 'package:shop/app/widgets/auth/auth_text_button.dart';
+import 'package:shop/app/widgets/content/content_message.dart';
 import 'package:shop/app/widgets/divider.dart';
+import 'package:shop/app/widgets/fqa_page/dismissible_card.dart';
+import 'package:shop/app/widgets/fqa_page/dismissible_element.dart';
+import 'package:shop/app/widgets/horizontal_line.dart';
+import 'package:shop/app/widgets/news_page/news_card.dart';
+import 'package:shop/app/widgets/text_container.dart';
+import 'package:shop/core/bloc/bloc_fqa/fqa_bloc.dart';
+import 'package:shop/core/bloc/bloc_fqa/fqa_event.dart';
+import 'package:shop/core/bloc/bloc_fqa/fqa_state.dart';
+import 'package:shop/core/models/news_model.dart';
+import 'package:shop/core/models/question_answer_model.dart';
 import 'package:shop/core/navigator_service.dart';
+import 'package:shop/data/repositories/question_answer_repository.dart';
+import 'package:shop/data/service/question_answer_service.dart';
 
 void main() {
+  mainGolden();
+  testBlocs();
+}
+
+void testBlocs() {
+  group('FqaBloc', () {
+    late FqaBloc fqaBloc;
+
+    setUpAll(() {
+      GetIt.instance.registerSingleton(QuestionAnswerRepository());
+      GetIt.instance.registerSingleton(QuestionAnswerService());
+      GetIt.instance<QuestionAnswerRepository>().initializeDatabase();
+    });
+
+    setUp(() {
+      fqaBloc = FqaBloc();
+    });
+
+    blocTest<FqaBloc, FqaState>(
+      '',
+      build: () => fqaBloc,
+      expect: () => [],
+    );
+
+    blocTest<FqaBloc, FqaState>(
+      '',
+      build: () => fqaBloc,
+      act: (_) => _..add(FqaQuestionAnswerEvent()),
+      expect: () => [
+        FqaState.loading(),
+        FqaState.error(),
+      ],
+    );
+  });
+}
+
+void mainGolden() {
   group(
     'GoldenBuilder',
     () {
@@ -36,6 +92,109 @@ void main() {
         await tester.pumpWidgetBuilder(builder.build());
         await screenMatchesGolden(tester, 'divider');
       });
+
+      testGoldens('ContentMessage', (tester) async {
+        final widget = ContentMessage(
+          text: 'Something',
+          textStyle: ThemeProvider.getTheme().textTheme.headline3,
+        );
+        final builder = GoldenBuilder.column()
+          ..addScenario('ContentMessage', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'content_message');
+      });
+
+      testGoldens('Line', (tester) async {
+        final widget = Line();
+        final builder = GoldenBuilder.column()..addScenario('Line', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'line');
+      });
+
+      testGoldens('TextContainer', (tester) async {
+        final widget = TextContainer(
+          text: 'Something',
+          style: TextStyle(),
+          padding: EdgeInsets.zero,
+        );
+        final builder = GoldenBuilder.column()
+          ..addScenario('TextContainer', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'text_container');
+      });
+
+      testGoldens('DismissibleCard', (tester) async {
+        final element = QuestionAnswer(answer: '', question: '', id: 1);
+        final widget = DismissibleCard(index: 1, element: element);
+        final builder = GoldenBuilder.column()
+          ..addScenario('DismissibleCard', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'dismissible_card');
+      });
+
+      testGoldens('DissmissibleElement', (tester) async {
+        final element = QuestionAnswer(answer: '', question: '', id: 1);
+        final widget = DissmissibleElement(index: 1, element: element);
+        final builder = GoldenBuilder.column()
+          ..addScenario('DissmissibleElement', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'dissmissible_element');
+      });
+
+      testGoldens('AuthInput', (tester) async {
+        final TextEditingController _email = TextEditingController();
+        final widget = AuthInput(
+          controller: _email,
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+          obscure: true,
+          labelText: '',
+          hintText: '',
+        );
+        final builder = GoldenBuilder.column()
+          ..addScenario('AuthInput', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'auth_input');
+      });
+
+      testGoldens('AuthButton', (tester) async {
+        final widget = AuthButton(
+          text: '',
+          onPressed: () => null,
+        );
+        final builder = GoldenBuilder.column()
+          ..addScenario('AuthButton', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'auth_button');
+      });
+
+      testGoldens('AuthTextButton', (tester) async {
+        final widget = AuthTextButton(
+          padding: const EdgeInsets.only(bottom: 15),
+          textStyle: const TextStyle(fontSize: 15),
+          onPressed: () => null,
+          text: '',
+        );
+        final builder = GoldenBuilder.column()
+          ..addScenario('AuthTextButton', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'auth_text_button');
+      });
+
+      // testGoldens('NewsCard', (tester) async {
+      //   final element = News(
+      //     title: 'title',
+      //     text: 'text',
+      //     url:
+      //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlNTSPlzlKB5_DY0P8hiuDJLP4m21S-LY9rSpyfv309PdQ42IqYtfvR_ylZHW_uXFGJuI&usqp=CAU',
+      //     date: DateTime.now(),
+      //   );
+      //   final widget = NewsCard(
+      //     news: element,
+      //   );
+      //   final builder = GoldenBuilder.column()..addScenario('NewsCard', widget);
+      //   await tester.pumpWidgetBuilder(builder.build());
+      //   await screenMatchesGolden(tester, 'news_card');
+      // });
     },
   );
 }

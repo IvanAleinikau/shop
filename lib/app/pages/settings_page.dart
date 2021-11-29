@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/theme/font_size.dart';
 import 'package:shop/app/theme/theme_provider.dart';
@@ -12,7 +11,6 @@ import 'package:shop/core/bloc/bloc_user/user_bloc.dart';
 import 'package:shop/core/bloc/bloc_user/user_event.dart';
 import 'package:shop/core/bloc/bloc_user/user_state.dart';
 import 'package:shop/core/localization/app_localization.dart';
-import 'package:shop/core/navigator_service.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -47,16 +45,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 AppLocalization.of(context)!.settings,
                 style: ThemeProvider.getTheme().textTheme.headline2,
               ),
-              actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.admin_panel_settings,
-                  ),
-                  onPressed: () {
-                    GetIt.instance<NavigatorService>().navigateTo(Pages.control);
-                  },
-                ),
-              ],
             ),
             body: Container(
               child: ListView(
