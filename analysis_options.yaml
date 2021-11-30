@@ -6,6 +6,8 @@ analyzer:
     - lib/core/l10n/messages_ru.dart
     - lib/core/l10n/messages_messages.dart
     - lib/core/l10n/messages_all.dart
+    - lib/app/pages/maps_page.dart
+    - test/widget_test.dart
     - "**/*.g.dart"
     - "**/*.freezed.dart"
 

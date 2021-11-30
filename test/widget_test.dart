@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:shop/app/pages/control_page.dart';
+import 'package:shop/app/pages/settings_page.dart';
 import 'package:shop/app/theme/theme_provider.dart';
 import 'package:shop/app/widgets/account_button.dart';
 import 'package:shop/app/widgets/app_logo.dart';
@@ -125,6 +127,17 @@ void mainGolden() {
         await screenMatchesGolden(tester, 'auth_button');
       });
 
+      testGoldens('ContentPage', (tester) async {
+        final widget = ContentMessage(
+          text: 'Something',
+          textStyle: ThemeProvider.getTheme().textTheme.headline3,
+        );
+        final builder = GoldenBuilder.column()
+          ..addScenario('ContentPage', widget);
+        await tester.pumpWidgetBuilder(builder.build());
+        await screenMatchesGolden(tester, 'content_page');
+      });
+
       testGoldens('AuthTextButton', (tester) async {
         final widget = AuthTextButton(
           padding: const EdgeInsets.only(bottom: 15),
@@ -137,6 +150,47 @@ void mainGolden() {
         await tester.pumpWidgetBuilder(builder.build());
         await screenMatchesGolden(tester, 'auth_text_button');
       });
+
+      // testGoldens('ControlPage', (tester) async {
+      //   final widget = SizedBox(
+      //     width: 700,
+      //     height: 546,
+      //     child: ControlPage(),
+      //   );
+      //   final builder = GoldenBuilder.column()
+      //     ..addScenario('ControlPage', widget);
+      //   await tester.pumpWidgetBuilder(builder.build());
+      //   await screenMatchesGolden(tester, 'control_page');
+      // });
+
+      // testGoldens('SettingsPage', (tester) async {
+      //   final widget = SizedBox(
+      //     width: 700,
+      //     height: 546,
+      //     child: SettingsPage(),
+      //   );
+      //   final builder = GoldenBuilder.column()
+      //     ..addScenario('SettingsPage', widget);
+      //   await tester.pumpWidgetBuilder(builder.build());
+      //   await screenMatchesGolden(tester, 'settings_page');
+      // });
+
+      // testGoldens('VinylCard', (tester) async {
+      //   final widget = VinylCard(
+      //     vinylRecord: VinylRecord(
+      //       name: 'name',
+      //       author: 'author',
+      //       year: '2000',
+      //       description: 'description',
+      //       cost: '1000',
+      //       image: '',
+      //     ),
+      //   );
+      //   final builder = GoldenBuilder.column()
+      //     ..addScenario('VinylCard', widget);
+      //   await tester.pumpWidgetBuilder(builder.build());
+      //   await screenMatchesGolden(tester, 'vinyl_card');
+      // });
 
       // testGoldens('NewsCard', (tester) async {
       //   final element = News(

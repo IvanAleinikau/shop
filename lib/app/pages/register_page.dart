@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop/app/theme/color_palette.dart';
 import 'package:shop/app/widgets/app_logo.dart';
 import 'package:shop/app/widgets/app_menu.dart';
 import 'package:shop/app/widgets/auth/auth_button.dart';
